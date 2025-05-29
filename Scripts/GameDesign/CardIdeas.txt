@@ -1,0 +1,30 @@
+Resource:
+    - Basic:
+        - Add 1 energy next turn, cost 1 energy
+        - 
+        - 
+
+Attack:
+    - Basic:
+        - Quick Attack: Deal 2 damage, 1 energy
+        - Normal Attack: Deal 5 damage, 2 energy
+        - Heavy Attack: Deal 8 damage, 3 energy
+
+Defense:
+    - Basic:
+        - Raise Shield: Gain 3 armor, 1 energy
+        - Energy Shield: Gain 4 ward, 1 energy
+        - Magic Gauntlets: Gain 2 armor and 2 ward, 2 energy
+
+Buff:
+    - Basic:
+        - Enchant Weapon: Next attack deals 1.5x damage, 2 energy
+        - Magic Daggers: Next attack gains +2 damage, 1 energy
+        - Double up: Next attack deals its damage twice, 2 energy
+
+Special:
+
+
+Unique:
+    - Recursion:
+
