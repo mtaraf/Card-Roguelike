@@ -1,0 +1,44 @@
+Create Main Menu Scene
+    - Create Canvas
+    - Add logic to GameManager
+        - Load Data / Save Data on quit (only allow 1 slot for now)
+    - Completion Criteria:
+        - Can start a new game 
+        - Can load a saved game
+        - Can quit game
+        - Settings button visible but no functionality
+        - Transitions to another scene when new game / saved game is pressed
+
+Finish the base level scene
+    - Add Enemy character into scene (does not need to have scripts finished)
+    - Add physics to tile map
+    - Add all needed UI
+        - Deck (clickable to draw a card if possible)
+        - Discard pile (can drag a card to discard)
+        - Card slots
+        - Level title
+        - Settings button 
+        - Leave game button
+        - End turn button
+        - UI for health / items
+        - Add animations to cards
+
+Load user with data into base level
+    - Deck data should allow user to draw/play cards
+    - User data should fill the health and items UIs
+        - items should have hover tooltip
+    - User should have responsive health bar
+
+Load enemy with data into base level
+    - Enemy should have responsive health bar
+    - Should display icon for any effects enemy has
+        - This should have a hover tooltip
+    - Should have automatic attacks when it is their turn
+
+
+Create first "map" for GameManager
+    - Mutliple levels with different enemies and a boss at the End
+    - GameManager should keep track of different values (level number, etc.)
+    - character does not refill hp between levels
+    - should use the same scene but with different enemies and a transition between levels
+    - if user exits, they will have to restart the whole map
