@@ -23,8 +23,9 @@ Buff:
         - Double up: Next attack deals its damage twice, 2 energy
 
 Special:
-
+    -
 
 Unique:
     - Recursion:
 
+Ability to create card in a forge
