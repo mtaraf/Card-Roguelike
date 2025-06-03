@@ -148,8 +148,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1245043830}
-  - {fileID: 1731557999}
   - {fileID: 1253062898}
+  - {fileID: 1731557999}
   - {fileID: 529946491}
   m_Father: {fileID: 2043236173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -869,7 +869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &357049318
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1193,7 +1193,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continue
+  m_text: New Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1824,8 +1824,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 795501282}
-  - {fileID: 2078876019}
   - {fileID: 769001219}
+  - {fileID: 2078876019}
   - {fileID: 357049318}
   m_Father: {fileID: 2043236173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2480,8 +2480,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 278855310}
-  - {fileID: 1860014249}
   - {fileID: 1964753354}
+  - {fileID: 1860014249}
   - {fileID: 1019764385}
   m_Father: {fileID: 2043236173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3965,7 +3965,7 @@ GameObject:
   - component: {fileID: 1731558001}
   - component: {fileID: 1731558000}
   m_Layer: 5
-  m_Name: ContinueButton
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4034,7 +4034,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1731558001}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1024863985}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: enterGame
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1731558001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4253,7 +4265,7 @@ GameObject:
   - component: {fileID: 1860014251}
   - component: {fileID: 1860014250}
   m_Layer: 5
-  m_Name: ContinueButton
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4322,7 +4334,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1860014251}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1024863985}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: enterGame
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1860014251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5162,7 +5186,7 @@ GameObject:
   - component: {fileID: 2078876021}
   - component: {fileID: 2078876020}
   m_Layer: 5
-  m_Name: ContinueButton
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5231,7 +5255,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2078876021}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1024863985}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: enterGame
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2078876021
 MonoBehaviour:
   m_ObjectHideFlags: 0

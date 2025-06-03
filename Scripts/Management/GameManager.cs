@@ -1,4 +1,6 @@
+using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +13,10 @@ public class GameManager : MonoBehaviour
 
 
     // Game States
+
+
+    // Private data
+    private string pathToSaveFiles = "../../Saves/";
 
 
     public void Awake()
@@ -37,6 +43,23 @@ public class GameManager : MonoBehaviour
         Debug.Log("Play clicked!");
     }
 
+    private void checkForSavedGames()
+    {
+
+    }
+
+    private void saveGame()
+    {
+        
+    }
+
+    public void enterGame(int saveSlot)
+    {
+        // Add checks for save slots
+
+        SceneManager.LoadScene(1);
+    }
+
     public void openSettings()
     {
         Debug.Log("Open Settings");
@@ -54,5 +77,13 @@ public class GameManager : MonoBehaviour
     public void quitGame()
     {
         Debug.Log("Quit Game");
+
+        // Save everything here
+
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }
