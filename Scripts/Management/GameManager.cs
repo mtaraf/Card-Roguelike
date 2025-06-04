@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
 
     // Game States
 
+    // Card States
+    private GameObject selectedCard = null;
+
 
     // Private data
     private string pathToSaveFiles = "../../Saves/";
@@ -32,6 +35,20 @@ public class GameManager : MonoBehaviour
     }
 
     // Game Functions
+    public void setSelectedCard(GameObject card)
+    {
+        selectedCard = card;
+    }
+
+    public void clearSelectedCard()
+    {
+        selectedCard = null;
+    }
+
+    public GameObject getSelectedCard()
+    {
+        return selectedCard;
+    }
 
     // Save Functions
 

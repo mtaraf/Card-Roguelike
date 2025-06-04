@@ -1,9 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEditor.EventSystems;
 using UnityEngine.EventSystems;
 
-public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
+public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler, IPointerClickHandler
 {
     [SerializeField] private float verticalMoveAmount = 300f;
     [SerializeField] private float moveTime = 0.1f;
@@ -55,27 +55,47 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        eventData.selectedObject = gameObject;
+        // Only allow card animation if a card is not selected for playing
+        if (GameManager.instance.getSelectedCard() == null)
+        {
+            eventData.selectedObject = gameObject;
 
-        // Layer card infront of all others
-        transform.parent.gameObject.transform.SetAsLastSibling();
+            // Layer card infront of all others
+            transform.parent.gameObject.transform.SetAsLastSibling();
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        eventData.selectedObject = null;
+        if (GameManager.instance.getSelectedCard() == null)
+        {
+            eventData.selectedObject = null;
 
-        // Set layering back to original
-        transform.parent.gameObject.transform.SetSiblingIndex(originalIndex);
+            // Set layering back to original
+            transform.parent.gameObject.transform.SetSiblingIndex(originalIndex);
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        GameManager.instance.setSelectedCard(gameObject);
+        eventData.selectedObject = gameObject;
+        transform.parent.gameObject.transform.SetAsLastSibling();
     }
 
     public void OnSelect(BaseEventData eventData)
     {
+        // Card Animation
         StartCoroutine(moveCard(true));
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
+        // Card Animation
         StartCoroutine(moveCard(false));
+
+        // Remove from game manager and reorder
+        GameManager.instance.clearSelectedCard();
+        transform.parent.gameObject.transform.SetSiblingIndex(originalIndex);
     }
 }

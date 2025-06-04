@@ -24,7 +24,6 @@ public class Deck : MonoBehaviour
         // Get card slots
         foreach (Transform child in cardSlotContainer.transform)
         {
-            Debug.Log(child.gameObject.name);
             cardSlots.Add(child.gameObject);
         }
 
