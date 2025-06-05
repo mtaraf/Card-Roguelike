@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,10 @@ public class GameManager : MonoBehaviour
 
 
     // Game States
+    private Character player;
+    private List<CardModelSO> drawPile;
+    private List<CardModelSO> discardPile;
+    private List<CardModelSO> characterDeck;
 
     // Card States
     private GameObject selectedCard = null;
@@ -32,6 +37,17 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // Detect when a new scene is loaded
+        SceneManager.sceneLoaded += onSceneLoaded;
+    }
+
+
+    public void onSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log($"Game Manager detected scene loaded: {scene.name}");
+
+        // Add scene specific logic here
     }
 
     // Game Functions
@@ -49,6 +65,8 @@ public class GameManager : MonoBehaviour
     {
         return selectedCard;
     }
+
+
 
     // Save Functions
 
