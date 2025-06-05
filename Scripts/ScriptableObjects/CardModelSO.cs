@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum CardType
@@ -10,6 +11,12 @@ public enum CardType
     Special
 }
 
+public enum Special
+{
+    TakeDamage,
+    AttackEnemy
+}
+
 [CreateAssetMenu(fileName = "Card", menuName = "New Card")]
 public class CardModelSO : ScriptableObject
 {
@@ -18,8 +25,11 @@ public class CardModelSO : ScriptableObject
     public int damage;
     public int armor;
     public int ward;
+    public int turns;
+    public bool special;
+    public Special [] condition;
     public double multiplier;
-    public string text;
+    public string details;
     public string title;
     public Sprite image;
 }

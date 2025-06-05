@@ -10,5 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: DoubleUp
+  m_Name: EnchantWeapon
   m_EditorClassIdentifier: Assembly-CSharp::CardModelSO
+  type: 2
+  energy: 2
+  damage: 2
+  armor: 0
+  ward: 0
+  turns: 2
+  special: 0
+  condition: 
+  multiplier: 0
+  details: Attacks gain 2 damage for the next 2 turns
+  title: Enchant Weapon
+  image: {fileID: 0}

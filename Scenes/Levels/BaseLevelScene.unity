@@ -254,7 +254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: 0
-  character: {fileID: 0}
+  character: {fileID: 1049709230}
+  deckSizeText: {fileID: 0}
 --- !u!1 &63665002
 GameObject:
   m_ObjectHideFlags: 0
@@ -2103,9 +2104,7 @@ MonoBehaviour:
   maxDeckSize: 20
   deckSize: 10
   deck: []
-  cardPrefab: {fileID: 7452529627010682384, guid: d87ed3bf6fba44748b7c9c22eef22fb3, type: 3}
   deckSizeText: {fileID: 713505174}
-  cardSlotContainer: {fileID: 209903292}
 --- !u!224 &1177253308 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5786669075054051947, guid: d87ed3bf6fba44748b7c9c22eef22fb3, type: 3}

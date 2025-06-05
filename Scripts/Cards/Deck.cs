@@ -8,8 +8,7 @@ public class Deck : MonoBehaviour
 {
     [SerializeField] public int maxDeckSize = 20;
     [SerializeField] public int deckSize = 0;
-    [SerializeField] public List<CardModelSO> deck;
-    [SerializeField] private GameObject deckSizeText;
+    [SerializeField] public DeckModelSO deck;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,7 +26,7 @@ public class Deck : MonoBehaviour
     {
         if (deckSize != maxDeckSize)
         {
-            deck.Add(card);
+            deck.cards.Add(card);
         }
     }
 
@@ -42,5 +41,11 @@ public class Deck : MonoBehaviour
         //         break;
         //     }
         // }
+    }
+
+    public void setDeck(DeckModelSO cardList)
+    {
+        deck = cardList;
+        Debug.Log("Deck updated: " + deck);
     }
 }
