@@ -28,4 +28,12 @@ Special:
 Unique:
     - Recursion:
 
+
+
+Game Ideas:
 Ability to create card in a forge
+Ability to add a effect (poison, cold, bleed, etc) to cards
+Cards can trigger effects
+    - Card to burst bleed stacks of enemy for damage
+
+Card Ideas:

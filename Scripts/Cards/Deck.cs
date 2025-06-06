@@ -10,10 +10,14 @@ public class Deck : MonoBehaviour
     [SerializeField] public int deckSize = 0;
     [SerializeField] public DeckModelSO deck;
 
+    private List<CardModelSO> discardPile = new List<CardModelSO>();
+    private List<CardModelSO> drawPile;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //drawPile = deck.cards;
     }
 
     // Update is called once per frame
