@@ -2,29 +2,22 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private Deck deck;
-    [SerializeField] private DeckModelSO startingDeck;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (deck == null)
-        {
-            // Add starting deck if the player deck is empty
-        }
+        deck = new Deck();
+        generateStartingDeck();
+        HandManager.instance.setPlayerDeck(deck.deck);
     }
 
-    // Update is called once per frame
-    void Update()
+    public DeckModelSO getCards()
     {
-
-    }
-
-    public Deck getDeck()
-    {
-        return deck;
+        Debug.Log(deck);
+        return deck.getCurrentDeck();
     }
 
     public void addCardToDeck(CardModelSO card)
@@ -34,6 +27,6 @@ public class Character : MonoBehaviour
 
     private void generateStartingDeck()
     {
-        deck.setDeck(startingDeck);
+        deck.setDeck(GameManager.instance.getStarterDeck());
     }
 }

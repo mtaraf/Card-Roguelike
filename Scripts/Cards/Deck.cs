@@ -4,26 +4,17 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Deck : MonoBehaviour
+public class Deck
 {
-    [SerializeField] public int maxDeckSize = 20;
-    [SerializeField] public int deckSize = 0;
-    [SerializeField] public DeckModelSO deck;
+    public int maxDeckSize = 20;
+    public int deckSize = 0;
+    public DeckModelSO deck;
 
-    private List<CardModelSO> discardPile = new List<CardModelSO>();
-    private List<CardModelSO> drawPile;
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //drawPile = deck.cards;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        // Initialize empty deck
+        deck = ScriptableObject.CreateInstance<DeckModelSO>();
+        deck.cards = new List<CardModelSO>();
     }
 
     void AddCardToDeck(CardModelSO card)
@@ -50,6 +41,10 @@ public class Deck : MonoBehaviour
     public void setDeck(DeckModelSO cardList)
     {
         deck = cardList;
-        Debug.Log("Deck updated: " + deck);
+    }
+
+    public DeckModelSO getCurrentDeck()
+    {
+        return deck;
     }
 }

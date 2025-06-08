@@ -11,7 +11,6 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
 
     private Vector3 startPos;
     private Vector3 startScale;
-
     private int originalIndex = -1;
 
     private void Start()
@@ -56,7 +55,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
     public void OnPointerEnter(PointerEventData eventData)
     {
         // Only allow card animation if a card is not selected for playing
-        if (GameManager.instance.getSelectedCard() == null)
+        if (HandManager.instance.getSelectedCard() == null)
         {
             eventData.selectedObject = gameObject;
 
@@ -67,7 +66,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (GameManager.instance.getSelectedCard() == null)
+        if (HandManager.instance.getSelectedCard() == null)
         {
             eventData.selectedObject = null;
 
@@ -78,7 +77,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameManager.instance.setSelectedCard(gameObject);
+        HandManager.instance.setSelectedCard(gameObject);
         eventData.selectedObject = gameObject;
         transform.parent.gameObject.transform.SetAsLastSibling();
     }
@@ -95,7 +94,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
         StartCoroutine(moveCard(false));
 
         // Remove from game manager and reorder
-        GameManager.instance.clearSelectedCard();
+        HandManager.instance.clearSelectedCard();
         transform.parent.gameObject.transform.SetSiblingIndex(originalIndex);
     }
 }

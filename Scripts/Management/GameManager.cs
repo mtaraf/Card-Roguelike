@@ -14,13 +14,10 @@ public class GameManager : MonoBehaviour
 
 
     // Game States
-    private Character player;
-    private List<CardModelSO> drawPile;
-    private List<CardModelSO> discardPile;
-    private List<CardModelSO> characterDeck;
+    private Player player;
 
-    // Card States
-    private GameObject selectedCard = null;
+    // Cards
+    [SerializeField] private DeckModelSO starterDeck;
 
 
     // Private data
@@ -50,22 +47,11 @@ public class GameManager : MonoBehaviour
         // Add scene specific logic here
     }
 
-    // Game Functions
-    public void setSelectedCard(GameObject card)
+    // Card/Deck Functions
+    public DeckModelSO getStarterDeck()
     {
-        selectedCard = card;
+        return starterDeck;
     }
-
-    public void clearSelectedCard()
-    {
-        selectedCard = null;
-    }
-
-    public GameObject getSelectedCard()
-    {
-        return selectedCard;
-    }
-
 
 
     // Save Functions
