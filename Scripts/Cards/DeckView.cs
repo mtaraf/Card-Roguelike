@@ -2,6 +2,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public enum DeckViewType
 {
@@ -16,18 +17,25 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] private Character player;
     [SerializeField] private GameObject deckSizeText;
-    [SerializeField] private GameObject deckViewScrollBarContent; // Fill this with title and cards within the deck
-    [SerializeField] private GameObject deckView; // Turn on and off when viewing deck
+    [SerializeField] private GameObject deckViewUI; // Turn on and off when viewing deck
     [SerializeField] private GameObject cardPrefab;
 
     // For Testing purposes, remove later
     [SerializeField] public DeckModelSO testDeck;
+
+
     private Deck deck;
+    private GameObject deckViewScrollBarContent; // Fill this with title and cards within the deck
+    private Transform canvasTransform;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Find the scroll bar content
+        deckViewScrollBarContent = findDescendant(deckViewUI.gameObject.transform, "Content");
+        canvasTransform = transform.parent.transform.parent;
+
         if (player)
         {
             deck = player.getDeck();
@@ -37,10 +45,10 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Deck Clicked");
-        fillDeckView(deck, "Full Deck");
+        Instantiate(deckViewUI, canvasTransform);
         if (view == DeckViewType.FullDeck)
         {
-
+            fillDeckView(deck, "Full Deck");
         }
     }
 
@@ -57,17 +65,14 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
         {
             while (index <= deckViewScrollBarContent.transform.childCount - 1)
             {
-                if (deckViewScrollBarContent.transform.GetChild(index).transform.childCount == 0)
+                if (deckViewScrollBarContent.transform.GetChild(index).transform.childCount == 1)
                 {
-                    // Create Card Prefab and fill with data from card
-                    GameObject cardDisplay = Instantiate(cardPrefab);
-                    cardDisplay.transform.Find("Title").GetComponent<TextMeshProUGUI>().SetText(card.title);
-                    cardDisplay.transform.Find("Description").GetComponent<TextMeshProUGUI>().SetText(card.details);
-                    cardDisplay.transform.Find("EnergyTextContainer").transform.Find("EnergyCost").GetComponent<TextMeshProUGUI>().SetText(card.energy.ToString());
+                    GameObject cardObj = deckViewScrollBarContent.transform.GetChild(index).transform.Find("CardNoAnimationPrefab").gameObject;
+                    cardObj.transform.Find("Title").GetComponent<TextMeshProUGUI>().SetText(card.title);
+                    cardObj.transform.Find("Description").GetComponent<TextMeshProUGUI>().SetText(card.details);
+                    cardObj.transform.Find("EnergyTextContainer").transform.Find("EnergyCost").GetComponent<TextMeshProUGUI>().SetText(card.energy.ToString());
 
-                    // Add object as a child to the open card slot
-                    cardDisplay.transform.SetParent(deckViewScrollBarContent.transform.GetChild(index).transform);
-                    cardDisplay.transform.localPosition = Vector3.zero;
+                    cardObj.SetActive(true);
 
                     index++;
                     break;
@@ -75,8 +80,20 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
                 index++;
             }
         }
+    }
 
-        // Set the deck view to active
-        deckView.gameObject.SetActive(true);
+    // Move this to a helper script eventually
+    private GameObject findDescendant(Transform parent, string name)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.name == "Content")
+                return child.gameObject;
+
+            GameObject found = findDescendant(child, "Content");
+            if (found != null)
+                return found;
+        }
+        return null;
     }
 }
