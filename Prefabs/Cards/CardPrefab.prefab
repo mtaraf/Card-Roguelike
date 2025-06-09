@@ -173,7 +173,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 350}
+  m_SizeDelta: {x: 200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8622675112039267554
 CanvasRenderer:
@@ -428,7 +428,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 240, y: 70}
+  m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5922971279586016973
 CanvasRenderer:
@@ -567,7 +567,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -25, y: -25}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1480439562933846996
 CanvasRenderer:
@@ -646,7 +646,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 350}
+  m_SizeDelta: {x: 200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &267781690945318454
 MonoBehaviour:
@@ -675,15 +675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed12992560544e74bb578aebde871132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  energy: 0
-  damage: 0
-  armor: 0
-  ward: 0
-  turns: 0
-  special: 0
-  condition: 
-  multiplier: 0
 --- !u!1 &7777927133083271905
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,7 +710,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 140}
-  m_SizeDelta: {x: 230, y: 250}
+  m_SizeDelta: {x: 180, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1661149351911605378
 CanvasRenderer:
