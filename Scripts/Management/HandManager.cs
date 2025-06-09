@@ -8,13 +8,18 @@ public class HandManager : MonoBehaviour
     public static HandManager instance;
 
     [SerializeField] private Player player;
+    PlayerEffects effects = new PlayerEffects();
     [SerializeField] public GameObject cardPrefab;
+
+    // Decks
     private DeckModelSO drawPile;
     private DeckModelSO discardPile;
     private DeckModelSO playerDeck;
-    private GameObject selectedCard = null;
 
+    // Cards
+    private GameObject selectedCard = null;
     private GameObject cardSlots;
+    private int handSize = 6; // Default Hand Size
 
     private List<GameObject> cardSlotsList = new List<GameObject>();
 
@@ -71,7 +76,7 @@ public class HandManager : MonoBehaviour
         }
     }
 
-    // Card Functions
+    // General card functions
     public void setSelectedCard(GameObject card)
     {
         selectedCard = card;
@@ -108,35 +113,30 @@ public class HandManager : MonoBehaviour
         playerDeck = deck;
     }
 
+    // Card movement functions
     public void drawCards(int numCards)
     {
-        
-    }
-
-    public void drawNewHand(int handSize)
-    {
         int randomCardIndex = -1;
-        
+
         // Reshuffle discard and draw if drawPile does not have enough cards
-        if (drawPile.cards.Count < handSize)
+        if (drawPile.cards.Count < numCards)
         {
             shuffleDiscardPileIntoDrawPile();
         }
 
-        for (int i = 0; i < handSize; i++)
+        for (int i = 0; i < numCards; i++)
         {
             randomCardIndex = Random.Range(0, drawPile.cards.Count);
             bool spaceInHandRemaining = addCardToCardSlot(drawPile.cards[randomCardIndex]);
             if (spaceInHandRemaining)
             {
-                discardPile.cards.Add(drawPile.cards[randomCardIndex]);
                 drawPile.cards.RemoveAt(randomCardIndex);
             }
         }
 
     }
 
-    private bool addCardToCardSlot(CardModelSO cardInformation)
+    public bool addCardToCardSlot(CardModelSO cardInformation)
     {
         for (int i = 0; i < cardSlotsList.Count; i++)
         {
@@ -156,11 +156,19 @@ public class HandManager : MonoBehaviour
 
     }
 
+    // Start of turn functions
     public void startTurn()
     {
+        // Check for any player effects add them 
+        effects = player.getPlayerEffects();
+
         // Draw New Hand
+        drawCards(handSize);
+
     }
 
+
+    // End of turn functions
     public void endTurn()
     {
         // Remove cards from card slots and move them to the discard pile
@@ -168,8 +176,13 @@ public class HandManager : MonoBehaviour
         // Relay to GameManager
     }
 
-    public void useSelectedCard()
+    public void useSelectedCard(CardModelSO model)
     {
+        // Check effects of player 
 
+
+        
+
+        // Add card to discard pile
     }
 }
