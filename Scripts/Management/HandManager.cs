@@ -13,6 +13,8 @@ public class HandManager : MonoBehaviour
     private DeckModelSO playerDeck;
     private GameObject selectedCard = null;
 
+    private GameObject cardSlots;
+
     public void Awake()
     {
         if (instance != null)
@@ -55,6 +57,8 @@ public class HandManager : MonoBehaviour
 
         discardPile = ScriptableObject.CreateInstance<DeckModelSO>();
         discardPile.cards = new List<CardModelSO>();
+
+        cardSlots = GameObject.FindGameObjectWithTag("CardSlots");
     }
 
     // Card Functions
@@ -92,5 +96,25 @@ public class HandManager : MonoBehaviour
     public void setPlayerDeck(DeckModelSO deck)
     {
         playerDeck = deck;
+    }
+
+    public void drawCards(int numCards)
+    {
+        
+    }
+
+    public void drawNewHand()
+    {
+        
+    }
+
+    public void endTurn()
+    {
+        
+    }
+
+    public void useSelectedCard()
+    {
+
     }
 }

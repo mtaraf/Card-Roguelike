@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
+
 public enum DeckViewType
 {
     FullDeck,
@@ -35,7 +36,7 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         GameObject newDeckUI = Instantiate(deckViewUI, canvasTransform);
-        GameObject deckViewScrollBarContent = findDescendant(newDeckUI.transform, "Content");
+        GameObject deckViewScrollBarContent = Helpers.findDescendant(newDeckUI.transform, "Content");
         if (view == DeckViewType.FullDeck)
         {
             deck = HandManager.instance.getPlayerDeck();
@@ -91,20 +92,5 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
                 }
             }
         }
-    }
-
-    // Move this to a helper script eventually
-    private GameObject findDescendant(Transform parent, string name)
-    {
-        foreach (Transform child in parent)
-        {
-            if (child.name == "Content")
-                return child.gameObject;
-
-            GameObject found = findDescendant(child, "Content");
-            if (found != null)
-                return found;
-        }
-        return null;
     }
 }

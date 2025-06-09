@@ -266,7 +266,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: 0
-  player: {fileID: 1049709232}
   deckViewUI: {fileID: 9198885487986516452, guid: 989d15d63c52ec644b9023197bde5641, type: 3}
   cardPrefab: {fileID: 693967387009741433, guid: 351df61022925a649bc589fab5b063d7, type: 3}
   testDeck: {fileID: 11400000, guid: 997cbd8a5167c9e48b41ad45238a2157, type: 2}
@@ -317,7 +316,7 @@ GameObject:
   - component: {fileID: 209903293}
   m_Layer: 5
   m_Name: CardSlots
-  m_TagString: Untagged
+  m_TagString: CardSlots
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -419,7 +418,7 @@ Transform:
   m_GameObject: {fileID: 280259275}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.84728, y: -0.01658, z: 0}
+  m_LocalPosition: {x: 7, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1248,13 +1247,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663878391}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 280259276}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!212 &663878393
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1296,10 +1295,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1104909463
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 7626730168138988562, guid: 0129e07b91d37ae418f1c0347ce6cfb1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2357,7 +2356,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: 1
-  player: {fileID: 1049709232}
   deckViewUI: {fileID: 9198885487986516452, guid: 989d15d63c52ec644b9023197bde5641, type: 3}
   cardPrefab: {fileID: 693967387009741433, guid: 351df61022925a649bc589fab5b063d7, type: 3}
   testDeck: {fileID: 11400000, guid: 997cbd8a5167c9e48b41ad45238a2157, type: 2}
@@ -2574,7 +2572,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: 2
-  player: {fileID: 1049709232}
   deckViewUI: {fileID: 9198885487986516452, guid: 989d15d63c52ec644b9023197bde5641, type: 3}
   cardPrefab: {fileID: 693967387009741433, guid: 351df61022925a649bc589fab5b063d7, type: 3}
   testDeck: {fileID: 11400000, guid: 997cbd8a5167c9e48b41ad45238a2157, type: 2}

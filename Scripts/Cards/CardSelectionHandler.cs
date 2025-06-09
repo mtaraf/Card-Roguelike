@@ -97,4 +97,10 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
         HandManager.instance.clearSelectedCard();
         transform.parent.gameObject.transform.SetSiblingIndex(originalIndex);
     }
+
+    // Move card to center of screen then fade out when card is used
+    public void onUseCard()
+    {
+        
+    }
 }
