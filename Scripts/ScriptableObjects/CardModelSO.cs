@@ -17,6 +17,13 @@ public enum Special
     AttackEnemy
 }
 
+public enum Target
+{
+    Enemy_Multiple,
+    Enemy_Single,
+    Player
+}
+
 [CreateAssetMenu(fileName = "Card", menuName = "New Card")]
 public class CardModelSO : ScriptableObject
 {
@@ -27,9 +34,10 @@ public class CardModelSO : ScriptableObject
     public int ward;
     public int turns;
     public bool special;
-    public Special [] condition;
+    public Special[] condition;
     public double multiplier;
     public string details;
     public string title;
     public Sprite image;
+    public Target target;
 }
