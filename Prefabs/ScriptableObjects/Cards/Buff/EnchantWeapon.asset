@@ -24,3 +24,4 @@ MonoBehaviour:
   details: Attacks gain 2 damage for the next 2 turns
   title: Enchant Weapon
   image: {fileID: 0}
+  target: 2

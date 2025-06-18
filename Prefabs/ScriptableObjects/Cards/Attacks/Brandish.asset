@@ -24,3 +24,4 @@ MonoBehaviour:
   details: Attacks enemy for 8 damage
   title: Brandish
   image: {fileID: 0}
+  target: 1

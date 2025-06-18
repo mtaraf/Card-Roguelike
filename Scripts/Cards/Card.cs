@@ -27,4 +27,14 @@ public class Card : MonoBehaviour
         // Change energy value
         transform.Find("EnergyTextContainer").transform.Find("EnergyCost").GetComponent<TextMeshProUGUI>().text = model.energy.ToString();
     }
+
+    public CardModelSO getCardModel()
+    {
+        return cardModel;
+    }
+
+    public Target getCardTarget()
+    {
+        return cardModel.target;
+    }
 }

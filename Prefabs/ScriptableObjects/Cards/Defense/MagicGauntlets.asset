@@ -24,3 +24,4 @@ MonoBehaviour:
   details: Adds 2 ward and 2 armor
   title: Magic Gauntlets
   image: {fileID: 0}
+  target: 2

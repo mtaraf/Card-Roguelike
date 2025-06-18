@@ -17,7 +17,7 @@ public class HandManager : MonoBehaviour
     private DeckModelSO playerDeck;
 
     // Cards
-    private GameObject selectedCard = null;
+    private Card selectedCard = null;
     private GameObject cardSlots;
     private int handSize = 6; // Default Hand Size
 
@@ -68,7 +68,7 @@ public class HandManager : MonoBehaviour
 
         cardSlots = GameObject.FindGameObjectWithTag("CardSlots");
 
-        string cardSlotName = "";
+        string cardSlotName;
         for (int i = 0; i < cardSlots.transform.childCount; i++)
         {
             cardSlotName = "CardSlot" + (i + 1).ToString();
@@ -79,7 +79,15 @@ public class HandManager : MonoBehaviour
     // General card functions
     public void setSelectedCard(GameObject card)
     {
-        selectedCard = card;
+        Debug.Log("Card Selected: " + card.GetComponent<Card>().getCardModel());
+        if (card.GetComponent<Card>() != null)
+        {
+            selectedCard = card.GetComponent<Card>();
+        }
+        else
+        {
+            Debug.LogError("No card component found in setSelectedCard");
+        }
     }
 
     public void clearSelectedCard()
@@ -87,9 +95,14 @@ public class HandManager : MonoBehaviour
         selectedCard = null;
     }
 
-    public GameObject getSelectedCard()
+    public Card getSelectedCard()
     {
         return selectedCard;
+    }
+
+    public bool hasSelectedCard()
+    {
+        return selectedCard != null;
     }
 
     // Deck Functions
@@ -176,7 +189,7 @@ public class HandManager : MonoBehaviour
         // Relay to GameManager
     }
 
-    public void useSelectedCard(CardModelSO model)
+    public void useSelectedCard(Card card)
     {
         // Check effects of player 
 

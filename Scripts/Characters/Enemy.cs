@@ -8,7 +8,7 @@ public enum EnemyEffect {
     THORNS
 }
 
-public class Enemy : MonoBehaviour, IPointerClickHandler
+public class Enemy : MonoBehaviour
 {
     [SerializeField] private double health;
     [SerializeField] private double attackPower;
@@ -25,25 +25,14 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
         // Check GameManager if it is enemy turn 
 
         // Check if selected card can target self
-
-
-        // Code to get mouse position on click, move to Clickable file
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            Vector3 screenPos = Mouse.current.position.ReadValue(); // in pixels
-            screenPos.z = -Camera.main.transform.position.z;
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-
-            Debug.Log("World: " + worldPos + " Screen: " + screenPos);
-        }
     }
 
     // Check if selected card can target self, display visual indicator if so
     private void checkSelectedCard()
     {
-        if (HandManager.instance.getSelectedCard() != null)
+        if (HandManager.instance.hasSelectedCard())
         {
-            GameObject card = HandManager.instance.getSelectedCard();
+            Card card = HandManager.instance.getSelectedCard();
         }
     }
 
@@ -59,15 +48,15 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 
 
     // Listener for the user to play cards on this enemy
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("Enemy clicked");
-        if (HandManager.instance.getSelectedCard() != null)
-        {
-            // Check if type of card can be used on enemy
-            GameObject card = HandManager.instance.getSelectedCard();
+    // public void OnPointerClick(PointerEventData eventData)
+    // {
+    //     Debug.Log("Enemy clicked");
+    //     if (HandManager.instance.getSelectedCard() != null)
+    //     {
+    //         // Check if type of card can be used on enemy
+    //         GameObject card = HandManager.instance.getSelectedCard();
 
-            Debug.Log("Hit by: " + card);
-        }
-    }
+    //         Debug.Log("Hit by: " + card);
+    //     }
+    // }
 }

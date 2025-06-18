@@ -24,3 +24,4 @@ MonoBehaviour:
   details: Attacks enemy for 2 damage
   title: Stab
   image: {fileID: 0}
+  target: 1

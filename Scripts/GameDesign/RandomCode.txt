@@ -1,0 +1,9 @@
+// Code to get mouse position on click, move to Clickable file
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            Vector3 screenPos = Mouse.current.position.ReadValue(); // in pixels
+            screenPos.z = -Camera.main.transform.position.z;
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+
+            Debug.Log("World: " + worldPos + " Screen: " + screenPos);
+        }

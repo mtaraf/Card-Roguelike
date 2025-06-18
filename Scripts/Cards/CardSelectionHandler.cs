@@ -55,7 +55,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
     public void OnPointerEnter(PointerEventData eventData)
     {
         // Only allow card animation if a card is not selected for playing
-        if (HandManager.instance.getSelectedCard() == null)
+        if (!HandManager.instance.hasSelectedCard())
         {
             eventData.selectedObject = gameObject;
 
@@ -66,7 +66,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (HandManager.instance.getSelectedCard() == null)
+        if (!HandManager.instance.hasSelectedCard())
         {
             eventData.selectedObject = null;
 
