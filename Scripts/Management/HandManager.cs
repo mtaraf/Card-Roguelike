@@ -56,7 +56,6 @@ public class HandManager : MonoBehaviour
     {
         yield return null;
         // Get player deck and create an empty discard deck and a full draw pile on load
-        Debug.Log("Setting player deck with: " + player.getCards());
         playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
         playerDeck.cards = new List<CardModelSO>(player?.getCards().cards);
 
@@ -169,6 +168,50 @@ public class HandManager : MonoBehaviour
 
     }
 
+    // Card Processing
+    public CardEffects processCard(Card card)
+    {
+        int armor, ward, damage;
+        int [] damageOverTime;
+        CardEffects effects = new CardEffects();
+
+        if (card.hasCondition())
+        {
+
+        }
+        else
+        {
+            return new CardEffects(card.getDamage(), card.getArmor(), card.getWard());
+        }
+
+        return new CardEffects();
+    }
+
+    private void addEnergyToCurrentTurn()
+    {
+        
+    }
+
+    private void addEnergyToNextTurn()
+    {
+        
+    }
+
+    private int checkPlayerArmor()
+    {
+        return 0;
+    }
+
+    private int checkPlayerWard()
+    {
+        return 0;
+    }
+
+    private int checkPlayerHealth()
+    {
+        return 0;
+    }
+
     // Start of turn functions
     public void startTurn()
     {
@@ -197,5 +240,45 @@ public class HandManager : MonoBehaviour
         
 
         // Add card to discard pile
+    }
+}
+
+public class CardEffects
+{
+    private int totalDamage = 0;
+    private int totalArmor = 0;
+    private int totalWard = 0;
+    private int[] damageOverTime;
+
+    public CardEffects(int damage, int armor, int ward)
+    {
+        totalDamage = damage;
+        totalArmor = armor;
+        totalWard = ward;
+    }
+
+    public CardEffects()
+    {
+
+    }
+
+    public void setTotalDamage(int damage)
+    {
+        totalDamage = damage;
+    }
+
+    public void setTotalArmor(int armor)
+    {
+        totalArmor = armor;
+    }
+
+    public void setTotalWard(int ward)
+    {
+        totalWard = ward;
+    }
+
+    public void setTotalDamageOverTime(int [] dot)
+    {
+        damageOverTime = dot;
     }
 }

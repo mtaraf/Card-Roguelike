@@ -19,7 +19,9 @@ MonoBehaviour:
   ward: 0
   turns: 0
   special: 0
-  condition: 
+  condition:
+    conditionValue: 0
+    metric: 5
   multiplier: 0
   details: Adds 3 armor
   title: Raise Shield

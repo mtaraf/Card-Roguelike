@@ -19,7 +19,9 @@ MonoBehaviour:
   ward: 0
   turns: 2
   special: 0
-  condition: 
+  condition:
+    conditionValue: 0
+    metric: 5
   multiplier: 0
   details: Attacks gain 2 damage for the next 2 turns
   title: Enchant Weapon

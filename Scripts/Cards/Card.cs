@@ -37,4 +37,24 @@ public class Card : MonoBehaviour
     {
         return cardModel.target;
     }
+
+    public bool hasCondition()
+    {
+        return cardModel.condition.metric != ConditionMetric.NO_CONDITION;
+    }
+
+    public int getDamage()
+    {
+        return cardModel.damage;
+    }
+
+    public int getArmor()
+    {
+        return cardModel.armor;
+    }
+
+    public int getWard()
+    {
+        return cardModel.ward;
+    }
 }

@@ -11,10 +11,14 @@ public enum CardType
     Special
 }
 
-public enum Special
+public enum ConditionMetric
 {
-    TakeDamage,
-    AttackEnemy
+    HEALTH,
+    WARD,
+    ARMOR,
+    APPLIED_EFFECT,
+    PLAYER_CURRENT_EFFECT,
+    NO_CONDITION
 }
 
 public enum Target
@@ -22,6 +26,13 @@ public enum Target
     Enemy_Multiple,
     Enemy_Single,
     Player
+}
+
+[Serializable]
+public class ConditionTupleEquivalent
+{
+    public int conditionValue;
+    public ConditionMetric metric;
 }
 
 [CreateAssetMenu(fileName = "Card", menuName = "New Card")]
@@ -34,7 +45,7 @@ public class CardModelSO : ScriptableObject
     public int ward;
     public int turns;
     public bool special;
-    public Special[] condition;
+    public ConditionTupleEquivalent condition;
     public double multiplier;
     public string details;
     public string title;

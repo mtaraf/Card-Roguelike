@@ -35,7 +35,6 @@ public class Player : MonoBehaviour
 
     public DeckModelSO getCards()
     {
-        Debug.Log(deck);
         return deck.getCurrentDeck();
     }
 
@@ -52,5 +51,10 @@ public class Player : MonoBehaviour
     public PlayerEffects getPlayerEffects()
     {
         return currentEffects;
+    }
+
+    public void processCardEffects(CardEffects effects)
+    {
+        
     }
 }

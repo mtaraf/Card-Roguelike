@@ -19,7 +19,9 @@ MonoBehaviour:
   ward: 2
   turns: 0
   special: 0
-  condition: 
+  condition:
+    conditionValue: 0
+    metric: 5
   multiplier: 0
   details: Adds 2 ward and 2 armor
   title: Magic Gauntlets

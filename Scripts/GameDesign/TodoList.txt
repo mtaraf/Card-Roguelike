@@ -1,13 +1,21 @@
 Create Main Menu Scene
-    - Create Canvas
+    - Create Canvas (done)
     - Add logic to GameManager
         - Load Data / Save Data on quit (only allow 1 slot for now)
+            - Data to pass between scenes:
+                - Character object
+                - Deck object
+            - Data to save on quit:
+                - Map number
+                - Character object
+                - Deck object
+                - Settings
     - Completion Criteria:
         - Can start a new game 
         - Can load a saved game
         - Can quit game
-        - Settings button visible but no functionality
-        - Transitions to another scene when new game / saved game is pressed
+        - Settings button visible but no functionality (done)
+        - Transitions to another scene when new game / saved game is pressed (done)
 
 Finish the base level scene
     - Add Enemy character into scene (does not need to have scripts finished)
@@ -42,3 +50,9 @@ Create first "map" for GameManager
     - character does not refill hp between levels
     - should use the same scene but with different enemies and a transition between levels
     - if user exits, they will have to restart the whole map
+
+
+1. Create general UI for Enemy
+    - Link UI to health/statuses/armor/etc.
+2. Create general UI for Player
+    - Link UI to health/armor/etc.

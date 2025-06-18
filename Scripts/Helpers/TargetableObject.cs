@@ -10,10 +10,22 @@ public class TargetableObject : MonoBehaviour, IPointerClickHandler, IPointerEnt
     private RectTransform rect;
     private bool isEnemy;
 
+    private Player player;
+
+    private Enemy enemy;
+
     void Start()
     {
-        rect = GetComponent<RectTransform>();
+        player = GetComponent<Player>();
+        enemy = GetComponent<Enemy>();
 
+        if (enemy == null && player == null)
+        {
+            Debug.LogError("No player or enemy component found for this targetable object");
+        }
+
+
+        rect = GetComponent<RectTransform>();
         // Match height/width of targetSprites to gameObject
         RectTransform targetRect = targetSprites.GetComponent<RectTransform>();
         if (targetRect != null)
@@ -25,7 +37,7 @@ public class TargetableObject : MonoBehaviour, IPointerClickHandler, IPointerEnt
         }
 
         // Check if player or enemy
-        if (GetComponent<Player>() != null)
+        if (player != null)
         {
             isEnemy = false;
         }
@@ -56,14 +68,22 @@ public class TargetableObject : MonoBehaviour, IPointerClickHandler, IPointerEnt
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Target clicked");
-        if (HandManager.instance.hasSelectedCard())
+        // Check if card is selected and type of card can be used on this entity
+        if (HandManager.instance.hasSelectedCard() && targetSprites.activeSelf)
         {
             // Check if type of card can be used on enemy
-
-
             Card card = HandManager.instance.getSelectedCard();
+            CardEffects effects = HandManager.instance.processCard(card);
 
             // Call enemy/player processCard function
+            if (isEnemy)
+            {
+                enemy.processCardEffects(effects);
+            }
+            else
+            {
+                player.processCardEffects(effects);
+            }
         }
     }
 

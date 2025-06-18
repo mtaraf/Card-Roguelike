@@ -46,17 +46,8 @@ public class Enemy : MonoBehaviour
         // Notify GameManager that turn has ended
     }
 
-
-    // Listener for the user to play cards on this enemy
-    // public void OnPointerClick(PointerEventData eventData)
-    // {
-    //     Debug.Log("Enemy clicked");
-    //     if (HandManager.instance.getSelectedCard() != null)
-    //     {
-    //         // Check if type of card can be used on enemy
-    //         GameObject card = HandManager.instance.getSelectedCard();
-
-    //         Debug.Log("Hit by: " + card);
-    //     }
-    // }
+    public void processCardEffects(CardEffects effects)
+    {
+        
+    }
 }
