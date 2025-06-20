@@ -52,7 +52,7 @@ Create first "map" for GameManager
     - if user exits, they will have to restart the whole map
 
 
-1. Create general UI for Enemy
-    - Link UI to health/statuses/armor/etc.
-2. Create general UI for Player
-    - Link UI to health/armor/etc.
+1. Create general UI for Enemy (done)
+    - Link UI to health/statuses/armor/etc. (to-do)
+2. Create general UI for Player (done)
+    - Link UI to health/armor/etc. (to-do)

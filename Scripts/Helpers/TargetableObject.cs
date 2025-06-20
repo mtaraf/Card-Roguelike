@@ -64,7 +64,7 @@ public class TargetableObject : MonoBehaviour, IPointerClickHandler, IPointerEnt
         }
     }
 
-    // Listener for the user to play cards on this enemy
+    // Listener for the user to play cards on this object
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Target clicked");

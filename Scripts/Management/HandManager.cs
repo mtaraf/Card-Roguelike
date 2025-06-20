@@ -8,7 +8,6 @@ public class HandManager : MonoBehaviour
     public static HandManager instance;
 
     [SerializeField] private Player player;
-    PlayerEffects effects = new PlayerEffects();
     [SerializeField] public GameObject cardPrefab;
 
     // Decks
@@ -216,7 +215,6 @@ public class HandManager : MonoBehaviour
     public void startTurn()
     {
         // Check for any player effects add them 
-        effects = player.getPlayerEffects();
 
         // Draw New Hand
         drawCards(handSize);

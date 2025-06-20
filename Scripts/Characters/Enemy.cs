@@ -2,22 +2,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public enum EnemyEffect {
-    POISON,
-    FREEZE,
-    THORNS
-}
-
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
-    [SerializeField] private double health;
-    [SerializeField] private double attackPower;
-    [SerializeField] private EnemyEffect effect;
     [SerializeField] private int moveset;
 
-    void Start()
-    {
+    // Attributes
 
+    public override void Start()
+    {
+        base.Start();
     }
 
     void Update()
