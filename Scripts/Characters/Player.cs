@@ -35,8 +35,8 @@ public class Player : Character
         deck.setDeck(GameManager.instance.getStarterDeck());
     }
 
-    public void processCardEffects(CardEffects effects)
+    public override void processCardEffects(CardEffects effects)
     {
-        
+        base.processCardEffects(effects);
     }
 }

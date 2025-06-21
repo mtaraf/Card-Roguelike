@@ -39,8 +39,8 @@ public class Enemy : Character
         // Notify GameManager that turn has ended
     }
 
-    public void processCardEffects(CardEffects effects)
+    public override void processCardEffects(CardEffects effects)
     {
-        
+        base.processCardEffects(effects);
     }
 }

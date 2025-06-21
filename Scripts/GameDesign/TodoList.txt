@@ -52,7 +52,13 @@ Create first "map" for GameManager
     - if user exits, they will have to restart the whole map
 
 
-1. Create general UI for Enemy (done)
-    - Link UI to health/statuses/armor/etc. (to-do)
-2. Create general UI for Player (done)
-    - Link UI to health/armor/etc. (to-do)
+1. Cards playable towards player and enemies
+    - stats gained from cards should be updated (in-progress)
+2. Create level in game manager
+    - Deck operations:
+        - refill at start of round
+        - discard pile should return to draw pile if there are no cards left in draw pile
+    - Player health should remain the same between levels, enemies always start with full health
+    - Player effects clear after each level
+    - Update UI for level
+3. Brainstorm about level rewards and ui for that

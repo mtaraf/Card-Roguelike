@@ -265,9 +265,19 @@ public class CardEffects
         totalDamage = damage;
     }
 
+    public int getTotalDamage()
+    {
+        return totalDamage;
+    }
+
     public void setTotalArmor(int armor)
     {
         totalArmor = armor;
+    }
+
+    public int getTotalArmor()
+    {
+        return totalArmor;
     }
 
     public void setTotalWard(int ward)
@@ -275,8 +285,18 @@ public class CardEffects
         totalWard = ward;
     }
 
-    public void setTotalDamageOverTime(int [] dot)
+    public int getTotalWard()
+    {
+        return totalWard;
+    }
+
+    public void setTotalDamageOverTime(int[] dot)
     {
         damageOverTime = dot;
+    }
+    
+    public int[] getTotalDamageOverTime()
+    {
+        return damageOverTime;
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum Effects
@@ -7,6 +8,28 @@ public enum Effects
     FREEZE,
     THORNS
 }
+
+public enum Attributes
+{
+    STRENGTH = 0,
+    WARD = 1,
+    ARMOR = 2
+}
+
+public static class AttributesExtensions
+{
+    public static string ToDisplayString(this Attributes att)
+    {
+        switch (att)
+        {
+            case Attributes.STRENGTH: return "StrengthEffect";
+            case Attributes.ARMOR: return "ArmorEffect";
+            case Attributes.WARD: return "WardEffect";
+            default: return "Default";
+        }
+    }
+}
+
 
 public class Character : MonoBehaviour
 {
@@ -17,14 +40,17 @@ public class Character : MonoBehaviour
     protected int weakness;
     protected int armor;
     protected int ward;
+    protected Dictionary<Attributes, int> attributes = new Dictionary<Attributes, int>();
 
     // UI
     protected HealthAndStatus healthAndStatus;
 
     public virtual void Start()
     {
-
         currentHealth = maxHealth;
+        attributes.Add(Attributes.STRENGTH, 1);
+        attributes.Add(Attributes.ARMOR, 0);
+        attributes.Add(Attributes.WARD, 0);
 
         // Set up after first frame
         StartCoroutine(findComponentsAfterFrame());
@@ -44,5 +70,39 @@ public class Character : MonoBehaviour
         {
             healthAndStatus.setHealth(currentHealth, maxHealth);
         }
+    }
+
+    public virtual void processCardEffects(CardEffects effects)
+    {
+        // Apply changes to attributes
+        currentHealth -= effects.getTotalDamage();
+        attributes[Attributes.ARMOR] += effects.getTotalArmor();
+        attributes[Attributes.WARD] += effects.getTotalArmor();
+        
+        healthAndStatus.updateAttributes(false, attributes);
+    }
+
+    public int getCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    // public int getArmor()
+    // {
+    //     return armor;
+    // }
+
+    // public int getWard()
+    // {
+    //     return ward;
+    // }
+
+    // public int getStrength()
+    // {
+    //     return strength;
+    // }
+    public Dictionary<Attributes, int> getAttributes()
+    {
+        return attributes;
     }
 }
