@@ -54,6 +54,8 @@ Create first "map" for GameManager
 
 1. Cards playable towards player and enemies
     - stats gained from cards should be updated (in-progress)
+        - fix armor/ward not updating ui (to-do)
+        - fix buff cards
 2. Create level in game manager
     - Deck operations:
         - refill at start of round

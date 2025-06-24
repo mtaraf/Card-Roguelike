@@ -171,7 +171,7 @@ public class HandManager : MonoBehaviour
     public CardEffects processCard(Card card)
     {
         int armor, ward, damage;
-        int [] damageOverTime;
+        int[] damageOverTime;
         CardEffects effects = new CardEffects();
 
         if (card.hasCondition())
@@ -184,31 +184,6 @@ public class HandManager : MonoBehaviour
         }
 
         return new CardEffects();
-    }
-
-    private void addEnergyToCurrentTurn()
-    {
-        
-    }
-
-    private void addEnergyToNextTurn()
-    {
-        
-    }
-
-    private int checkPlayerArmor()
-    {
-        return 0;
-    }
-
-    private int checkPlayerWard()
-    {
-        return 0;
-    }
-
-    private int checkPlayerHealth()
-    {
-        return 0;
     }
 
     // Start of turn functions
@@ -230,14 +205,24 @@ public class HandManager : MonoBehaviour
         // Relay to GameManager
     }
 
-    public void useSelectedCard(Card card)
+    public CardEffects useSelectedCard()
     {
-        // Check effects of player 
+        // Get card effects
+        CardEffects effects = processCard(selectedCard);
 
 
-        
+        // Add card to discard pile and remove card
+        addCardToDiscardPile(selectedCard);
 
-        // Add card to discard pile
+
+        clearSelectedCard();
+
+        return effects;
+    }
+
+    private void addCardToDiscardPile(Card card)
+    {
+        discardPile.cards.Add(card.getCardModel());
     }
 }
 

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler, IPointerClickHandler
 {
@@ -42,14 +44,68 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
             }
 
             // Lerppppp
-            Vector3 lerpPos = Vector3.Lerp(transform.position, endPos, (elapsedTime / moveTime));
-            Vector3 lerpScale = Vector3.Lerp(transform.localScale, endScale, (elapsedTime / moveTime));
+            Vector3 lerpPos = Vector3.Lerp(transform.position, endPos, elapsedTime / moveTime);
+            Vector3 lerpScale = Vector3.Lerp(transform.localScale, endScale, elapsedTime / moveTime);
 
             transform.position = lerpPos;
             transform.localScale = lerpScale;
 
             yield return null;
         }
+    }
+
+    // Move card to center of screen then fade out when card is used
+    private IEnumerator onUseCard()
+    {
+        // Move time of the card
+        moveTime = 0.2f;
+
+        // Move card to center of screen (UI space)
+        Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+        Vector3 worldCenter;
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+            transform.parent as RectTransform, screenCenter, null, out worldCenter);
+
+        float elapsedTime = 0f;
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = worldCenter;
+
+        Vector3 startScale = transform.localScale;
+        Vector3 endScale = startScale * 1.2f;
+
+        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
+
+        // Step 1: Move and scale
+        while (elapsedTime < moveTime)
+        {
+            float t = elapsedTime / moveTime;
+            transform.position = Vector3.Lerp(startPosition, endPosition, t);
+            transform.localScale = Vector3.Lerp(startScale, endScale, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure final position and scale are exact
+        transform.position = endPosition;
+        transform.localScale = endScale;
+
+        // Step 2: Fade out
+        float fadeDuration = 0.3f;
+        elapsedTime = 0f;
+        while (elapsedTime < fadeDuration)
+        {
+            float t = elapsedTime / fadeDuration;
+            canvasGroup.alpha = Mathf.Lerp(1f, 0f, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Destroy the game object after it fades out
+        Destroy(gameObject);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -88,19 +144,82 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
         StartCoroutine(moveCard(true));
     }
 
+    private GameObject getGameObjectedClicked()
+    {
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            position = Mouse.current.position.ReadValue()
+        };
+
+        // Raycast UI
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        if (results.Count > 0)
+        {
+            GameObject clickedUI = results[0].gameObject;
+            Debug.Log("Clicked UI Element: " + clickedUI.name);
+            return findParent(clickedUI);
+        }
+
+        return null;
+    }
+
+    private GameObject findParent(GameObject obj)
+    {
+        if (obj.transform.parent == null || obj.transform.parent.gameObject.CompareTag("BaseLevelCanvas"))
+        {
+            return null;
+        }
+        else if (obj.transform.parent.gameObject.CompareTag("Player") || obj.transform.parent.gameObject.CompareTag("Enemy"))
+        {
+            return obj.transform.parent.gameObject;
+        }
+        else
+        {
+            return findParent(obj.transform.parent.gameObject);
+        }
+    }
+
+    // if a card is selected, use card on clicked object if possible 
     public void OnDeselect(BaseEventData eventData)
     {
+        GameObject clickedGameObject;
+        if (HandManager.instance.hasSelectedCard())
+        {
+            clickedGameObject = getGameObjectedClicked();
+            if (clickedGameObject != null)
+            {
+                Player player = clickedGameObject.GetComponent<Player>();
+                if (player != null && player.checkifTargetable())
+                {
+                    Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on player");
+                    CardEffects effects = HandManager.instance.useSelectedCard();
+                    player.processCardEffects(effects);
+                    StartCoroutine(onUseCard());
+                    return;
+                }
+                else
+                {
+                    Enemy enemy = clickedGameObject.GetComponent<Enemy>();
+                    if (enemy != null && enemy.checkifTargetable())
+                    {
+                        Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on enemy");
+                        CardEffects effects = HandManager.instance.useSelectedCard();
+                        enemy.processCardEffects(effects);
+                        StartCoroutine(onUseCard());
+                        return;
+                    }
+                }
+            }
+        }
+
         // Card Animation
         StartCoroutine(moveCard(false));
 
         // Remove from game manager and reorder
         HandManager.instance.clearSelectedCard();
         transform.parent.gameObject.transform.SetSiblingIndex(originalIndex);
-    }
 
-    // Move card to center of screen then fade out when card is used
-    public void onUseCard()
-    {
-        
     }
 }

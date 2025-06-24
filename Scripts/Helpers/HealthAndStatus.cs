@@ -143,7 +143,7 @@ public class HealthAndStatus : MonoBehaviour
 
                 // Assign value to effect UI
                 statusEffectUI.transform.Find("ValueContainer").transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = value.ToString();
-                
+
                 if (statusEffectUI == null)
                 {
                     Debug.LogError("Could not find status ui object in addStatus");
@@ -155,7 +155,7 @@ public class HealthAndStatus : MonoBehaviour
             }
         }
 
-        
+
     }
 
     public void removeStatus(string status)
@@ -175,7 +175,7 @@ public class HealthAndStatus : MonoBehaviour
         return statuses;
     }
 
-    public void setHealth(int current, int max)
+    public void setHealth(float current, float max)
     {
         healthText.text = current.ToString() + '/' + max.ToString();
         healthSlider.value = current / max;

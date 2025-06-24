@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -13,6 +14,7 @@ public class TargetableObject : MonoBehaviour, IPointerClickHandler, IPointerEnt
     private Player player;
 
     private Enemy enemy;
+    private bool targetable = false;
 
     void Start()
     {
@@ -67,24 +69,24 @@ public class TargetableObject : MonoBehaviour, IPointerClickHandler, IPointerEnt
     // Listener for the user to play cards on this object
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Target clicked");
         // Check if card is selected and type of card can be used on this entity
-        if (HandManager.instance.hasSelectedCard() && targetSprites.activeSelf)
-        {
-            // Check if type of card can be used on enemy
-            Card card = HandManager.instance.getSelectedCard();
-            CardEffects effects = HandManager.instance.processCard(card);
+        // if (HandManager.instance.hasSelectedCard() && targetSprites.activeSelf)
+        // {
+        //     // Check if type of card can be used on enemy
+        //     Card card = HandManager.instance.getSelectedCard();
+        //     CardEffects effects = HandManager.instance.processCard(card);
+        //     Debug.Log(effects.getTotalDamage());
 
-            // Call enemy/player processCard function
-            if (isEnemy)
-            {
-                enemy.processCardEffects(effects);
-            }
-            else
-            {
-                player.processCardEffects(effects);
-            }
-        }
+        //     // Call enemy/player processCard function
+        //     if (isEnemy)
+        //     {
+        //         enemy.processCardEffects(effects);
+        //     }
+        //     else
+        //     {
+        //         player.processCardEffects(effects);
+        //     }
+        // }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -95,10 +97,17 @@ public class TargetableObject : MonoBehaviour, IPointerClickHandler, IPointerEnt
     public void showTarget()
     {
         targetSprites.SetActive(true);
+        targetable = true;
     }
 
     public void hideTarget()
     {
         targetSprites.SetActive(false);
+        targetable = false;
+    }
+
+    public bool isTargetable()
+    {
+        return targetable;
     }
 }

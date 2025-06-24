@@ -44,9 +44,13 @@ public class Character : MonoBehaviour
 
     // UI
     protected HealthAndStatus healthAndStatus;
+    protected TargetableObject targetableObject;
 
     public virtual void Start()
     {
+        // Initializers
+        targetableObject = GetComponent<TargetableObject>();
+
         currentHealth = maxHealth;
         attributes.Add(Attributes.STRENGTH, 1);
         attributes.Add(Attributes.ARMOR, 0);
@@ -77,9 +81,10 @@ public class Character : MonoBehaviour
         // Apply changes to attributes
         currentHealth -= effects.getTotalDamage();
         attributes[Attributes.ARMOR] += effects.getTotalArmor();
-        attributes[Attributes.WARD] += effects.getTotalArmor();
-        
+        attributes[Attributes.WARD] += effects.getTotalWard();
+
         healthAndStatus.updateAttributes(false, attributes);
+        healthAndStatus.setHealth(currentHealth, maxHealth);
     }
 
     public int getCurrentHealth()
@@ -104,5 +109,10 @@ public class Character : MonoBehaviour
     public Dictionary<Attributes, int> getAttributes()
     {
         return attributes;
+    }
+
+    public bool checkifTargetable()
+    {
+        return targetableObject.isTargetable();
     }
 }

@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 261285377}
   - component: {fileID: 261285376}
+  - component: {fileID: 261285378}
   m_Layer: 0
   m_Name: HandManager
   m_TagString: HandManager
@@ -165,6 +166,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &261285378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261285375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e61f3954000f87f44a30ce74643a4d82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &387127105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8465,6 +8478,10 @@ PrefabInstance:
     - target: {fileID: 8494905839136584963, guid: f53546e803804394382804eea7a5b775, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8793928011539296520, guid: f53546e803804394382804eea7a5b775, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8842252202673702655, guid: f53546e803804394382804eea7a5b775, type: 3}
       propertyPath: m_Name
