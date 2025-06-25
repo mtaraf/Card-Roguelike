@@ -6,18 +6,18 @@ using UnityEngine;
 
 public class Player : Character
 {
-    private Deck deck;
+    private Deck deck = null;
 
     // Attributes
 
     public override void Start()
     {
         base.Start();
+    }
 
-        // Player Deck set up
-        deck = new Deck();
-        generateStartingDeck();
-        HandManager.instance.setPlayerDeck(deck.deck);
+    public bool hasDeck()
+    {
+        return deck == null;
     }
 
     public DeckModelSO getCards()
@@ -28,6 +28,11 @@ public class Player : Character
     public void addCardToDeck(CardModelSO card)
     {
         // add card to deck
+
+
+
+        // update hand manager
+        HandManager.instance.setPlayerDeck(deck.deck);
     }
 
     private void generateStartingDeck()
@@ -38,5 +43,11 @@ public class Player : Character
     public override void processCardEffects(CardEffects effects)
     {
         base.processCardEffects(effects);
+    }
+
+    public void setDeck(DeckModelSO deckModel)
+    {
+        deck = new Deck(deckModel);
+        HandManager.instance.setPlayerDeck(deck.deck);
     }
 }

@@ -1,7 +1,16 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+enum TurnState
+{
+    PlayerTurn,
+    EnemyTurn,
+    Victory,
+    Defeat
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -11,10 +20,24 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject loadGameMenu;
+    [SerializeField] private GameObject mainLevelCanvas;
+
 
 
     // Game States
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private List<GameObject> enemyPrefabs;
+    // [SerializeField] private List<GameObject> bossPrefabs;
+    private int currentLevel = 0;
+    private Enemy enemy;
     private Player player;
+    private bool endPlayerTurnBool = true;
+    private DeckModelSO playerDeck;
+    private int playerMaxHealth;
+    private int playerHandSize;
+    private int playerHandEnergy;
+
+    // TO-DO: add player items here
 
     // Cards
     [SerializeField] private DeckModelSO starterDeck;
@@ -37,15 +60,146 @@ public class GameManager : MonoBehaviour
 
         // Detect when a new scene is loaded
         SceneManager.sceneLoaded += onSceneLoaded;
+
+        // Initial player values
+        playerDeck = starterDeck;
+        playerMaxHealth = 50;
+        playerHandSize = 6;
+        playerHandEnergy = 3;
     }
 
 
-    public void onSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Game Manager detected scene loaded: {scene.name}");
 
-        // Add scene specific logic here
+        // Level scene
+        if (scene.name == "BaseLevelScene")
+        {
+            baseLevelSceneStart();
+        }
     }
+
+    void baseLevelSceneStart()
+    {
+        // Instantiate and set up player data
+        GameObject playerObj = Instantiate(playerPrefab, mainLevelCanvas.transform);
+        player = playerObj.GetComponent<Player>();
+        if (player == null)
+        {
+            Debug.LogError("Could not find player component in player prefab");
+        }
+
+        player.setDeck(playerDeck);
+        player.setMaxHealth(playerMaxHealth);
+
+
+        if (currentLevel == 0)
+        {
+
+        }
+
+        // add enemy to level
+        randomizeEnemy();
+
+
+        // Start turn sequence
+        StartCoroutine(startTurnSequence());
+    }
+
+    // Randomize the enemy the player encounters
+    void randomizeEnemy()
+    {
+        if (currentLevel % 10 == 0 && currentLevel != 0)
+        {
+            // Load Boss level
+        }
+        else
+        {
+            // Random common enemy
+            int random = Random.Range(0, enemyPrefabs.Count - 1);
+            GameObject enemyObj = Instantiate(enemyPrefabs[random], mainLevelCanvas.transform);
+
+            // remove enemy from list
+            enemyPrefabs.Remove(enemyPrefabs[random]);
+
+            // Get enemy component
+            enemy = enemyObj.GetComponent<Enemy>();
+
+
+
+
+            // TO-DO: Add random events instead of common enemy
+        }
+    }
+
+    IEnumerator startTurnSequence()
+    {
+        yield return null;
+        TurnState currentState = TurnState.PlayerTurn;
+        Debug.Log(enemy.getCurrentHealth());
+        while (enemy.getCurrentHealth() > 1 && player.getCurrentHealth() > 1)
+        {
+            if (currentState == TurnState.PlayerTurn)
+            {
+                yield return StartCoroutine(startPlayerTurn());
+                currentState = TurnState.EnemyTurn;
+                endPlayerTurn();
+                Debug.Log("Player turn has ended, moving to enemy turn");
+            }
+            else
+            {
+                yield return StartCoroutine(startEnemyTurn());
+                currentState = TurnState.PlayerTurn;
+                Debug.Log("Enemy turn has ended, moving to player turn");
+            }
+            yield return null; // Keep this for ui frame update (maybe lengthen if animations get put in)
+        }
+
+        if (enemy.getCurrentHealth() < 1)
+        {
+            // Progress to next stage
+        }
+        else
+        {
+            // Game over screen
+        }
+    }
+
+    IEnumerator startPlayerTurn()
+    {
+        if (endPlayerTurnBool == false)
+        {
+            endPlayerTurnBool = true;
+        }
+
+        HandManager.instance.drawCards(playerHandSize);
+
+        yield return new WaitUntil(() => endPlayerTurnBool == false);
+    }
+
+    void endPlayerTurn()
+    {
+        Debug.Log("end turn called");
+        HandManager.instance.shuffleCurrentHandIntoDiscardPile();
+    }
+
+    IEnumerator startEnemyTurn()
+    {
+        // Delay before enemy turn
+        yield return new WaitForSeconds(1);
+
+        // TO-DO: implement enemy turn
+
+        // Delay before handing turn to player
+        yield return new WaitForSeconds(1);
+    }
+
+    public void endTurn()
+    {
+        endPlayerTurnBool = false;
+    }
+
 
     // Card/Deck Functions
     public DeckModelSO getStarterDeck()
@@ -71,7 +225,7 @@ public class GameManager : MonoBehaviour
 
     private void saveGame()
     {
-        
+
     }
 
     public void enterGame(int saveSlot)
@@ -101,10 +255,10 @@ public class GameManager : MonoBehaviour
 
         // Save everything here
 
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
             Application.Quit();
-        #endif
+#endif
     }
 }

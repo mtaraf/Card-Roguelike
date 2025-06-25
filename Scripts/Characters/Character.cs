@@ -115,4 +115,9 @@ public class Character : MonoBehaviour
     {
         return targetableObject.isTargetable();
     }
+
+    public void setMaxHealth(int value)
+    {
+        maxHealth = value;
+    }
 }

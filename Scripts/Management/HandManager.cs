@@ -40,13 +40,6 @@ public class HandManager : MonoBehaviour
     public void onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Hand Manager detected scene loaded: {scene.name}");
-
-        if (player == null)
-        {
-            Debug.Log("Player not found, trying to locate player by object type");
-            player = FindFirstObjectByType<Player>(); // fallback if not assigned
-        }
-
         StartCoroutine(createDecksAfterStartHasRun());
     }
 
@@ -54,6 +47,13 @@ public class HandManager : MonoBehaviour
     private IEnumerator createDecksAfterStartHasRun()
     {
         yield return null;
+
+        player = FindFirstObjectByType<Player>();
+        if (player == null)
+        {
+            Debug.Log("Player not found in scene from hand manager");
+        }
+
         // Get player deck and create an empty discard deck and a full draw pile on load
         playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
         playerDeck.cards = new List<CardModelSO>(player?.getCards().cards);
@@ -127,6 +127,7 @@ public class HandManager : MonoBehaviour
     // Card movement functions
     public void drawCards(int numCards)
     {
+        Debug.Log("Draw cards called");
         int randomCardIndex = -1;
 
         // Reshuffle discard and draw if drawPile does not have enough cards
@@ -164,7 +165,12 @@ public class HandManager : MonoBehaviour
 
     private void shuffleDiscardPileIntoDrawPile()
     {
-
+        List<CardModelSO> discardCopy = new List<CardModelSO>(discardPile.cards);
+        foreach (CardModelSO card in discardCopy)
+        {
+            drawPile.cards.Add(card);
+            discardPile.cards.Remove(card);
+        }
     }
 
     // Card Processing
@@ -186,25 +192,6 @@ public class HandManager : MonoBehaviour
         return new CardEffects();
     }
 
-    // Start of turn functions
-    public void startTurn()
-    {
-        // Check for any player effects add them 
-
-        // Draw New Hand
-        drawCards(handSize);
-
-    }
-
-
-    // End of turn functions
-    public void endTurn()
-    {
-        // Remove cards from card slots and move them to the discard pile
-
-        // Relay to GameManager
-    }
-
     public CardEffects useSelectedCard()
     {
         // Get card effects
@@ -223,6 +210,20 @@ public class HandManager : MonoBehaviour
     private void addCardToDiscardPile(Card card)
     {
         discardPile.cards.Add(card.getCardModel());
+    }
+
+    public void shuffleCurrentHandIntoDiscardPile()
+    {
+        for (int i = 0; i < cardSlotsList.Count; i++)
+        {
+            if (cardSlotsList[i].transform.childCount != 0)
+            {
+                GameObject card = cardSlotsList[i].transform.GetChild(0).gameObject;
+                Card cardInfo = card.GetComponent<Card>();
+                addCardToDiscardPile(cardInfo);
+                Destroy(card);
+            }
+        }
     }
 }
 

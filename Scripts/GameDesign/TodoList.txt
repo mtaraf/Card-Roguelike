@@ -53,9 +53,9 @@ Create first "map" for GameManager
 
 
 1. Cards playable towards player and enemies
-    - stats gained from cards should be updated (in-progress)
-        - fix armor/ward not updating ui (to-do)
-        - fix buff cards
+    - stats gained from cards should be updated (done)
+        - fix armor/ward not updating ui (done)
+        - fix buff cards (to-do)
 2. Create level in game manager
     - Deck operations:
         - refill at start of round
@@ -63,4 +63,4 @@ Create first "map" for GameManager
     - Player health should remain the same between levels, enemies always start with full health
     - Player effects clear after each level
     - Update UI for level
-3. Brainstorm about level rewards and ui for that
+    - Create Scriptable Object for Moveset of enemies

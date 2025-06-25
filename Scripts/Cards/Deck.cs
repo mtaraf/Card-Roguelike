@@ -10,6 +10,10 @@ public class Deck
     public int deckSize = 0;
     public DeckModelSO deck;
 
+    public Deck(DeckModelSO model)
+    {
+        deck = model;
+    }
     void Start()
     {
         // Initialize empty deck

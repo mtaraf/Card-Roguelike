@@ -16,7 +16,7 @@ public class HealthAndStatus : MonoBehaviour
     private Player player;
     private Enemy enemy;
     private bool isEnemy = false;
-    private Dictionary<Attributes, int> currentAttributes;
+    private Dictionary<Attributes, int> startingAttributes;
     private List<GameObject> effectUISlots = new List<GameObject>();
 
     void Start()
@@ -43,11 +43,11 @@ public class HealthAndStatus : MonoBehaviour
         {
             enemy = GetComponent<Enemy>();
             isEnemy = true;
-            currentAttributes = enemy.getAttributes();
+            startingAttributes = enemy.getAttributes();
         }
         else
         {
-            currentAttributes = player.getAttributes();
+            startingAttributes = player.getAttributes();
         }
 
         if (player == null && enemy == null)
@@ -55,48 +55,7 @@ public class HealthAndStatus : MonoBehaviour
             Debug.LogError("Could not find Player or Enemy component for HealthAndStatus component");
         }
 
-        updateAttributes(true, currentAttributes);
-    }
-
-    public void updateAttributes(bool onLoad, Dictionary<Attributes, int> att)
-    {
-        // TO-DO: Is this needed?
-        if (attributesAreEqual(currentAttributes, att) && !onLoad)
-        {
-            return;
-        }
-
-        // update attributes on UI
-        foreach (KeyValuePair<Attributes, int> pair in att)
-        {
-            if (pair.Value != 0)
-            {
-                addStatus(pair.Key, pair.Value);
-            }
-        }
-
-        // update current attributes
-        currentAttributes = att;
-    }
-
-
-
-    bool attributesAreEqual(Dictionary<Attributes, int> currentAtt, Dictionary<Attributes, int> updatedAtt)
-    {
-        if (currentAtt.Count != updatedAtt.Count)
-        {
-            return false;
-        }
-
-        foreach (var pair in currentAtt)
-        {
-            if (!updatedAtt.TryGetValue(pair.Key, out int valueB) || pair.Value != valueB)
-            {
-                return false;
-            }
-        }
-
-        return true;
+        updateAttributes(true, startingAttributes);
     }
 
     Transform getHeathAndStatus()
@@ -112,27 +71,36 @@ public class HealthAndStatus : MonoBehaviour
         return null;
     }
 
+    public void updateAttributes(bool onLoad, Dictionary<Attributes, int> att)
+    {
+        // update attributes on UI
+        foreach (KeyValuePair<Attributes, int> pair in att)
+        {
+            if (pair.Value != 0)
+            {
+                updateStatus(pair.Key, pair.Value);
+            }
+        }
+    }
+
     // adds or updates status to ui
-    public void addStatus(Attributes status, int value)
+    public void updateStatus(Attributes status, int value)
     {
         foreach (GameObject slot in effectUISlots)
         {
             if (slot.transform.childCount > 0)
             {
-                if (slot.transform.GetChild(0).name == status.ToDisplayString())
+                // TO-DO: Find a better way to see what status is in the effect slot
+                if (slot.transform.GetChild(0).name.Substring(0,slot.transform.GetChild(0).name.Length-7) == status.ToDisplayString())
                 {
-                    // Check value of effect to change or remove effect if value is < 1
-                    int currentEffectValue = Int32.Parse(slot.transform.GetChild(0).transform.Find("ValueContainer").transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
-                    currentEffectValue += value;
-
                     // remove effect if value is below 1
-                    if (currentEffectValue < 1)
+                    if (value < 1)
                     {
                         Destroy(slot.transform.GetChild(0));
                         return;
                     }
 
-                    slot.transform.GetChild(0).transform.Find("ValueContainer").transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentEffectValue.ToString();
+                    slot.transform.GetChild(0).transform.Find("ValueContainer").transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = value.ToString();
                     return;
                 }
             }
@@ -154,8 +122,6 @@ public class HealthAndStatus : MonoBehaviour
                 return;
             }
         }
-
-
     }
 
     public void removeStatus(string status)

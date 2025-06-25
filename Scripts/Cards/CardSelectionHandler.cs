@@ -158,7 +158,6 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
         if (results.Count > 0)
         {
             GameObject clickedUI = results[0].gameObject;
-            Debug.Log("Clicked UI Element: " + clickedUI.name);
             return findParent(clickedUI);
         }
 
