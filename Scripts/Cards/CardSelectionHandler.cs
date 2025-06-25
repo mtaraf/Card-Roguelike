@@ -192,22 +192,45 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                 Player player = clickedGameObject.GetComponent<Player>();
                 if (player != null && player.checkifTargetable())
                 {
-                    Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on player");
-                    CardEffects effects = HandManager.instance.useSelectedCard();
-                    player.processCardEffects(effects);
-                    StartCoroutine(onUseCard());
-                    return;
+                    // Check if player has enough energy to use the card
+                    int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
+                    if (GameManager.instance.getCurrentPlayerEnergy() >= cardEnergy)
+                    {
+                        // Use card
+                        Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on player");
+                        CardEffects effects = HandManager.instance.useSelectedCard();
+                        player.processCardEffects(effects);
+
+                        // update player energy
+                        GameManager.instance.usePlayerEnergy(cardEnergy);
+
+                        // card animation
+                        StartCoroutine(onUseCard());
+                        return;
+                    }
                 }
                 else
                 {
                     Enemy enemy = clickedGameObject.GetComponent<Enemy>();
                     if (enemy != null && enemy.checkifTargetable())
                     {
-                        Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on enemy");
-                        CardEffects effects = HandManager.instance.useSelectedCard();
-                        enemy.processCardEffects(effects);
-                        StartCoroutine(onUseCard());
-                        return;
+                        // Check if player has enough energy to use the card
+                        int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
+                        if (GameManager.instance.getCurrentPlayerEnergy() >= cardEnergy)
+                        {
+                            // Use card
+                            Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on enemy");
+                            CardEffects effects = HandManager.instance.useSelectedCard();
+                            enemy.processCardEffects(effects);
+
+                            // update player energy
+                            GameManager.instance.usePlayerEnergy(cardEnergy);
+
+                            // card animation
+                            StartCoroutine(onUseCard());
+                            return;
+                        }
+
                     }
                 }
             }

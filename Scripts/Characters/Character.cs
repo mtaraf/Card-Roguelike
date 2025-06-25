@@ -52,7 +52,7 @@ public class Character : MonoBehaviour
         targetableObject = GetComponent<TargetableObject>();
 
         currentHealth = maxHealth;
-        attributes.Add(Attributes.STRENGTH, 1);
+        attributes.Add(Attributes.STRENGTH, 0);
         attributes.Add(Attributes.ARMOR, 0);
         attributes.Add(Attributes.WARD, 0);
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,8 +37,10 @@ public class GameManager : MonoBehaviour
     private int playerMaxHealth;
     private int playerHandSize;
     private int playerHandEnergy;
+    private int currentPlayerEnergy;
 
-    // TO-DO: add player items here
+    // UI
+    private GameObject playerEnergyUI;
 
     // Cards
     [SerializeField] private DeckModelSO starterDeck;
@@ -82,6 +85,14 @@ public class GameManager : MonoBehaviour
 
     void baseLevelSceneStart()
     {
+        // Get UI data
+        playerEnergyUI = Helpers.findDescendant(mainLevelCanvas.transform, "EnergyUI");
+
+        if (playerEnergyUI == null)
+        {
+            Debug.LogError("Could not find a piece of UI within the main level scene");
+        }
+
         // Instantiate and set up player data
         GameObject playerObj = Instantiate(playerPrefab, mainLevelCanvas.transform);
         player = playerObj.GetComponent<Player>();
@@ -137,7 +148,6 @@ public class GameManager : MonoBehaviour
     {
         yield return null;
         TurnState currentState = TurnState.PlayerTurn;
-        Debug.Log(enemy.getCurrentHealth());
         while (enemy.getCurrentHealth() > 1 && player.getCurrentHealth() > 1)
         {
             if (currentState == TurnState.PlayerTurn)
@@ -168,6 +178,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator startPlayerTurn()
     {
+        yield return new WaitForSeconds(1);
+        currentPlayerEnergy = playerHandEnergy;
+        updatePlayerEnergyUI();
         if (endPlayerTurnBool == false)
         {
             endPlayerTurnBool = true;
@@ -184,6 +197,17 @@ public class GameManager : MonoBehaviour
         HandManager.instance.shuffleCurrentHandIntoDiscardPile();
     }
 
+    public int getCurrentPlayerEnergy()
+    {
+        return currentPlayerEnergy;
+    }
+
+    public void usePlayerEnergy(int value)
+    {
+        currentPlayerEnergy -= value;
+        updatePlayerEnergyUI();
+    }
+
     IEnumerator startEnemyTurn()
     {
         // Delay before enemy turn
@@ -198,6 +222,14 @@ public class GameManager : MonoBehaviour
     public void endTurn()
     {
         endPlayerTurnBool = false;
+    }
+
+    // UI Updates
+
+    void updatePlayerEnergyUI()
+    {
+        Debug.Log(currentPlayerEnergy);
+        playerEnergyUI.transform.Find("EnergyText").GetComponent<TextMeshProUGUI>().text = currentPlayerEnergy.ToString();
     }
 
 
