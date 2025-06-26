@@ -4,15 +4,6 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     private CardModelSO cardModel;
-    // public CardType type;
-    // public int energy;
-    // public int damage;
-    // public int armor;
-    // public int ward;
-    // public int turns;
-    // public bool special;
-    // public Special[] condition;
-    // public double multiplier;
 
     public void setCardDisplayInformation(CardModelSO model)
     {
@@ -26,6 +17,21 @@ public class Card : MonoBehaviour
 
         // Change energy value
         transform.Find("EnergyTextContainer").transform.Find("EnergyCost").GetComponent<TextMeshProUGUI>().text = model.energy.ToString();
+    }
+
+    public string getCardTitle()
+    {
+        return cardModel.title;
+    }
+
+    public int getTurns()
+    {
+        return cardModel.turns;
+    }
+
+    public int getStrength()
+    {
+        return cardModel.strength;
     }
 
     public CardModelSO getCardModel()
@@ -53,8 +59,8 @@ public class Card : MonoBehaviour
         return cardModel.armor;
     }
 
-    public int getWard()
+    public bool isSpecial()
     {
-        return cardModel.ward;
+        return cardModel.special;
     }
 }

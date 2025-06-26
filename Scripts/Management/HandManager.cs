@@ -173,40 +173,6 @@ public class HandManager : MonoBehaviour
         }
     }
 
-    // Card Processing
-    public CardEffects processCard(Card card)
-    {
-        int armor, ward, damage;
-        int[] damageOverTime;
-        CardEffects effects = new CardEffects();
-
-        if (card.hasCondition())
-        {
-
-        }
-        else
-        {
-            return new CardEffects(card.getDamage(), card.getArmor(), card.getWard());
-        }
-
-        return new CardEffects();
-    }
-
-    public CardEffects useSelectedCard()
-    {
-        // Get card effects
-        CardEffects effects = processCard(selectedCard);
-
-
-        // Add card to discard pile and remove card
-        addCardToDiscardPile(selectedCard);
-
-
-        clearSelectedCard();
-
-        return effects;
-    }
-
     private void addCardToDiscardPile(Card card)
     {
         discardPile.cards.Add(card.getCardModel());
@@ -225,64 +191,159 @@ public class HandManager : MonoBehaviour
             }
         }
     }
+
+    // Card Processing
+    public CardEffects useSelectedCard()
+    {
+        // Get card effects
+        CardEffects effects = processCard(selectedCard);
+
+        // Add card to discard pile and remove card
+        addCardToDiscardPile(selectedCard);
+
+
+        clearSelectedCard();
+
+        return effects;
+    }
+
+    public CardEffects processCard(Card card)
+    {
+        CardEffects effects = new CardEffects(card.getTurns());
+        effects.setEffect(EffectType.Damage, card.getDamage());
+        effects.setEffect(EffectType.Armor, card.getArmor());
+        effects.setEffect(EffectType.Strength, card.getStrength());
+
+        if (card.isSpecial())
+        {
+            effects = processSpecialCards(card);
+        }
+
+        return effects;
+    }
+
+    CardEffects processSpecialCards(Card specialCard)
+    {
+        CardEffects effects = new CardEffects(specialCard.getTurns());
+        string title = specialCard.getCardTitle();
+        switch (title)
+        {
+            case "Glass Canon":
+
+                break;
+            default:
+                break;
+        }
+
+
+        return effects;
+    }
 }
+
+public enum EffectType
+{
+    Damage,
+    Armor,
+    Strength,
+    // Add more: Poison, Stun, Heal, etc.
+}
+
 
 public class CardEffects
 {
-    private int totalDamage = 0;
-    private int totalArmor = 0;
-    private int totalWard = 0;
-    private int[] damageOverTime;
+    private Dictionary<EffectType, int> effectValues = new();
+    private int totalTurns = 0;
 
-    public CardEffects(int damage, int armor, int ward)
+    public CardEffects(int turns = 0)
     {
-        totalDamage = damage;
-        totalArmor = armor;
-        totalWard = ward;
+        totalTurns = turns;
     }
 
-    public CardEffects()
+    public void setEffect(EffectType type, int value)
     {
-
+        if (effectValues.ContainsKey(type))
+            effectValues[type] += value;
+        else
+            effectValues[type] = value;
     }
 
-    public void setTotalDamage(int damage)
+    public int getEffect(EffectType type)
     {
-        totalDamage = damage;
+        return effectValues.ContainsKey(type) ? effectValues[type] : 0;
     }
 
-    public int getTotalDamage()
+    public bool hasEffect(EffectType type)
     {
-        return totalDamage;
+        return getEffect(type) != 0;
     }
 
-    public void setTotalArmor(int armor)
+    public Dictionary<EffectType, int> getAllEffects()
     {
-        totalArmor = armor;
+        return new Dictionary<EffectType, int>(effectValues);
     }
 
-    public int getTotalArmor()
-    {
-        return totalArmor;
-    }
-
-    public void setTotalWard(int ward)
-    {
-        totalWard = ward;
-    }
-
-    public int getTotalWard()
-    {
-        return totalWard;
-    }
-
-    public void setTotalDamageOverTime(int[] dot)
-    {
-        damageOverTime = dot;
-    }
-    
-    public int[] getTotalDamageOverTime()
-    {
-        return damageOverTime;
-    }
+    public int Turns => totalTurns;
+    public void setTurns(int turns) => totalTurns = turns;
 }
+
+// public class CardEffects
+// {
+//     private int totalDamage = 0;
+//     private int totalArmor = 0;
+//     private int totalTurns = 0;
+
+//     private int totalStrength = 0;
+
+//     public CardEffects(int damage, int armor, int turns, int strength)
+//     {
+//         totalDamage = damage;
+//         totalArmor = armor;
+//         totalStrength = strength;
+//         totalTurns = turns;
+//     }
+
+//     public CardEffects()
+//     {
+
+//     }
+
+//     public void setTotalDamage(int damage)
+//     {
+//         totalDamage = damage;
+//     }
+
+//     public int getTotalDamage()
+//     {
+//         return totalDamage;
+//     }
+
+//     public void setTotalArmor(int armor)
+//     {
+//         totalArmor = armor;
+//     }
+
+//     public int getTotalArmor()
+//     {
+//         return totalArmor;
+//     }
+
+//     public int getTotalStrength()
+//     {
+//         return totalStrength;
+//     }
+
+//     public void setStrength(int strength)
+//     {
+//         totalStrength = strength;
+//     }
+
+//     public void setTurns(int turns)
+//     {
+//         totalTurns = turns;
+//     }
+
+//     public int getTurns()
+//     {
+//         return totalTurns;
+//     }
+// }

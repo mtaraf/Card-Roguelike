@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> enemyPrefabs;
     // [SerializeField] private List<GameObject> bossPrefabs;
     private int currentLevel = 0;
-    private Enemy enemy;
+    private List<Enemy> enemies = new List<Enemy>();
     private Player player;
     private bool endPlayerTurnBool = true;
     private DeckModelSO playerDeck;
@@ -135,7 +134,7 @@ public class GameManager : MonoBehaviour
             enemyPrefabs.Remove(enemyPrefabs[random]);
 
             // Get enemy component
-            enemy = enemyObj.GetComponent<Enemy>();
+            enemies.Add(enemyObj.GetComponent<Enemy>());
 
 
 
@@ -148,7 +147,7 @@ public class GameManager : MonoBehaviour
     {
         yield return null;
         TurnState currentState = TurnState.PlayerTurn;
-        while (enemy.getCurrentHealth() > 1 && player.getCurrentHealth() > 1)
+        while (enemies.Count > 0 && player.getCurrentHealth() > 1)
         {
             if (currentState == TurnState.PlayerTurn)
             {
@@ -163,12 +162,22 @@ public class GameManager : MonoBehaviour
                 currentState = TurnState.PlayerTurn;
                 Debug.Log("Enemy turn has ended, moving to player turn");
             }
+
+            // Removes dead enemies at the end of turn
+            List<Enemy> enemiesCopy = new List<Enemy>(enemies);
+            foreach (Enemy enemy in enemiesCopy)
+            {
+                if (enemy.getCurrentHealth() < 1)
+                {
+                    enemies.Remove(enemy);
+                }
+            }
             yield return null; // Keep this for ui frame update (maybe lengthen if animations get put in)
         }
 
-        if (enemy.getCurrentHealth() < 1)
+        if (enemies.Count == 0)
         {
-            // Progress to next stage
+            // Victory!
         }
         else
         {
@@ -179,6 +188,7 @@ public class GameManager : MonoBehaviour
     IEnumerator startPlayerTurn()
     {
         yield return new WaitForSeconds(1);
+        player.processStartOfTurnEffects();
         currentPlayerEnergy = playerHandEnergy;
         updatePlayerEnergyUI();
         if (endPlayerTurnBool == false)
@@ -214,6 +224,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         // TO-DO: implement enemy turn
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.processStartOfTurnEffects();
+        }
 
         // Delay before handing turn to player
         yield return new WaitForSeconds(1);

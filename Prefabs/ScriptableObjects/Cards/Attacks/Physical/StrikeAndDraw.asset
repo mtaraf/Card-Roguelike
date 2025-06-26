@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: Brandish
-  m_EditorClassIdentifier: Assembly-CSharp::CardModelSO
+  m_Name: StrikeAndDraw
+  m_EditorClassIdentifier: 
   type: 0
-  energy: 3
-  damage: 8
+  energy: 1
+  damage: 2
   armor: 0
-  ward: 0
   turns: 0
   special: 0
   condition:
     conditionValue: 0
-    metric: 5
+    metric: 4
   multiplier: 0
-  details: Attacks enemy for 8 damage
-  title: Brandish
+  details: Deal 2 damage, draw 1 card
+  title: Strike and Draw
   image: {fileID: 0}
   target: 1
+  cardsDrawn: 1

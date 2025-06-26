@@ -14,7 +14,6 @@ public enum CardType
 public enum ConditionMetric
 {
     HEALTH,
-    WARD,
     ARMOR,
     APPLIED_EFFECT,
     PLAYER_CURRENT_EFFECT,
@@ -42,7 +41,6 @@ public class CardModelSO : ScriptableObject
     public int energy;
     public int damage;
     public int armor;
-    public int ward;
     public int turns;
     public bool special;
     public ConditionTupleEquivalent condition;
@@ -51,4 +49,6 @@ public class CardModelSO : ScriptableObject
     public string title;
     public Sprite image;
     public Target target;
+    public int cardsDrawn;
+    public int strength;
 }

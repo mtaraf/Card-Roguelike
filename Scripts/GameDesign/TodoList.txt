@@ -56,10 +56,15 @@ Create first "map" for GameManager
     - stats gained from cards should be updated (done)
         - fix armor/ward not updating ui (done)
         - fix buff cards (to-do)
+            - create mechanism for multiple turn cards (change damage to poison, amond other things)
+            - process special cards
+
+
+
 2. Create level in game manager
     - Deck operations:
-        - refill at start of round
-        - discard pile should return to draw pile if there are no cards left in draw pile
+        - refill at start of round (done)
+        - discard pile should return to draw pile if there are no cards left in draw pile (done)
     - Player health should remain the same between levels, enemies always start with full health
     - Player effects clear after each level
     - Update UI for level

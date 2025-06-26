@@ -12,8 +12,7 @@ public enum Effects
 public enum Attributes
 {
     STRENGTH = 0,
-    WARD = 1,
-    ARMOR = 2
+    ARMOR = 1
 }
 
 public static class AttributesExtensions
@@ -24,7 +23,6 @@ public static class AttributesExtensions
         {
             case Attributes.STRENGTH: return "StrengthEffect";
             case Attributes.ARMOR: return "ArmorEffect";
-            case Attributes.WARD: return "WardEffect";
             default: return "Default";
         }
     }
@@ -39,8 +37,8 @@ public class Character : MonoBehaviour
     protected int strength;
     protected int weakness;
     protected int armor;
-    protected int ward;
     protected Dictionary<Attributes, int> attributes = new Dictionary<Attributes, int>();
+    protected List<CardEffects> multipleTurnEffects = new List<CardEffects>();
 
     // UI
     protected HealthAndStatus healthAndStatus;
@@ -54,7 +52,6 @@ public class Character : MonoBehaviour
         currentHealth = maxHealth;
         attributes.Add(Attributes.STRENGTH, 0);
         attributes.Add(Attributes.ARMOR, 0);
-        attributes.Add(Attributes.WARD, 0);
 
         // Set up after first frame
         StartCoroutine(findComponentsAfterFrame());
@@ -78,10 +75,42 @@ public class Character : MonoBehaviour
 
     public virtual void processCardEffects(CardEffects effects)
     {
-        // Apply changes to attributes
-        currentHealth -= effects.getTotalDamage();
-        attributes[Attributes.ARMOR] += effects.getTotalArmor();
-        attributes[Attributes.WARD] += effects.getTotalWard();
+        if (effects.Turns > 0)
+        {
+            multipleTurnEffects.Add(effects);
+        }
+        else
+        {
+            // Apply changes to attributes
+            currentHealth -= effects.getEffect(EffectType.Damage);
+            attributes[Attributes.ARMOR] += effects.getEffect(EffectType.Armor);
+            attributes[Attributes.STRENGTH] += effects.getEffect(EffectType.Strength);
+        }
+
+        healthAndStatus.updateAttributes(false, attributes);
+        healthAndStatus.setHealth(currentHealth, maxHealth);
+    }
+
+    public void processStartOfTurnEffects()
+    {
+        List<CardEffects> turnEffectsCopy = new List<CardEffects>(multipleTurnEffects);
+        foreach (CardEffects eff in turnEffectsCopy)
+        {
+            currentHealth -= eff.getEffect(EffectType.Damage);
+            attributes[Attributes.ARMOR] += eff.getEffect(EffectType.Armor);
+            attributes[Attributes.STRENGTH] += eff.getEffect(EffectType.Strength);
+
+            if (eff.Turns == 1)
+            {
+                multipleTurnEffects.Remove(eff);
+            }
+        }
+
+        // Decrease effects by 1 turn
+        foreach (CardEffects eff in multipleTurnEffects)
+        {
+            eff.setTurns(eff.Turns - 1);
+        }
 
         healthAndStatus.updateAttributes(false, attributes);
         healthAndStatus.setHealth(currentHealth, maxHealth);
@@ -91,21 +120,7 @@ public class Character : MonoBehaviour
     {
         return currentHealth;
     }
-
-    // public int getArmor()
-    // {
-    //     return armor;
-    // }
-
-    // public int getWard()
-    // {
-    //     return ward;
-    // }
-
-    // public int getStrength()
-    // {
-    //     return strength;
-    // }
+    
     public Dictionary<Attributes, int> getAttributes()
     {
         return attributes;

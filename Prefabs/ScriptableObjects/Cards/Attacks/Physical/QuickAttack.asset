@@ -10,21 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: EnchantWeapon
+  m_Name: QuickAttack
   m_EditorClassIdentifier: Assembly-CSharp::CardModelSO
-  type: 2
-  energy: 2
-  damage: 0
+  type: 0
+  energy: 1
+  damage: 2
   armor: 0
-  turns: 2
+  turns: 0
   special: 0
   condition:
     conditionValue: 0
     metric: 4
   multiplier: 0
-  details: Gain 2 strength at the start of the next turn for the 2 turns
-  title: Enchant Weapon
+  details: Attacks enemy for 2 damage
+  title: Stab
   image: {fileID: 0}
-  target: 2
+  target: 1
   cardsDrawn: 0
-  strength: 2

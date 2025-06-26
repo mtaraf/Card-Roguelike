@@ -16,14 +16,14 @@ MonoBehaviour:
   energy: 1
   damage: 0
   armor: 3
-  ward: 0
   turns: 0
   special: 0
   condition:
     conditionValue: 0
-    metric: 5
+    metric: 4
   multiplier: 0
   details: Adds 3 armor
   title: Raise Shield
   image: {fileID: 0}
   target: 2
+  cardsDrawn: 0

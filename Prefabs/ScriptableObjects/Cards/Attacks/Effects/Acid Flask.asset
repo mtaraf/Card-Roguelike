@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: QuickAttack
-  m_EditorClassIdentifier: Assembly-CSharp::CardModelSO
+  m_Name: Acid Flask
+  m_EditorClassIdentifier: 
   type: 0
-  energy: 1
+  energy: 0
   damage: 2
   armor: 0
-  ward: 0
-  turns: 0
+  turns: 3
   special: 0
   condition:
     conditionValue: 0
-    metric: 5
+    metric: 4
   multiplier: 0
-  details: Attacks enemy for 2 damage
-  title: Stab
+  details: Poison an enemy for 2 damage for the next 3 turns
+  title: Acid Flask
   image: {fileID: 0}
   target: 1
+  cardsDrawn: 0

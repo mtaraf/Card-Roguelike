@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: Slash
-  m_EditorClassIdentifier: Assembly-CSharp::CardModelSO
-  type: 0
-  energy: 2
-  damage: 5
+  m_Name: GlassCanon
+  m_EditorClassIdentifier: 
+  type: 2
+  energy: 0
+  damage: 0
   armor: 0
-  ward: 0
   turns: 0
-  special: 0
+  special: 1
   condition:
     conditionValue: 0
-    metric: 5
-  multiplier: 0
-  details: Attacks enemy for 5 damage
-  title: Slash
+    metric: 4
+  multiplier: 2
+  details: Doubles your stength, lose all armor
+  title: Glass Canon
   image: {fileID: 0}
-  target: 1
+  target: 2
+  cardsDrawn: 0
