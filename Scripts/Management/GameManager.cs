@@ -227,6 +227,9 @@ public class GameManager : MonoBehaviour
         foreach (Enemy enemy in enemies)
         {
             enemy.processStartOfTurnEffects();
+            // TO-DO: depending on current level adjust multiplier for enemy cards
+            enemy.playCard(1);
+            yield return new WaitForSeconds(1.5f);
         }
 
         // Delay before handing turn to player

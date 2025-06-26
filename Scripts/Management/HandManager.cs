@@ -9,6 +9,7 @@ public class HandManager : MonoBehaviour
 
     [SerializeField] private Player player;
     [SerializeField] public GameObject cardPrefab;
+    [SerializeField] private GameObject cardAnimationEndLocation;
 
     // Decks
     private DeckModelSO drawPile;
@@ -237,6 +238,40 @@ public class HandManager : MonoBehaviour
 
 
         return effects;
+    }
+
+    // Instantiate and play animation for enemy cards
+    public IEnumerator enemyCardAnimation(CardModelSO model)
+    {
+        // Instantiate at the center of the screen
+        Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+        Vector3 worldCenter;
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+            transform.parent as RectTransform, screenCenter, null, out worldCenter);
+
+        GameObject card = Instantiate(cardPrefab, cardAnimationEndLocation.transform);
+        Card cardInfo = card.GetComponent<Card>();
+        cardInfo.setCardDisplayInformation(model);
+
+        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
+
+        // Step 2: Fade out
+        float fadeDuration = 0.4f;
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeDuration)
+        {
+            float t = elapsedTime / fadeDuration;
+            canvasGroup.alpha = Mathf.Lerp(1f, 0f, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Destroy the game object after it fades out
+        Destroy(gameObject);
     }
 }
 

@@ -206,6 +206,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 20
   moveset: 0
+  enemyClass: 0
+  movesets: []
 --- !u!114 &5314620027693752524
 MonoBehaviour:
   m_ObjectHideFlags: 0

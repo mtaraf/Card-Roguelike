@@ -63,4 +63,11 @@ public class Card : MonoBehaviour
     {
         return cardModel.special;
     }
+
+    public void mulitplyValues(int multiplier)
+    {
+        cardModel.damage *= multiplier;
+        cardModel.armor *= multiplier;
+        cardModel.strength *= multiplier;
+    }
 }
