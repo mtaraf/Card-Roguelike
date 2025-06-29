@@ -207,7 +207,11 @@ MonoBehaviour:
   maxHealth: 20
   moveset: 0
   enemyClass: 0
-  movesets: []
+  movesets:
+  - {fileID: 11400000, guid: 8723286960b9e924e8dd32fe5e2190fe, type: 2}
+  - {fileID: 11400000, guid: d95047a6afa16724486a5205e127a5fe, type: 2}
+  - {fileID: 11400000, guid: 46a1e57660940824086bb7cff53ba1e3, type: 2}
+  - {fileID: 11400000, guid: 2dea2ddd2fd069048a42ffa261ac8d58, type: 2}
 --- !u!114 &5314620027693752524
 MonoBehaviour:
   m_ObjectHideFlags: 0

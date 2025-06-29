@@ -752,6 +752,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed12992560544e74bb578aebde871132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardTitle: {fileID: 5785831787977049328}
+  cardDescription: {fileID: 7777927133083271905}
+  cardEnergyValue: {fileID: 2121674004442531549}
 --- !u!225 &4318823716078220047
 CanvasGroup:
   m_ObjectHideFlags: 0

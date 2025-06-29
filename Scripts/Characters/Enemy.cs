@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -44,30 +45,38 @@ public class Enemy : Character
         return enemyClass;
     }
 
-    public CardEffects playCard(int multiplier)
+    public IEnumerator playCards(int multiplier, int energy)
     {
-        // if enemy does not have a current moveset, add one
-        if (currentMoveset.Count == 0)
+        // Get all movesets with the number of cards equal to energy
+        List<DeckModelSO> applicableMovesets = movesets.FindAll((moveset) => moveset.cards.Count == energy);
+        if (applicableMovesets.Count == 0)
         {
-            int randomMoveset = Random.Range(0, movesets.Count);
-            foreach (CardModelSO model in movesets[randomMoveset].cards)
-            {
-                currentMoveset.Add(model);
-            }
+            Debug.Log("No applicable movesets with " + energy + " energy for this enemy");
         }
 
+        // Get all the cards from a random moveset within the applicable movesets
+        int randomMoveset = Random.Range(0, applicableMovesets.Count);
+        yield return StartCoroutine(playAndProcessCards(applicableMovesets[randomMoveset].cards, multiplier));
 
-        int random = Random.Range(0, currentMoveset.Count);
-        Card card = new Card();
-        card.setCardDisplayInformation(currentMoveset[0]);
-        card.mulitplyValues(multiplier);
+        currentMoveset.Clear();
+    }
 
-        // Card animation
-        StartCoroutine(HandManager.instance.enemyCardAnimation(currentMoveset[0]));
+    IEnumerator playAndProcessCards(List<CardModelSO> moveset, int multiplier)
+    {
+        Debug.Log(moveset.Count);
+        for (int i = 0; i < moveset.Count; i++)
+        {
+            yield return new WaitForSeconds(0.5f);
+            CardModelSO cardModel = moveset[i];
+            cardModel.multiplyValues(multiplier);
 
-        // Remove move from current moveset
-        currentMoveset.Remove(currentMoveset[0]);
-
-        return HandManager.instance.processCard(card);
+            CardEffects effects = HandManager.instance.processEnemyCard(cardModel);
+            if (effects != null)
+            {
+                processCardEffects(effects);
+            }
+            // Card animation
+            yield return StartCoroutine(HandManager.instance.enemyCardAnimation(cardModel));
+        }
     }
 }

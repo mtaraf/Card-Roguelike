@@ -228,12 +228,16 @@ public class GameManager : MonoBehaviour
         {
             enemy.processStartOfTurnEffects();
             // TO-DO: depending on current level adjust multiplier for enemy cards
-            enemy.playCard(1);
-            yield return new WaitForSeconds(1.5f);
+            yield return StartCoroutine(enemy.playCards(1, 1));
         }
 
         // Delay before handing turn to player
         yield return new WaitForSeconds(1);
+    }
+
+    public void processEnemyCardEffectsOnPlayer(CardEffects effects)
+    {
+        player.processCardEffects(effects);
     }
 
     public void endTurn()

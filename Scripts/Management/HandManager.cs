@@ -223,6 +223,22 @@ public class HandManager : MonoBehaviour
         return effects;
     }
 
+    public CardEffects processEnemyCard(CardModelSO model)
+    {
+        CardEffects effects = new CardEffects(model.turns);
+        effects.setEffect(EffectType.Damage, model.damage);
+        effects.setEffect(EffectType.Armor, model.armor);
+        effects.setEffect(EffectType.Strength, model.strength);
+
+        if (model.target == Target.Player)
+        {
+            GameManager.instance.processEnemyCardEffectsOnPlayer(effects);
+            return null;
+        }
+
+        return effects;
+    }
+
     CardEffects processSpecialCards(Card specialCard)
     {
         CardEffects effects = new CardEffects(specialCard.getTurns());
@@ -243,24 +259,22 @@ public class HandManager : MonoBehaviour
     // Instantiate and play animation for enemy cards
     public IEnumerator enemyCardAnimation(CardModelSO model)
     {
+        Debug.Log("Enemy card animation for " + model.title);
         // Instantiate at the center of the screen
-        Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
-        Vector3 worldCenter;
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(
-            transform.parent as RectTransform, screenCenter, null, out worldCenter);
-
         GameObject card = Instantiate(cardPrefab, cardAnimationEndLocation.transform);
         Card cardInfo = card.GetComponent<Card>();
         cardInfo.setCardDisplayInformation(model);
 
-        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+        CanvasGroup canvasGroup = card.GetComponent<CanvasGroup>();
         if (canvasGroup == null)
         {
-            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+            canvasGroup = card.AddComponent<CanvasGroup>();
         }
 
-        // Step 2: Fade out
-        float fadeDuration = 0.4f;
+        processEnemyCard(model);
+
+        // Step 1: Fade out
+        float fadeDuration = 3f;
         float elapsedTime = 0f;
         while (elapsedTime < fadeDuration)
         {
@@ -270,8 +284,11 @@ public class HandManager : MonoBehaviour
             yield return null;
         }
 
-        // Destroy the game object after it fades out
-        Destroy(gameObject);
+        yield return new WaitForSeconds(1f);
+        Debug.Log("Animation ended");
+
+        // Destroy the card after it fades out
+        Destroy(card);
     }
 }
 

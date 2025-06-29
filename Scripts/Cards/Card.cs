@@ -1,22 +1,31 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class Card : MonoBehaviour
 {
     private CardModelSO cardModel;
+    [SerializeField] private GameObject cardTitle;
+    [SerializeField] private GameObject cardDescription;
+    [SerializeField] private GameObject cardEnergyValue;
 
     public void setCardDisplayInformation(CardModelSO model)
     {
         cardModel = model;
 
-        // Change Title
-        transform.Find("Title").GetComponent<TextMeshProUGUI>().text = model.title;
+        cardTitle = cardTitle ?? Helpers.findDescendant(transform, "Title");
+        cardDescription = cardDescription ?? transform.Find("Description")?.gameObject;
+        cardEnergyValue = cardEnergyValue ?? transform.Find("EnergyCost")?.gameObject;
 
-        // Change Description
-        transform.Find("Description").GetComponent<TextMeshProUGUI>().text = model.details;
+        if (cardTitle == null || cardDescription == null || cardEnergyValue == null)
+        {
+            Debug.LogError("Card UI element(s) not found!");
+            return;
+        }
 
-        // Change energy value
-        transform.Find("EnergyTextContainer").transform.Find("EnergyCost").GetComponent<TextMeshProUGUI>().text = model.energy.ToString();
+        cardTitle.GetComponent<TextMeshProUGUI>().text = model.title;
+        cardEnergyValue.GetComponent<TextMeshProUGUI>().text = model.energy.ToString();
+        cardDescription.GetComponent<TextMeshProUGUI>().text = model.details;
     }
 
     public string getCardTitle()
@@ -62,6 +71,11 @@ public class Card : MonoBehaviour
     public bool isSpecial()
     {
         return cardModel.special;
+    }
+
+    public void setModel(CardModelSO model)
+    {
+        cardModel = model;
     }
 
     public void mulitplyValues(int multiplier)

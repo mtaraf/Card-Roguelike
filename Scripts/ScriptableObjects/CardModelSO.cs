@@ -51,4 +51,11 @@ public class CardModelSO : ScriptableObject
     public Target target;
     public int cardsDrawn;
     public int strength;
+
+    public void multiplyValues(int multiplier)
+    {
+        damage *= multiplier;
+        armor *= multiplier;
+        strength *= multiplier;
+    }
 }
