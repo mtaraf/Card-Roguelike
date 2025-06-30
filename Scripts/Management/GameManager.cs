@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     private int playerHandSize;
     private int playerHandEnergy;
     private int currentPlayerEnergy;
+    private TurnState currentState;
 
     // UI
     private GameObject playerEnergyUI;
@@ -146,7 +147,7 @@ public class GameManager : MonoBehaviour
     IEnumerator startTurnSequence()
     {
         yield return null;
-        TurnState currentState = TurnState.PlayerTurn;
+        currentState = TurnState.PlayerTurn;
         while (enemies.Count > 0 && player.getCurrentHealth() > 1)
         {
             if (currentState == TurnState.PlayerTurn)
@@ -188,6 +189,14 @@ public class GameManager : MonoBehaviour
     IEnumerator startPlayerTurn()
     {
         yield return new WaitForSeconds(1);
+
+        // Show enemy energy levels for next turn
+        foreach (Enemy enemy in enemies)
+        {
+            int random = Random.Range(1, 4);
+            enemy.setEnergy(random);
+        }
+
         player.processStartOfTurnEffects();
         currentPlayerEnergy = playerHandEnergy;
         updatePlayerEnergyUI();
@@ -203,7 +212,6 @@ public class GameManager : MonoBehaviour
 
     void endPlayerTurn()
     {
-        Debug.Log("end turn called");
         HandManager.instance.shuffleCurrentHandIntoDiscardPile();
     }
 
@@ -221,14 +229,13 @@ public class GameManager : MonoBehaviour
     IEnumerator startEnemyTurn()
     {
         // Delay before enemy turn
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
 
-        // TO-DO: implement enemy turn
         foreach (Enemy enemy in enemies)
         {
             enemy.processStartOfTurnEffects();
             // TO-DO: depending on current level adjust multiplier for enemy cards
-            yield return StartCoroutine(enemy.playCards(1, 1));
+            yield return StartCoroutine(enemy.playCards(1, enemy.getEnergy()));
         }
 
         // Delay before handing turn to player
@@ -242,14 +249,16 @@ public class GameManager : MonoBehaviour
 
     public void endTurn()
     {
-        endPlayerTurnBool = false;
+        if (currentState == TurnState.PlayerTurn)
+        {
+            endPlayerTurnBool = false;
+        }
     }
 
     // UI Updates
 
     void updatePlayerEnergyUI()
     {
-        Debug.Log(currentPlayerEnergy);
         playerEnergyUI.transform.Find("EnergyText").GetComponent<TextMeshProUGUI>().text = currentPlayerEnergy.ToString();
     }
 
@@ -268,7 +277,6 @@ public class GameManager : MonoBehaviour
     {
         mainMenu.gameObject.SetActive(false);
         loadGameMenu.gameObject.SetActive(true);
-        Debug.Log("Play clicked!");
     }
 
     private void checkForSavedGames()
@@ -290,7 +298,6 @@ public class GameManager : MonoBehaviour
 
     public void openSettings()
     {
-        Debug.Log("Open Settings");
         mainMenu.gameObject.SetActive(false);
         optionsMenu.gameObject.SetActive(true);
     }
@@ -304,7 +311,6 @@ public class GameManager : MonoBehaviour
 
     public void quitGame()
     {
-        Debug.Log("Quit Game");
 
         // Save everything here
 

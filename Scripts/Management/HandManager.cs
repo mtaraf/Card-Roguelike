@@ -9,6 +9,7 @@ public class HandManager : MonoBehaviour
 
     [SerializeField] private Player player;
     [SerializeField] public GameObject cardPrefab;
+    [SerializeField] public GameObject noAnimationCardPrefab;
     [SerializeField] private GameObject cardAnimationEndLocation;
 
     // Decks
@@ -52,7 +53,7 @@ public class HandManager : MonoBehaviour
         player = FindFirstObjectByType<Player>();
         if (player == null)
         {
-            Debug.Log("Player not found in scene from hand manager");
+            Debug.LogError("Player not found in scene from hand manager");
         }
 
         // Get player deck and create an empty discard deck and a full draw pile on load
@@ -78,7 +79,6 @@ public class HandManager : MonoBehaviour
     // General card functions
     public void setSelectedCard(GameObject card)
     {
-        Debug.Log("Card Selected: " + card.GetComponent<Card>().getCardModel());
         if (card.GetComponent<Card>() != null)
         {
             selectedCard = card.GetComponent<Card>();
@@ -128,7 +128,6 @@ public class HandManager : MonoBehaviour
     // Card movement functions
     public void drawCards(int numCards)
     {
-        Debug.Log("Draw cards called");
         int randomCardIndex = -1;
 
         // Reshuffle discard and draw if drawPile does not have enough cards
@@ -259,9 +258,8 @@ public class HandManager : MonoBehaviour
     // Instantiate and play animation for enemy cards
     public IEnumerator enemyCardAnimation(CardModelSO model)
     {
-        Debug.Log("Enemy card animation for " + model.title);
         // Instantiate at the center of the screen
-        GameObject card = Instantiate(cardPrefab, cardAnimationEndLocation.transform);
+        GameObject card = Instantiate(noAnimationCardPrefab, cardAnimationEndLocation.transform);
         Card cardInfo = card.GetComponent<Card>();
         cardInfo.setCardDisplayInformation(model);
 
@@ -273,8 +271,10 @@ public class HandManager : MonoBehaviour
 
         processEnemyCard(model);
 
+        yield return new WaitForSeconds(1.0f);
+
         // Step 1: Fade out
-        float fadeDuration = 3f;
+        float fadeDuration = 2f;
         float elapsedTime = 0f;
         while (elapsedTime < fadeDuration)
         {
@@ -284,8 +284,7 @@ public class HandManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(1f);
-        Debug.Log("Animation ended");
+        yield return new WaitForSeconds(0.5f);
 
         // Destroy the card after it fades out
         Destroy(card);

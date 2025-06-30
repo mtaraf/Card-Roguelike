@@ -69,3 +69,7 @@ Create first "map" for GameManager
     - Player effects clear after each level
     - Update UI for level
     - Create Scriptable Object for Moveset of enemies
+
+
+Make armor take damage if present
+add strength to damage

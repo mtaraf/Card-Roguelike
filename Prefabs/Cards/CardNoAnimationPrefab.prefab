@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3382912082373520350}
   - component: {fileID: 5428431090539410003}
+  - component: {fileID: 4059500548319023088}
   m_Layer: 5
   m_Name: CardNoAnimationPrefab
   m_TagString: Untagged
@@ -56,6 +57,18 @@ MonoBehaviour:
   cardTitle: {fileID: 7436162406265529230}
   cardDescription: {fileID: 5401482497684016749}
   cardEnergyValue: {fileID: 2759556757166004528}
+--- !u!225 &4059500548319023088
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693967387009741433}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1359553000382519896
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Adds 5 armor
+  details: Adds 4 armor
   title: Protect
   image: {fileID: 0}
   target: 1

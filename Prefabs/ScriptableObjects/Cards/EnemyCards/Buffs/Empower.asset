@@ -22,9 +22,9 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Adds 2 strength
+  details: Adds 1 strength
   title: Empower
   image: {fileID: 0}
   target: 1
   cardsDrawn: 0
-  strength: 2
+  strength: 1
