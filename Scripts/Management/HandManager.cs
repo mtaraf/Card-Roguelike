@@ -220,6 +220,9 @@ public class HandManager : MonoBehaviour
             effects = processSpecialCards(card);
         }
 
+        // Animations
+        GameManager.instance.playAnimationsForCard(card.getCardType());
+
         return effects;
     }
 

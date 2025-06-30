@@ -68,6 +68,11 @@ public class Card : MonoBehaviour
         return cardModel.armor;
     }
 
+    public CardType getCardType()
+    {
+        return cardModel.type;
+    }
+
     public bool isSpecial()
     {
         return cardModel.special;

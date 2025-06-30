@@ -252,6 +252,11 @@ public class GameManager : MonoBehaviour
         player.processCardEffects(effects);
     }
 
+    public void playAnimationsForCard(CardType type)
+    {
+        player.playAnimation(type);
+    }
+
     public void endTurn()
     {
         if (currentState == TurnState.PlayerTurn)

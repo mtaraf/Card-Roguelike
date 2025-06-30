@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  spriteObject: {fileID: 4653887851505298441}
   moveset: 0
   enemyClass: 0
   movesets:
@@ -332,6 +333,7 @@ GameObject:
   - component: {fileID: 4383788944920563940}
   - component: {fileID: 6903727880379044601}
   - component: {fileID: 8172569903550263999}
+  - component: {fileID: 8253059964121182837}
   m_Layer: 5
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -396,6 +398,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &8253059964121182837
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4653887851505298441}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4960655375972504127
 GameObject:
   m_ObjectHideFlags: 0

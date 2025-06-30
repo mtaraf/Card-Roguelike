@@ -42,6 +42,10 @@ public class Character : MonoBehaviour
     protected HealthAndStatus healthAndStatus;
     protected TargetableObject targetableObject;
 
+    // Animations
+    [SerializeField] protected GameObject spriteObject;
+    protected Animator animator;
+
     public virtual void Start()
     {
         // Initializers
@@ -69,6 +73,13 @@ public class Character : MonoBehaviour
         {
             healthAndStatus.setHealth(currentHealth, maxHealth);
         }
+
+        // Find Animator
+        if (spriteObject == null)
+        {
+            Debug.Log("Sprite Object for " + gameObject.name + " not set in inspector");
+        }
+        animator = spriteObject.GetComponent<Animator>();
     }
 
     public virtual void processCardEffects(CardEffects effects)
@@ -81,9 +92,6 @@ public class Character : MonoBehaviour
         }
         else
         {
-            Debug.Log("Armor: " + effects.getEffect(EffectType.Armor));
-            Debug.Log("Current Armor: " + attributes[Attributes.ARMOR]);
-            Debug.Log("Damage: " + effects.getEffect(EffectType.Damage));
             // Apply changes to attributes
 
             // Apply damage through armor
@@ -137,7 +145,7 @@ public class Character : MonoBehaviour
     {
         return currentHealth;
     }
-    
+
     public Dictionary<Attributes, int> getAttributes()
     {
         return attributes;
@@ -151,5 +159,22 @@ public class Character : MonoBehaviour
     public void setMaxHealth(int value)
     {
         maxHealth = value;
+    }
+
+    public void playAnimation(CardType type)
+    {
+        Debug.Log("Played animation");
+        if (type == CardType.Attack)
+        {
+            animator.SetTrigger("attack");
+        }
+        else if (type == CardType.Defense)
+        {
+            animator.SetTrigger("defense");
+        }
+        else if (type == CardType.Buff)
+        {
+            animator.SetTrigger("buff");
+        }
     }
 }

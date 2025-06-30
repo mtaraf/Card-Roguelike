@@ -100,6 +100,10 @@ public class Enemy : Character
             {
                 processCardEffects(effects);
             }
+            else
+            {
+                playAnimation(cardModel.type);
+            }
             // Card animation
             yield return StartCoroutine(HandManager.instance.enemyCardAnimation(cardModel));
         }
