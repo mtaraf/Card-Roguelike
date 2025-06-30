@@ -34,9 +34,7 @@ public class Character : MonoBehaviour
     // Attributes
     [SerializeField] protected int maxHealth;
     protected int currentHealth; // Set current health to max health only when a run starts not in start for player
-    protected int strength;
     protected int weakness;
-    protected int armor;
     protected Dictionary<Attributes, int> attributes = new Dictionary<Attributes, int>();
     protected List<CardEffects> multipleTurnEffects = new List<CardEffects>();
 
@@ -75,14 +73,31 @@ public class Character : MonoBehaviour
 
     public virtual void processCardEffects(CardEffects effects)
     {
+        int armor = attributes[Attributes.ARMOR];
+
         if (effects.Turns > 0)
         {
             multipleTurnEffects.Add(effects);
         }
         else
         {
+            Debug.Log("Armor: " + effects.getEffect(EffectType.Armor));
+            Debug.Log("Current Armor: " + attributes[Attributes.ARMOR]);
+            Debug.Log("Damage: " + effects.getEffect(EffectType.Damage));
             // Apply changes to attributes
-            currentHealth -= effects.getEffect(EffectType.Damage);
+
+            // Apply damage through armor
+            if (effects.getEffect(EffectType.Damage) - armor > 0)
+            {
+                attributes[Attributes.ARMOR] = 0;
+                currentHealth -= effects.getEffect(EffectType.Damage) - armor;
+            }
+            else
+            {
+                attributes[Attributes.ARMOR] = armor - effects.getEffect(EffectType.Damage);
+            }
+
+
             attributes[Attributes.ARMOR] += effects.getEffect(EffectType.Armor);
             attributes[Attributes.STRENGTH] += effects.getEffect(EffectType.Strength);
         }
@@ -96,6 +111,8 @@ public class Character : MonoBehaviour
         List<CardEffects> turnEffectsCopy = new List<CardEffects>(multipleTurnEffects);
         foreach (CardEffects eff in turnEffectsCopy)
         {
+            Debug.Log(eff.getEffect(EffectType.Damage));
+            // Armor does not protect against DoT
             currentHealth -= eff.getEffect(EffectType.Damage);
             attributes[Attributes.ARMOR] += eff.getEffect(EffectType.Armor);
             attributes[Attributes.STRENGTH] += eff.getEffect(EffectType.Strength);

@@ -195,22 +195,23 @@ public class HandManager : MonoBehaviour
     // Card Processing
     public CardEffects useSelectedCard()
     {
+        // Get player attributes
+        Dictionary<Attributes, int> playerAttributes = GameManager.instance.getPlayerAttributes();
         // Get card effects
-        CardEffects effects = processCard(selectedCard);
+        CardEffects effects = processCard(selectedCard, playerAttributes);
 
         // Add card to discard pile and remove card
         addCardToDiscardPile(selectedCard);
-
 
         clearSelectedCard();
 
         return effects;
     }
 
-    public CardEffects processCard(Card card)
+    public CardEffects processCard(Card card, Dictionary<Attributes, int> attributes)
     {
         CardEffects effects = new CardEffects(card.getTurns());
-        effects.setEffect(EffectType.Damage, card.getDamage());
+        effects.setEffect(EffectType.Damage, card.getDamage() + attributes[Attributes.STRENGTH]);
         effects.setEffect(EffectType.Armor, card.getArmor());
         effects.setEffect(EffectType.Strength, card.getStrength());
 
@@ -222,10 +223,10 @@ public class HandManager : MonoBehaviour
         return effects;
     }
 
-    public CardEffects processEnemyCard(CardModelSO model)
+    public CardEffects processEnemyCard(CardModelSO model, Dictionary<Attributes, int> attributes)
     {
         CardEffects effects = new CardEffects(model.turns);
-        effects.setEffect(EffectType.Damage, model.damage);
+        effects.setEffect(EffectType.Damage, model.damage + attributes[Attributes.STRENGTH]);
         effects.setEffect(EffectType.Armor, model.armor);
         effects.setEffect(EffectType.Strength, model.strength);
 
@@ -269,7 +270,7 @@ public class HandManager : MonoBehaviour
             canvasGroup = card.AddComponent<CanvasGroup>();
         }
 
-        processEnemyCard(model);
+        //processEnemyCard(model);
 
         yield return new WaitForSeconds(1.0f);
 
@@ -336,65 +337,3 @@ public class CardEffects
     public int Turns => totalTurns;
     public void setTurns(int turns) => totalTurns = turns;
 }
-
-// public class CardEffects
-// {
-//     private int totalDamage = 0;
-//     private int totalArmor = 0;
-//     private int totalTurns = 0;
-
-//     private int totalStrength = 0;
-
-//     public CardEffects(int damage, int armor, int turns, int strength)
-//     {
-//         totalDamage = damage;
-//         totalArmor = armor;
-//         totalStrength = strength;
-//         totalTurns = turns;
-//     }
-
-//     public CardEffects()
-//     {
-
-//     }
-
-//     public void setTotalDamage(int damage)
-//     {
-//         totalDamage = damage;
-//     }
-
-//     public int getTotalDamage()
-//     {
-//         return totalDamage;
-//     }
-
-//     public void setTotalArmor(int armor)
-//     {
-//         totalArmor = armor;
-//     }
-
-//     public int getTotalArmor()
-//     {
-//         return totalArmor;
-//     }
-
-//     public int getTotalStrength()
-//     {
-//         return totalStrength;
-//     }
-
-//     public void setStrength(int strength)
-//     {
-//         totalStrength = strength;
-//     }
-
-//     public void setTurns(int turns)
-//     {
-//         totalTurns = turns;
-//     }
-
-//     public int getTurns()
-//     {
-//         return totalTurns;
-//     }
-// }

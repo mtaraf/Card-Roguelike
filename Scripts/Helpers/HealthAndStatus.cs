@@ -76,10 +76,7 @@ public class HealthAndStatus : MonoBehaviour
         // update attributes on UI
         foreach (KeyValuePair<Attributes, int> pair in att)
         {
-            if (pair.Value != 0)
-            {
-                updateStatus(pair.Key, pair.Value);
-            }
+            updateStatus(pair.Key, pair.Value);
         }
     }
 
@@ -96,7 +93,7 @@ public class HealthAndStatus : MonoBehaviour
                     // remove effect if value is below 1
                     if (value < 1)
                     {
-                        Destroy(slot.transform.GetChild(0));
+                        Destroy(slot.transform.GetChild(0).gameObject);
                         return;
                     }
 
@@ -106,6 +103,12 @@ public class HealthAndStatus : MonoBehaviour
             }
             else
             {
+                // Don't make UI if attribute value is 0
+                if (value == 0)
+                {
+                    return;
+                }
+
                 // Get Effect UI to instantiate
                 GameObject statusEffectUI = statuses.Find((obj) => obj.name == status.ToDisplayString());
 

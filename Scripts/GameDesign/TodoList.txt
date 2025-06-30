@@ -55,8 +55,8 @@ Create first "map" for GameManager
 1. Cards playable towards player and enemies
     - stats gained from cards should be updated (done)
         - fix armor/ward not updating ui (done)
-        - fix buff cards (to-do)
-            - create mechanism for multiple turn cards (change damage to poison, amond other things)
+        - fix buff cards (done)
+            - create mechanism for multiple turn cards (change damage to poison, amond other things) (done)
             - process special cards
 
 
@@ -71,5 +71,4 @@ Create first "map" for GameManager
     - Create Scriptable Object for Moveset of enemies
 
 
-Make armor take damage if present
-add strength to damage
+Add "Not enough energy" pop up when trying to play a card

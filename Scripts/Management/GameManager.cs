@@ -215,6 +215,11 @@ public class GameManager : MonoBehaviour
         HandManager.instance.shuffleCurrentHandIntoDiscardPile();
     }
 
+    public Dictionary<Attributes, int> getPlayerAttributes()
+    {
+        return player.getAttributes();
+    }
+
     public int getCurrentPlayerEnergy()
     {
         return currentPlayerEnergy;

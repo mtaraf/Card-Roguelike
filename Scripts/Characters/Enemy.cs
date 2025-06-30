@@ -95,7 +95,7 @@ public class Enemy : Character
             CardModelSO cardModel = moveset[i];
             cardModel.multiplyValues(multiplier);
 
-            CardEffects effects = HandManager.instance.processEnemyCard(cardModel);
+            CardEffects effects = HandManager.instance.processEnemyCard(cardModel, attributes);
             if (effects != null)
             {
                 processCardEffects(effects);
