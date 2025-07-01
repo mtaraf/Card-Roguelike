@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +11,8 @@ public class HandManager : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] public GameObject cardPrefab;
     [SerializeField] public GameObject noAnimationCardPrefab;
-    [SerializeField] private GameObject cardAnimationEndLocation;
+    [SerializeField] private GameObject centerOfUI;
+    [SerializeField] private GameObject feedbackMessage;
 
     // Decks
     private DeckModelSO drawPile;
@@ -263,7 +265,7 @@ public class HandManager : MonoBehaviour
     public IEnumerator enemyCardAnimation(CardModelSO model)
     {
         // Instantiate at the center of the screen
-        GameObject card = Instantiate(noAnimationCardPrefab, cardAnimationEndLocation.transform);
+        GameObject card = Instantiate(noAnimationCardPrefab, centerOfUI.transform);
         Card cardInfo = card.GetComponent<Card>();
         cardInfo.setCardDisplayInformation(model);
 
@@ -292,6 +294,18 @@ public class HandManager : MonoBehaviour
 
         // Destroy the card after it fades out
         Destroy(card);
+    }
+
+    public IEnumerator displayFeedbackMessage(string message)
+    {
+        Debug.Log("Display Message");
+
+        GameObject textObj = Instantiate(feedbackMessage, centerOfUI.transform);
+        textObj.GetComponent<TextMeshProUGUI>().text = message;
+
+        yield return new WaitForSeconds(1.0f);
+
+        Destroy(textObj);
     }
 }
 

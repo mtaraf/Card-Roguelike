@@ -640,7 +640,8 @@ MonoBehaviour:
   player: {fileID: 0}
   cardPrefab: {fileID: 7452529627010682384, guid: d87ed3bf6fba44748b7c9c22eef22fb3, type: 3}
   noAnimationCardPrefab: {fileID: 693967387009741433, guid: 351df61022925a649bc589fab5b063d7, type: 3}
-  cardAnimationEndLocation: {fileID: 1354477331}
+  centerOfUI: {fileID: 1354477331}
+  feedbackMessage: {fileID: 443055797922103271, guid: 0dddf5f45c862174fa033b816ce63dd9, type: 3}
 --- !u!4 &261285377
 Transform:
   m_ObjectHideFlags: 0
@@ -3156,7 +3157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1354477332}
   m_Layer: 5
-  m_Name: CardAnimationEndingLocation
+  m_Name: CenterOfUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

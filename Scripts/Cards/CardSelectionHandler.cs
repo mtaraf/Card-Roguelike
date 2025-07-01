@@ -208,6 +208,11 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                         StartCoroutine(onUseCard());
                         return;
                     }
+                    else
+                    {
+                        // If player does not have energy for the card, but tries to play, display feedback message
+                        StartCoroutine(HandManager.instance.displayFeedbackMessage("Not enough energy!"));
+                    }
                 }
                 else
                 {
@@ -229,6 +234,11 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                             // card animation
                             StartCoroutine(onUseCard());
                             return;
+                        }
+                        else
+                        {
+                            // If player does not have energy for the card, but tries to play, display feedback message
+                            StartCoroutine(HandManager.instance.displayFeedbackMessage("Not enough energy!"));
                         }
 
                     }

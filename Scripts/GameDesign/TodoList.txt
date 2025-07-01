@@ -71,4 +71,6 @@ Create first "map" for GameManager
     - Create Scriptable Object for Moveset of enemies
 
 
-Add "Not enough energy" pop up when trying to play a card
+Add cards
+Implement game manager for scene transition
+Add card selection before scene transition

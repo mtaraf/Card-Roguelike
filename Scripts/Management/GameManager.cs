@@ -188,7 +188,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator startPlayerTurn()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
 
         // Show enemy energy levels for next turn
         foreach (Enemy enemy in enemies)
