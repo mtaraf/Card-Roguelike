@@ -71,6 +71,6 @@ Create first "map" for GameManager
     - Create Scriptable Object for Moveset of enemies
 
 
-Add cards
+Add/Debug cards (TO-DO)
 Implement game manager for scene transition
 Add card selection before scene transition

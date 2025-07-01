@@ -12,7 +12,8 @@ public enum Effects
 public enum Attributes
 {
     STRENGTH = 0,
-    ARMOR = 1
+    ARMOR = 1,
+    POISON = 2
 }
 
 public static class AttributesExtensions
@@ -23,6 +24,7 @@ public static class AttributesExtensions
         {
             case Attributes.STRENGTH: return "StrengthEffect";
             case Attributes.ARMOR: return "ArmorEffect";
+            case Attributes.POISON: return "PoisonEffect";
             default: return "Default";
         }
     }
@@ -54,6 +56,7 @@ public class Character : MonoBehaviour
         currentHealth = maxHealth;
         attributes.Add(Attributes.STRENGTH, 0);
         attributes.Add(Attributes.ARMOR, 0);
+        attributes.Add(Attributes.POISON, 0);
 
         // Set up after first frame
         StartCoroutine(findComponentsAfterFrame());
@@ -89,12 +92,15 @@ public class Character : MonoBehaviour
         if (effects.Turns > 0)
         {
             multipleTurnEffects.Add(effects);
+
+            // Instantly adds any effects that need to be instantly applied
+            instantAddEffectUI(effects);
         }
         else
         {
             // Apply changes to attributes
 
-            // Apply damage through armor
+            // Apply damage with armor
             if (effects.getEffect(EffectType.Damage) - armor > 0)
             {
                 attributes[Attributes.ARMOR] = 0;
@@ -114,6 +120,16 @@ public class Character : MonoBehaviour
         healthAndStatus.setHealth(currentHealth, maxHealth);
     }
 
+    void instantAddEffectUI(CardEffects eff)
+    {
+        if (eff.getEffect(EffectType.Damage) > 0)
+        {
+            Debug.Log("Add poison " + eff.getEffect(EffectType.Damage));
+            attributes[Attributes.POISON] += eff.Turns;
+        }
+        healthAndStatus.updateAttributes(false, attributes);
+    }
+
     public void processStartOfTurnEffects()
     {
         List<CardEffects> turnEffectsCopy = new List<CardEffects>(multipleTurnEffects);
@@ -124,6 +140,10 @@ public class Character : MonoBehaviour
             currentHealth -= eff.getEffect(EffectType.Damage);
             attributes[Attributes.ARMOR] += eff.getEffect(EffectType.Armor);
             attributes[Attributes.STRENGTH] += eff.getEffect(EffectType.Strength);
+            if (attributes[Attributes.POISON] > 0)
+            {
+                attributes[Attributes.POISON] -= 1;
+            }
 
             if (eff.Turns == 1)
             {

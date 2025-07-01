@@ -222,6 +222,12 @@ public class HandManager : MonoBehaviour
             effects = processSpecialCards(card);
         }
 
+        int numCardsToDraw = card.getCardsToDraw();
+        if (numCardsToDraw > 0)
+        {
+            drawCards(numCardsToDraw);
+        }
+
         // Animations
         GameManager.instance.playAnimationsForCard(card.getCardType());
 

@@ -206,6 +206,8 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
 
                         // card animation
                         StartCoroutine(onUseCard());
+
+                        HandManager.instance.clearSelectedCard();
                         return;
                     }
                     else
@@ -233,6 +235,8 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
 
                             // card animation
                             StartCoroutine(onUseCard());
+
+                            HandManager.instance.clearSelectedCard();
                             return;
                         }
                         else

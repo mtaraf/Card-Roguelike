@@ -11,6 +11,13 @@ public enum CardType
     Special
 }
 
+public enum CardRarity {
+    COMMON,
+    RARE,
+    EPIC,
+    MYTHIC
+}
+
 public enum ConditionMetric
 {
     HEALTH,
@@ -38,6 +45,7 @@ public class ConditionTupleEquivalent
 public class CardModelSO : ScriptableObject
 {
     public CardType type;
+    public CardRarity rarity;
     public int energy;
     public int damage;
     public int armor;

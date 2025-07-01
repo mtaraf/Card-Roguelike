@@ -73,9 +73,19 @@ public class Card : MonoBehaviour
         return cardModel.type;
     }
 
+    public int getCardsToDraw()
+    {
+        return cardModel.cardsDrawn;
+    }
+
     public bool isSpecial()
     {
         return cardModel.special;
+    }
+
+    public CardRarity getRarity()
+    {
+        return cardModel.rarity;
     }
 
     public void setModel(CardModelSO model)

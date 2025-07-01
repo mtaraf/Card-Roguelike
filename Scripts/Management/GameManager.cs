@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject loadGameMenu;
     [SerializeField] private GameObject mainLevelCanvas;
 
+    // Victory Menu
+    [SerializeField] private GameObject victoryMenuUI;
+    private GameObject[] victoryCardSlots;
+    [SerializeField] private List<DeckModelSO> VictoryCards; // 0: common, 1: rare, 2: epic, 3: mythic
+
 
 
     // Game States
@@ -92,6 +97,12 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("Could not find a piece of UI within the main level scene");
         }
+
+        if (victoryMenuUI == null)
+        {
+            Debug.LogError("Could not find a piece of UI within the main level scene");
+        }
+
 
         // Instantiate and set up player data
         GameObject playerObj = Instantiate(playerPrefab, mainLevelCanvas.transform);
@@ -179,11 +190,38 @@ public class GameManager : MonoBehaviour
         if (enemies.Count == 0)
         {
             // Victory!
+            encounterVictory();
         }
         else
         {
             // Game over screen
         }
+    }
+
+    void encounterVictory()
+    {
+        // Display the victory UI
+        GameObject victoryScreen = Instantiate(victoryMenuUI);
+
+        int slots = victoryScreen.transform.Find("Slots").transform.childCount;
+        for (int i = 0; i < slots; i++)
+        {
+            victoryCardSlots[i] = victoryScreen.transform.Find("Slots").transform.GetChild(i).gameObject;
+        }
+
+        // Generate random cards for player to choose, then fill card slots with them
+
+        // Card selection
+    }
+
+    public void chooseVictoryCard(int cardSlot)
+    {
+        
+    }
+
+    void encounterDefeat()
+    {
+
     }
 
     IEnumerator startPlayerTurn()
