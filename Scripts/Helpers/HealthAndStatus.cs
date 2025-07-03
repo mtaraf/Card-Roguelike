@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class HealthAndStatus : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> statuses = new List<GameObject>();
+    private List<GameObject> statuses = new List<GameObject>();
     private List<GameObject> currentStatuses = new List<GameObject>();
 
     private Transform healthStatusUI;
@@ -16,7 +16,7 @@ public class HealthAndStatus : MonoBehaviour
     private Player player;
     private Enemy enemy;
     private bool isEnemy = false;
-    private Dictionary<Attributes, int> startingAttributes;
+    private Dictionary<EffectType, int> startingAttributes;
     private List<GameObject> effectUISlots = new List<GameObject>();
 
     void Start()
@@ -55,6 +55,8 @@ public class HealthAndStatus : MonoBehaviour
             Debug.LogError("Could not find Player or Enemy component for HealthAndStatus component");
         }
 
+        statuses = GameManager.instance.getStatusObjects();
+
         updateAttributes(true, startingAttributes);
     }
 
@@ -71,29 +73,30 @@ public class HealthAndStatus : MonoBehaviour
         return null;
     }
 
-    public void updateAttributes(bool onLoad, Dictionary<Attributes, int> att)
+    public void updateAttributes(bool onLoad, Dictionary<EffectType, int> att)
     {
         // update attributes on UI
-        foreach (KeyValuePair<Attributes, int> pair in att)
+        foreach (KeyValuePair<EffectType, int> pair in att)
         {
             updateStatus(pair.Key, pair.Value);
         }
     }
 
     // adds or updates status to ui
-    public void updateStatus(Attributes status, int value)
+    public void updateStatus(EffectType status, int value)
     {
         foreach (GameObject slot in effectUISlots)
         {
             if (slot.transform.childCount > 0)
             {
                 // TO-DO: Find a better way to see what status is in the effect slot
-                if (slot.transform.GetChild(0).name.Substring(0,slot.transform.GetChild(0).name.Length-7) == status.ToDisplayString())
+                if (slot.transform.GetChild(0).name.Substring(0, slot.transform.GetChild(0).name.Length - 7) == status.ToDisplayString())
                 {
                     // remove effect if value is below 1
                     if (value < 1)
                     {
-                        Destroy(slot.transform.GetChild(0).gameObject);
+                        DestroyImmediate(slot.transform.GetChild(0).gameObject);
+                        reorderSlots();
                         return;
                     }
 
@@ -125,6 +128,46 @@ public class HealthAndStatus : MonoBehaviour
                 return;
             }
         }
+    }
+
+    void reorderSlots()
+    {
+        List<Transform> activeEffects  = new List<Transform>();
+
+        // Step 1: Collect and detach all existing effect GameObjects
+        foreach (GameObject slot in effectUISlots)
+        {
+            if (slot.transform.childCount > 0)
+            {
+                Transform effect = slot.transform.GetChild(0);
+                activeEffects.Add(effect);
+                effect.SetParent(null); // Detach to prevent destruction when clearing slot
+            }
+        }
+
+        // Step 2: Clear all slots (now safely empty)
+        foreach (GameObject slot in effectUISlots)
+        {
+            foreach (Transform child in slot.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        // Step 3: Reassign effects to the first available slots
+        for (int i = 0; i < activeEffects.Count && i < effectUISlots.Count; i++)
+        {
+            Transform slot = effectUISlots[i].transform;
+            Transform effect = activeEffects[i];
+
+            effect.SetParent(slot, false); // false = maintain local layout
+
+            // Ensure it aligns exactly
+            effect.localPosition = Vector3.zero;
+            effect.localRotation = Quaternion.identity;
+            effect.localScale = Vector3.one;
+        }
+
     }
 
     public void removeStatus(string status)

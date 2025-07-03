@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b04a2a5476ff64788caa87c41b8035, type: 3}
   m_Name: RareVictoryCards
   m_EditorClassIdentifier: 
-  cards: []
+  cards:
+  - {fileID: 11400000, guid: dcf53dbabc129904a80c01280e5ae795, type: 2}
+  - {fileID: 11400000, guid: d60d4f515e43f58438d52d4e4a7f8693, type: 2}
+  - {fileID: 11400000, guid: 9c3483ad67e0dea43a4b400ed035c93b, type: 2}
+  - {fileID: 11400000, guid: b7bc36456c956744597711d6cf3b4ab9, type: 2}

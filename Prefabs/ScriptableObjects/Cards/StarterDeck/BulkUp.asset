@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: BulkUp
   m_EditorClassIdentifier: 
   type: 2
+  rarity: 0
   energy: 1
-  damage: 0
-  armor: 0
+  effects:
+  - type: 2
+    value: 1
   turns: 0
   special: 0
   condition:
@@ -27,4 +29,4 @@ MonoBehaviour:
   image: {fileID: 0}
   target: 2
   cardsDrawn: 0
-  strength: 1
+  corrupts: 0

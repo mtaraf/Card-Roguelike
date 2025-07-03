@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     // UI
     private GameObject playerEnergyUI;
+    [SerializeField] private List<GameObject> statuses = new List<GameObject>();
 
     // Cards
     [SerializeField] private DeckModelSO starterDeck;
@@ -129,6 +130,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(startTurnSequence());
     }
 
+    public List<GameObject> getStatusObjects()
+    {
+        return statuses;
+    }
+
     // Randomize the enemy the player encounters
     void randomizeEnemy()
     {
@@ -171,6 +177,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 yield return StartCoroutine(startEnemyTurn());
+                
                 currentState = TurnState.PlayerTurn;
                 Debug.Log("Enemy turn has ended, moving to player turn");
             }
@@ -251,9 +258,10 @@ public class GameManager : MonoBehaviour
     void endPlayerTurn()
     {
         HandManager.instance.shuffleCurrentHandIntoDiscardPile();
+        player.processEndOfTurnEffects();
     }
 
-    public Dictionary<Attributes, int> getPlayerAttributes()
+    public Dictionary<EffectType, int> getPlayerAttributes()
     {
         return player.getAttributes();
     }
@@ -279,13 +287,14 @@ public class GameManager : MonoBehaviour
             enemy.processStartOfTurnEffects();
             // TO-DO: depending on current level adjust multiplier for enemy cards
             yield return StartCoroutine(enemy.playCards(1, enemy.getEnergy()));
+            enemy.processEndOfTurnEffects();
         }
 
         // Delay before handing turn to player
         yield return new WaitForSeconds(1);
     }
 
-    public void processEnemyCardEffectsOnPlayer(CardEffects effects)
+    public void processEnemyCardEffectsOnPlayer(List<CardEffect> effects)
     {
         player.processCardEffects(effects);
     }

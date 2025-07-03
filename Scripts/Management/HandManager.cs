@@ -195,12 +195,13 @@ public class HandManager : MonoBehaviour
     }
 
     // Card Processing
-    public CardEffects useSelectedCard()
+    public List<CardEffect> useSelectedCard()
     {
         // Get player attributes
-        Dictionary<Attributes, int> playerAttributes = GameManager.instance.getPlayerAttributes();
+        Dictionary<EffectType, int> playerAttributes = GameManager.instance.getPlayerAttributes();
+
         // Get card effects
-        CardEffects effects = processCard(selectedCard, playerAttributes);
+        List<CardEffect> effects = processCard(selectedCard, playerAttributes);
 
         // Add card to discard pile and remove card
         addCardToDiscardPile(selectedCard);
@@ -210,16 +211,16 @@ public class HandManager : MonoBehaviour
         return effects;
     }
 
-    public CardEffects processCard(Card card, Dictionary<Attributes, int> attributes)
+    public List<CardEffect> processCard(Card card, Dictionary<EffectType, int> attributes)
     {
-        CardEffects effects = new CardEffects(card.getTurns());
-        effects.setEffect(EffectType.Damage, card.getDamage() + attributes[Attributes.STRENGTH]);
-        effects.setEffect(EffectType.Armor, card.getArmor());
-        effects.setEffect(EffectType.Strength, card.getStrength());
+        // CardEffects effects = new CardEffects(card.getTurns());
+        // effects.setEffect(EffectType.Damage, card.getDamage() + attributes[Attributes.STRENGTH]);
+        // effects.setEffect(EffectType.Armor, card.getArmor());
+        // effects.setEffect(EffectType.Strength, card.getStrength());
 
         if (card.isSpecial())
         {
-            effects = processSpecialCards(card);
+            return processSpecialCards(card);
         }
 
         int numCardsToDraw = card.getCardsToDraw();
@@ -231,28 +232,28 @@ public class HandManager : MonoBehaviour
         // Animations
         GameManager.instance.playAnimationsForCard(card.getCardType());
 
-        return effects;
+        return card.getEffects();
     }
 
-    public CardEffects processEnemyCard(CardModelSO model, Dictionary<Attributes, int> attributes)
+    public List<CardEffect> processEnemyCard(CardModelSO model, Dictionary<EffectType, int> attributes)
     {
-        CardEffects effects = new CardEffects(model.turns);
-        effects.setEffect(EffectType.Damage, model.damage + attributes[Attributes.STRENGTH]);
-        effects.setEffect(EffectType.Armor, model.armor);
-        effects.setEffect(EffectType.Strength, model.strength);
+        // CardEffects effects = new CardEffects(model.turns);
+
+        // effects.setEffect(EffectType.Damage, model.damage + attributes[Attributes.STRENGTH]);
+        // effects.setEffect(EffectType.Armor, model.armor);
+        // effects.setEffect(EffectType.Strength, model.strength);
 
         if (model.target == Target.Player)
         {
-            GameManager.instance.processEnemyCardEffectsOnPlayer(effects);
+            GameManager.instance.processEnemyCardEffectsOnPlayer(model.effects);
             return null;
         }
 
-        return effects;
+        return model.effects;
     }
 
-    CardEffects processSpecialCards(Card specialCard)
+    List<CardEffect> processSpecialCards(Card specialCard)
     {
-        CardEffects effects = new CardEffects(specialCard.getTurns());
         string title = specialCard.getCardTitle();
         switch (title)
         {
@@ -264,7 +265,7 @@ public class HandManager : MonoBehaviour
         }
 
 
-        return effects;
+        return specialCard.getEffects();
     }
 
     // Instantiate and play animation for enemy cards
@@ -320,43 +321,61 @@ public enum EffectType
     Damage,
     Armor,
     Strength,
-    // Add more: Poison, Stun, Heal, etc.
+    Weaken,
+    Divinity,
+    Poison,
 }
 
-
-public class CardEffects
+public static class EffectTypeExtensions
 {
-    private Dictionary<EffectType, int> effectValues = new();
-    private int totalTurns = 0;
-
-    public CardEffects(int turns = 0)
+    public static string ToDisplayString(this EffectType eff)
     {
-        totalTurns = turns;
+        switch (eff)
+        {
+            case EffectType.Strength: return "StrengthEffect";
+            case EffectType.Armor: return "ArmorEffect";
+            case EffectType.Poison: return "PoisonEffect";
+            case EffectType.Divinity: return "DivinityEffect";
+            case EffectType.Weaken: return "WeakenEffect";
+            default: return "Default";
+        }
     }
-
-    public void setEffect(EffectType type, int value)
-    {
-        if (effectValues.ContainsKey(type))
-            effectValues[type] += value;
-        else
-            effectValues[type] = value;
-    }
-
-    public int getEffect(EffectType type)
-    {
-        return effectValues.ContainsKey(type) ? effectValues[type] : 0;
-    }
-
-    public bool hasEffect(EffectType type)
-    {
-        return getEffect(type) != 0;
-    }
-
-    public Dictionary<EffectType, int> getAllEffects()
-    {
-        return new Dictionary<EffectType, int>(effectValues);
-    }
-
-    public int Turns => totalTurns;
-    public void setTurns(int turns) => totalTurns = turns;
 }
+
+
+// public class CardEffects
+// {
+//     private Dictionary<EffectType, int> effectValues = new();
+//     private int totalTurns = 0;
+
+//     public CardEffects(int turns = 0)
+//     {
+//         totalTurns = turns;
+//     }
+
+//     public void setEffect(EffectType type, int value)
+//     {
+//         if (effectValues.ContainsKey(type))
+//             effectValues[type] += value;
+//         else
+//             effectValues[type] = value;
+//     }
+
+//     public int getEffect(EffectType type)
+//     {
+//         return effectValues.ContainsKey(type) ? effectValues[type] : 0;
+//     }
+
+//     public bool hasEffect(EffectType type)
+//     {
+//         return getEffect(type) != 0;
+//     }
+
+//     public Dictionary<EffectType, int> getAllEffects()
+//     {
+//         return new Dictionary<EffectType, int>(effectValues);
+//     }
+
+//     public int Turns => totalTurns;
+//     public void setTurns(int turns) => totalTurns = turns;
+// }

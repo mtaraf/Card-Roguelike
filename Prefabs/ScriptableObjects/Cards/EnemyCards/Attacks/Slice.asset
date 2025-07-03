@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Slice
   m_EditorClassIdentifier: 
   type: 0
+  rarity: 0
   energy: 0
-  damage: 5
-  armor: 0
+  effects:
+  - type: 0
+    value: 5
   turns: 0
   special: 0
   condition:
@@ -27,4 +29,4 @@ MonoBehaviour:
   image: {fileID: 0}
   target: 2
   cardsDrawn: 0
-  strength: 0
+  corrupts: 0

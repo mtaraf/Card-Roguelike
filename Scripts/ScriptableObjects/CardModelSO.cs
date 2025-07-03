@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum CardType
@@ -35,6 +36,14 @@ public enum Target
 }
 
 [Serializable]
+public class CardEffect
+{
+    public EffectType type;
+    public int value;
+    public int turns;
+}
+
+[Serializable]
 public class ConditionTupleEquivalent
 {
     public int conditionValue;
@@ -47,9 +56,7 @@ public class CardModelSO : ScriptableObject
     public CardType type;
     public CardRarity rarity;
     public int energy;
-    public int damage;
-    public int armor;
-    public int turns;
+    public List<CardEffect> effects = new List<CardEffect>();
     public bool special;
     public ConditionTupleEquivalent condition;
     public double multiplier;
@@ -58,12 +65,13 @@ public class CardModelSO : ScriptableObject
     public Sprite image;
     public Target target;
     public int cardsDrawn;
-    public int strength;
+    public bool corrupts;
 
     public void multiplyValues(int multiplier)
     {
-        damage *= multiplier;
-        armor *= multiplier;
-        strength *= multiplier;
+        foreach (CardEffect effect in effects)
+        {
+            effect.value *= multiplier;
+        }
     }
 }

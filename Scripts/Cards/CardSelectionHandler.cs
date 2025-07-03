@@ -198,7 +198,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                     {
                         // Use card
                         Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on player");
-                        CardEffects effects = HandManager.instance.useSelectedCard();
+                        List<CardEffect> effects = HandManager.instance.useSelectedCard();
                         player.processCardEffects(effects);
 
                         // update player energy
@@ -227,7 +227,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                         {
                             // Use card
                             Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on enemy");
-                            CardEffects effects = HandManager.instance.useSelectedCard();
+                            List<CardEffect> effects = HandManager.instance.useSelectedCard();
                             enemy.processCardEffects(effects);
 
                             // update player energy

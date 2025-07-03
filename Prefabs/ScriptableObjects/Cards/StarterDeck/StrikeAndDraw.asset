@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: StrikeAndDraw
   m_EditorClassIdentifier: 
   type: 0
+  rarity: 0
   energy: 1
-  damage: 2
-  armor: 0
+  effects:
+  - type: 0
+    value: 2
   turns: 0
   special: 0
   condition:
@@ -27,3 +29,4 @@ MonoBehaviour:
   image: {fileID: 0}
   target: 1
   cardsDrawn: 1
+  corrupts: 0

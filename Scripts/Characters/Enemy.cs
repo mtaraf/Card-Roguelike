@@ -43,7 +43,7 @@ public class Enemy : Character
         }
     }
 
-    public override void processCardEffects(CardEffects effects)
+    public override void processCardEffects(List<CardEffect> effects)
     {
         base.processCardEffects(effects);
     }
@@ -95,7 +95,7 @@ public class Enemy : Character
             CardModelSO cardModel = moveset[i];
             cardModel.multiplyValues(multiplier);
 
-            CardEffects effects = HandManager.instance.processEnemyCard(cardModel, attributes);
+            List<CardEffect> effects = HandManager.instance.processEnemyCard(cardModel, attributes);
             if (effects != null)
             {
                 processCardEffects(effects);

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -33,16 +34,6 @@ public class Card : MonoBehaviour
         return cardModel.title;
     }
 
-    public int getTurns()
-    {
-        return cardModel.turns;
-    }
-
-    public int getStrength()
-    {
-        return cardModel.strength;
-    }
-
     public CardModelSO getCardModel()
     {
         return cardModel;
@@ -58,14 +49,9 @@ public class Card : MonoBehaviour
         return cardModel.condition.metric != ConditionMetric.NO_CONDITION;
     }
 
-    public int getDamage()
+    public List<CardEffect> getEffects()
     {
-        return cardModel.damage;
-    }
-
-    public int getArmor()
-    {
-        return cardModel.armor;
+        return cardModel.effects;
     }
 
     public CardType getCardType()
@@ -93,10 +79,13 @@ public class Card : MonoBehaviour
         cardModel = model;
     }
 
+    public bool isCorrupt()
+    {
+        return cardModel.corrupts;
+    }
+
     public void mulitplyValues(int multiplier)
     {
-        cardModel.damage *= multiplier;
-        cardModel.armor *= multiplier;
-        cardModel.strength *= multiplier;
+        cardModel.multiplyValues(multiplier);
     }
 }

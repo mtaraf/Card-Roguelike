@@ -10,20 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: Demacia
+  m_Name: GoldenTouch
   m_EditorClassIdentifier: 
-  type: 0
+  type: 2
+  rarity: 2
   energy: 0
-  damage: 3
+  damage: 0
   armor: 0
   turns: 0
-  special: 0
+  special: 1
   condition:
     conditionValue: 0
-    metric: 4
+    metric: 0
   multiplier: 0
-  details: Attack all enemies for 3 damage
-  title: Demacia
+  details: Gives the same amount of gold as damage dealt this turn. Corrupts.
+  title: Golden Touch
   image: {fileID: 0}
-  target: 0
+  target: 2
   cardsDrawn: 0
+  strength: 0
+  corrupts: 1

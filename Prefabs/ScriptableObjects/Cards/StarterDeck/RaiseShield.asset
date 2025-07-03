@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: RaiseShield
   m_EditorClassIdentifier: Assembly-CSharp::CardModelSO
   type: 1
+  rarity: 0
   energy: 1
-  damage: 0
-  armor: 3
+  effects:
+  - type: 1
+    value: 3
   turns: 0
   special: 0
   condition:
@@ -27,3 +29,4 @@ MonoBehaviour:
   image: {fileID: 0}
   target: 2
   cardsDrawn: 0
+  corrupts: 0

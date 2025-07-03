@@ -2,34 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Effects
-{
-    POISON,
-    FREEZE,
-    THORNS
-}
-
-public enum Attributes
-{
-    STRENGTH = 0,
-    ARMOR = 1,
-    POISON = 2
-}
-
-public static class AttributesExtensions
-{
-    public static string ToDisplayString(this Attributes att)
-    {
-        switch (att)
-        {
-            case Attributes.STRENGTH: return "StrengthEffect";
-            case Attributes.ARMOR: return "ArmorEffect";
-            case Attributes.POISON: return "PoisonEffect";
-            default: return "Default";
-        }
-    }
-}
-
 
 public class Character : MonoBehaviour
 {
@@ -37,8 +9,8 @@ public class Character : MonoBehaviour
     [SerializeField] protected int maxHealth;
     protected int currentHealth; // Set current health to max health only when a run starts not in start for player
     protected int weakness;
-    protected Dictionary<Attributes, int> attributes = new Dictionary<Attributes, int>();
-    protected List<CardEffects> multipleTurnEffects = new List<CardEffects>();
+    protected Dictionary<EffectType, int> attributes = new Dictionary<EffectType, int>();
+    protected List<CardEffect> multipleTurnEffects = new List<CardEffect>();
 
     // UI
     protected HealthAndStatus healthAndStatus;
@@ -54,9 +26,11 @@ public class Character : MonoBehaviour
         targetableObject = GetComponent<TargetableObject>();
 
         currentHealth = maxHealth;
-        attributes.Add(Attributes.STRENGTH, 0);
-        attributes.Add(Attributes.ARMOR, 0);
-        attributes.Add(Attributes.POISON, 0);
+        attributes.Add(EffectType.Strength, 0);
+        attributes.Add(EffectType.Armor, 0);
+        attributes.Add(EffectType.Weaken, 0);
+        attributes.Add(EffectType.Divinity, 0);
+        attributes.Add(EffectType.Poison, 0);
 
         // Set up after first frame
         StartCoroutine(findComponentsAfterFrame());
@@ -85,88 +59,95 @@ public class Character : MonoBehaviour
         animator = spriteObject.GetComponent<Animator>();
     }
 
-    public virtual void processCardEffects(CardEffects effects)
+    public virtual void processCardEffects(List<CardEffect> effects)
     {
-        int armor = attributes[Attributes.ARMOR];
 
-        if (effects.Turns > 0)
+        foreach (CardEffect effect in effects)
         {
-            multipleTurnEffects.Add(effects);
-
-            // Instantly adds any effects that need to be instantly applied
-            instantAddEffectUI(effects);
-        }
-        else
-        {
-            // Apply changes to attributes
-
-            // Apply damage with armor
-            if (effects.getEffect(EffectType.Damage) - armor > 0)
+            if (effect.type == EffectType.Damage)
             {
-                attributes[Attributes.ARMOR] = 0;
-                currentHealth -= effects.getEffect(EffectType.Damage) - armor;
+                // Damage
+                if (effect.value - attributes[EffectType.Armor] > 0)
+                {
+                    attributes[EffectType.Armor] = 0;
+                    currentHealth -= effect.value - attributes[EffectType.Armor];
+                }
+                else
+                {
+                    attributes[EffectType.Armor] -= effect.value;
+                }
             }
             else
             {
-                attributes[Attributes.ARMOR] = armor - effects.getEffect(EffectType.Damage);
+                if (effect.turns > 0)
+                {
+                    // multiple turn effects
+                    attributes[effect.type] += effect.value;
+                    effect.turns--;
+                    multipleTurnEffects.Add(effect);
+                }
+                else
+                {
+                    attributes[effect.type] += effect.value;
+                }
             }
-
-
-            attributes[Attributes.ARMOR] += effects.getEffect(EffectType.Armor);
-            attributes[Attributes.STRENGTH] += effects.getEffect(EffectType.Strength);
         }
 
         healthAndStatus.updateAttributes(false, attributes);
         healthAndStatus.setHealth(currentHealth, maxHealth);
-    }
-
-    void instantAddEffectUI(CardEffects eff)
-    {
-        if (eff.getEffect(EffectType.Damage) > 0)
-        {
-            Debug.Log("Add poison " + eff.getEffect(EffectType.Damage));
-            attributes[Attributes.POISON] += eff.Turns;
-        }
-        healthAndStatus.updateAttributes(false, attributes);
     }
 
     public void processStartOfTurnEffects()
     {
-        List<CardEffects> turnEffectsCopy = new List<CardEffects>(multipleTurnEffects);
-        foreach (CardEffects eff in turnEffectsCopy)
-        {
-            Debug.Log(eff.getEffect(EffectType.Damage));
-            // Armor does not protect against DoT
-            currentHealth -= eff.getEffect(EffectType.Damage);
-            attributes[Attributes.ARMOR] += eff.getEffect(EffectType.Armor);
-            attributes[Attributes.STRENGTH] += eff.getEffect(EffectType.Strength);
-            if (attributes[Attributes.POISON] > 0)
-            {
-                attributes[Attributes.POISON] -= 1;
-            }
+        // Poison Damage
+        currentHealth -= attributes[EffectType.Poison];
 
-            if (eff.Turns == 1)
-            {
-                multipleTurnEffects.Remove(eff);
-            }
-        }
+        // Decrease stacks
+        attributes[EffectType.Poison] = 0;
 
-        // Decrease effects by 1 turn
-        foreach (CardEffects eff in multipleTurnEffects)
+        List<CardEffect> copy = new List<CardEffect>(multipleTurnEffects);
+
+        // apply effects
+        foreach (CardEffect effect in copy)
         {
-            eff.setTurns(eff.Turns - 1);
+            if (effect.turns == 0)
+            {
+                multipleTurnEffects.Remove(effect);
+            }
+            else
+            {
+                effect.turns--;
+
+                attributes[effect.type] += effect.value;
+            }
         }
 
         healthAndStatus.updateAttributes(false, attributes);
         healthAndStatus.setHealth(currentHealth, maxHealth);
     }
+
+    public void processEndOfTurnEffects()
+    {
+        if (attributes[EffectType.Weaken] > 0)
+        {
+            attributes[EffectType.Weaken] -= 1;
+        }
+        if (attributes[EffectType.Divinity] > 0)
+        {
+            attributes[EffectType.Divinity] -= 1;
+        }
+
+        healthAndStatus.updateAttributes(false, attributes);
+        healthAndStatus.setHealth(currentHealth, maxHealth);
+    }
+
 
     public int getCurrentHealth()
     {
         return currentHealth;
     }
 
-    public Dictionary<Attributes, int> getAttributes()
+    public Dictionary<EffectType, int> getAttributes()
     {
         return attributes;
     }
