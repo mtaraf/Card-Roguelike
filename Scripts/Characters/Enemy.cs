@@ -39,7 +39,8 @@ public class Enemy : Character
     {
         if (currentHealth < 1 && !dead)
         {
-            GameManager.instance.removeDeadEnemy(id);
+            //GameManager.instance.removeDeadEnemy(id);
+            BaseLevelSceneController.instance.removeDeadEnemy(id);
             dead = true;
         }
     }

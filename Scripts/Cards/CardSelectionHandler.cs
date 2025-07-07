@@ -202,7 +202,8 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                         player.processCardEffects(effects);
 
                         // update player energy
-                        GameManager.instance.usePlayerEnergy(cardEnergy);
+                        //GameManager.instance.usePlayerEnergy(cardEnergy);
+                        BaseLevelSceneController.instance.usePlayerEnergy(cardEnergy);
 
                         // card animation
                         StartCoroutine(onUseCard());
@@ -231,7 +232,8 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                             enemy.processCardEffects(effects);
 
                             // update player energy
-                            GameManager.instance.usePlayerEnergy(cardEnergy);
+                            //GameManager.instance.usePlayerEnergy(cardEnergy);
+                            BaseLevelSceneController.instance.usePlayerEnergy(cardEnergy);
 
                             // card animation
                             StartCoroutine(onUseCard());

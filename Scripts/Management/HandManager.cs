@@ -198,7 +198,7 @@ public class HandManager : MonoBehaviour
     public List<CardEffect> useSelectedCard()
     {
         // Get player attributes
-        Dictionary<EffectType, int> playerAttributes = GameManager.instance.getPlayerAttributes();
+        Dictionary<EffectType, int> playerAttributes = BaseLevelSceneController.instance.getPlayerAttributes();
 
         // Get card effects
         List<CardEffect> effects = processCard(selectedCard, playerAttributes);
@@ -230,7 +230,7 @@ public class HandManager : MonoBehaviour
         }
 
         // Animations
-        GameManager.instance.playAnimationsForCard(card.getCardType());
+        BaseLevelSceneController.instance.playAnimationsForCard(card.getCardType());
 
         return card.getEffects();
     }
@@ -245,7 +245,7 @@ public class HandManager : MonoBehaviour
 
         if (model.target == Target.Player)
         {
-            GameManager.instance.processEnemyCardEffectsOnPlayer(model.effects);
+            BaseLevelSceneController.instance.processEnemyCardEffectsOnPlayer(model.effects);
             return null;
         }
 

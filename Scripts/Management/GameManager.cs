@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject loadGameMenu;
-    [SerializeField] private GameObject mainLevelCanvas;
+    private GameObject mainLevelCanvas;
 
 
     // Game States
@@ -68,96 +68,12 @@ public class GameManager : MonoBehaviour
     private void onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Game Manager detected scene loaded: {scene.name}");
-
-        // Level scene
-        if (scene.name == "BaseLevelScene")
-        {
-            baseLevelSceneStart();
-        }
-    }
-
-    // Scene Start Functionality
-
-    void baseLevelSceneStart()
-    {
-        // Get UI data
-        playerEnergyUI = Helpers.findDescendant(mainLevelCanvas.transform, "EnergyUI");
-
-        if (playerEnergyUI == null)
-        {
-            Debug.LogError("Could not find a piece of UI within the main level scene");
-        }
-
-
-        // Instantiate and set up player data
-        GameObject playerObj = Instantiate(playerPrefab, mainLevelCanvas.transform);
-        player = playerObj.GetComponent<Player>();
-        if (player == null)
-        {
-            Debug.LogError("Could not find player component in player prefab");
-        }
-
-        player.setDeck(playerDeck);
-        player.setMaxHealth(playerMaxHealth);
-        player.setCurrentHealth(playerCurrentHealth);
-
-
-        if (currentLevel == 0)
-        {
-
-        }
-
-        // add enemy to level
-        randomizeEnemy();
-
-
-        // Start turn sequence
-        TurnManager.instance.Initialize(player, enemies);
-        TurnManager.instance.startTurns();
     }
 
     public List<GameObject> getStatusObjects()
     {
         return statuses;
     }
-
-    // Randomize the enemy the player encounters
-    void randomizeEnemy()
-    {
-        if (currentLevel % 10 == 0 && currentLevel != 0)
-        {
-            // Load Boss level
-        }
-        else
-        {
-            // Random common enemy
-            int random = Random.Range(0, enemyPrefabs.Count - 1);
-            GameObject enemyObj = Instantiate(enemyPrefabs[random], mainLevelCanvas.transform);
-
-            // remove enemy from list
-            enemyPrefabs.Remove(enemyPrefabs[random]);
-
-            // Get enemy component
-            enemies.Add(enemyObj.GetComponent<Enemy>());
-
-            // TO-DO: Add random events instead of common enemy
-        }
-    }
-
-    public void removeDeadEnemy(int id)
-    {
-        Enemy enemy = enemies.Find((enemy) => enemy.getId() == id);
-        if (enemy != null)
-        {
-            enemies.Remove(enemy);
-        }
-        else
-        {
-            Debug.LogError("Could not find enemy for id: " + id);
-        }
-    }
-
-    // Encounter End Functions
 
     public void encounterVictory()
     {
@@ -173,7 +89,10 @@ public class GameManager : MonoBehaviour
 
     public void moveToNextEncounter()
     {
-        SceneManager.LoadScene(1);
+        SceneLoader.instance.loadScene(1, () =>
+        {
+            Debug.Log("Scene loaded!");
+        });
     }
 
     public int getPlayerHandSize()
@@ -186,17 +105,24 @@ public class GameManager : MonoBehaviour
         currentPlayerEnergy = playerHandEnergy;
     }
 
+    public int getPlayerHandEnergy()
+    {
+        return playerHandEnergy;
+    }
+
+    public int getCurrentLevel()
+    {
+        return currentLevel;
+    }
+
+    public void levelCompleted()
+    {
+        currentLevel++;
+    }
+
     public void endTurn()
     {
         TurnManager.instance.endTurnButtonPressed();
-    }
-
-
-    // Variable Mutations
-
-    public Dictionary<EffectType, int> getPlayerAttributes()
-    {
-        return player.getAttributes();
     }
 
     public int getCurrentPlayerEnergy()
@@ -204,29 +130,20 @@ public class GameManager : MonoBehaviour
         return currentPlayerEnergy;
     }
 
-    public void usePlayerEnergy(int value)
+    public DeckModelSO getPlayerDeck()
     {
-        currentPlayerEnergy -= value;
-        updatePlayerEnergyUI();
+        return playerDeck;
     }
 
-    public void processEnemyCardEffectsOnPlayer(List<CardEffect> effects)
+    public int getPlayerMaxHealth()
     {
-        player.processCardEffects(effects);
+        return playerMaxHealth;
     }
 
-    public void playAnimationsForCard(CardType type)
+    public int getPlayerCurrentHealth()
     {
-        player.playAnimation(type);
+        return playerCurrentHealth;
     }
-
-    // UI Updates
-
-    void updatePlayerEnergyUI()
-    {
-        playerEnergyUI.transform.Find("EnergyText").GetComponent<TextMeshProUGUI>().text = currentPlayerEnergy.ToString();
-    }
-
 
     // Card/Deck Functions
     public DeckModelSO getStarterDeck()
@@ -281,10 +198,10 @@ public class GameManager : MonoBehaviour
 
         // Save everything here
 
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                    Application.Quit();
+        #endif
     }
 }

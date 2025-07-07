@@ -15,4 +15,25 @@ public class Helpers
         }
         return null;
     }
+
+    public static GameObject findSiblingByTag(string tag, Transform parent)
+    {
+        if (parent == null)
+        {
+            Debug.LogWarning("This object has no parent.");
+            return null;
+        }
+
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            Transform child = parent.GetChild(i);
+            if (child.gameObject.CompareTag(tag))
+            {
+                return child.gameObject;
+            }
+        }
+
+        Debug.LogWarning($"No sibling found with tag: {tag}");
+        return null;
+    }
 }
