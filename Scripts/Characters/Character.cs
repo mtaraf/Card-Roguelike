@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
 
@@ -11,9 +12,10 @@ public class Character : MonoBehaviour
     protected int weakness;
     protected Dictionary<EffectType, int> attributes = new Dictionary<EffectType, int>();
     protected List<CardEffect> multipleTurnEffects = new List<CardEffect>();
+    [SerializeField] protected int id;
 
     // UI
-    protected HealthAndStatus healthAndStatus;
+    protected UIUpdater uIUpdater;
     protected TargetableObject targetableObject;
 
     // Animations
@@ -41,15 +43,9 @@ public class Character : MonoBehaviour
         yield return null;
 
         // UI set up
-        healthAndStatus = GetComponent<HealthAndStatus>();
-        if (healthAndStatus == null)
-        {
-            Debug.LogError("Could not find Health and Status for this obj: " + name);
-        }
-        else
-        {
-            healthAndStatus.setHealth(currentHealth, maxHealth);
-        }
+        uIUpdater = GetComponent<UIUpdater>();
+        uIUpdater.setHealth(currentHealth, maxHealth);
+
 
         // Find Animator
         if (spriteObject == null)
@@ -92,9 +88,12 @@ public class Character : MonoBehaviour
                 }
             }
         }
-
-        healthAndStatus.updateAttributes(false, attributes);
-        healthAndStatus.setHealth(currentHealth, maxHealth);
+        
+        foreach (KeyValuePair<EffectType, int> attribute in attributes)
+        {
+            uIUpdater.updateEffect(attribute.Key, attribute.Value);
+        }
+        uIUpdater.setHealth(currentHealth, maxHealth);
     }
 
     public void processStartOfTurnEffects()
@@ -122,8 +121,10 @@ public class Character : MonoBehaviour
             }
         }
 
-        healthAndStatus.updateAttributes(false, attributes);
-        healthAndStatus.setHealth(currentHealth, maxHealth);
+        foreach (KeyValuePair<EffectType, int> attribute in attributes) {
+            uIUpdater.updateEffect(attribute.Key, attribute.Value);
+        }
+        uIUpdater.setHealth(currentHealth, maxHealth);
     }
 
     public void processEndOfTurnEffects()
@@ -137,8 +138,11 @@ public class Character : MonoBehaviour
             attributes[EffectType.Divinity] -= 1;
         }
 
-        healthAndStatus.updateAttributes(false, attributes);
-        healthAndStatus.setHealth(currentHealth, maxHealth);
+
+        foreach (KeyValuePair<EffectType, int> attribute in attributes) {
+            uIUpdater.updateEffect(attribute.Key, attribute.Value);
+        }
+        uIUpdater.setHealth(currentHealth, maxHealth);
     }
 
 
@@ -160,6 +164,16 @@ public class Character : MonoBehaviour
     public void setMaxHealth(int value)
     {
         maxHealth = value;
+    }
+
+    public void setCurrentHealth(int value)
+    {
+        currentHealth = value;
+    }
+
+    public int getId()
+    {
+        return id;
     }
 
     public void playAnimation(CardType type)

@@ -28,7 +28,7 @@ public class Player : Character
     public void addCardToDeck(CardModelSO card)
     {
         // add card to deck
-
+        deck.addCardToDeck(card);
 
 
         // update hand manager

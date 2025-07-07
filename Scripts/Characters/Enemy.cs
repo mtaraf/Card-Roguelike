@@ -19,6 +19,7 @@ public class Enemy : Character
     private List<CardModelSO> currentMoveset = new List<CardModelSO>();
     [SerializeField] private List<DeckModelSO> movesets = new List<DeckModelSO>();
     [SerializeField] private GameObject energyUI;
+    private bool dead = false;
 
     // Attributes
     private int currentEnergy = 0;
@@ -31,6 +32,15 @@ public class Enemy : Character
         if (energyUI == null)
         {
             energyUI = transform.Find("EnemyEnergyUI").gameObject;
+        }
+    }
+
+    public void Update()
+    {
+        if (currentHealth < 1 && !dead)
+        {
+            GameManager.instance.removeDeadEnemy(id);
+            dead = true;
         }
     }
 

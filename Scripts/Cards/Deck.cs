@@ -21,7 +21,7 @@ public class Deck
         deck.cards = new List<CardModelSO>();
     }
 
-    void AddCardToDeck(CardModelSO card)
+    public void addCardToDeck(CardModelSO card)
     {
         if (deckSize != maxDeckSize)
         {

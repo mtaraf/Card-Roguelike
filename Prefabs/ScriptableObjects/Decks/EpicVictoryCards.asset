@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b04a2a5476ff64788caa87c41b8035, type: 3}
   m_Name: EpicVictoryCards
   m_EditorClassIdentifier: 
-  cards: []
+  cards:
+  - {fileID: 11400000, guid: 1a676ac1e6d4412488b3cd6dd734b5d4, type: 2}
+  - {fileID: 11400000, guid: 35698c5c1c4000f48950bed11c1c31b3, type: 2}
+  - {fileID: 11400000, guid: f2d9af9de651bc34dad0c0ee40daae78, type: 2}
+  - {fileID: 11400000, guid: 3af14df29dbf50b438c95a3fc1a36247, type: 2}
+  - {fileID: 11400000, guid: 81a59b7bd6983ab49be4b9ff827cb278, type: 2}

@@ -72,5 +72,5 @@ Create first "map" for GameManager
 
 
 Add/Debug cards (TO-DO)
-Implement game manager for scene transition
+implement sceneloader, combatmanager (reduce code in game manager)
 Add card selection before scene transition
