@@ -13,6 +13,7 @@ public class UIUpdater : MonoBehaviour
     [SerializeField] private Transform effectUIParent;
     [SerializeField] private List<GameObject> effectPrefabs;
 
+
     private Dictionary<EffectType, GameObject> activeEffects = new();
     private List<GameObject> effectUISlots = new();
 

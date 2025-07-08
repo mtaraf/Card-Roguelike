@@ -96,11 +96,6 @@ public class GameManager : MonoBehaviour
         return playerHandSize;
     }
 
-    public void resetPlayerEnergy()
-    {
-        currentPlayerEnergy = playerHandEnergy;
-    }
-
     public int getPlayerHandEnergy()
     {
         return playerHandEnergy;

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   rarity: 0
-  energy: 0
+  energy: 2
   effects:
   - type: 0
     value: 3
-  turns: 0
+    turns: 0
   special: 0
   condition:
     conditionValue: 0

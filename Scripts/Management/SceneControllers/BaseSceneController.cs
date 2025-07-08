@@ -6,7 +6,8 @@ public class BaseLevelSceneController : MonoBehaviour
 {
     public static BaseLevelSceneController instance;
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private List<GameObject> enemyPrefabs;
+    [SerializeField] private List<EnemyGroup> enemyPrefabs;
+    [SerializeField] private List<GameObject> enemySpawnLocations;
 
     private GameObject mainCanvas;
     private GameObject playerEnergyUI;
@@ -50,15 +51,11 @@ public class BaseLevelSceneController : MonoBehaviour
         setPlayerEnergy(playerCurrentEnergy);
 
         // Randomize enemies enemies
-        randomizeEnemy();
-
-        // Start turns
-        TurnManager.instance.Initialize(player, enemies);
-        TurnManager.instance.startTurns();
+        randomizeEnemyAndStartTurnSequence();
     }
 
     // Randomize the enemy the player encounters
-    void randomizeEnemy()
+    void randomizeEnemyAndStartTurnSequence()
     {
         int currentLevel = GameManager.instance.getCurrentLevel();
         if (currentLevel % 10 == 0 && currentLevel != 0)
@@ -67,18 +64,59 @@ public class BaseLevelSceneController : MonoBehaviour
         }
         else
         {
-            // Random common enemy
-            int random = Random.Range(0, enemyPrefabs.Count - 1);
-            GameObject enemyObj = Instantiate(enemyPrefabs[random], mainCanvas.transform);
+            int randomSize = Random.Range(1, 5);
+            List<EnemyGroup> enemyGroups = enemyPrefabs.FindAll((group) => group.size == randomSize);
+
+            int randomGroup = Random.Range(0, enemyGroups.Count);
+            EnemyGroup enemyGroup = enemyGroups[randomGroup];
+
+            foreach (GameObject enemyObj in enemyGroup.enemies)
+            {
+                GameObject enemy = spawnEnemy(enemyObj, randomSize - 1);
+                if (enemy == null)
+                {
+                    Debug.Log($" Problem instantiating {enemy.name}!");
+                }
+
+                Enemy enemyComponent = enemy.GetComponent<Enemy>();
+
+                if (enemyComponent == null)
+                {
+                    Debug.LogError($"Instantiated enemy {enemy.name} has no Enemy component!");
+                }
+                else
+                {
+                    enemies.Add(enemyComponent);
+                }
+            }
 
             // TO-DO: remove enemy from list once there are enough enemies
             // enemyPrefabs.Remove(enemyPrefabs[random]);
 
             // Get enemy component
-            enemies.Add(enemyObj.GetComponent<Enemy>());
 
             // TO-DO: Add random events instead of common enemy
+
+            // Start turns
+            TurnManager.instance.Initialize(player, enemies);
+            TurnManager.instance.startTurns();
         }
+    }
+
+    GameObject spawnEnemy(GameObject enemyObj, int numEnemies)
+    {
+        GameObject spawnLocationParent = enemySpawnLocations[numEnemies];
+        GameObject enemy = null;
+        Debug.Log(spawnLocationParent.transform.childCount);
+        for (int i = 0; i < spawnLocationParent.transform.childCount; i++)
+        {
+            if (spawnLocationParent.transform.GetChild(i).childCount == 0)
+            {
+                return Instantiate(enemyObj, spawnLocationParent.transform.GetChild(i).transform);
+            }
+        }
+
+        return enemy;
     }
 
     public void removeDeadEnemy(int id)
@@ -105,6 +143,17 @@ public class BaseLevelSceneController : MonoBehaviour
         setPlayerEnergy(playerCurrentEnergy);
     }
 
+    public void resetPlayerEnergy()
+    {
+        playerCurrentEnergy = GameManager.instance.getPlayerHandEnergy();
+        setPlayerEnergy(playerCurrentEnergy);
+    }
+
+    public int getCurrentPlayerEnergy()
+    {
+        return playerCurrentEnergy;
+    }
+
     public Dictionary<EffectType, int> getPlayerAttributes()
     {
         return player.getAttributes();
@@ -119,4 +168,16 @@ public class BaseLevelSceneController : MonoBehaviour
     {
         player.processCardEffects(effects);
     }
+
+    public List<Enemy> getEnemies()
+    {
+        return enemies;
+    }
+}
+
+[System.Serializable]
+public class EnemyGroup
+{
+    public int size;
+    public List<GameObject> enemies;
 }

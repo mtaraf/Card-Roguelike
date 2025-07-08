@@ -194,7 +194,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                 {
                     // Check if player has enough energy to use the card
                     int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
-                    if (GameManager.instance.getCurrentPlayerEnergy() >= cardEnergy)
+                    if (BaseLevelSceneController.instance.getCurrentPlayerEnergy() >= cardEnergy)
                     {
                         // Use card
                         Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on player");
@@ -219,35 +219,99 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                 }
                 else
                 {
-                    Enemy enemy = clickedGameObject.GetComponent<Enemy>();
-                    if (enemy != null && enemy.checkifTargetable())
+                    Card selectedCardModel = HandManager.instance.getSelectedCard();
+                    if (selectedCardModel.getCardTarget() == Target.Enemy_Multiple)
                     {
-                        // Check if player has enough energy to use the card
+                        List<Enemy> enemies = BaseLevelSceneController.instance.getEnemies();
                         int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
-                        if (GameManager.instance.getCurrentPlayerEnergy() >= cardEnergy)
+                        if (BaseLevelSceneController.instance.getCurrentPlayerEnergy() < cardEnergy)
+                        {
+                            // If player does not have energy for the card, but tries to play, display feedback message
+                            StartCoroutine(HandManager.instance.displayFeedbackMessage("Not enough energy!"));
+                        }
+                        else
                         {
                             // Use card
-                            Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on enemy");
+                            Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on all enemies");
                             List<CardEffect> effects = HandManager.instance.useSelectedCard();
-                            enemy.processCardEffects(effects);
+                            
+                            foreach (Enemy enemy in enemies)
+                            {
+                                if (enemy.checkifTargetable())
+                                {
+                                    enemy.processCardEffects(effects);
+                                }
+                            }
 
                             // update player energy
-                            //GameManager.instance.usePlayerEnergy(cardEnergy);
                             BaseLevelSceneController.instance.usePlayerEnergy(cardEnergy);
 
                             // card animation
                             StartCoroutine(onUseCard());
 
                             HandManager.instance.clearSelectedCard();
-                            return;
                         }
-                        else
-                        {
-                            // If player does not have energy for the card, but tries to play, display feedback message
-                            StartCoroutine(HandManager.instance.displayFeedbackMessage("Not enough energy!"));
-                        }
-
                     }
+                    else
+                    {
+                        Enemy enemy = clickedGameObject.GetComponent<Enemy>();
+                        if (enemy != null && enemy.checkifTargetable())
+                        {
+                            // Check if player has enough energy to use the card
+                            int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
+                            if (BaseLevelSceneController.instance.getCurrentPlayerEnergy() >= cardEnergy)
+                            {
+                                // Use card
+                                Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on enemy");
+                                List<CardEffect> effects = HandManager.instance.useSelectedCard();
+                                enemy.processCardEffects(effects);
+
+                                // update player energy
+                                //GameManager.instance.usePlayerEnergy(cardEnergy);
+                                BaseLevelSceneController.instance.usePlayerEnergy(cardEnergy);
+
+                                // card animation
+                                StartCoroutine(onUseCard());
+
+                                HandManager.instance.clearSelectedCard();
+                                return;
+                            }
+                            else
+                            {
+                                // If player does not have energy for the card, but tries to play, display feedback message
+                                StartCoroutine(HandManager.instance.displayFeedbackMessage("Not enough energy!"));
+                            }
+                        }
+                    }
+
+                    // Enemy enemy = clickedGameObject.GetComponent<Enemy>();
+                    // if (enemy != null && enemy.checkifTargetable())
+                    // {
+                    //     // Check if player has enough energy to use the card
+                    //     int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
+                    //     if (GameManager.instance.getCurrentPlayerEnergy() >= cardEnergy)
+                    //     {
+                    //         // Use card
+                    //         Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on enemy");
+                    //         List<CardEffect> effects = HandManager.instance.useSelectedCard();
+                    //         enemy.processCardEffects(effects);
+
+                    //         // update player energy
+                    //         //GameManager.instance.usePlayerEnergy(cardEnergy);
+                    //         BaseLevelSceneController.instance.usePlayerEnergy(cardEnergy);
+
+                    //         // card animation
+                    //         StartCoroutine(onUseCard());
+
+                    //         HandManager.instance.clearSelectedCard();
+                    //         return;
+                    //     }
+                    //     else
+                    //     {
+                    //         // If player does not have energy for the card, but tries to play, display feedback message
+                    //         StartCoroutine(HandManager.instance.displayFeedbackMessage("Not enough energy!"));
+                    //     }
+                    // }
                 }
             }
         }

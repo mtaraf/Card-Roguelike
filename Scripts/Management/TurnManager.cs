@@ -70,7 +70,7 @@ public class TurnManager : MonoBehaviour
         }
 
         player.processStartOfTurnEffects();
-        GameManager.instance.resetPlayerEnergy();
+        BaseLevelSceneController.instance.resetPlayerEnergy();
         HandManager.instance.drawCards(GameManager.instance.getPlayerHandSize());
 
         endPlayerTurnBool = false;

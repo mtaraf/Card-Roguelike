@@ -161,9 +161,9 @@ GameObject:
   - component: {fileID: 1115958195323305224}
   - component: {fileID: 115143974249260187}
   - component: {fileID: 5314620027693752524}
-  - component: {fileID: 6130304064773122085}
+  - component: {fileID: 5331599743582957192}
   m_Layer: 5
-  m_Name: Enemy_1
+  m_Name: Common_Enemy_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,7 +190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -600, y: 150}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &115143974249260187
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc5364425cae854a88eb42a9b86716c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 25
   id: 1
   spriteObject: {fileID: 4653887851505298441}
   moveset: 0
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSprites: {fileID: 6624938710008606965}
---- !u!114 &6130304064773122085
+--- !u!114 &5331599743582957192
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -248,6 +248,8 @@ MonoBehaviour:
   healthText: {fileID: 2693879261269892494}
   effectUIParent: {fileID: 7804237151318731177}
   effectPrefabs: []
+  sprite: {fileID: 4653887851505298441}
+  healthBarSprite: {fileID: 4041394820422197779}
 --- !u!1 &4380949831817794052
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +759,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4041394820422197779 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6645424258156167739, guid: c5e704ea19c1be445839a00f48f92c42, type: 3}
+  m_PrefabInstance: {fileID: 7218321367852638248}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6317161425048252278 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3713131935535124318, guid: c5e704ea19c1be445839a00f48f92c42, type: 3}
@@ -781,6 +788,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1115958195323305224}
     m_Modifications:
+    - target: {fileID: 2718934789831433111, guid: 9ab2da283c8164a4b8c9c4eabd7e339f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3404731266770956207, guid: 9ab2da283c8164a4b8c9c4eabd7e339f, type: 3}
       propertyPath: m_Name
       value: EnemyEnergyUI

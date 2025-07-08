@@ -46,6 +46,11 @@ public class Character : MonoBehaviour
         uIUpdater = GetComponent<UIUpdater>();
         uIUpdater.setHealth(currentHealth, maxHealth);
 
+        if (uIUpdater == null)
+        {
+            Debug.LogError($"UIUpdater not found on {gameObject.name}");
+        }
+
 
         // Find Animator
         if (spriteObject == null)
@@ -98,6 +103,7 @@ public class Character : MonoBehaviour
 
     public void processStartOfTurnEffects()
     {
+        Debug.Log(attributes.Count);
         // Poison Damage
         currentHealth -= attributes[EffectType.Poison];
 

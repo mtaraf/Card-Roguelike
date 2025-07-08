@@ -29,12 +29,6 @@ public class Enemy : Character
     {
         base.Start();
 
-        // Get energyUI
-        if (energyUI == null)
-        {
-            energyUI = transform.Find("EnemyEnergyUI").gameObject;
-        }
-
         cardProcessor = new CardProcessor(BaseLevelSceneController.instance);
     }
 
@@ -42,7 +36,6 @@ public class Enemy : Character
     {
         if (currentHealth < 1 && !dead)
         {
-            //GameManager.instance.removeDeadEnemy(id);
             BaseLevelSceneController.instance.removeDeadEnemy(id);
             dead = true;
         }
