@@ -18,12 +18,14 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
     [SerializeField] private DeckViewType view;
     [SerializeField] private GameObject deckViewUI;
     [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private GameObject corruptCardPrefab;
 
     // For Testing purposes, remove later
     [SerializeField] public DeckModelSO testDeck;
 
 
     private DeckModelSO deck;
+    private List<CardModelSO> corruptedCards = new List<CardModelSO>();
     private Transform canvasTransform;
 
     void Start()
@@ -63,6 +65,33 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
         TextMeshProUGUI titleObject = content.transform.Find("Title").GetComponent<TextMeshProUGUI>();
         titleObject.SetText(title);
 
+        int index = 0;
+
+        // Add corrupt cards if discard pile
+        if (title == "Discard Pile")
+        {
+            corruptedCards = HandManager.instance.getCorruptedCards();
+            if (corruptedCards.Count > 0)
+            {
+                foreach (CardModelSO model in corruptedCards)
+                {
+                    while (index <= content.transform.childCount - 1)
+                    {
+                        if (content.transform.GetChild(index).transform.childCount == 0)
+                        {
+                            GameObject cardObj = Instantiate(corruptCardPrefab, content.transform.GetChild(index).transform);
+                            Card cardComponent = cardObj.GetComponent<Card>();
+                            cardComponent.setCardDisplayInformation(model);
+                            cardObj.SetActive(true);
+                            index++;
+                            break;
+                        }
+                        index++;
+                    }
+                }
+            }
+        }
+
         if (deck.cards.Count == 0)
         {
             // No cards for this deck view, display empty
@@ -71,20 +100,16 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
         else
         {
             // Fill the cards of the deck view
-            int index = 0;
             foreach (CardModelSO card in deck.cards)
             {
                 while (index <= content.transform.childCount - 1)
                 {
-                    if (content.transform.GetChild(index).transform.childCount == 1)
+                    if (content.transform.GetChild(index).transform.childCount == 0)
                     {
-                        GameObject cardObj = content.transform.GetChild(index).transform.Find("CardNoAnimationPrefab").gameObject;
-                        cardObj.transform.Find("Title").GetComponent<TextMeshProUGUI>().SetText(card.title);
-                        cardObj.transform.Find("Description").GetComponent<TextMeshProUGUI>().SetText(card.details);
-                        cardObj.transform.Find("EnergyTextContainer").transform.Find("EnergyCost").GetComponent<TextMeshProUGUI>().SetText(card.energy.ToString());
-
+                        GameObject cardObj = Instantiate(cardPrefab, content.transform.GetChild(index).transform);
+                        Card cardComponent = cardObj.GetComponent<Card>();
+                        cardComponent.setCardDisplayInformation(card);
                         cardObj.SetActive(true);
-
                         index++;
                         break;
                     }

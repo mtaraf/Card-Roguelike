@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject loadGameMenu;
-    private GameObject mainLevelCanvas;
 
 
     // Game States
@@ -21,8 +20,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> enemyPrefabs;
     // [SerializeField] private List<GameObject> bossPrefabs;
     private int currentLevel = 0;
-    private List<Enemy> enemies = new List<Enemy>();
-    private Player player;
     private DeckModelSO playerDeck;
     private int playerMaxHealth;
     private int playerCurrentHealth;
@@ -31,7 +28,6 @@ public class GameManager : MonoBehaviour
     private int currentPlayerEnergy;
 
     // UI
-    private GameObject playerEnergyUI;
     [SerializeField] private List<GameObject> statuses = new List<GameObject>();
 
     // Cards

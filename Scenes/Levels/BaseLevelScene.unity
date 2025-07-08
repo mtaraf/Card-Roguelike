@@ -354,6 +354,7 @@ MonoBehaviour:
   view: 0
   deckViewUI: {fileID: 9198885487986516452, guid: 989d15d63c52ec644b9023197bde5641, type: 3}
   cardPrefab: {fileID: 693967387009741433, guid: 351df61022925a649bc589fab5b063d7, type: 3}
+  corruptCardPrefab: {fileID: 693967387009741433, guid: ef11dbab15236e2499cb82b3285ddbf5, type: 3}
   testDeck: {fileID: 11400000, guid: 997cbd8a5167c9e48b41ad45238a2157, type: 2}
 --- !u!114 &153018901
 MonoBehaviour:
@@ -504,6 +505,7 @@ MonoBehaviour:
   view: 1
   deckViewUI: {fileID: 9198885487986516452, guid: 989d15d63c52ec644b9023197bde5641, type: 3}
   cardPrefab: {fileID: 693967387009741433, guid: 351df61022925a649bc589fab5b063d7, type: 3}
+  corruptCardPrefab: {fileID: 693967387009741433, guid: ef11dbab15236e2499cb82b3285ddbf5, type: 3}
   testDeck: {fileID: 11400000, guid: 997cbd8a5167c9e48b41ad45238a2157, type: 2}
 --- !u!114 &177048423
 MonoBehaviour:
@@ -2860,6 +2862,7 @@ MonoBehaviour:
   view: 2
   deckViewUI: {fileID: 9198885487986516452, guid: 989d15d63c52ec644b9023197bde5641, type: 3}
   cardPrefab: {fileID: 693967387009741433, guid: 351df61022925a649bc589fab5b063d7, type: 3}
+  corruptCardPrefab: {fileID: 693967387009741433, guid: ef11dbab15236e2499cb82b3285ddbf5, type: 3}
   testDeck: {fileID: 11400000, guid: 997cbd8a5167c9e48b41ad45238a2157, type: 2}
 --- !u!114 &946521702
 MonoBehaviour:
@@ -3428,7 +3431,7 @@ GameObject:
   - component: {fileID: 1354477332}
   m_Layer: 5
   m_Name: CenterOfUI
-  m_TagString: Untagged
+  m_TagString: CenterOfUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

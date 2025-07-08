@@ -19,6 +19,7 @@ public class Enemy : Character
     private List<CardModelSO> currentMoveset = new List<CardModelSO>();
     [SerializeField] private List<DeckModelSO> movesets = new List<DeckModelSO>();
     [SerializeField] private GameObject energyUI;
+    private CardProcessor cardProcessor;
     private bool dead = false;
 
     // Attributes
@@ -33,6 +34,8 @@ public class Enemy : Character
         {
             energyUI = transform.Find("EnemyEnergyUI").gameObject;
         }
+
+        cardProcessor = new CardProcessor(BaseLevelSceneController.instance);
     }
 
     public void Update()
@@ -106,7 +109,7 @@ public class Enemy : Character
             CardModelSO cardModel = moveset[i];
             cardModel.multiplyValues(multiplier);
 
-            List<CardEffect> effects = HandManager.instance.processEnemyCard(cardModel, attributes);
+            List<CardEffect> effects = cardProcessor.processEnemyCard(cardModel, attributes);
             if (effects != null)
             {
                 processCardEffects(effects);

@@ -72,5 +72,8 @@ Create first "map" for GameManager
 
 
 Add/Debug cards (TO-DO)
-implement sceneloader, combatmanager (reduce code in game manager)
+    - Add corruption system to cards (done)
+        - Add corrupted card display prefab for discard pile (done)
+            - Add tooltip for corrupt icon
+
 Add card selection before scene transition

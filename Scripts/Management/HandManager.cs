@@ -13,18 +13,18 @@ public class HandManager : MonoBehaviour
     [SerializeField] public GameObject noAnimationCardPrefab;
     [SerializeField] private GameObject centerOfUI;
     [SerializeField] private GameObject feedbackMessage;
+    private CardProcessor cardProcessor;
 
     // Decks
     private DeckModelSO drawPile;
     private DeckModelSO discardPile;
     private DeckModelSO playerDeck;
+    private DeckModelSO corruptedCards;
 
     // Cards
     private Card selectedCard = null;
     private GameObject cardSlots;
-    private int handSize = 6; // Default Hand Size
-
-    private List<GameObject> cardSlotsList = new List<GameObject>();
+    private List<GameObject> cardSlotsList;
 
     public void Awake()
     {
@@ -45,6 +45,10 @@ public class HandManager : MonoBehaviour
     {
         Debug.Log($"Hand Manager detected scene loaded: {scene.name}");
         StartCoroutine(createDecksAfterStartHasRun());
+
+        centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI");
+
+        cardSlotsList = new List<GameObject>();
     }
 
     // Any data that is created in Start() functions of other files needs to be accessed after the first frame
@@ -76,6 +80,11 @@ public class HandManager : MonoBehaviour
             cardSlotName = "CardSlot" + (i + 1).ToString();
             cardSlotsList.Add(cardSlots.transform.Find(cardSlotName).gameObject);
         }
+
+        cardProcessor = new CardProcessor(BaseLevelSceneController.instance);
+
+        corruptedCards = ScriptableObject.CreateInstance<DeckModelSO>();
+        corruptedCards.cards = new List<CardModelSO>();
     }
 
     // General card functions
@@ -130,7 +139,7 @@ public class HandManager : MonoBehaviour
     // Card movement functions
     public void drawCards(int numCards)
     {
-        int randomCardIndex = -1;
+        int randomCardIndex;
 
         // Reshuffle discard and draw if drawPile does not have enough cards
         if (drawPile.cards.Count < numCards)
@@ -147,7 +156,16 @@ public class HandManager : MonoBehaviour
                 drawPile.cards.RemoveAt(randomCardIndex);
             }
         }
+    }
 
+    public void addCorruptedCard(CardModelSO model)
+    {
+        corruptedCards.cards.Add(model);
+    }
+
+    public List<CardModelSO> getCorruptedCards()
+    {
+        return corruptedCards.cards;
     }
 
     public bool addCardToCardSlot(CardModelSO cardInformation)
@@ -171,7 +189,10 @@ public class HandManager : MonoBehaviour
         foreach (CardModelSO card in discardCopy)
         {
             drawPile.cards.Add(card);
-            discardPile.cards.Remove(card);
+            if (!card.corrupts)
+            {
+                discardPile.cards.Remove(card);
+            }
         }
     }
 
@@ -201,71 +222,21 @@ public class HandManager : MonoBehaviour
         Dictionary<EffectType, int> playerAttributes = BaseLevelSceneController.instance.getPlayerAttributes();
 
         // Get card effects
-        List<CardEffect> effects = processCard(selectedCard, playerAttributes);
+        List<CardEffect> effects =  cardProcessor.processCard(selectedCard, playerAttributes);
 
         // Add card to discard pile and remove card
-        addCardToDiscardPile(selectedCard);
+        if (selectedCard.isCorrupt())
+        {
+            addCorruptedCard(selectedCard.getCardModel());
+        }
+        else
+        {
+            addCardToDiscardPile(selectedCard);
+        }
 
         clearSelectedCard();
 
         return effects;
-    }
-
-    public List<CardEffect> processCard(Card card, Dictionary<EffectType, int> attributes)
-    {
-        // CardEffects effects = new CardEffects(card.getTurns());
-        // effects.setEffect(EffectType.Damage, card.getDamage() + attributes[Attributes.STRENGTH]);
-        // effects.setEffect(EffectType.Armor, card.getArmor());
-        // effects.setEffect(EffectType.Strength, card.getStrength());
-
-        if (card.isSpecial())
-        {
-            return processSpecialCards(card);
-        }
-
-        int numCardsToDraw = card.getCardsToDraw();
-        if (numCardsToDraw > 0)
-        {
-            drawCards(numCardsToDraw);
-        }
-
-        // Animations
-        BaseLevelSceneController.instance.playAnimationsForCard(card.getCardType());
-
-        return card.getEffects();
-    }
-
-    public List<CardEffect> processEnemyCard(CardModelSO model, Dictionary<EffectType, int> attributes)
-    {
-        // CardEffects effects = new CardEffects(model.turns);
-
-        // effects.setEffect(EffectType.Damage, model.damage + attributes[Attributes.STRENGTH]);
-        // effects.setEffect(EffectType.Armor, model.armor);
-        // effects.setEffect(EffectType.Strength, model.strength);
-
-        if (model.target == Target.Player)
-        {
-            BaseLevelSceneController.instance.processEnemyCardEffectsOnPlayer(model.effects);
-            return null;
-        }
-
-        return model.effects;
-    }
-
-    List<CardEffect> processSpecialCards(Card specialCard)
-    {
-        string title = specialCard.getCardTitle();
-        switch (title)
-        {
-            case "Glass Canon":
-
-                break;
-            default:
-                break;
-        }
-
-
-        return specialCard.getEffects();
     }
 
     // Instantiate and play animation for enemy cards
@@ -341,41 +312,3 @@ public static class EffectTypeExtensions
         }
     }
 }
-
-
-// public class CardEffects
-// {
-//     private Dictionary<EffectType, int> effectValues = new();
-//     private int totalTurns = 0;
-
-//     public CardEffects(int turns = 0)
-//     {
-//         totalTurns = turns;
-//     }
-
-//     public void setEffect(EffectType type, int value)
-//     {
-//         if (effectValues.ContainsKey(type))
-//             effectValues[type] += value;
-//         else
-//             effectValues[type] = value;
-//     }
-
-//     public int getEffect(EffectType type)
-//     {
-//         return effectValues.ContainsKey(type) ? effectValues[type] : 0;
-//     }
-
-//     public bool hasEffect(EffectType type)
-//     {
-//         return getEffect(type) != 0;
-//     }
-
-//     public Dictionary<EffectType, int> getAllEffects()
-//     {
-//         return new Dictionary<EffectType, int>(effectValues);
-//     }
-
-//     public int Turns => totalTurns;
-//     public void setTurns(int turns) => totalTurns = turns;
-// }
