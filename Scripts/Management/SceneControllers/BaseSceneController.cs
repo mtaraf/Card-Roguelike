@@ -64,7 +64,7 @@ public class BaseLevelSceneController : MonoBehaviour
         }
         else
         {
-            int randomSize = Random.Range(1, 5);
+            int randomSize = Random.Range(1, 2); // TO-DO: change back to 1,5 after testing
             List<EnemyGroup> enemyGroups = enemyPrefabs.FindAll((group) => group.size == randomSize);
 
             int randomGroup = Random.Range(0, enemyGroups.Count);

@@ -9,10 +9,7 @@ public class HandManager : MonoBehaviour
     public static HandManager instance;
 
     [SerializeField] private Player player;
-    [SerializeField] public GameObject cardPrefab;
-    [SerializeField] public GameObject noAnimationCardPrefab;
-    [SerializeField] private GameObject centerOfUI;
-    [SerializeField] private GameObject feedbackMessage;
+    [SerializeField] private HandUIController handUI;
     private CardProcessor cardProcessor;
 
     // Decks
@@ -45,8 +42,6 @@ public class HandManager : MonoBehaviour
     {
         Debug.Log($"Hand Manager detected scene loaded: {scene.name}");
         StartCoroutine(createDecksAfterStartHasRun());
-
-        centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI");
 
         cardSlotsList = new List<GameObject>();
     }
@@ -85,6 +80,8 @@ public class HandManager : MonoBehaviour
 
         corruptedCards = ScriptableObject.CreateInstance<DeckModelSO>();
         corruptedCards.cards = new List<CardModelSO>();
+
+        handUI.Initialize();
     }
 
     // General card functions
@@ -168,21 +165,6 @@ public class HandManager : MonoBehaviour
         return corruptedCards.cards;
     }
 
-    public bool addCardToCardSlot(CardModelSO cardInformation)
-    {
-        for (int i = 0; i < cardSlotsList.Count; i++)
-        {
-            if (cardSlotsList[i].transform.childCount == 0)
-            {
-                GameObject card = Instantiate(cardPrefab, cardSlotsList[i].transform);
-                Card cardInfo = card.GetComponent<Card>();
-                cardInfo.setCardDisplayInformation(cardInformation);
-                return true;
-            }
-        }
-        return false;
-    }
-
     private void shuffleDiscardPileIntoDrawPile()
     {
         List<CardModelSO> discardCopy = new List<CardModelSO>(discardPile.cards);
@@ -199,20 +181,6 @@ public class HandManager : MonoBehaviour
     private void addCardToDiscardPile(Card card)
     {
         discardPile.cards.Add(card.getCardModel());
-    }
-
-    public void shuffleCurrentHandIntoDiscardPile()
-    {
-        for (int i = 0; i < cardSlotsList.Count; i++)
-        {
-            if (cardSlotsList[i].transform.childCount != 0)
-            {
-                GameObject card = cardSlotsList[i].transform.GetChild(0).gameObject;
-                Card cardInfo = card.GetComponent<Card>();
-                addCardToDiscardPile(cardInfo);
-                Destroy(card);
-            }
-        }
     }
 
     // Card Processing
@@ -239,51 +207,39 @@ public class HandManager : MonoBehaviour
         return effects;
     }
 
-    // Instantiate and play animation for enemy cards
+    // UI Changes
+    public HandUIController getHandUIContoller()
+    {
+        return handUI;
+    }
     public IEnumerator enemyCardAnimation(CardModelSO model)
     {
-        // Instantiate at the center of the screen
-        GameObject card = Instantiate(noAnimationCardPrefab, centerOfUI.transform);
-        Card cardInfo = card.GetComponent<Card>();
-        cardInfo.setCardDisplayInformation(model);
+        return handUI.enemyCardAnimation(model);
+    }
 
-        CanvasGroup canvasGroup = card.GetComponent<CanvasGroup>();
-        if (canvasGroup == null)
-        {
-            canvasGroup = card.AddComponent<CanvasGroup>();
-        }
+    public bool addCardToCardSlot(CardModelSO cardInformation)
+    {
+        return handUI.addCardToSlot(cardInformation);
+    }
 
-        //processEnemyCard(model);
+    public void reorganizeHand()
+    {
+        handUI.reorganizeCardsInHand();
+    }
 
-        yield return new WaitForSeconds(1.0f);
+    public int getNumCardsInHand()
+    {
+        return handUI.getNumCardsInHand();
+    }
 
-        // Step 1: Fade out
-        float fadeDuration = 2f;
-        float elapsedTime = 0f;
-        while (elapsedTime < fadeDuration)
-        {
-            float t = elapsedTime / fadeDuration;
-            canvasGroup.alpha = Mathf.Lerp(1f, 0f, t);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(0.5f);
-
-        // Destroy the card after it fades out
-        Destroy(card);
+    public void shuffleCurrentHandIntoDiscardPile()
+    {
+        handUI.shuffleHandIntoDiscard(discardPile);
     }
 
     public IEnumerator displayFeedbackMessage(string message)
     {
-        Debug.Log("Display Message");
-
-        GameObject textObj = Instantiate(feedbackMessage, centerOfUI.transform);
-        textObj.GetComponent<TextMeshProUGUI>().text = message;
-
-        yield return new WaitForSeconds(1.0f);
-
-        Destroy(textObj);
+        return handUI.displayFeedbackMessage(message);
     }
 }
 

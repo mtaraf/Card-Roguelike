@@ -14,11 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   rarity: 2
-  energy: 0
-  effects:
-  - type: 0
-    value: 2
-  turns: 0
+  energy: 2
+  effects: []
   special: 1
   condition:
     conditionValue: 0

@@ -40,13 +40,18 @@ public class CardProcessor
 
     private List<CardEffect> processSpecialCard(Card specialCard)
     {
+        List<CardEffect> cardEffects = new List<CardEffect>();
         switch (specialCard.getCardTitle())
         {
-            case "Glass Canon":
-                // Example: reduce HP to 1 and deal massive damage
+            case "Stacked Hand":
+                CardEffect cardDamage = new CardEffect();
+                cardDamage.type = EffectType.Damage;
+                cardDamage.value = (HandManager.instance.getNumCardsInHand() * 2) - 1;
+                cardDamage.turns = 0;
+                cardEffects.Add(cardDamage);
                 break;
         }
 
-        return specialCard.getEffects();
+        return cardEffects;
     }
 }

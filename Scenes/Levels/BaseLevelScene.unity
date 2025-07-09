@@ -699,6 +699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 261285377}
   - component: {fileID: 261285376}
+  - component: {fileID: 261285378}
   m_Layer: 0
   m_Name: HandManager
   m_TagString: HandManager
@@ -723,6 +724,7 @@ MonoBehaviour:
   noAnimationCardPrefab: {fileID: 693967387009741433, guid: 351df61022925a649bc589fab5b063d7, type: 3}
   centerOfUI: {fileID: 1354477331}
   feedbackMessage: {fileID: 443055797922103271, guid: 0dddf5f45c862174fa033b816ce63dd9, type: 3}
+  handUI: {fileID: 261285378}
 --- !u!4 &261285377
 Transform:
   m_ObjectHideFlags: 0
@@ -738,6 +740,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &261285378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261285375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734966cd418038d4499b886e2daefbe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  centerOfUI: {fileID: 1354477331}
+  feedbackMessage: {fileID: 443055797922103271, guid: 0dddf5f45c862174fa033b816ce63dd9, type: 3}
+  cardPrefab: {fileID: 7452529627010682384, guid: d87ed3bf6fba44748b7c9c22eef22fb3, type: 3}
+  noAnimationCardPrefab: {fileID: 693967387009741433, guid: 351df61022925a649bc589fab5b063d7, type: 3}
 --- !u!1 &305225403
 GameObject:
   m_ObjectHideFlags: 0
