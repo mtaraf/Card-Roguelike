@@ -720,10 +720,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  cardPrefab: {fileID: 7452529627010682384, guid: d87ed3bf6fba44748b7c9c22eef22fb3, type: 3}
-  noAnimationCardPrefab: {fileID: 693967387009741433, guid: 351df61022925a649bc589fab5b063d7, type: 3}
-  centerOfUI: {fileID: 1354477331}
-  feedbackMessage: {fileID: 443055797922103271, guid: 0dddf5f45c862174fa033b816ce63dd9, type: 3}
   handUI: {fileID: 261285378}
 --- !u!4 &261285377
 Transform:
@@ -2347,7 +2343,7 @@ MonoBehaviour:
   - {fileID: 4870446416972806785, guid: 79b4af29145ea4e4a8641685285652e4, type: 3}
   - {fileID: 7442688622563808511, guid: 20f406cfa5808bc4289ca6c9dba8a9a7, type: 3}
   - {fileID: 4870446416972806785, guid: 7ffd5b292d74dc64ba6de10296aec740, type: 3}
-  starterDeck: {fileID: 11400000, guid: 8bcf81340addefb4aa9484b91a92c180, type: 2}
+  starterDeck: {fileID: 11400000, guid: 997cbd8a5167c9e48b41ad45238a2157, type: 2}
 --- !u!114 &694091819
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ MonoBehaviour:
     turns: 0
   - type: 4
     value: 1
-    turns: 1
+    turns: 0
   special: 0
   condition:
     conditionValue: 0

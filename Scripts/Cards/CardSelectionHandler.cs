@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler, IPointerClickHandler
 {
     [SerializeField] private float verticalMoveAmount = 300f;
-    [Range(0f, 2f), SerializeField] private float scaleAmount = 1.1f;
 
     private Vector3 startPos;
     private Vector3 startScale;
@@ -18,6 +17,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
     private GameObject centerOfUI;
 
     private float cardMoveSpeed = 0.4f;
+    private float cardHoverSpeed = 0.1f;
     private float cardFadeSpeed = 0.3f;
 
     private void Start()
@@ -63,7 +63,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
     public void OnSelect(BaseEventData eventData)
     {
         // Card Animation
-        handUIController.animateCardMovement(transform, startPos + new Vector3(0f, verticalMoveAmount, 0f), startScale * scaleAmount, 0.2f, null);
+        handUIController.animateCardMovement(transform, startPos + new Vector3(0f, verticalMoveAmount, 0f), transform.localScale, cardHoverSpeed, null);
     }
 
     private GameObject getGameObjectedClicked()
@@ -128,7 +128,8 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                         BaseLevelSceneController.instance.usePlayerEnergy(cardEnergy);
 
                         // card animation
-                        handUIController.animateCardMovement(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed, () => handUIController.fadeAndDestroy(gameObject, cardFadeSpeed));
+                        StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
+                        
 
                         HandManager.instance.clearSelectedCard();
                         return;
@@ -169,7 +170,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                             BaseLevelSceneController.instance.usePlayerEnergy(cardEnergy);
 
                             // card animation
-                            handUIController.animateCardMovement(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed, () => handUIController.fadeAndDestroy(gameObject, cardFadeSpeed));
+                            StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
 
                             HandManager.instance.clearSelectedCard();
                         }
@@ -193,7 +194,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                                 BaseLevelSceneController.instance.usePlayerEnergy(cardEnergy);
 
                                 // card animation
-                                handUIController.animateCardMovement(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed, () => handUIController.fadeAndDestroy(gameObject, cardFadeSpeed));
+                                StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
 
                                 HandManager.instance.clearSelectedCard();
                                 return;
@@ -210,7 +211,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
         }
 
         // Card Animation
-        handUIController.animateCardMovement(transform, startPos, startScale * scaleAmount, cardMoveSpeed, null);
+        handUIController.animateCardMovement(transform, startPos, transform.localScale, cardHoverSpeed, null);
         
 
         // Remove from game manager and reorder

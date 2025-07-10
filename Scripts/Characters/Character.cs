@@ -103,7 +103,6 @@ public class Character : MonoBehaviour
 
     public void processStartOfTurnEffects()
     {
-        Debug.Log(attributes.Count);
         // Poison Damage
         currentHealth -= attributes[EffectType.Poison];
 
@@ -182,9 +181,27 @@ public class Character : MonoBehaviour
         return id;
     }
 
+    public UIUpdater getUiUpdater()
+    {
+        return uIUpdater;
+    }
+
+    public void clearAllNegativeEffects()
+    {
+        Dictionary<EffectType, int> effectsCopy = new Dictionary<EffectType, int>(attributes);
+        foreach (KeyValuePair<EffectType, int> pair in effectsCopy)
+        {
+            if (pair.Key != EffectType.Damage && pair.Key != EffectType.Armor && pair.Key != EffectType.Strength)
+            {
+                Debug.Log("Cleansed: " + pair.Key);
+                attributes[pair.Key] = 0;
+                uIUpdater.updateEffect(pair.Key, 0);
+            }
+        }
+    }
+
     public void playAnimation(CardType type)
     {
-        Debug.Log("Played animation");
         if (type == CardType.Attack)
         {
             animator.SetTrigger("attack");

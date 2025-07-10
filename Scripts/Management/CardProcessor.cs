@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CardProcessor
 {
@@ -11,9 +13,12 @@ public class CardProcessor
 
     public List<CardEffect> processCard(Card card, Dictionary<EffectType, int> attributes)
     {
+        List<CardEffect> cardEffects = applyEffectsToCardDamage(card.getEffects(), attributes);
+
         if (card.isSpecial())
         {
-            return processSpecialCard(card);
+            sceneController.playAnimationsForCard(card.getCardType());
+            return processSpecialCard(card, attributes);
         }
 
         int draw = card.getCardsToDraw();
@@ -24,33 +29,78 @@ public class CardProcessor
         }
 
         sceneController.playAnimationsForCard(card.getCardType());
-        return card.getEffects();
+
+        return cardEffects;
     }
 
     public List<CardEffect> processEnemyCard(CardModelSO model, Dictionary<EffectType, int> attributes)
     {
+        List<CardEffect> cardEffects = applyEffectsToCardDamage(model.effects, attributes);
+
         if (model.target == Target.Player)
         {
-            sceneController.processEnemyCardEffectsOnPlayer(model.effects);
+            sceneController.processEnemyCardEffectsOnPlayer(cardEffects);
             return null;
         }
 
-        return model.effects;
+        return cardEffects;
     }
 
-    private List<CardEffect> processSpecialCard(Card specialCard)
+    // applies Strenth and Weakness attributes to the Cards effects
+    List<CardEffect> applyEffectsToCardDamage(List<CardEffect> cardEffects, Dictionary<EffectType, int> attributes)
+    {
+        // Deep copy the effects
+        List<CardEffect> modifiedEffects = new List<CardEffect>();
+        foreach (var effect in cardEffects)
+        {
+            modifiedEffects.Add(new CardEffect
+            {
+                type = effect.type,
+                value = effect.value,
+                turns = effect.turns
+            });
+        }
+
+        int damage_index = modifiedEffects.FindIndex((effect) => effect.type == EffectType.Damage);
+        if (damage_index != -1)
+        {
+            Debug.Log("Strength: " + attributes[EffectType.Strength]);
+            Debug.Log("Weakness: " + attributes[EffectType.Weaken]);
+            modifiedEffects[damage_index].value += attributes[EffectType.Strength];
+            modifiedEffects[damage_index].value -= Mathf.FloorToInt(modifiedEffects[damage_index].value * 0.2f * attributes[EffectType.Weaken]);
+            Debug.Log("Damage after strength and weakness: " + modifiedEffects[damage_index].value);
+        }
+
+        return modifiedEffects;
+    }
+
+    private List<CardEffect> processSpecialCard(Card specialCard, Dictionary<EffectType, int> attributes)
     {
         List<CardEffect> cardEffects = new List<CardEffect>();
+
+        CardEffect damage = new CardEffect();
+        damage.type = EffectType.Damage;
+
+        CardEffect strength = new CardEffect();
+        strength.type = EffectType.Strength;
+
         switch (specialCard.getCardTitle())
         {
             case "Stacked Hand":
-                CardEffect cardDamage = new CardEffect();
-                cardDamage.type = EffectType.Damage;
-                cardDamage.value = (HandManager.instance.getNumCardsInHand() * 2) - 1;
-                cardDamage.turns = 0;
-                cardEffects.Add(cardDamage);
+                damage.value = (HandManager.instance.getNumCardsInHand() * 2) - 1;
+                damage.turns = 0;
+                cardEffects.Add(damage);
+                break;
+            case "Cleanse":
+                sceneController.clearPlayerNegativeEffects();
+                break;
+            case "Corruptable":
+                strength.value = HandManager.instance.getCorruptedCards().Count;
+                cardEffects.Add(strength);
                 break;
         }
+
+        cardEffects = applyEffectsToCardDamage(cardEffects, attributes);
 
         return cardEffects;
     }

@@ -18,7 +18,7 @@ MonoBehaviour:
   effects:
   - type: 0
     value: 2
-  turns: 0
+    turns: 0
   special: 0
   condition:
     conditionValue: 0

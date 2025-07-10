@@ -129,7 +129,6 @@ public class HandUIController : MonoBehaviour
         // Step 3: Reassign cards to the first available slots
         for (int i = 0; i < cardsInHand.Count; i++)
         {
-            Debug.Log(cardSlotsList[i].name);
             cardsInHand[i].transform.SetParent(cardSlotsList[i].transform, false);
 
             // Optional: Reset position/scale to avoid layout glitches
@@ -148,6 +147,12 @@ public class HandUIController : MonoBehaviour
         StartCoroutine(moveCardCoroutine(card, targetPosition, targetScale, duration, onComplete));
     }
 
+    public IEnumerator animateCardPlayed(Transform card, Vector3 targetPosition, Vector3 targetScale, float duration, Action onComplete = null)
+    {
+        yield return StartCoroutine(moveCardCoroutine(card, targetPosition, targetScale, duration, onComplete));
+        yield return StartCoroutine(fadeOutCoroutine(card.gameObject, duration));
+    }
+
     IEnumerator moveCardCoroutine(Transform card, Vector3 targetPos, Vector3 targetScale, float duration, Action onComplete)
     {
         Vector3 startPos = card.position;
@@ -156,6 +161,11 @@ public class HandUIController : MonoBehaviour
 
         while (elapsedTime < duration)
         {
+            if (card == null)
+            {
+                yield break;
+            }
+            
             float t = elapsedTime / duration;
             card.position = Vector3.Lerp(startPos, targetPos, t);
             card.localScale = Vector3.Lerp(startScale, targetScale, t);
@@ -187,7 +197,7 @@ public class HandUIController : MonoBehaviour
         Destroy(card);
         yield return null;
 
-        reorganizeCardsInHand();
+        //reorganizeCardsInHand();
     }
     
 }

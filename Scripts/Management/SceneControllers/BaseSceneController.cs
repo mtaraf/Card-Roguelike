@@ -107,7 +107,6 @@ public class BaseLevelSceneController : MonoBehaviour
     {
         GameObject spawnLocationParent = enemySpawnLocations[numEnemies];
         GameObject enemy = null;
-        Debug.Log(spawnLocationParent.transform.childCount);
         for (int i = 0; i < spawnLocationParent.transform.childCount; i++)
         {
             if (spawnLocationParent.transform.GetChild(i).childCount == 0)
@@ -135,6 +134,11 @@ public class BaseLevelSceneController : MonoBehaviour
     public void setPlayerEnergy(int energy)
     {
         playerEnergyUI.transform.Find("EnergyText").GetComponent<TextMeshProUGUI>().text = energy.ToString();
+    }
+
+    public void clearPlayerNegativeEffects()
+    {
+        player.clearAllNegativeEffects();
     }
 
     public void usePlayerEnergy(int value)

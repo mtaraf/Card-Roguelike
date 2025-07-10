@@ -26,6 +26,11 @@ public class TargetableObject : MonoBehaviour, IPointerClickHandler, IPointerEnt
             Debug.LogError("No player or enemy component found for this targetable object");
         }
 
+        if (targetSprites == null)
+        {
+            targetSprites = Helpers.findDescendant(transform, "TargetSprites");
+        }
+
 
         rect = GetComponent<RectTransform>();
         // Match height/width of targetSprites to gameObject
@@ -66,27 +71,9 @@ public class TargetableObject : MonoBehaviour, IPointerClickHandler, IPointerEnt
         }
     }
 
-    // Listener for the user to play cards on this object
     public void OnPointerClick(PointerEventData eventData)
     {
-        // Check if card is selected and type of card can be used on this entity
-        // if (HandManager.instance.hasSelectedCard() && targetSprites.activeSelf)
-        // {
-        //     // Check if type of card can be used on enemy
-        //     Card card = HandManager.instance.getSelectedCard();
-        //     CardEffects effects = HandManager.instance.processCard(card);
-        //     Debug.Log(effects.getTotalDamage());
-
-        //     // Call enemy/player processCard function
-        //     if (isEnemy)
-        //     {
-        //         enemy.processCardEffects(effects);
-        //     }
-        //     else
-        //     {
-        //         player.processCardEffects(effects);
-        //     }
-        // }
+        
     }
 
     public void OnPointerEnter(PointerEventData eventData)

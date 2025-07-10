@@ -94,7 +94,6 @@ public class Enemy : Character
 
     IEnumerator playAndProcessCards(List<CardModelSO> moveset, int multiplier)
     {
-        Debug.Log(moveset.Count);
         for (int i = 0; i < moveset.Count; i++)
         {
             yield return new WaitForSeconds(1.0f);

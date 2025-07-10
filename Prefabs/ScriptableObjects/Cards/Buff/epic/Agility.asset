@@ -14,19 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   rarity: 2
-  energy: 0
-  damage: 0
-  armor: 0
-  turns: 0
+  energy: 1
+  effects: []
   special: 1
   condition:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Reduces the energy cost of all cards in hand by 1. Corrupts.
+  details: Reduces the energy cost of all cards in hand by 1 for this turn. Corrupts.
   title: Agility
   image: {fileID: 0}
   target: 2
   cardsDrawn: 0
-  strength: 0
   corrupts: 1

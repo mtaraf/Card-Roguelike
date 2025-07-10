@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -146,6 +147,12 @@ public class HandManager : MonoBehaviour
 
         for (int i = 0; i < numCards; i++)
         {
+            // Don't draw cards if out of cards
+            if (drawPile.cards.Count == 0)
+            {
+                return;
+            }
+
             randomCardIndex = Random.Range(0, drawPile.cards.Count);
             bool spaceInHandRemaining = addCardToCardSlot(drawPile.cards[randomCardIndex]);
             if (spaceInHandRemaining)

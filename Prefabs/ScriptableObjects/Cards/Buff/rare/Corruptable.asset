@@ -15,10 +15,7 @@ MonoBehaviour:
   type: 2
   rarity: 1
   energy: 0
-  effects:
-  - type: 2
-    value: 1
-  turns: 0
+  effects: []
   special: 1
   condition:
     conditionValue: 0

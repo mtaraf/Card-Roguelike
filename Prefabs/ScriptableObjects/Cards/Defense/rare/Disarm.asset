@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   rarity: 0
-  energy: 0
+  energy: 1
   effects:
   - type: 3
-    value: 2
+    value: 1
     turns: 2
   special: 0
   condition:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Applies 2 stacks of weaken to a target for the next 2 turns.
+  details: Applies 1 stacks of weaken to a target for the next 2 turns.
   title: Disarm
   image: {fileID: 0}
   target: 1

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class UIUpdater : MonoBehaviour
     [SerializeField] private List<GameObject> effectPrefabs;
 
 
-    private Dictionary<EffectType, GameObject> activeEffects = new();
+    [SerializeField] private Dictionary<EffectType, GameObject> activeEffects = new();
     private List<GameObject> effectUISlots = new();
 
     void Awake()
@@ -42,7 +43,7 @@ public class UIUpdater : MonoBehaviour
             {
                 Destroy(activeEffects[type]);
                 activeEffects.Remove(type);
-                reorderSlots();
+                StartCoroutine(reorderSlots());
             }
             return;
         }
@@ -72,11 +73,12 @@ public class UIUpdater : MonoBehaviour
         GameObject newEffect = Instantiate(prefab, slot.transform);
         newEffect.transform.Find("ValueContainer").GetChild(0).GetComponent<TextMeshProUGUI>().text = value.ToString();
         activeEffects[type] = newEffect;
-        reorderSlots();
+        StartCoroutine(reorderSlots());
     }
 
-    private void reorderSlots()
+    private IEnumerator reorderSlots()
     {
+        yield return new WaitForEndOfFrame();
         List<Transform> active = new List<Transform>();
 
         foreach (GameObject slot in effectUISlots)

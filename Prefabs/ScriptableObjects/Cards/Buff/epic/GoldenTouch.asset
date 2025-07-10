@@ -14,19 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   rarity: 2
-  energy: 0
-  damage: 0
-  armor: 0
-  turns: 0
+  energy: 2
+  effects: []
   special: 1
   condition:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Gives the same amount of gold as damage dealt this turn. Corrupts.
+  details: Gives the same amount of gold as damage dealt for any on hit attacks this
+    turn. Corrupts.
   title: Golden Touch
   image: {fileID: 0}
   target: 2
   cardsDrawn: 0
-  strength: 0
   corrupts: 1
