@@ -19,6 +19,7 @@ public class TurnManager : MonoBehaviour
 
     private List<Enemy> enemies;
     private Player player;
+    private int goldEarned = 20;
 
     public void Awake()
     {
@@ -57,7 +58,7 @@ public class TurnManager : MonoBehaviour
         }
 
         if (enemies.Count == 0)
-            GameManager.instance.encounterVictory();
+            GameManager.instance.encounterVictory(goldEarned);
     }
 
     private IEnumerator playerTurn()

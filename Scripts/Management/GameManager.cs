@@ -14,21 +14,26 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject loadGameMenu;
 
+    // Controllers
+    private BaseLevelUIController baseLevelUIController;
+
 
     // Game States
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private List<GameObject> enemyPrefabs;
     // [SerializeField] private List<GameObject> bossPrefabs;
-    private int currentLevel = 0;
+    private int currentLevel = 1;
     private DeckModelSO playerDeck;
     private int playerMaxHealth;
     private int playerCurrentHealth;
     private int playerHandSize;
     private int playerHandEnergy;
     private int currentPlayerEnergy;
+    private int playerGold;
 
     // UI
-    [SerializeField] private List<GameObject> statuses = new List<GameObject>();
+    [SerializeField] private List<GameObject> turnBasedStatuses = new List<GameObject>();
+    [SerializeField] private List<GameObject> valueBasedStatuses = new List<GameObject>();
 
     // Cards
     [SerializeField] private DeckModelSO starterDeck;
@@ -58,21 +63,48 @@ public class GameManager : MonoBehaviour
         playerHandSize = 6;
         playerHandEnergy = 3;
         playerCurrentHealth = 50;
+        playerGold = 0;
     }
 
 
     private void onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Game Manager detected scene loaded: {scene.name}");
+        if (scene.buildIndex == 1)
+        {
+            StartCoroutine(waitForBaseLevelUI());
+        }
     }
 
-    public List<GameObject> getStatusObjects()
+    private IEnumerator waitForBaseLevelUI()
     {
-        return statuses;
+        yield return null;
+        baseLevelUIController = FindFirstObjectByType<BaseLevelUIController>();
+        baseLevelUIController.Initialize();
+
+        if (baseLevelUIController == null)
+        {
+            Debug.LogError("BaseLevelUIController not found!");
+            yield break;
+        }
+
+        baseLevelUIController.updateLevelCount(currentLevel);
     }
 
-    public void encounterVictory()
+    public List<GameObject> getTurnBasedStatusObjects()
     {
+        return turnBasedStatuses;
+    }
+
+    public List<GameObject> getValueBasedStatusObject()
+    {
+        return valueBasedStatuses;
+    }
+
+    public void encounterVictory(int goldEarned)
+    {
+        playerGold += goldEarned;
+        baseLevelUIController.updateGoldCount(playerGold);
         VictoryManager victoryManager = FindFirstObjectByType<VictoryManager>();
         victoryManager.showVictoryScreen();
     }
@@ -85,10 +117,26 @@ public class GameManager : MonoBehaviour
 
     public void moveToNextEncounter()
     {
+        currentLevel++;
         SceneLoader.instance.loadScene(1, () =>
         {
             Debug.Log("Scene loaded!");
         });
+    }
+
+    public int getPlayerGold()
+    {
+        return playerGold;
+    }
+
+    public void addPlayerGold(int value)
+    {
+        playerGold += value;
+    }
+
+    public void subtractPlayerGold(int value)
+    {
+        playerGold -= value;
     }
 
     public int getPlayerHandSize()

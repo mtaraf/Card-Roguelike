@@ -10,22 +10,38 @@ public class UIUpdater : MonoBehaviour
     [SerializeField] private Slider healthSlider;
     [SerializeField] private TextMeshProUGUI healthText;
 
-    [Header("Effect UI")]
-    [SerializeField] private Transform effectUIParent;
-    [SerializeField] private List<GameObject> effectPrefabs;
+    [Header("Turn Effect UI")]
+    [SerializeField] private Transform turnEffectUIParent;
+    [SerializeField] private List<GameObject> turnEffectPrefabs;
+
+    [Header("Value Effect UI")]
+    [SerializeField] private Transform valueEffectUIParent;
+    [SerializeField] private List<GameObject> valueEffectPrefabs;
 
 
     [SerializeField] private Dictionary<EffectType, GameObject> activeEffects = new();
-    private List<GameObject> effectUISlots = new();
+    private List<GameObject> turnEffectUISlots = new();
+    private List<GameObject> valueEffectUISlots = new();
+    private HashSet<EffectType> turnEffects = new HashSet<EffectType>();
 
     void Awake()
     {
-        foreach (Transform child in effectUIParent)
+        turnEffects.Add(EffectType.Weaken);
+        turnEffects.Add(EffectType.Divinity);
+
+        foreach (Transform child in turnEffectUIParent)
         {
-            effectUISlots.Add(child.gameObject);
+            turnEffectUISlots.Add(child.gameObject);
         }
 
-        effectPrefabs = GameManager.instance.getStatusObjects();
+        turnEffectPrefabs = GameManager.instance.getTurnBasedStatusObjects();
+
+        foreach (Transform child in valueEffectUIParent)
+        {
+            valueEffectUISlots.Add(child.gameObject);
+        }
+
+        valueEffectPrefabs = GameManager.instance.getValueBasedStatusObject();
     }
 
     public void setHealth(float current, float max)
@@ -43,7 +59,7 @@ public class UIUpdater : MonoBehaviour
             {
                 Destroy(activeEffects[type]);
                 activeEffects.Remove(type);
-                StartCoroutine(reorderSlots());
+                StartCoroutine(reorderSlots(type));
             }
             return;
         }
@@ -56,32 +72,115 @@ public class UIUpdater : MonoBehaviour
         }
 
         // Add new effect
-        GameObject prefab = effectPrefabs.Find(obj => obj.name == type.ToDisplayString());
-        if (prefab == null)
+        GameObject prefab;
+        GameObject slot;
+
+        // Check if turn or status based
+        if (turnEffects.Contains(type))
         {
-            Debug.LogWarning($"Effect prefab not found for {type}");
-            return;
+            // Turn Based
+            prefab = turnEffectPrefabs.Find(obj => obj.name == type.ToDisplayString());
+            if (prefab == null)
+            {
+                Debug.LogWarning($"Effect prefab not found for {type}");
+                return;
+            }
+
+            slot = turnEffectUISlots.Find(s => s.transform.childCount == 0);
+            if (slot == null)
+            {
+                Debug.LogWarning("No empty effect UI slots available");
+                return;
+            }
+        }
+        else
+        {
+            // Value Based
+            prefab = valueEffectPrefabs.Find(obj => obj.name == type.ToDisplayString());
+            if (prefab == null)
+            {
+                Debug.LogWarning($"Effect prefab not found for {type}");
+                return;
+            }
+
+            slot = valueEffectUISlots.Find(s => s.transform.childCount == 0);
+            if (slot == null)
+            {
+                Debug.LogWarning("No empty effect UI slots available");
+                return;
+            }
         }
 
-        GameObject slot = effectUISlots.Find(s => s.transform.childCount == 0);
-        if (slot == null)
-        {
-            Debug.LogWarning("No empty effect UI slots available");
-            return;
-        }
+
+
+        // GameObject prefab = turnEffectPrefabs.Find(obj => obj.name == type.ToDisplayString());
+        // if (prefab == null)
+        // {
+        //     Debug.LogWarning($"Effect prefab not found for {type}");
+        //     return;
+        // }
+
+        // GameObject slot = turnEffectUISlots.Find(s => s.transform.childCount == 0);
+        // if (slot == null)
+        // {
+        //     Debug.LogWarning("No empty effect UI slots available");
+        //     return;
+        // }
 
         GameObject newEffect = Instantiate(prefab, slot.transform);
         newEffect.transform.Find("ValueContainer").GetChild(0).GetComponent<TextMeshProUGUI>().text = value.ToString();
         activeEffects[type] = newEffect;
-        StartCoroutine(reorderSlots());
+
+        StartCoroutine(reorderSlots(type));
     }
 
-    private IEnumerator reorderSlots()
+    private IEnumerator reorderSlots(EffectType type)
     {
         yield return new WaitForEndOfFrame();
+
+        if (turnEffects.Contains(type))
+        {
+            reorderTurnSlots();
+        }
+        else
+        {
+            reorderValueSlots();
+        }
+        // List<Transform> active = new List<Transform>();
+
+        // foreach (GameObject slot in turnEffectUISlots)
+        // {
+        //     if (slot.transform.childCount > 0)
+        //     {
+        //         Transform effect = slot.transform.GetChild(0);
+        //         active.Add(effect);
+        //         effect.SetParent(null); // Detach to preserve it
+        //     }
+        // }
+
+        // foreach (GameObject slot in turnEffectUISlots)
+        // {
+        //     foreach (Transform child in slot.transform)
+        //     {
+        //         Destroy(child.gameObject);
+        //     }
+        // }
+
+        // for (int i = 0; i < active.Count && i < turnEffectUISlots.Count; i++)
+        // {
+        //     Transform effect = active[i];
+        //     effect.SetParent(turnEffectUISlots[i].transform, false);
+        //     effect.localPosition = Vector3.zero;
+        //     effect.localRotation = Quaternion.identity;
+        //     effect.localScale = Vector3.one;
+        // }
+    }
+
+    void reorderValueSlots()
+    {
         List<Transform> active = new List<Transform>();
 
-        foreach (GameObject slot in effectUISlots)
+        foreach (GameObject slot in valueEffectUISlots)
         {
             if (slot.transform.childCount > 0)
             {
@@ -91,7 +190,7 @@ public class UIUpdater : MonoBehaviour
             }
         }
 
-        foreach (GameObject slot in effectUISlots)
+        foreach (GameObject slot in valueEffectUISlots)
         {
             foreach (Transform child in slot.transform)
             {
@@ -99,15 +198,49 @@ public class UIUpdater : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < active.Count && i < effectUISlots.Count; i++)
+        for (int i = 0; i < active.Count && i < valueEffectUISlots.Count; i++)
         {
             Transform effect = active[i];
-            effect.SetParent(effectUISlots[i].transform, false);
+            effect.SetParent(valueEffectUISlots[i].transform, false);
             effect.localPosition = Vector3.zero;
             effect.localRotation = Quaternion.identity;
             effect.localScale = Vector3.one;
         }
     }
+
+    void reorderTurnSlots()
+    {
+        List<Transform> active = new List<Transform>();
+
+        foreach (GameObject slot in turnEffectUISlots)
+        {
+            if (slot.transform.childCount > 0)
+            {
+                Transform effect = slot.transform.GetChild(0);
+                active.Add(effect);
+                effect.SetParent(null); // Detach to preserve it
+            }
+        }
+
+        foreach (GameObject slot in turnEffectUISlots)
+        {
+            foreach (Transform child in slot.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        for (int i = 0; i < active.Count && i < turnEffectUISlots.Count; i++)
+        {
+            Transform effect = active[i];
+            effect.SetParent(turnEffectUISlots[i].transform, false);
+            effect.localPosition = Vector3.zero;
+            effect.localRotation = Quaternion.identity;
+            effect.localScale = Vector3.one;
+        }
+    }
+
+    
 
     public void clearAllEffects()
     {

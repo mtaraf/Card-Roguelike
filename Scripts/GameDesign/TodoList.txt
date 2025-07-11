@@ -61,8 +61,9 @@ Add/Debug cards (TO-DO)
         - Corruptable: add 1 strength for each corrupted card this encounter (done)
         - Cleanse: Remove all negative effects on player (done)
 
-- Add gold to GameManager and UI
-- Move value based effects (armor/strength/posion) to a seperate UI, turn based effects on same ui (divine mark, weakness)
+- Move value based effects (armor/strength/posion) to a seperate UI, turn based effects on same ui (divine mark, weakness) (done)
+    - Add tooltips to effects
+- Check if enemy dies from start of turn effects
 
 Add card selection before scene transition
 
