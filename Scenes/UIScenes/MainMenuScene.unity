@@ -2559,6 +2559,10 @@ MonoBehaviour:
   mainMenu: {fileID: 1242335109}
   optionsMenu: {fileID: 704149009}
   loadGameMenu: {fileID: 2043236172}
+  playerPrefab: {fileID: 0}
+  enemyPrefabs: []
+  turnBasedStatuses: []
+  valueBasedStatuses: []
   starterDeck: {fileID: 11400000, guid: 997cbd8a5167c9e48b41ad45238a2157, type: 2}
 --- !u!4 &1024863986
 Transform:

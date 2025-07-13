@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class VictoryManager : MonoBehaviour
 {
@@ -19,6 +20,14 @@ public class VictoryManager : MonoBehaviour
         {CardRarity.EPIC,   new Color(190f / 255f, 123f / 255f, 248f / 255f, 1f)},
         {CardRarity.MYTHIC, new Color(255f / 255f, 142f / 255f, 6f / 255f, 1f)},
     };
+
+    public void instantiate()
+    {
+        victoryScreenPrefab = Resources.Load<GameObject>("UI/BaseScene/VictoryUI");
+        cardSelectionDisplayPrefab = Resources.Load<GameObject>("UI/Cards/CardSelectionDisplay");
+        canvasTransform = GameObject.FindGameObjectWithTag("BaseLevelCanvas").transform;
+        victoryCardPools = GameManager.instance.getVictoryCardsPools();
+    }
 
 
     public void showVictoryScreen()
@@ -49,16 +58,31 @@ public class VictoryManager : MonoBehaviour
             int rand = Random.Range(0, 100);
             CardModelSO card = rand switch
             {
-                < 50 => getRandomCard(victoryCardPools[0]),
-                < 75 => getRandomCard(victoryCardPools[1]),
-                < 95 => getRandomCard(victoryCardPools[2]),
+                < 65 => getRandomCard(victoryCardPools[0]),
+                < 90 => getRandomCard(victoryCardPools[1]),
+                < 98 => getRandomCard(victoryCardPools[2]),
                 _ => getRandomCard(victoryCardPools[3])
             };
             chosenCards[i] = card;
         }
     }
 
-    CardModelSO getRandomCard(DeckModelSO deck) => deck.cards[Random.Range(0, deck.cards.Count)];
+    CardModelSO getRandomCard(DeckModelSO deck) {
+        int random = Random.Range(0, deck.cards.Count);
+        CardModelSO card = deck.cards[random];
+        if (chosenCards.Contains(card))
+        {
+            if (random + 1 < deck.cards.Count)
+            {
+                card = deck.cards[random + 1];
+            }
+            else
+            {
+                card = deck.cards[random - 1];
+            }
+        }
+        return card;
+    }
 
     void chooseCard(int index)
     {

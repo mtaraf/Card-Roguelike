@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,12 +18,10 @@ public class GameManager : MonoBehaviour
 
     // Controllers
     private BaseLevelUIController baseLevelUIController;
+    private VictoryManager victoryManager;
 
 
     // Game States
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private List<GameObject> enemyPrefabs;
-    // [SerializeField] private List<GameObject> bossPrefabs;
     private int currentLevel = 1;
     private DeckModelSO playerDeck;
     private int playerMaxHealth;
@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     private int playerHandEnergy;
     private int currentPlayerEnergy;
     private int playerGold;
+    
+    [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
 
     // UI
     [SerializeField] private List<GameObject> turnBasedStatuses = new List<GameObject>();
@@ -45,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
-        if (instance != null)
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
             return;
@@ -54,16 +56,20 @@ public class GameManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
 
+        initializePrefabs();
+
         // Detect when a new scene is loaded
         SceneManager.sceneLoaded += onSceneLoaded;
 
         // Initial player values
-        playerDeck = starterDeck;
+        createPlayerDeckCopy();
+
         playerMaxHealth = 50;
         playerHandSize = 6;
         playerHandEnergy = 3;
         playerCurrentHealth = 50;
         playerGold = 0;
+        Debug.Log("Game Manager Awake");
     }
 
 
@@ -76,19 +82,58 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void initializePrefabs()
+    {
+        turnBasedStatuses = new List<GameObject>(Resources.LoadAll<GameObject>("UI/Effects/TurnBasedEffects"));
+        valueBasedStatuses = new List<GameObject>(Resources.LoadAll<GameObject>("UI/Effects/ValueBasedEffects"));
+        starterDeck = Resources.Load<DeckModelSO>("ScriptableObjects/Decks/StarterDeck");
+
+        // Get Victory Card Pools
+        victoryCardPools.Insert(0,cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/CommonVictoryCards")));
+        victoryCardPools.Insert(1,cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/RareVictoryCards")));
+        victoryCardPools.Insert(2,cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/EpicVictoryCards")));
+        victoryCardPools.Insert(3,cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/MythicVictoryCards")));
+    }
+
     private IEnumerator waitForBaseLevelUI()
     {
         yield return null;
         baseLevelUIController = FindFirstObjectByType<BaseLevelUIController>();
-        baseLevelUIController.Initialize();
-
         if (baseLevelUIController == null)
         {
-            Debug.LogError("BaseLevelUIController not found!");
-            yield break;
+            baseLevelUIController = transform.AddComponent<BaseLevelUIController>();
         }
 
+        baseLevelUIController.Initialize();
         baseLevelUIController.updateLevelCount(currentLevel);
+        baseLevelUIController.updateGoldCount(playerGold);
+
+        victoryManager = transform.AddComponent<VictoryManager>();
+        victoryManager.instantiate();
+    }
+
+    private DeckModelSO cloneDeck(DeckModelSO deck)
+    {
+        DeckModelSO clonedDeck = ScriptableObject.CreateInstance<DeckModelSO>();
+        clonedDeck.cards = new List<CardModelSO>();
+
+        foreach (CardModelSO card in deck.cards)
+        {
+            clonedDeck.cards.Add(card.clone());
+        }
+
+        return clonedDeck;
+    }
+
+    public void createPlayerDeckCopy()
+    {
+        playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
+        playerDeck.cards = new List<CardModelSO>();
+
+        foreach (CardModelSO card in starterDeck.cards)
+        {
+            playerDeck.cards.Add(card.clone());
+        }
     }
 
     public List<GameObject> getTurnBasedStatusObjects()
@@ -101,11 +146,15 @@ public class GameManager : MonoBehaviour
         return valueBasedStatuses;
     }
 
+    public List<DeckModelSO> getVictoryCardsPools()
+    {
+        return victoryCardPools;
+    }
+
     public void encounterVictory(int goldEarned)
     {
         playerGold += goldEarned;
         baseLevelUIController.updateGoldCount(playerGold);
-        VictoryManager victoryManager = FindFirstObjectByType<VictoryManager>();
         victoryManager.showVictoryScreen();
     }
 

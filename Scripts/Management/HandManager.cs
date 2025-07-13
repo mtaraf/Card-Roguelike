@@ -258,6 +258,7 @@ public enum EffectType
     Weaken,
     Divinity,
     Poison,
+    Frostbite,
 }
 
 public static class EffectTypeExtensions

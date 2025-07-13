@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
+  m_Name: Tunnel Vision
+  m_EditorClassIdentifier: 
+  type: 0
+  rarity: 3
+  energy: 0
+  effects: []
+  special: 1
+  condition:
+    conditionValue: 0
+    metric: 0
+  multiplier: 0
+  details: All AoE attacks now only hit  1 enemy, but the attack deals double damage.
+  title: Tunnel Vision
+  image: {fileID: 0}
+  target: 2
+  cardsDrawn: 0
+  corrupts: 0

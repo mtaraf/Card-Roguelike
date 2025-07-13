@@ -63,6 +63,7 @@ Add/Debug cards (TO-DO)
 
 - Move value based effects (armor/strength/posion) to a seperate UI, turn based effects on same ui (divine mark, weakness) (done)
     - Add tooltips to effects
+    - implement frostbite (value-based, if player deals damage equal to frostbite value, entity takes 10% max health as damage)
 - Check if enemy dies from start of turn effects
 
 Add card selection before scene transition

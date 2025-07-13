@@ -74,4 +74,40 @@ public class CardModelSO : ScriptableObject
             effect.value *= multiplier;
         }
     }
+
+    public CardModelSO clone()
+    {
+        CardModelSO copy = CreateInstance<CardModelSO>();
+
+        copy.type = type;
+        copy.rarity = rarity;
+        copy.energy = energy;
+        copy.special = special;
+        copy.condition = new ConditionTupleEquivalent
+        {
+            conditionValue = condition?.conditionValue ?? 0,
+            metric = condition?.metric ?? ConditionMetric.NO_CONDITION
+        };
+        copy.multiplier = multiplier;
+        copy.details = details;
+        copy.title = title;
+        copy.image = image;
+        copy.target = target;
+        copy.cardsDrawn = cardsDrawn;
+        copy.corrupts = corrupts;
+
+        // Clone effects list
+        copy.effects = new List<CardEffect>();
+        foreach (var effect in effects)
+        {
+            copy.effects.Add(new CardEffect
+            {
+                type = effect.type,
+                value = effect.value,
+                turns = effect.turns
+            });
+        }
+
+        return copy;
+    }
 }

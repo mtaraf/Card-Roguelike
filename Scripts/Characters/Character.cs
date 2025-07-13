@@ -70,8 +70,8 @@ public class Character : MonoBehaviour
                 // Damage
                 if (effect.value - attributes[EffectType.Armor] > 0)
                 {
-                    attributes[EffectType.Armor] = 0;
                     currentHealth -= effect.value - attributes[EffectType.Armor];
+                    attributes[EffectType.Armor] = 0;
                 }
                 else
                 {

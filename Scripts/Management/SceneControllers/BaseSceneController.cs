@@ -37,6 +37,15 @@ public class BaseLevelSceneController : MonoBehaviour
     {
         mainCanvas = GameObject.FindGameObjectWithTag("BaseLevelCanvas");
 
+        // Get Enemy Group prefabs
+        foreach (GameObject singleEnemy in Resources.LoadAll<GameObject>("EnemyPrefabs/Regular/ES1"))
+        {
+            EnemyGroup enemyGroup = new EnemyGroup();
+            enemyGroup.size = 1;
+            enemyGroup.enemyParentObj = singleEnemy;
+            enemyPrefabs.Add(enemyGroup);
+        }
+
         // Spawn player
         GameObject playerObj = Instantiate(playerPrefab, mainCanvas.transform);
         player = playerObj.GetComponent<Player>();
@@ -70,9 +79,9 @@ public class BaseLevelSceneController : MonoBehaviour
             int randomGroup = Random.Range(0, enemyGroups.Count);
             EnemyGroup enemyGroup = enemyGroups[randomGroup];
 
-            foreach (GameObject enemyObj in enemyGroup.enemies)
+            for (int i = 0; i < enemyGroup.enemyParentObj.transform.childCount; i++)
             {
-                GameObject enemy = spawnEnemy(enemyObj, randomSize - 1);
+                GameObject enemy = spawnEnemy(enemyGroup.enemyParentObj.transform.GetChild(i).gameObject, randomSize - 1);
                 if (enemy == null)
                 {
                     Debug.Log($" Problem instantiating {enemy.name}!");
@@ -89,6 +98,26 @@ public class BaseLevelSceneController : MonoBehaviour
                     enemies.Add(enemyComponent);
                 }
             }
+
+            // foreach (GameObject enemyObj in enemyGroup.enemyParentObj.transform.GetChild())
+            // {
+            //     GameObject enemy = spawnEnemy(enemyObj, randomSize - 1);
+            //     if (enemy == null)
+            //     {
+            //         Debug.Log($" Problem instantiating {enemy.name}!");
+            //     }
+
+            //     Enemy enemyComponent = enemy.GetComponent<Enemy>();
+
+            //     if (enemyComponent == null)
+            //     {
+            //         Debug.LogError($"Instantiated enemy {enemy.name} has no Enemy component!");
+            //     }
+            //     else
+            //     {
+            //         enemies.Add(enemyComponent);
+            //     }
+            // }
 
             // TO-DO: remove enemy from list once there are enough enemies
             // enemyPrefabs.Remove(enemyPrefabs[random]);
@@ -183,5 +212,5 @@ public class BaseLevelSceneController : MonoBehaviour
 public class EnemyGroup
 {
     public int size;
-    public List<GameObject> enemies;
+    public GameObject enemyParentObj;
 }

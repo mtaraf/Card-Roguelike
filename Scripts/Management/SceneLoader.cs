@@ -21,6 +21,8 @@ public class SceneLoader : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        loadingScreen = Resources.Load<GameObject>("UI/SceneUI/SceneLoadingScreen");
     }
 
     public void loadScene(string sceneName, Action onComplete = null)

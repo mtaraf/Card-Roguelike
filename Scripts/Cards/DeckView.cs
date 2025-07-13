@@ -20,9 +20,6 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private GameObject corruptCardPrefab;
 
-    // For Testing purposes, remove later
-    [SerializeField] public DeckModelSO testDeck;
-
 
     private DeckModelSO deck;
     private List<CardModelSO> corruptedCards = new List<CardModelSO>();
