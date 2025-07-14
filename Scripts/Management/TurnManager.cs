@@ -58,7 +58,7 @@ public class TurnManager : MonoBehaviour
         }
 
         if (enemies.Count == 0)
-            GameManager.instance.encounterVictory(goldEarned);
+            StartCoroutine(GameManager.instance.encounterVictory(goldEarned));
     }
 
     private IEnumerator playerTurn()
@@ -86,7 +86,7 @@ public class TurnManager : MonoBehaviour
 
     IEnumerator enemyTurn()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         foreach (Enemy enemy in enemies)
         {
             enemy.processStartOfTurnEffects();
@@ -94,7 +94,7 @@ public class TurnManager : MonoBehaviour
             yield return StartCoroutine(enemy.playCards(1, enemy.getEnergy()));
             enemy.processEndOfTurnEffects();
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
     }
 
     public void endTurnButtonPressed()

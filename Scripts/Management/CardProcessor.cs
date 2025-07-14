@@ -33,13 +33,13 @@ public class CardProcessor
         return cardEffects;
     }
 
-    public List<CardEffect> processEnemyCard(CardModelSO model, Dictionary<EffectType, int> attributes)
+    public List<CardEffect> processEnemyCard(CardModelSO model, Dictionary<EffectType, int> attributes, Enemy enemy)
     {
         List<CardEffect> cardEffects = applyEffectsToCardDamage(model.effects, attributes);
 
         if (model.target == Target.Player)
         {
-            sceneController.processEnemyCardEffectsOnPlayer(cardEffects);
+            sceneController.processEnemyCardEffectsOnPlayer(cardEffects, enemy);
             return null;
         }
 
@@ -64,8 +64,6 @@ public class CardProcessor
         int damage_index = modifiedEffects.FindIndex((effect) => effect.type == EffectType.Damage);
         if (damage_index != -1)
         {
-            Debug.Log("Strength: " + attributes[EffectType.Strength]);
-            Debug.Log("Weakness: " + attributes[EffectType.Weaken]);
             modifiedEffects[damage_index].value += attributes[EffectType.Strength];
             modifiedEffects[damage_index].value -= Mathf.FloorToInt(modifiedEffects[damage_index].value * 0.2f * attributes[EffectType.Weaken]);
             Debug.Log("Damage after strength and weakness: " + modifiedEffects[damage_index].value);
@@ -103,5 +101,19 @@ public class CardProcessor
         cardEffects = applyEffectsToCardDamage(cardEffects, attributes);
 
         return cardEffects;
+    }
+
+    public void checkOnDeathEffect(Card lastCardPlayed)
+    {
+        switch (lastCardPlayed.getCardTitle())
+        {
+            case "Scaling Strike":
+                List<CardEffect> effects = lastCardPlayed.getCardModel().effects;
+                CardEffect damage = effects.Find((effect) => effect.type == EffectType.Damage);
+                damage.value += 2;
+                string details = "Deals " + damage.value + " damage. Corrupts. When this card deals the killing blow, adds 2 damage.";
+                lastCardPlayed.setCardDetails(details);
+                break;
+        }
     }
 }

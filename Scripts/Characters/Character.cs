@@ -13,10 +13,15 @@ public class Character : MonoBehaviour
     protected Dictionary<EffectType, int> attributes = new Dictionary<EffectType, int>();
     protected List<CardEffect> multipleTurnEffects = new List<CardEffect>();
     [SerializeField] protected int id;
+    protected bool dead = false;
 
     // UI
     protected UIUpdater uIUpdater;
     protected TargetableObject targetableObject;
+    protected GameObject floatingFeedbackUI;
+    protected Color floatingFeedbackColor = Color.crimson;
+    protected Transform mainCanvasTransfrom;
+    protected RectTransform characterRect;
 
     // Animations
     [SerializeField] protected GameObject spriteObject;
@@ -26,6 +31,8 @@ public class Character : MonoBehaviour
     {
         // Initializers
         targetableObject = GetComponent<TargetableObject>();
+        floatingFeedbackUI = Resources.Load<GameObject>("UI/General/FloatingFeedbackUIPrefab");
+        characterRect = GetComponent<RectTransform>();
 
         currentHealth = maxHealth;
         attributes.Add(EffectType.Strength, 0);
@@ -45,6 +52,8 @@ public class Character : MonoBehaviour
         // UI set up
         uIUpdater = GetComponent<UIUpdater>();
         uIUpdater.setHealth(currentHealth, maxHealth);
+        
+        mainCanvasTransfrom = BaseLevelSceneController.instance.getMainCanvasTransfom();
 
         if (uIUpdater == null)
         {
@@ -60,28 +69,44 @@ public class Character : MonoBehaviour
         animator = spriteObject.GetComponent<Animator>();
     }
 
-    public virtual void processCardEffects(List<CardEffect> effects)
+    public virtual void processCardEffects(List<CardEffect> effects, Enemy enemy = null)
     {
+        int damageDealt = 0;
 
+        if (enemy != null)
+        {
+            Debug.Log("Process Card Enemy: " + enemy.currentHealth);
+        }
         foreach (CardEffect effect in effects)
         {
+            // Calculate this with on-hit effects 
+            if (effect.type == EffectType.HealDamageDone)
+            {
+                continue;
+            }
+
             if (effect.type == EffectType.Damage)
             {
                 // Damage
                 if (effect.value - attributes[EffectType.Armor] > 0)
                 {
                     currentHealth -= effect.value - attributes[EffectType.Armor];
+                    damageDealt = effect.value - attributes[EffectType.Armor];
+                    showFloatingFeedbackUI(damageDealt.ToString(), Color.crimson);
                     attributes[EffectType.Armor] = 0;
                 }
                 else
                 {
                     attributes[EffectType.Armor] -= effect.value;
+                    showFloatingFeedbackUI(effect.value.ToString(), Color.darkSlateGray);
                 }
             }
             else
             {
+                showFloatingFeedbackUI(effect.type.ToFeedbackString(), Color.blueViolet);
                 if (effect.turns > 0)
                 {
+
                     // multiple turn effects
                     attributes[effect.type] += effect.value;
                     effect.turns--;
@@ -93,12 +118,53 @@ public class Character : MonoBehaviour
                 }
             }
         }
-        
+
+        processOnHitEffects(effects, damageDealt, attributes, enemy);
+
         foreach (KeyValuePair<EffectType, int> attribute in attributes)
         {
             uIUpdater.updateEffect(attribute.Key, attribute.Value);
         }
+
+        if (currentHealth == 0 || currentHealth < 0)
+        {
+            currentHealth = 0;
+            dead = true;
+            HandManager.instance.checkOnDeathEffect();
+        }
+
         uIUpdater.setHealth(currentHealth, maxHealth);
+    }
+
+    void processOnHitEffects(List<CardEffect> effects, int damageDealt, Dictionary<EffectType, int> attributes, Enemy enemy = null)
+    {
+        CardEffect healDamage = effects.Find((effect) => effect.type == EffectType.HealDamageDone);
+        CardEffect divintiyCard = effects.Find((effect) => effect.type == EffectType.Divinity);
+
+        if (healDamage != null)
+        {
+            if (enemy == null)
+            {
+                BaseLevelSceneController.instance.healPlayer(damageDealt);
+            }
+            else
+            {
+                enemy.healCharacter(damageDealt);
+            }
+        }
+
+        // Can not heal from divinity effect if the card applies divinity
+        if (attributes[EffectType.Divinity] > 0 && damageDealt > 0 && divintiyCard == null)
+        {
+            if (enemy == null)
+            {
+                BaseLevelSceneController.instance.healPlayer(5);
+            }
+            else
+            {
+                enemy.healCharacter(5);
+            }
+        }
     }
 
     public void processStartOfTurnEffects()
@@ -126,7 +192,8 @@ public class Character : MonoBehaviour
             }
         }
 
-        foreach (KeyValuePair<EffectType, int> attribute in attributes) {
+        foreach (KeyValuePair<EffectType, int> attribute in attributes)
+        {
             uIUpdater.updateEffect(attribute.Key, attribute.Value);
         }
         uIUpdater.setHealth(currentHealth, maxHealth);
@@ -144,12 +211,12 @@ public class Character : MonoBehaviour
         }
 
 
-        foreach (KeyValuePair<EffectType, int> attribute in attributes) {
+        foreach (KeyValuePair<EffectType, int> attribute in attributes)
+        {
             uIUpdater.updateEffect(attribute.Key, attribute.Value);
         }
         uIUpdater.setHealth(currentHealth, maxHealth);
     }
-
 
     public int getCurrentHealth()
     {
@@ -173,7 +240,19 @@ public class Character : MonoBehaviour
 
     public void setCurrentHealth(int value)
     {
-        currentHealth = value;
+        if (value < 0)
+        {
+            currentHealth = 0;
+        }
+        else
+        {
+            currentHealth = value;
+        }
+    }
+
+    public void updateHealthUI()
+    {
+        uIUpdater.setHealth(currentHealth, maxHealth);
     }
 
     public int getId()
@@ -200,6 +279,16 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void healCharacter(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        uIUpdater.setHealth(currentHealth, maxHealth);
+    }
+
     public void playAnimation(CardType type)
     {
         if (type == CardType.Attack)
@@ -214,5 +303,14 @@ public class Character : MonoBehaviour
         {
             animator.SetTrigger("buff");
         }
+    }
+
+    public void showFloatingFeedbackUI(string message, Color color)
+    {
+        GameObject feedback = Instantiate(floatingFeedbackUI, transform);
+        feedback.transform.localPosition = new Vector3(0, characterRect.sizeDelta.y/2, 0);
+        FloatingFeedbackUI feedbackUI = feedback.GetComponent<FloatingFeedbackUI>();
+        feedbackUI.SetText(message, color);
+        StartCoroutine(feedbackUI.moveAndDestroy());
     }
 }

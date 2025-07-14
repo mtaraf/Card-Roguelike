@@ -9,12 +9,13 @@ public class BaseLevelSceneController : MonoBehaviour
     [SerializeField] private List<EnemyGroup> enemyPrefabs;
     [SerializeField] private List<GameObject> enemySpawnLocations;
 
+    // UI
     private GameObject mainCanvas;
     private GameObject playerEnergyUI;
 
+    // Game States
     private Player player;
     private int playerCurrentEnergy = 0;
-
     private List<Enemy> enemies = new List<Enemy>();
 
     void Start()
@@ -99,26 +100,6 @@ public class BaseLevelSceneController : MonoBehaviour
                 }
             }
 
-            // foreach (GameObject enemyObj in enemyGroup.enemyParentObj.transform.GetChild())
-            // {
-            //     GameObject enemy = spawnEnemy(enemyObj, randomSize - 1);
-            //     if (enemy == null)
-            //     {
-            //         Debug.Log($" Problem instantiating {enemy.name}!");
-            //     }
-
-            //     Enemy enemyComponent = enemy.GetComponent<Enemy>();
-
-            //     if (enemyComponent == null)
-            //     {
-            //         Debug.LogError($"Instantiated enemy {enemy.name} has no Enemy component!");
-            //     }
-            //     else
-            //     {
-            //         enemies.Add(enemyComponent);
-            //     }
-            // }
-
             // TO-DO: remove enemy from list once there are enough enemies
             // enemyPrefabs.Remove(enemyPrefabs[random]);
 
@@ -149,6 +130,7 @@ public class BaseLevelSceneController : MonoBehaviour
 
     public void removeDeadEnemy(int id)
     {
+
         Enemy enemy = enemies.Find((enemy) => enemy.getId() == id);
         if (enemy != null)
         {
@@ -158,6 +140,12 @@ public class BaseLevelSceneController : MonoBehaviour
         {
             Debug.LogError("Could not find enemy for id: " + id);
         }
+    }
+
+    public void healPlayer(int value)
+    {
+        player.healCharacter(value);
+        Debug.Log("Player healed by: " + value);
     }
 
     public void setPlayerEnergy(int energy)
@@ -197,14 +185,19 @@ public class BaseLevelSceneController : MonoBehaviour
         player.playAnimation(type);
     }
 
-    public void processEnemyCardEffectsOnPlayer(List<CardEffect> effects)
+    public void processEnemyCardEffectsOnPlayer(List<CardEffect> effects, Enemy enemy)
     {
-        player.processCardEffects(effects);
+        player.processCardEffects(effects, enemy);
     }
 
     public List<Enemy> getEnemies()
     {
         return enemies;
+    }
+
+    public Transform getMainCanvasTransfom()
+    {
+        return mainCanvas.transform;
     }
 }
 

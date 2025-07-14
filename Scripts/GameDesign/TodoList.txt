@@ -53,8 +53,10 @@ Add/Debug cards (TO-DO)
     - Apply card effects to damage done/taken for strength (+1 to all on-hit) / weakness (weakness 10%)
     - Cards to implement:
         - Acid flask: decide on poison DoT mechanic and how it will work
+        - Reroll
+        - Scaling Strike (done)
         - Divine Mark: mark should heal player on hit, add tooltip for mark
-        - Heavens Hammer: calculate damage taken and apply heal to player
+        - Heavens Hammer: calculate damage taken and apply heal to player (done)
         - Agility: reduce energy cost of all cards by 1
         - Combo attack: add 1 * all effects enemy is under damage for any attacks this turn, adds new effect type
         - Golden Touch: adds gold for any on hit damage this turn
@@ -68,12 +70,16 @@ Add/Debug cards (TO-DO)
 
 Add card selection before scene transition
 
+Menu TO-DO:
+- 
+
 
 Animations List:
     - Adjust player card animations
     - Adjust enemy card animations
     - Add animations slide to effects
     - Add attack, buff effects
+        - Add damage/effects numbers that fade when hit (done)
 
 
 Ideas:

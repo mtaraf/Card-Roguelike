@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc5364425cae854a88eb42a9b86716c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 8
+  maxHealth: 20
   id: 1
   spriteObject: {fileID: 4653887851505298441}
   moveset: 0
@@ -546,10 +546,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1115958195323305224}
     m_Modifications:
-    - target: {fileID: 7065205798116793772, guid: 0d82368fbbd58e843a6f4f32cc8f7281, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 6352424104250590139, guid: ab76e973a31b8ff40b1d390b6ba46cc2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -633,6 +629,10 @@ PrefabInstance:
     - target: {fileID: 6490025599836588401, guid: ab76e973a31b8ff40b1d390b6ba46cc2, type: 3}
       propertyPath: m_Name
       value: EffectUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7065205798116793772, guid: 0d82368fbbd58e843a6f4f32cc8f7281, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -754,14 +754,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1115958195323305224}
     m_Modifications:
-    - target: {fileID: 5651164143574722611, guid: c5e704ea19c1be445839a00f48f92c42, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5651164143574722611, guid: c5e704ea19c1be445839a00f48f92c42, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2756005801438958451, guid: dd462957e7061fd47a3e74aa3a2379fd, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -854,6 +846,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthAndStatus
       objectReference: {fileID: 0}
+    - target: {fileID: 5651164143574722611, guid: c5e704ea19c1be445839a00f48f92c42, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5651164143574722611, guid: c5e704ea19c1be445839a00f48f92c42, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -894,10 +894,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1115958195323305224}
     m_Modifications:
-    - target: {fileID: 2718934789831433111, guid: 9ab2da283c8164a4b8c9c4eabd7e339f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5321564933573214773, guid: 68f835917a6042546a685cd4175a92d3, type: 3}
       propertyPath: m_Name
       value: EnemyEnergyUI
@@ -981,6 +977,10 @@ PrefabInstance:
     - target: {fileID: 7170742265325174066, guid: 68f835917a6042546a685cd4175a92d3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718934789831433111, guid: 9ab2da283c8164a4b8c9c4eabd7e339f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

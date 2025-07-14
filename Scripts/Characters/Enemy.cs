@@ -20,7 +20,6 @@ public class Enemy : Character
     [SerializeField] private List<DeckModelSO> movesets = new List<DeckModelSO>();
     [SerializeField] private GameObject energyUI;
     private CardProcessor cardProcessor;
-    private bool dead = false;
 
     // Attributes
     private int currentEnergy = 0;
@@ -34,10 +33,11 @@ public class Enemy : Character
 
     public void Update()
     {
-        if (currentHealth < 1 && !dead)
+        if (currentHealth < 1 && dead)
         {
             BaseLevelSceneController.instance.removeDeadEnemy(id);
-            dead = true;
+            dead = false;
+            animator.SetTrigger("die");
         }
     }
 
@@ -50,9 +50,9 @@ public class Enemy : Character
         }
     }
 
-    public override void processCardEffects(List<CardEffect> effects)
+    public override void processCardEffects(List<CardEffect> effects, Enemy enemy = null)
     {
-        base.processCardEffects(effects);
+        base.processCardEffects(effects, enemy);
     }
 
     public EnemyClass getClass()
@@ -96,12 +96,16 @@ public class Enemy : Character
     {
         for (int i = 0; i < moveset.Count; i++)
         {
+            if (dead)
+            {
+                yield break;
+            }
             yield return new WaitForSeconds(1.0f);
             setEnergy(currentEnergy - 1);
             CardModelSO cardModel = moveset[i];
             cardModel.multiplyValues(multiplier);
 
-            List<CardEffect> effects = cardProcessor.processEnemyCard(cardModel, attributes);
+            List<CardEffect> effects = cardProcessor.processEnemyCard(cardModel, attributes, this);
             if (effects != null)
             {
                 processCardEffects(effects);

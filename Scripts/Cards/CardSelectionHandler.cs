@@ -185,12 +185,10 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                             if (BaseLevelSceneController.instance.getCurrentPlayerEnergy() >= cardEnergy)
                             {
                                 // Use card
-                                Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on enemy");
                                 List<CardEffect> effects = HandManager.instance.useSelectedCard();
                                 enemy.processCardEffects(effects);
 
                                 // update player energy
-                                //GameManager.instance.usePlayerEnergy(cardEnergy);
                                 BaseLevelSceneController.instance.usePlayerEnergy(cardEnergy);
 
                                 // card animation

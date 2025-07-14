@@ -151,10 +151,11 @@ public class GameManager : MonoBehaviour
         return victoryCardPools;
     }
 
-    public void encounterVictory(int goldEarned)
+    public IEnumerator encounterVictory(int goldEarned)
     {
         playerGold += goldEarned;
         baseLevelUIController.updateGoldCount(playerGold);
+        yield return new WaitForSeconds(1.0f);
         victoryManager.showVictoryScreen();
     }
 
@@ -201,11 +202,6 @@ public class GameManager : MonoBehaviour
     public int getCurrentLevel()
     {
         return currentLevel;
-    }
-
-    public void levelCompleted()
-    {
-        currentLevel++;
     }
 
     public void endTurn()

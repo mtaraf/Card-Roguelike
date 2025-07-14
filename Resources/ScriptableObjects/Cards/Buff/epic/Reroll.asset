@@ -10,26 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: Heaven'sHammer
+  m_Name: Reroll
   m_EditorClassIdentifier: 
-  type: 0
-  rarity: 1
-  energy: 0
-  effects:
-  - type: 0
-    value: 12
-    turns: 0
-  - type: 7
-    value: 1
-    turns: 0
+  type: 2
+  rarity: 2
+  energy: 1
+  effects: []
   special: 0
   condition:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Deal 12 damage. Heal for damage taken by target.
-  title: Heaven's Hammer
+  details: Moves all cards to the discard pile then draws a new hand. Corrupts.
+  title: Reroll
   image: {fileID: 0}
-  target: 1
+  target: 2
   cardsDrawn: 0
-  corrupts: 0
+  corrupts: 1

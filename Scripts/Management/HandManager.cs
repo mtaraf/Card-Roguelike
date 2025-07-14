@@ -23,6 +23,7 @@ public class HandManager : MonoBehaviour
     private Card selectedCard = null;
     private GameObject cardSlots;
     private List<GameObject> cardSlotsList;
+    private Card lastCardPlayed;
 
     public void Awake()
     {
@@ -197,7 +198,7 @@ public class HandManager : MonoBehaviour
         Dictionary<EffectType, int> playerAttributes = BaseLevelSceneController.instance.getPlayerAttributes();
 
         // Get card effects
-        List<CardEffect> effects =  cardProcessor.processCard(selectedCard, playerAttributes);
+        List<CardEffect> effects = cardProcessor.processCard(selectedCard, playerAttributes);
 
         // Add card to discard pile and remove card
         if (selectedCard.isCorrupt())
@@ -208,6 +209,8 @@ public class HandManager : MonoBehaviour
         {
             addCardToDiscardPile(selectedCard);
         }
+
+        lastCardPlayed = selectedCard;
 
         clearSelectedCard();
 
@@ -248,6 +251,11 @@ public class HandManager : MonoBehaviour
     {
         return handUI.displayFeedbackMessage(message);
     }
+
+    public void checkOnDeathEffect()
+    {
+        cardProcessor.checkOnDeathEffect(lastCardPlayed);
+    }
 }
 
 public enum EffectType
@@ -259,6 +267,7 @@ public enum EffectType
     Divinity,
     Poison,
     Frostbite,
+    HealDamageDone
 }
 
 public static class EffectTypeExtensions
@@ -272,6 +281,19 @@ public static class EffectTypeExtensions
             case EffectType.Poison: return "PoisonEffect";
             case EffectType.Divinity: return "DivinityEffect";
             case EffectType.Weaken: return "WeakenEffect";
+            default: return "Default";
+        }
+    }
+
+    public static string ToFeedbackString(this EffectType eff)
+    {
+        switch (eff)
+        {
+            case EffectType.Strength: return "Strength";
+            case EffectType.Armor: return "Armor";
+            case EffectType.Poison: return "Poison";
+            case EffectType.Divinity: return "Divinity";
+            case EffectType.Weaken: return "Weaken";
             default: return "Default";
         }
     }

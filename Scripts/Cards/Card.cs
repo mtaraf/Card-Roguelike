@@ -34,6 +34,11 @@ public class Card : MonoBehaviour
         return cardModel.title;
     }
 
+    public void setCardDetails(string details)
+    {
+        cardModel.details = details;
+    }
+
     public CardModelSO getCardModel()
     {
         return cardModel;
