@@ -78,6 +78,7 @@ public class Character : MonoBehaviour
         }
         foreach (CardEffect effect in effects)
         {
+            addAudioCue(effect);
             // Calculate this with on-hit effects 
             if (effect.type == EffectType.HealDamageDone)
             {
@@ -93,11 +94,13 @@ public class Character : MonoBehaviour
                     damageDealt = effect.value - attributes[EffectType.Armor];
                     showFloatingFeedbackUI(damageDealt.ToString(), Color.crimson);
                     attributes[EffectType.Armor] = 0;
+                    AudioManager.instance.playDamage();
                 }
                 else
                 {
                     attributes[EffectType.Armor] -= effect.value;
                     showFloatingFeedbackUI(effect.value.ToString(), Color.darkSlateGray);
+                    AudioManager.instance.playBlock();
                 }
             }
             else
@@ -133,6 +136,32 @@ public class Character : MonoBehaviour
         }
 
         uIUpdater.setHealth(currentHealth, maxHealth);
+    }
+
+    void addAudioCue(CardEffect effect)
+    {
+        switch (effect.type)
+        {
+            case EffectType.Armor:
+                // Add armor audio cue
+                break;
+            case EffectType.Strength:
+                // Add armor audio cue
+                AudioManager.instance.playBuff();
+                break;
+            case EffectType.Poison:
+                // Add poison audio cue
+                break;
+            case EffectType.Frostbite:
+                // Add armor audio cue
+                break;
+            case EffectType.Divinity:
+            case EffectType.Weaken:
+                // Add general debuff
+                AudioManager.instance.playDebuff();
+                break;
+            
+        }
     }
 
     void processOnHitEffects(List<CardEffect> effects, int damageDealt, Dictionary<EffectType, int> attributes, Enemy enemy = null)
@@ -291,6 +320,7 @@ public class Character : MonoBehaviour
             currentHealth = maxHealth;
         }
         uIUpdater.setHealth(currentHealth, maxHealth);
+        AudioManager.instance.playHeal();
     }
 
     public void playAnimation(CardType type)
@@ -312,7 +342,7 @@ public class Character : MonoBehaviour
     public void showFloatingFeedbackUI(string message, Color color)
     {
         GameObject feedback = Instantiate(floatingFeedbackUI, transform);
-        feedback.transform.localPosition = new Vector3(0, characterRect.sizeDelta.y/2, 0);
+        feedback.transform.localPosition = new Vector3(0, characterRect.sizeDelta.y / 2, 0);
         FloatingFeedbackUI feedbackUI = feedback.GetComponent<FloatingFeedbackUI>();
         feedbackUI.SetText(message, color);
         StartCoroutine(feedbackUI.moveAndDestroy());

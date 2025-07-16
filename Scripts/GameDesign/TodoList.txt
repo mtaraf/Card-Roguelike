@@ -75,8 +75,8 @@ Menu TO-DO:
 
 
 Animations List:
-    - Adjust player card animations
-    - Adjust enemy card animations
+    - Adjust player card animations 
+    - Adjust enemy card animations (done)
     - Add animations slide to effects
     - Add attack, buff effects
         - Add damage/effects numbers that fade when hit (done)
@@ -85,3 +85,13 @@ Animations List:
 Ideas:
     - Boss Mechanics:
         - Stun meter: After certain damage threshold, they are stunned for a turn
+
+
+Create Setting Menu
+    - Return to main Menu
+    - Quit Game
+    - Audio adjustment
+
+Fix feedback ui when multiple effects from one card
+
+When reached max card slots, create UI for user to replace card with a new one

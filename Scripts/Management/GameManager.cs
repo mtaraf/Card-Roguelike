@@ -166,6 +166,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator encounterVictory(int goldEarned)
     {
+        AudioManager.instance.playVictory();
         playerGold += goldEarned;
         baseLevelUIController.updateGoldCount(playerGold);
         yield return new WaitForSeconds(1.0f);
@@ -257,13 +258,6 @@ public class GameManager : MonoBehaviour
 
 
 
-    // Menu functions
-    public void playButtonClicked()
-    {
-        mainMenu.gameObject.SetActive(false);
-        loadGameMenu.gameObject.SetActive(true);
-    }
-
     public bool checkForSavedGames(int saveSlot)
     {
         return SaveSystem.saveFileExists(saveSlot);
@@ -341,10 +335,10 @@ public class GameManager : MonoBehaviour
     {
         saveGame(currentSaveSlot);
 
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                    Application.Quit();
+        #endif
     }
 }

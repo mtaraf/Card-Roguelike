@@ -37,23 +37,33 @@ public class MainMenuSceneController : MonoBehaviour
         }
     }
 
+    public void openLoadGameScreen()
+    {
+        mainMenu.gameObject.SetActive(false);
+        loadGameMenu.gameObject.SetActive(true);
+        AudioManager.instance.playClick();
+    }
+
     public void enterGame(int saveSlot)
     {
         GameManager.instance.setCurrentSaveSlot(saveSlot);
         GameManager.instance.loadScene(1);
+        AudioManager.instance.playClick();
     }
-    
+
     public void returnToMainMenu()
     {
         loadGameMenu.gameObject.SetActive(false);
         optionsMenu.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(true);
+        AudioManager.instance.playClick();
     }
-    
+
     public void openSettings()
     {
         mainMenu.gameObject.SetActive(false);
         optionsMenu.gameObject.SetActive(true);
+        AudioManager.instance.playClick();
     }
     
     public void quitGame()
