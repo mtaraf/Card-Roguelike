@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -198,6 +199,11 @@ public class BaseLevelSceneController : MonoBehaviour
     public Transform getMainCanvasTransfom()
     {
         return mainCanvas.transform;
+    }
+
+    public Player getPlayer()
+    {
+        return player;
     }
 }
 

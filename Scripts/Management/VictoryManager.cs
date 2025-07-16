@@ -97,6 +97,6 @@ public class VictoryManager : MonoBehaviour
         }
 
         Destroy(victoryScreenInstance);
-        GameManager.instance.moveToNextEncounter();
+        StartCoroutine(GameManager.instance.moveToNextEncounter());
     }
 }

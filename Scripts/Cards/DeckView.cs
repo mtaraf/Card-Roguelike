@@ -44,13 +44,11 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
         else if (view == DeckViewType.DrawPile)
         {
             deck = HandManager.instance.getDrawPile();
-            Debug.Log("Draw Pile:" + deck.cards.Count);
             fillDeckView(deck, "Draw Pile", deckViewScrollBarContent);
         }
         else
         {
             deck = HandManager.instance.getDiscardPile();
-            Debug.Log("Discard Pile:" + deck.cards.Count);
             fillDeckView(deck, "Discard Pile", deckViewScrollBarContent);
         }
     }

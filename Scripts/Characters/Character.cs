@@ -34,7 +34,6 @@ public class Character : MonoBehaviour
         floatingFeedbackUI = Resources.Load<GameObject>("UI/General/FloatingFeedbackUIPrefab");
         characterRect = GetComponent<RectTransform>();
 
-        currentHealth = maxHealth;
         attributes.Add(EffectType.Strength, 0);
         attributes.Add(EffectType.Armor, 0);
         attributes.Add(EffectType.Weaken, 0);
@@ -221,6 +220,11 @@ public class Character : MonoBehaviour
     public int getCurrentHealth()
     {
         return currentHealth;
+    }
+
+    public int getMaxHealth()
+    {
+        return maxHealth;
     }
 
     public Dictionary<EffectType, int> getAttributes()

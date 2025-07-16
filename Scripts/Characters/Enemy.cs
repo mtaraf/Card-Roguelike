@@ -28,6 +28,8 @@ public class Enemy : Character
     {
         base.Start();
 
+        currentHealth = maxHealth;
+
         cardProcessor = new CardProcessor(BaseLevelSceneController.instance);
     }
 

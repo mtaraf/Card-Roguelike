@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     // Controllers
     private BaseLevelUIController baseLevelUIController;
     private VictoryManager victoryManager;
+    private int currentSaveSlot = -1;
 
 
     // Game States
@@ -28,8 +29,8 @@ public class GameManager : MonoBehaviour
     private int playerCurrentHealth;
     private int playerHandSize;
     private int playerHandEnergy;
-    private int currentPlayerEnergy;
     private int playerGold;
+    private Player player;
     
     [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
 
@@ -62,14 +63,13 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += onSceneLoaded;
 
         // Initial player values
-        createPlayerDeckCopy();
+        // createPlayerDeckCopy();
 
-        playerMaxHealth = 50;
-        playerHandSize = 6;
-        playerHandEnergy = 3;
-        playerCurrentHealth = 50;
-        playerGold = 0;
-        Debug.Log("Game Manager Awake");
+        // playerMaxHealth = 50;
+        // playerHandSize = 6;
+        // playerHandEnergy = 3;
+        // playerCurrentHealth = 50;
+        // playerGold = 0;
     }
 
 
@@ -78,6 +78,16 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Game Manager detected scene loaded: {scene.name}");
         if (scene.buildIndex == 1)
         {
+            if (!loadGame(currentSaveSlot))
+            {
+                createPlayerDeckCopy();
+                playerMaxHealth = 50;
+                playerHandSize = 6;
+                playerHandEnergy = 3;
+                playerCurrentHealth = 50;
+                playerGold = 0;
+                playerHandEnergy = 3;
+            }
             StartCoroutine(waitForBaseLevelUI());
         }
     }
@@ -108,8 +118,11 @@ public class GameManager : MonoBehaviour
         baseLevelUIController.updateLevelCount(currentLevel);
         baseLevelUIController.updateGoldCount(playerGold);
 
+
         victoryManager = transform.AddComponent<VictoryManager>();
         victoryManager.instantiate();
+
+        player = BaseLevelSceneController.instance.getPlayer();
     }
 
     private DeckModelSO cloneDeck(DeckModelSO deck)
@@ -165,9 +178,12 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void moveToNextEncounter()
+    public IEnumerator moveToNextEncounter()
     {
         currentLevel++;
+        playerCurrentHealth = player.getCurrentHealth();
+        playerMaxHealth = player.getMaxHealth();
+        yield return new WaitUntil(() => saveGame(currentSaveSlot));
         SceneLoader.instance.loadScene(1, () =>
         {
             Debug.Log("Scene loaded!");
@@ -209,11 +225,6 @@ public class GameManager : MonoBehaviour
         TurnManager.instance.endTurnButtonPressed();
     }
 
-    public int getCurrentPlayerEnergy()
-    {
-        return currentPlayerEnergy;
-    }
-
     public DeckModelSO getPlayerDeck()
     {
         return playerDeck;
@@ -227,6 +238,12 @@ public class GameManager : MonoBehaviour
     public int getPlayerCurrentHealth()
     {
         return playerCurrentHealth;
+    }
+
+    public void updatePlayerHealth(int current, int max)
+    {
+        playerCurrentHealth = current;
+        playerMaxHealth = max;
     }
 
     // Card/Deck Functions
@@ -247,45 +264,87 @@ public class GameManager : MonoBehaviour
         loadGameMenu.gameObject.SetActive(true);
     }
 
-    private void checkForSavedGames()
+    public bool checkForSavedGames(int saveSlot)
     {
-
+        return SaveSystem.saveFileExists(saveSlot);
     }
 
-    private void saveGame()
+    public string getSaveSlotSummary(int saveSlot)
     {
-
+        return SaveSystem.getSlotSummary(saveSlot);
     }
 
-    public void enterGame(int saveSlot)
+    public string getSaveSlotTitle(int saveSlot)
     {
-        // Add checks for save slots
-
-        SceneManager.LoadScene(1);
+        return SaveSystem.getSlotTitle(saveSlot);
     }
 
-    public void openSettings()
+    public bool saveGame(int saveSlot)
     {
-        mainMenu.gameObject.SetActive(false);
-        optionsMenu.gameObject.SetActive(true);
+        SaveData saveData = new SaveData();
+        saveData.currentLevel = currentLevel;
+        saveData.playerCurrentHealth = playerCurrentHealth;
+        saveData.playerMaxHealth = playerMaxHealth;
+        saveData.playerGold = playerGold;
+        saveData.playerHandSize = playerHandSize;
+        saveData.playerHandEnergy = playerHandEnergy;
+
+        saveData.playerCards = new List<SerializableCardModel>();
+
+        foreach (CardModelSO model in playerDeck.cards)
+        {
+            saveData.playerCards.Add(SaveSystem.convertToSerializableModel(model));
+        }
+
+        SaveSystem.saveGame(saveData, saveSlot);
+
+        return true;
     }
 
-    public void returnToMainMenu()
+    private bool loadGame(int saveSlot)
     {
-        loadGameMenu.gameObject.SetActive(false);
-        optionsMenu.gameObject.SetActive(false);
-        mainMenu.gameObject.SetActive(true);
+        SaveData data = SaveSystem.loadGame(saveSlot);
+        if (data == null)
+        {
+            return false;
+        }
+
+        currentLevel = data.currentLevel;
+        playerCurrentHealth = data.playerCurrentHealth;
+        playerMaxHealth = data.playerMaxHealth;
+        playerGold = data.playerGold;
+        playerHandSize = data.playerHandSize;
+        playerHandEnergy = data.playerHandEnergy;
+
+        playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
+        playerDeck.cards = new List<CardModelSO>();
+
+        foreach (SerializableCardModel serializableCardModel in data.playerCards)
+        {
+            playerDeck.cards.Add(SaveSystem.convertToRuntimeCard(serializableCardModel));
+        }
+
+        return true;
+    }
+
+    public void setCurrentSaveSlot(int slot)
+    {
+        currentSaveSlot = slot;
+    }
+
+    public void loadScene(int sceneNumber)
+    {
+        SceneManager.LoadScene(sceneNumber);
     }
 
     public void quitGame()
     {
+        saveGame(currentSaveSlot);
 
-        // Save everything here
-
-        #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-        #else
-                    Application.Quit();
-        #endif
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
     }
 }
