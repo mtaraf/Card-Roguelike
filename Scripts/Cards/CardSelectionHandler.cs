@@ -122,7 +122,6 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                         Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on player");
                         List<CardEffect> effects = HandManager.instance.useSelectedCard();
                         player.processCardEffects(effects);
-                        AudioManager.instance.playBuff();
 
                         // update player energy
                         //GameManager.instance.usePlayerEnergy(cardEnergy);

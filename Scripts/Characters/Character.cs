@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
     protected int currentHealth; // Set current health to max health only when a run starts not in start for player
     protected int weakness;
     protected Dictionary<EffectType, int> attributes = new Dictionary<EffectType, int>();
+    private Dictionary<EffectType, System.Action> endTurnBehaviors;
     protected List<CardEffect> multipleTurnEffects = new List<CardEffect>();
     [SerializeField] protected int id;
     protected bool dead = false;
@@ -39,6 +40,9 @@ public class Character : MonoBehaviour
         attributes.Add(EffectType.Weaken, 0);
         attributes.Add(EffectType.Divinity, 0);
         attributes.Add(EffectType.Poison, 0);
+        attributes.Add(EffectType.Frostbite, 0);
+
+        initializeEndTurnBehaviors();
 
         // Set up after first frame
         StartCoroutine(findComponentsAfterFrame());
@@ -193,6 +197,32 @@ public class Character : MonoBehaviour
                 enemy.healCharacter(5);
             }
         }
+
+        // Check Frostbite threshold
+        checkFrostbiteThreshold(damageDealt);
+    }
+
+    void checkFrostbiteThreshold(int damageDealt)
+    {
+        // Check Frostbite threshold
+        if (attributes[EffectType.Frostbite] > 0 && damageDealt > 0)
+        {
+            attributes[EffectType.Frostbite] -= damageDealt;
+
+            // Check if threshold is met
+            if (attributes[EffectType.Frostbite] <= 0)
+            {
+                // Do frostbite damage and frostbite animation
+                attributes[EffectType.Frostbite] = 0;
+                int frostbiteDamage = (int)(maxHealth * 0.1f);
+                currentHealth -= frostbiteDamage;
+                showFloatingFeedbackUI(frostbiteDamage.ToString(), Color.powderBlue);
+                uIUpdater.setHealth(currentHealth, maxHealth);
+            }
+
+            // Updates the frostbite effect to either remove or lessen threshold
+            uIUpdater.updateEffect(EffectType.Frostbite, attributes[EffectType.Frostbite]);
+        }
     }
 
     public void processStartOfTurnEffects()
@@ -229,21 +259,41 @@ public class Character : MonoBehaviour
 
     public void processEndOfTurnEffects()
     {
-        if (attributes[EffectType.Weaken] > 0)
+        foreach (var effect in endTurnBehaviors)
         {
-            attributes[EffectType.Weaken] -= 1;
-        }
-        if (attributes[EffectType.Divinity] > 0)
-        {
-            attributes[EffectType.Divinity] -= 1;
+            if (attributes.ContainsKey(effect.Key) && attributes[effect.Key] > 0)
+            {
+                effect.Value.Invoke();
+            }
         }
 
-
+        // update UI
         foreach (KeyValuePair<EffectType, int> attribute in attributes)
         {
             uIUpdater.updateEffect(attribute.Key, attribute.Value);
         }
         uIUpdater.setHealth(currentHealth, maxHealth);
+    }
+
+    private void initializeEndTurnBehaviors()
+    {
+        endTurnBehaviors = new Dictionary<EffectType, System.Action>
+        {
+            { EffectType.Weaken, () => decrementEffect(EffectType.Weaken) },
+            { EffectType.Divinity, () => decrementEffect(EffectType.Divinity) },
+            { EffectType.Frostbite, () => clearEffect(EffectType.Frostbite) },
+            // Add more here
+        };
+    }
+
+    private void decrementEffect(EffectType type)
+    {
+        attributes[type] = Mathf.Max(0, attributes[type] - 1);
+    }
+
+    private void clearEffect(EffectType type)
+    {
+        attributes[type] = 0;
     }
 
     public int getCurrentHealth()

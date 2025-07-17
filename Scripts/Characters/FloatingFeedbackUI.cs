@@ -6,7 +6,7 @@ public class FloatingFeedbackUI : MonoBehaviour
 {
     [SerializeField] private float floatSpeed = 1.0f;
     [SerializeField] private float fadeSpeed = 1.0f;
-    [SerializeField] private Vector3 floatDirection = new Vector3(0, 1, 0);
+    [SerializeField] private Vector3 floatDirection;
 
     private TextMeshProUGUI textComponent;
     private Color color;
@@ -15,6 +15,7 @@ public class FloatingFeedbackUI : MonoBehaviour
 
     void Start()
     {
+        floatDirection = new Vector3(Random.Range(-1, 1.01f), 1, 0);
         textComponent = GetComponent<TextMeshProUGUI>();
         if (textComponent == null)
         {
@@ -28,7 +29,6 @@ public class FloatingFeedbackUI : MonoBehaviour
     public IEnumerator moveAndDestroy()
     {
         lifetime = fadeSpeed;
-        Debug.Log(lifetime);
         RectTransform rect = GetComponent<RectTransform>();
         while (lifetime > 0f)
         {
@@ -51,6 +51,17 @@ public class FloatingFeedbackUI : MonoBehaviour
         textComponent = GetComponent<TextMeshProUGUI>();
         textComponent.text = text;
         textComponent.color = color;
+        int num;
+        bool isNumeric = int.TryParse(text, out num);
+        if (isNumeric)
+        {
+            textComponent.fontSize = 70;
+            textComponent.fontStyle = FontStyles.Bold;
+        }
+        else
+        {
+            textComponent.fontSize = 50;
+        }
         this.color = color;
     }
 }

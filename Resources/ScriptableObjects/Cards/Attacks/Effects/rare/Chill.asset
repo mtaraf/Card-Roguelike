@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   rarity: 1
-  energy: 1
+  energy: 0
   effects:
   - type: 6
     value: 10
-    turns: 2
+    turns: 1
   special: 0
   condition:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Adds frostbite threshold of 10 for 2 turns to the selected enemy.
+  details: Adds frostbite threshold of 10 to the selected enemy until your next turn.
   title: Chill
   image: {fileID: 0}
   target: 1

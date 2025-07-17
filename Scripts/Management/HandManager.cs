@@ -281,6 +281,7 @@ public static class EffectTypeExtensions
             case EffectType.Poison: return "PoisonEffect";
             case EffectType.Divinity: return "DivinityEffect";
             case EffectType.Weaken: return "WeakenEffect";
+            case EffectType.Frostbite: return "FrostbiteEffect";
             default: return "Default";
         }
     }
@@ -289,11 +290,12 @@ public static class EffectTypeExtensions
     {
         switch (eff)
         {
-            case EffectType.Strength: return "Strength";
-            case EffectType.Armor: return "Armor";
-            case EffectType.Poison: return "Poison";
-            case EffectType.Divinity: return "Divinity";
-            case EffectType.Weaken: return "Weaken";
+            case EffectType.Strength: return "+strength";
+            case EffectType.Armor: return "+armor";
+            case EffectType.Poison: return "+poison";
+            case EffectType.Divinity: return "+divinity";
+            case EffectType.Weaken: return "+weaken";
+            case EffectType.Frostbite: return "+frostbite";
             default: return "Default";
         }
     }

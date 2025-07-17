@@ -1,51 +1,3 @@
-Create Main Menu Scene
-    - Create Canvas (done)
-    - Add logic to GameManager
-        - Load Data / Save Data on quit (only allow 1 slot for now)
-            - Data to pass between scenes:
-                - Character object
-                - Deck object
-            - Data to save on quit:
-                - Map number
-                - Character object
-                - Deck object
-                - Settings
-    - Completion Criteria:
-        - Can start a new game 
-        - Can load a saved game
-        - Can quit game
-        - Settings button visible but no functionality (done)
-        - Transitions to another scene when new game / saved game is pressed (done)
-
-Finish the base level scene
-    - Add Enemy character into scene (does not need to have scripts finished)
-    - Add physics to tile map
-    - Add all needed UI
-        - Deck (clickable to draw a card if possible)
-        - Discard pile (can drag a card to discard)
-        - Card slots
-        - Level title
-        - Settings button 
-        - Leave game button
-        - End turn button
-        - UI for health / items
-        - Add animations to cards
-
-Load user with data into base level
-    - Deck data should allow user to draw/play cards
-    - User data should fill the health and items UIs
-        - items should have hover tooltip
-    - User should have responsive health bar
-
-Load enemy with data into base level
-    - Enemy should have responsive health bar
-    - Should display icon for any effects enemy has
-        - This should have a hover tooltip
-    - Should have automatic attacks when it is their turn
-
-
-
-
 Add/Debug cards (TO-DO)
     - Add corruption system to cards (done)
         - Add corrupted card display prefab for discard pile (done)
@@ -86,6 +38,15 @@ Ideas:
     - Boss Mechanics:
         - Stun meter: After certain damage threshold, they are stunned for a turn
 
+    - Encounter Mechanics:
+        - Enemy cards injected into draw pile, will disappear after discarded or played (unstable keyword)
+
+    - Rewards:
+        - Unstable cards (one use, really OP, used when in trouble or bosses)?
+        - Removal of cards
+        - Upgrading cards (max of 1-2 upgrades depending on card, maybe less rare has more upgrades to balance the epic/rare cards)
+
+
 
 Create Setting Menu
     - Return to main Menu
@@ -95,3 +56,8 @@ Create Setting Menu
 Fix feedback ui when multiple effects from one card
 
 When reached max card slots, create UI for user to replace card with a new one
+
+Cycle through background music playlist
+
+Art:
+    - Create tooltip outline for top, bottom, left, right

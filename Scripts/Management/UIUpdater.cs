@@ -111,22 +111,6 @@ public class UIUpdater : MonoBehaviour
             }
         }
 
-
-
-        // GameObject prefab = turnEffectPrefabs.Find(obj => obj.name == type.ToDisplayString());
-        // if (prefab == null)
-        // {
-        //     Debug.LogWarning($"Effect prefab not found for {type}");
-        //     return;
-        // }
-
-        // GameObject slot = turnEffectUISlots.Find(s => s.transform.childCount == 0);
-        // if (slot == null)
-        // {
-        //     Debug.LogWarning("No empty effect UI slots available");
-        //     return;
-        // }
-
         GameObject newEffect = Instantiate(prefab, slot.transform);
         newEffect.transform.Find("ValueContainer").GetChild(0).GetComponent<TextMeshProUGUI>().text = value.ToString();
         activeEffects[type] = newEffect;
