@@ -10,11 +10,21 @@ public enum ToolTipDirection
     Right,
 }
 
+public enum ToolTipSize
+{
+    Large,
+    Medium,
+    Small
+}
+
 public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject tooltip;
-    private TextMeshProUGUI tooltipText;
+    private TextMeshProUGUI tooltipDescriptionComponent;
+    private TextMeshProUGUI tooltipTitleComponent;
     [SerializeField] private string tooltipMessage;
+    [SerializeField] private string tooltipTitle;
+    [SerializeField] private ToolTipSize tooltipSize;
     [SerializeField] private ToolTipDirection toolTipDirection;
     [SerializeField] private int buffer = 0;
 
@@ -28,8 +38,10 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         size = rectTransform.sizeDelta;
         tooltipObject = Instantiate(tooltip, transform);
         arrangeTooltip();
-        tooltipText = tooltipObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        tooltipText.text = tooltipMessage;
+        tooltipTitleComponent = tooltipObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        tooltipTitleComponent.text = tooltipTitle;
+        tooltipDescriptionComponent = tooltipObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        tooltipDescriptionComponent.text = tooltipMessage;
         hideTooltip();
     }
 
@@ -71,5 +83,11 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void hideTooltip()
     {
         tooltipObject.SetActive(false);
+    }
+
+    public void setTooltipData(string title, string message)
+    {
+        tooltipTitle = title;
+        tooltipMessage = message;
     }
 }

@@ -11,11 +11,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    // Menu
-    [SerializeField] private GameObject mainMenu;
-    [SerializeField] private GameObject optionsMenu;
-    [SerializeField] private GameObject loadGameMenu;
-
     // Controllers
     private BaseLevelUIController baseLevelUIController;
     private VictoryManager victoryManager;
@@ -31,7 +26,7 @@ public class GameManager : MonoBehaviour
     private int playerHandEnergy;
     private int playerGold;
     private Player player;
-    
+    private int currentCardRarity = 0;
     [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
 
     // UI
@@ -42,8 +37,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DeckModelSO starterDeck;
 
 
-    // Private data
-    private string pathToSaveFiles = "../../Saves/";
+    // Encounter Information
+    private EncounterType currentPath;
+    private EncounterReward encounterReward;
+    private int encounterRewardValue;
 
 
     public void Awake()
@@ -247,17 +244,20 @@ public class GameManager : MonoBehaviour
         playerMaxHealth = max;
     }
 
-    // Card/Deck Functions
     public DeckModelSO getStarterDeck()
     {
         return starterDeck;
     }
 
+    public void setEncounterTypeAndRewards(EncounterType encounterType, EncounterReward rewardType, int rewardValue)
+    {
+        currentPath = encounterType;
+        encounterReward = rewardType;
+        encounterRewardValue = rewardValue;
+    }
+
 
     // Save Functions
-
-
-
     public bool checkForSavedGames(int saveSlot)
     {
         return SaveSystem.saveFileExists(saveSlot);

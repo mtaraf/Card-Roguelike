@@ -34,19 +34,6 @@ Animations List:
         - Add damage/effects numbers that fade when hit (done)
 
 
-Ideas:
-    - Boss Mechanics:
-        - Stun meter: After certain damage threshold, they are stunned for a turn
-
-    - Encounter Mechanics:
-        - Enemy cards injected into draw pile, will disappear after discarded or played (unstable keyword)
-
-    - Rewards:
-        - Unstable cards (one use, really OP, used when in trouble or bosses)?
-        - Removal of cards
-        - Upgrading cards (max of 1-2 upgrades depending on card, maybe less rare has more upgrades to balance the epic/rare cards)
-
-
 
 Create Setting Menu
     - Return to main Menu
@@ -61,3 +48,42 @@ Cycle through background music playlist
 
 Art:
     - Create tooltip outline for top, bottom, left, right
+
+
+
+
+Game loops:
+    - Map: Start at 1 location, branches to different paths.
+        - Each path has icon for a reward for the previous encounter
+            - rewards: new cards, increased card rarity, increased number of card choices, card removal from deck
+                - show card rarity, number of card choices in corner of path selection screen
+        - locations: regular encounter, mini-boss encounter, forge (all scale with level)
+            - forge: spend $ to upgrade existing cards
+            - mini-boss: gives unique rewards (maybe a card that has to do with the boss mechanics)
+            - regular encounters: always give money
+        - Leads to one big boss (should be very hard to beat)
+            - Find ideal # of encounters so the player can build a deck with synergy
+            - Defeating boss, gives different starter deck maybe? or increases hand/deck size?
+        
+        -TO-DO:
+            - Path Selection Scene
+                - UI with interactable/hoverable locations
+            - Forge Scene
+                - User can select a card within the deck to show what it will become
+                - Submit button after viewing the enhanced card
+            - Reward Scene after encounter
+                - UI for card selection
+                - UI for card removal
+
+
+Ideas:
+    - Boss Mechanics:
+        - Stun meter: After certain damage threshold, they are stunned for a turn
+
+    - Encounter Mechanics:
+        - Enemy cards injected into draw pile, will disappear after discarded or played (unstable keyword)
+
+    - Rewards:
+        - Unstable cards (one use, really OP, used when in trouble or bosses)?
+        - Removal of cards
+        - Upgrading cards (max of 1-2 upgrades depending on card, maybe less rare has more upgrades to balance the epic/rare cards)
