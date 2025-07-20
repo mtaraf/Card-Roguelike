@@ -18,7 +18,6 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
 
     private float cardMoveSpeed = 0.4f;
     private float cardHoverSpeed = 0.1f;
-    private float cardFadeSpeed = 0.3f;
 
     private void Start()
     {

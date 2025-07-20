@@ -23,17 +23,31 @@ public class PathSelectionSceneController : MonoBehaviour
 {
     public static PathSelectionSceneController instance;
 
-    [SerializeField] private List<EncounterMap> encounterMaps = new List<EncounterMap>();
+    [SerializeField] private EncounterMap map = new EncounterMap();
+    [SerializeField] private int levels = 7;
 
-    // UI
-    private GameObject scrollViewBaseUI;
+    private PathSelectionUIController pathSelectionUIController;
 
 
     void Start()
     {
-        scrollViewBaseUI = GameObject.FindGameObjectWithTag("PathSelectionContent");
+        pathSelectionUIController = FindFirstObjectByType<PathSelectionUIController>();
+        pathSelectionUIController.Initialize();
+
+        // Check if on a current map, if not create one
+        if (GameManager.instance.getEncounterMap() != null)
+        {
+            map = GameManager.instance.getEncounterMap();
+        }
+        else
+        {
+            map.generateRandomMap(levels);
+            GameManager.instance.setEncounterMap(map);
+        }
+
+        pathSelectionUIController.fillUIWithCurrentEncounterMap(map, levels);
     }
-    
+
     void Awake()
     {
         if (instance != null && instance != this)
@@ -45,26 +59,21 @@ public class PathSelectionSceneController : MonoBehaviour
         instance = this;
     }
 
-    void instantiatePath()
-    {
-        
-    }
-
     public void navigateToScene(EncounterType path, EncounterReward encounterReward, int rewardValue)
     {
         switch (path)
         {
             case EncounterType.Forge:
-                SceneLoader.instance.loadScene(2);
+                //SceneLoader.instance.loadScene(2);
                 break;
             case EncounterType.Regular_Encounter:
-                SceneLoader.instance.loadScene(1, () => GameManager.instance.setEncounterTypeAndRewards(path, encounterReward, rewardValue));
+                //SceneLoader.instance.loadScene(1, () => GameManager.instance.setEncounterTypeAndRewards(path, encounterReward, rewardValue));
                 break;
             case EncounterType.Mini_Boss_Encounter:
-                SceneLoader.instance.loadScene(1, () => GameManager.instance.setEncounterTypeAndRewards(path, encounterReward, rewardValue));
+                //SceneLoader.instance.loadScene(1, () => GameManager.instance.setEncounterTypeAndRewards(path, encounterReward, rewardValue));
                 break;
             case EncounterType.Final_Boss:
-                SceneLoader.instance.loadScene(1, () => GameManager.instance.setEncounterTypeAndRewards(path, encounterReward, rewardValue));
+                //SceneLoader.instance.loadScene(1, () => GameManager.instance.setEncounterTypeAndRewards(path, encounterReward, rewardValue));
                 break;
         }
     }

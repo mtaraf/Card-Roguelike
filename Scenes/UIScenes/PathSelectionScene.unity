@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 439170268}
   m_Layer: 5
   m_Name: Scroll View
-  m_TagString: Untagged
+  m_TagString: PathSelectionScrollView
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1006,7 +1006,7 @@ GameObject:
   - component: {fileID: 1725617498}
   m_Layer: 5
   m_Name: Content
-  m_TagString: PathSelectionContent
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1025,10 +1025,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 307633230}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0003907358}
-  m_SizeDelta: {x: 0, y: 1423}
+  m_AnchoredPosition: {x: 0, y: 0.00024414062}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1767965360
 GameObject:
@@ -1207,6 +1207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1850123070}
   - component: {fileID: 1850123069}
+  - component: {fileID: 1850123071}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -1226,13 +1227,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36ea3de6d59c2f42afac9455eab8b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  encounterMaps:
-  - currentEncounterId: 0
-    nodes:
-    - id: 0
-      type: 1
-      progressPaths: 0100000002000000
-      completed: 0
+  map:
+    currentEncounterId: 0
+    nodes: []
+  levels: 7
 --- !u!4 &1850123070
 Transform:
   m_ObjectHideFlags: 0
@@ -1248,6 +1246,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1850123071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850123068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3624eece7cfef34fa05d4c4da476b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathSelectionIcon: {fileID: 0}
+  mapStartingPosition: {x: 0, y: 0}
 --- !u!1 &2000677268
 GameObject:
   m_ObjectHideFlags: 0

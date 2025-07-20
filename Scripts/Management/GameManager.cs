@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
 
     // Game States
+    EncounterMap map;
     private int currentLevel = 1;
     private DeckModelSO playerDeck;
     private int playerMaxHealth;
@@ -58,15 +59,6 @@ public class GameManager : MonoBehaviour
 
         // Detect when a new scene is loaded
         SceneManager.sceneLoaded += onSceneLoaded;
-
-        // Initial player values
-        // createPlayerDeckCopy();
-
-        // playerMaxHealth = 50;
-        // playerHandSize = 6;
-        // playerHandEnergy = 3;
-        // playerCurrentHealth = 50;
-        // playerGold = 0;
     }
 
 
@@ -256,6 +248,15 @@ public class GameManager : MonoBehaviour
         encounterRewardValue = rewardValue;
     }
 
+    public void setEncounterMap(EncounterMap map)
+    {
+        this.map = map;
+    }
+
+    public EncounterMap getEncounterMap()
+    {
+        return map;
+    }
 
     // Save Functions
     public bool checkForSavedGames(int saveSlot)
