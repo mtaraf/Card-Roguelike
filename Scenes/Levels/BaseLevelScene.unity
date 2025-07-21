@@ -553,6 +553,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltip: {fileID: 3710313620370394779, guid: 2825334cf25dc3e4a837c85cdb4dec4c, type: 3}
   tooltipMessage: Discard Pile
+  tooltipTitle: 
+  tooltipSize: 0
   toolTipDirection: 1
   buffer: 25
 --- !u!1 &220170032
@@ -2929,6 +2931,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltip: {fileID: 3710313620370394779, guid: 2825334cf25dc3e4a837c85cdb4dec4c, type: 3}
   tooltipMessage: Draw Pile
+  tooltipTitle: 
+  tooltipSize: 0
   toolTipDirection: 1
   buffer: 25
 --- !u!1 &963980912
@@ -11966,9 +11970,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d756d9862e29548a02090e90da91ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenu: {fileID: 0}
-  optionsMenu: {fileID: 0}
-  loadGameMenu: {fileID: 0}
   victoryCardPools: []
   turnBasedStatuses: []
   valueBasedStatuses: []

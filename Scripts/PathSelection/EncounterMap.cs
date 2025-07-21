@@ -56,16 +56,36 @@ public class EncounterMap
         }
     }
 
-    // TO-DO: Change this so no mini-bosses appear in first 5 levels
     private EncounterNode generateRandomEncounter(int nodeId, int level)
     {
         int random = Random.Range(0, 11);
-        EncounterNode node = random switch
+        EncounterNode node;
+
+        if (level == 1)
         {
-            < 9 => new EncounterNode(nodeId, level, EncounterType.Regular_Encounter),
-            < 11 => new EncounterNode(nodeId, level, EncounterType.Mini_Boss_Encounter),
-            _ => new EncounterNode(nodeId, level, EncounterType.Final_Boss)
-        };
+            return new EncounterNode(nodeId, level, EncounterType.Regular_Encounter);
+        }
+
+        if (level < 6)
+        {
+            node = random switch
+            {
+                < 8 => new EncounterNode(nodeId, level, EncounterType.Regular_Encounter),
+                < 10 => new EncounterNode(nodeId, level, EncounterType.Culver_Encounter),
+                _ => new EncounterNode(nodeId, level, EncounterType.Tank_Encounter)
+            };
+        }
+        else
+        {
+            node = random switch
+            {
+                < 8 => new EncounterNode(nodeId, level, EncounterType.Regular_Encounter),
+                < 9 => new EncounterNode(nodeId, level, EncounterType.Culver_Encounter),
+                < 10 => new EncounterNode(nodeId, level, EncounterType.Tank_Encounter),
+                10 => new EncounterNode(nodeId, level, EncounterType.Mini_Boss_Encounter),
+                _ => new EncounterNode(nodeId, level, EncounterType.Final_Boss)
+            };
+        }
         return node;
     }
 }

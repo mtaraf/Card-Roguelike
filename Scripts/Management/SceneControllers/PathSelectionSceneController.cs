@@ -7,6 +7,8 @@ public enum EncounterType
     Forge,
     Regular_Encounter,
     Mini_Boss_Encounter,
+    Culver_Encounter,
+    Tank_Encounter,
     Final_Boss
 }
 
@@ -24,7 +26,7 @@ public class PathSelectionSceneController : MonoBehaviour
     public static PathSelectionSceneController instance;
 
     [SerializeField] private EncounterMap map = new EncounterMap();
-    [SerializeField] private int levels = 7;
+    private int levels = 10;
 
     private PathSelectionUIController pathSelectionUIController;
 

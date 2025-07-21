@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
 
     // Game States
-    EncounterMap map;
+    private EncounterMap map;
     private int currentLevel = 1;
     private DeckModelSO playerDeck;
     private int playerMaxHealth;

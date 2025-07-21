@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
@@ -9,24 +10,44 @@ public class Card : MonoBehaviour
     [SerializeField] private GameObject cardTitle;
     [SerializeField] private GameObject cardDescription;
     [SerializeField] private GameObject cardEnergyValue;
+    [SerializeField] private GameObject cardBackgroundImage;
 
     public void setCardDisplayInformation(CardModelSO model)
     {
         cardModel = model;
+        Sprite background = null;
 
         cardTitle = cardTitle ?? Helpers.findDescendant(transform, "Title");
         cardDescription = cardDescription ?? transform.Find("Description")?.gameObject;
         cardEnergyValue = cardEnergyValue ?? transform.Find("EnergyCost")?.gameObject;
 
-        if (cardTitle == null || cardDescription == null || cardEnergyValue == null)
+        if (cardTitle == null || cardDescription == null || cardEnergyValue == null || cardBackgroundImage == null)
         {
             Debug.LogError("Card UI element(s) not found!");
             return;
         }
 
+        switch (model.rarity) {
+            case CardRarity.COMMON:
+                background = Resources.Load<Sprite>("UI/Art/Cards/common_card");
+                break;
+            case CardRarity.RARE:
+                background = Resources.Load<Sprite>("UI/Art/Cards/rare_card");
+                break;
+            case CardRarity.EPIC:
+                background = Resources.Load<Sprite>("UI/Art/Cards/epic_card");
+                break;
+            case CardRarity.MYTHIC:
+                background = Resources.Load<Sprite>("UI/Art/Cards/mythic_card");
+                break;
+        }
+
         cardTitle.GetComponent<TextMeshProUGUI>().text = model.title;
         cardEnergyValue.GetComponent<TextMeshProUGUI>().text = model.energy.ToString();
         cardDescription.GetComponent<TextMeshProUGUI>().text = model.details;
+
+        if (background != null)
+            cardBackgroundImage.GetComponent<Image>().sprite = background;
     }
 
     public string getCardTitle()

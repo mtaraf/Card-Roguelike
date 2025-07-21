@@ -31,6 +31,10 @@ public class PathSelectionUIController : MonoBehaviour
         int numberOfNodesOnLevel;
         List<EncounterNode> levelNodes = new List<EncounterNode>();
 
+        // Adjust the scroll view width
+        RectTransform scrollViewContentRect = scrollViewContent.GetComponent<RectTransform>();
+        scrollViewContentRect.sizeDelta = new Vector2(x_position + (200*levels) + 200, scrollViewContentRect.sizeDelta.y);
+
         // Creating all the icons
         for (int i = 0; i < levels; i++)
         {

@@ -89,5 +89,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         tooltipTitle = title;
         tooltipMessage = message;
+        tooltipTitleComponent.text = tooltipTitle;
+        tooltipDescriptionComponent.text = tooltipMessage;
     }
 }

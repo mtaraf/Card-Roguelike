@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 32700b33633269545b1e36f6a77c2074
+guid: f220bad46c6761343a0cdb9ec443d618
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3570492848134278514
-    second: mini_boss_icon_2_0
+      213: -4244473986221331750
+    second: pixil-frame-0(3)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mini_boss_icon_2_0
+      name: pixil-frame-0(3)_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 1
-        width: 25
-        height: 30
+        x: 2
+        y: 0
+        width: 28
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 27dcd1ef350fc8130800000000000000
-      internalID: 3570492848134278514
+      spriteID: ada24e0d5699815c0800000000000000
+      internalID: -4244473986221331750
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mini_boss_icon_2_0: 3570492848134278514
+      pixil-frame-0(3)_0: -4244473986221331750
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

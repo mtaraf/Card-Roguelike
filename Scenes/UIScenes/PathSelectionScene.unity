@@ -1230,7 +1230,6 @@ MonoBehaviour:
   map:
     currentEncounterId: 0
     nodes: []
-  levels: 7
 --- !u!4 &1850123070
 Transform:
   m_ObjectHideFlags: 0
