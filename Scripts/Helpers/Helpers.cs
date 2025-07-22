@@ -36,4 +36,10 @@ public class Helpers
         Debug.LogWarning($"No sibling found with tag: {tag}");
         return null;
     }
+
+    public static T GetRandomEnumValue<T>()
+    {
+        T[] values = (T[])System.Enum.GetValues(typeof(T));
+        return values[Random.Range(0, values.Length)];
+    }
 }

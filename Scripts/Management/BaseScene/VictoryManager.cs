@@ -24,13 +24,13 @@ public class VictoryManager : MonoBehaviour
     public void instantiate()
     {
         victoryScreenPrefab = Resources.Load<GameObject>("UI/BaseScene/VictoryUI");
-        cardSelectionDisplayPrefab = Resources.Load<GameObject>("UI/Cards/CardSelectionDisplay");
+        cardSelectionDisplayPrefab = Resources.Load<GameObject>("UI/Cards/CardNoAnimation");
         canvasTransform = GameObject.FindGameObjectWithTag("BaseLevelCanvas").transform;
         victoryCardPools = GameManager.instance.getVictoryCardsPools();
     }
 
-
-    public void showVictoryScreen()
+    // TO-DO: implement card choices / card rarity
+    public void showVictoryScreen(int cardChoices, int cardRarity)
     {
         victoryScreenInstance = Instantiate(victoryScreenPrefab, canvasTransform);
         generateCardRewards();

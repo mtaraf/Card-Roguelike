@@ -388,8 +388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: 0
   deckViewUI: {fileID: 5858184892181692343, guid: a8f2c061d3adff94db9070cf1546b77c, type: 3}
-  cardPrefab: {fileID: 3855351361844713507, guid: 7a735c7f5599db046958f1b7fd5344d0, type: 3}
-  corruptCardPrefab: {fileID: 4607337031477105933, guid: 24dfb57d0cdc3914182af208003654bc, type: 3}
+  cardPrefab: {fileID: 3229093071805968601, guid: 4657f2a5ab830b44a813a0350c5445d1, type: 3}
 --- !u!114 &153018901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,8 +536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: 1
   deckViewUI: {fileID: 5858184892181692343, guid: a8f2c061d3adff94db9070cf1546b77c, type: 3}
-  cardPrefab: {fileID: 3855351361844713507, guid: 7a735c7f5599db046958f1b7fd5344d0, type: 3}
-  corruptCardPrefab: {fileID: 4607337031477105933, guid: 24dfb57d0cdc3914182af208003654bc, type: 3}
+  cardPrefab: {fileID: 3229093071805968601, guid: 4657f2a5ab830b44a813a0350c5445d1, type: 3}
 --- !u!114 &177048423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,8 +551,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltip: {fileID: 3710313620370394779, guid: 2825334cf25dc3e4a837c85cdb4dec4c, type: 3}
   tooltipMessage: Discard Pile
-  tooltipTitle: 
-  tooltipSize: 0
+  tooltipTitle: Discard Pile
+  tooltipSize: 2
   toolTipDirection: 1
   buffer: 25
 --- !u!1 &220170032
@@ -2915,8 +2913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: 2
   deckViewUI: {fileID: 5858184892181692343, guid: a8f2c061d3adff94db9070cf1546b77c, type: 3}
-  cardPrefab: {fileID: 3855351361844713507, guid: 7a735c7f5599db046958f1b7fd5344d0, type: 3}
-  corruptCardPrefab: {fileID: 4607337031477105933, guid: 24dfb57d0cdc3914182af208003654bc, type: 3}
+  cardPrefab: {fileID: 3229093071805968601, guid: 4657f2a5ab830b44a813a0350c5445d1, type: 3}
 --- !u!114 &946521702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2931,8 +2928,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltip: {fileID: 3710313620370394779, guid: 2825334cf25dc3e4a837c85cdb4dec4c, type: 3}
   tooltipMessage: Draw Pile
-  tooltipTitle: 
-  tooltipSize: 0
+  tooltipTitle: Draw Pile
+  tooltipSize: 2
   toolTipDirection: 1
   buffer: 25
 --- !u!1 &963980912

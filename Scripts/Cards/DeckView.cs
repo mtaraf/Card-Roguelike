@@ -18,7 +18,6 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
     [SerializeField] private DeckViewType view;
     [SerializeField] private GameObject deckViewUI;
     [SerializeField] private GameObject cardPrefab;
-    [SerializeField] private GameObject corruptCardPrefab;
 
 
     private DeckModelSO deck;
@@ -74,7 +73,7 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
                     {
                         if (content.transform.GetChild(index).transform.childCount == 0)
                         {
-                            GameObject cardObj = Instantiate(corruptCardPrefab, content.transform.GetChild(index).transform);
+                            GameObject cardObj = Instantiate(cardPrefab, content.transform.GetChild(index).transform);
                             Card cardComponent = cardObj.GetComponent<Card>();
                             cardComponent.setCardDisplayInformation(model);
                             cardObj.SetActive(true);

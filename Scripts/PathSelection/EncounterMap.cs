@@ -7,6 +7,11 @@ public class EncounterMap
     public int currentEncounterId = 0;
     public List<EncounterNode> nodes = new List<EncounterNode>();
 
+    public EncounterNode getNode(int id)
+    {
+        return nodes.Find((node) => node.id == id);
+    }
+
     public void generateRandomMap(int levels)
     {
         int nodeId = 0;
@@ -86,11 +91,21 @@ public class EncounterMap
                 _ => new EncounterNode(nodeId, level, EncounterType.Final_Boss)
             };
         }
+
+        generateRandomReward(node);
+
         return node;
+    }
+
+    void generateRandomReward(EncounterNode node)
+    {
+        if (node.type != EncounterType.Forge && node.type != EncounterType.Final_Boss)
+        {
+            node.encounterReward = Helpers.GetRandomEnumValue<EncounterReward>();
+        }
     }
 }
 
-[System.Serializable]
 public class EncounterNode
 {
     public int id;
@@ -98,6 +113,8 @@ public class EncounterNode
     public EncounterType type;
     public List<EncounterNode> progressPaths = new List<EncounterNode>();
     public bool completed;
+    public EncounterReward encounterReward;
+    public int rewardValue;
 
     public EncounterNode(int nodeId, int nodeLevel, EncounterType nodeType)
     {

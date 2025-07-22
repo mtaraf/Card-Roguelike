@@ -38,6 +38,7 @@ public class BaseLevelSceneController : MonoBehaviour
     void InitializeScene()
     {
         mainCanvas = GameObject.FindGameObjectWithTag("BaseLevelCanvas");
+        HandManager.instance.Initialize();
 
         // Get Enemy Group prefabs
         foreach (GameObject singleEnemy in Resources.LoadAll<GameObject>("EnemyPrefabs/Regular/ES1"))

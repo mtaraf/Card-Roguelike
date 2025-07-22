@@ -14,11 +14,9 @@ public enum EncounterType
 
 public enum EncounterReward
 {
-    CardSelection,
     CardRarity,
     CardChoices,
-    CardRemoval,
-    Forge
+    Gold,
 }
 
 public class PathSelectionSceneController : MonoBehaviour
@@ -61,21 +59,24 @@ public class PathSelectionSceneController : MonoBehaviour
         instance = this;
     }
 
-    public void navigateToScene(EncounterType path, EncounterReward encounterReward, int rewardValue)
+    public void navigateToScene(int id)
     {
-        switch (path)
+        map.currentEncounterId = id;
+        Debug.Log("Current Encounter Level ID: " + id);
+        EncounterType type = map.getNode(id).type;
+        switch (type)
         {
             case EncounterType.Forge:
-                //SceneLoader.instance.loadScene(2);
+                //SceneLoader.instance.loadScene(3);
                 break;
             case EncounterType.Regular_Encounter:
-                //SceneLoader.instance.loadScene(1, () => GameManager.instance.setEncounterTypeAndRewards(path, encounterReward, rewardValue));
+                SceneLoader.instance.loadScene("BaseLevelScene", () => GameManager.instance.loadEncounterTypeAndRewards(map));
                 break;
             case EncounterType.Mini_Boss_Encounter:
-                //SceneLoader.instance.loadScene(1, () => GameManager.instance.setEncounterTypeAndRewards(path, encounterReward, rewardValue));
+                SceneLoader.instance.loadScene("BaseLevelScene", () => GameManager.instance.loadEncounterTypeAndRewards(map));
                 break;
             case EncounterType.Final_Boss:
-                //SceneLoader.instance.loadScene(1, () => GameManager.instance.setEncounterTypeAndRewards(path, encounterReward, rewardValue));
+                SceneLoader.instance.loadScene("BaseLevelScene", () => GameManager.instance.loadEncounterTypeAndRewards(map));
                 break;
         }
     }

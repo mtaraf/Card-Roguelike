@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,7 +45,7 @@ public class PathSelectionUIController : MonoBehaviour
             {
                 icon = Instantiate(pathSelectionIcon, scrollViewContent.transform);
                 icon.transform.localPosition = new Vector2(x_position, mapStartingPosition.y);
-                StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(levelNodes[0].type, levelNodes[0].completed));
+                StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(levelNodes[0].type, levelNodes[0].completed, levelNodes[0].encounterReward, levelNodes[0].id));
             }
             else
             {
@@ -53,7 +54,7 @@ public class PathSelectionUIController : MonoBehaviour
                 {
                     icon = Instantiate(pathSelectionIcon, scrollViewContent.transform);
                     icon.transform.localPosition = new Vector2(x_position, y_position);
-                    StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(node.type, node.completed));
+                    StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(node.type, node.completed, node.encounterReward, node.id));
                     y_position += 250;
                 }
             }

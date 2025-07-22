@@ -7,6 +7,7 @@ public class PathSelectionIcon : MonoBehaviour
     [SerializeField] private EncounterReward encounterReward;
     [SerializeField] private int rewardValue;
     [SerializeField] private Image rewardIcon;
+    [SerializeField] private GameObject rewardContainer;
     private Button iconButton;
     private Image iconImage;
     private Image completedOutline; // TO-DO: add this and enable if the path has been completed
@@ -19,54 +20,48 @@ public class PathSelectionIcon : MonoBehaviour
         tooltip = GetComponent<Tooltip>();
     }
 
-    public IEnumerator instantiateIcon(EncounterType type, bool completed)
+    public IEnumerator instantiateIcon(EncounterType type, bool completed, EncounterReward reward, int nodeId)
     {
         // Wait for Start() to finish
         yield return null;
 
-        Sprite encounterSprite = null;
-        string tooltipTitle = "";
-        string tooltipMessage = "";
-
-        // TO-DO: Set icon image and tooltip massage/title
-        switch (type)
+        if (type == EncounterType.Forge || type == EncounterType.Final_Boss)
         {
-            case EncounterType.Forge:
-                encounterSprite = Resources.Load<Sprite>("UI/Icons/forge_icon");
-                tooltipTitle = "The Forge";
-                tooltipMessage = "Enter the forge to upgrade or remove cards in your deck";
-                break;
-            case EncounterType.Regular_Encounter:
-                encounterSprite = Resources.Load<Sprite>("UI/Icons/regular_encounter_icon");
-                tooltipTitle = "Encounter";
-                tooltipMessage = "Battle a variety of enemies and claim the rewards!";
-                break;
-            case EncounterType.Mini_Boss_Encounter:
-                encounterSprite = Resources.Load<Sprite>("UI/Icons/mini_boss_icon");
-                tooltipTitle = "Mini Boss";
-                tooltipMessage = "Fight against a strong opponent to obtain rare loot!";
-                break;
-            case EncounterType.Culver_Encounter:
-                encounterSprite = Resources.Load<Sprite>("UI/Icons/culver_encounter_icon");
-                tooltipTitle = "Culver's Bounty";
-                tooltipMessage = "Your task is to unleash your might upon the mighty culver. Deal enough damage to incapacitate Culver to claim your bounty.";
-                break;
-            case EncounterType.Tank_Encounter:
-                encounterSprite = Resources.Load<Sprite>("UI/Icons/tank_encounter_icon");
-                tooltipTitle = "Hold the Line";
-                tooltipMessage = "Survive the onslaught of barrages without fighting back to claim the rewards for your effort to outlast the damage.";
-                break;
-            case EncounterType.Final_Boss:
-                break;
+            deleteRewardIcon();
         }
 
-        if (encounterSprite != null)
+        if (EncounterData.InfoMap.TryGetValue(type, out var info))
         {
-            iconImage.sprite = encounterSprite;
+            iconImage.sprite = Resources.Load<Sprite>(info.iconPath);
+            tooltip.setTooltipData(info.title, info.message);
         }
 
+        
         iconButton.onClick.RemoveAllListeners();
-        iconButton.onClick.AddListener(() => PathSelectionSceneController.instance.navigateToScene(type, encounterReward, rewardValue));
-        tooltip.setTooltipData(tooltipTitle, tooltipMessage);
+        iconButton.onClick.AddListener(() =>
+            PathSelectionSceneController.instance.navigateToScene(nodeId));
+
+        updateRewardIcon(reward);
+    }
+
+    void updateRewardIcon(EncounterReward reward)
+    {
+        switch (reward)
+        {
+            case EncounterReward.CardRarity:
+                rewardIcon.sprite = Resources.Load<Sprite>("UI/Icons/rarity_icon");
+                break;
+            case EncounterReward.CardChoices:
+                rewardIcon.sprite = Resources.Load<Sprite>("UI/Icons/card_choices_icon");
+                break;
+            case EncounterReward.Gold:
+                rewardIcon.sprite = Resources.Load<Sprite>("UI/Icons/gold_icon");
+                break;
+        }
+    }
+
+    void deleteRewardIcon()
+    {
+        Destroy(rewardContainer);
     }
 }

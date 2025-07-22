@@ -1229,7 +1229,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map:
     currentEncounterId: 0
-    nodes: []
 --- !u!4 &1850123070
 Transform:
   m_ObjectHideFlags: 0

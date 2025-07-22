@@ -40,8 +40,12 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         arrangeTooltip();
         tooltipTitleComponent = tooltipObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         tooltipTitleComponent.text = tooltipTitle;
-        tooltipDescriptionComponent = tooltipObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        tooltipDescriptionComponent.text = tooltipMessage;
+        
+        if (tooltipSize != ToolTipSize.Small)
+        {
+            tooltipDescriptionComponent = tooltipObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            tooltipDescriptionComponent.text = tooltipMessage;
+        }
         hideTooltip();
     }
 

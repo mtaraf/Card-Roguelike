@@ -34,15 +34,10 @@ public class HandManager : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject);
-
-        // Detect when a new scene is loaded
-        SceneManager.sceneLoaded += onSceneLoaded;
     }
 
-    public void onSceneLoaded(Scene scene, LoadSceneMode mode)
+    public void Initialize()
     {
-        Debug.Log($"Hand Manager detected scene loaded: {scene.name}");
         StartCoroutine(createDecksAfterStartHasRun());
 
         cardSlotsList = new List<GameObject>();

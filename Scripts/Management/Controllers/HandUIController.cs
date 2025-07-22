@@ -24,7 +24,7 @@ public class HandUIController : MonoBehaviour
 
         feedbackMessage = Resources.Load<GameObject>("UI/General/FeedbackMessage");
         cardPrefab = Resources.Load<GameObject>("UI/Cards/CardPrefab");
-        noAnimationCardPrefab = Resources.Load<GameObject>("UI/Cards/CardNoAnimationPrefab");
+        noAnimationCardPrefab = Resources.Load<GameObject>("UI/Cards/CardNoAnimation");
 
         cardSlotsList.Clear();
         for (int i = 0; i < cardSlots.transform.childCount; i++)

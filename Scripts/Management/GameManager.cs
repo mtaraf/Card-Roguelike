@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
     private int playerHandEnergy;
     private int playerGold;
     private Player player;
-    private int currentCardRarity = 0;
+    private int cardRarity = 0;
+    private int cardChoices = 3;
     [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
 
     // UI
@@ -156,10 +157,26 @@ public class GameManager : MonoBehaviour
     public IEnumerator encounterVictory(int goldEarned)
     {
         AudioManager.instance.playVictory();
-        playerGold += goldEarned;
-        baseLevelUIController.updateGoldCount(playerGold);
+        addEncounterRewards();
         yield return new WaitForSeconds(1.0f);
-        victoryManager.showVictoryScreen();
+        victoryManager.showVictoryScreen(cardChoices, cardRarity);
+    }
+
+    void addEncounterRewards()
+    {
+        switch (encounterReward)
+        {
+            case EncounterReward.Gold:
+                playerGold += 5 * currentLevel;
+                baseLevelUIController.updateGoldCount(playerGold);
+                break;
+            case EncounterReward.CardRarity:
+                cardRarity += 1;
+                break;
+            case EncounterReward.CardChoices:
+                cardChoices += 1;
+                break;
+        }
     }
 
     public void addCardToPlayerDeck(CardModelSO model)
@@ -170,11 +187,18 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator moveToNextEncounter()
     {
-        currentLevel++;
+        // Mark node as completed
+        map.getNode(map.currentEncounterId).completed = true;
+
+        // update player stats
         playerCurrentHealth = player.getCurrentHealth();
         playerMaxHealth = player.getMaxHealth();
+
+        // Save game
         yield return new WaitUntil(() => saveGame(currentSaveSlot));
-        SceneLoader.instance.loadScene(1, () =>
+
+        // Go to path selection scene
+        SceneLoader.instance.loadScene("PathSelectionScene", () =>
         {
             Debug.Log("Scene loaded!");
         });
@@ -241,11 +265,14 @@ public class GameManager : MonoBehaviour
         return starterDeck;
     }
 
-    public void setEncounterTypeAndRewards(EncounterType encounterType, EncounterReward rewardType, int rewardValue)
+    public void loadEncounterTypeAndRewards(EncounterMap map)
     {
-        currentPath = encounterType;
-        encounterReward = rewardType;
-        encounterRewardValue = rewardValue;
+        this.map = map;
+        EncounterNode currentNode = map.getNode(map.currentEncounterId);
+        currentPath = currentNode.type;
+        encounterReward = currentNode.encounterReward;
+        //encounterRewardValue = rewardValue;
+        currentLevel = currentNode.level;
     }
 
     public void setEncounterMap(EncounterMap map)
