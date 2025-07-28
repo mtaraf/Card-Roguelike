@@ -28,6 +28,11 @@ public class EncounterMap
                 EncounterNode forgeNode = new EncounterNode(nodeId, i, EncounterType.Forge);
                 nodeId++;
                 nodes.Add(forgeNode);
+                previousLevelNodes = nodes.FindAll((node) => node.level == i - 1);
+                foreach (EncounterNode node in previousLevelNodes)
+                {
+                    node.progressPaths.Add(forgeNode);
+                }
             }
             else if (i % 5 == 1)
             {
@@ -97,6 +102,7 @@ public class EncounterMap
         return node;
     }
 
+    // Rewards weighted mostly towards gold -> card rarity -> card choice
     void generateRandomReward(EncounterNode node)
     {
         if (node.type != EncounterType.Forge && node.type != EncounterType.Final_Boss)

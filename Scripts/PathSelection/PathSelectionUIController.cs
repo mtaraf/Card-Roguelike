@@ -8,7 +8,9 @@ public class PathSelectionUIController : MonoBehaviour
     private GameObject scrollView;
     private GameObject scrollViewContent;
     [SerializeField] private GameObject pathSelectionIcon;
+    [SerializeField] private GameObject arrowIndicator;
     [SerializeField] private Vector2 mapStartingPosition;
+    private Dictionary<int, GameObject> nodeIdToGameObject = new();
     private float height;
 
 
@@ -21,6 +23,7 @@ public class PathSelectionUIController : MonoBehaviour
         height = rectTransform.sizeDelta.y;
 
         pathSelectionIcon = Resources.Load<GameObject>("UI/PathSelectionUI/PathIconContainer");
+        arrowIndicator = Resources.Load<GameObject>("UI/PathSelectionUI/ArrowIndicator");
     }
 
     public void fillUIWithCurrentEncounterMap(EncounterMap map, int levels)
@@ -34,7 +37,7 @@ public class PathSelectionUIController : MonoBehaviour
 
         // Adjust the scroll view width
         RectTransform scrollViewContentRect = scrollViewContent.GetComponent<RectTransform>();
-        scrollViewContentRect.sizeDelta = new Vector2(x_position + (200*levels) + 200, scrollViewContentRect.sizeDelta.y);
+        scrollViewContentRect.sizeDelta = new Vector2(x_position + (200 * levels) + 1000, scrollViewContentRect.sizeDelta.y);
 
         // Creating all the icons
         for (int i = 0; i < levels; i++)
@@ -45,7 +48,9 @@ public class PathSelectionUIController : MonoBehaviour
             {
                 icon = Instantiate(pathSelectionIcon, scrollViewContent.transform);
                 icon.transform.localPosition = new Vector2(x_position, mapStartingPosition.y);
-                StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(levelNodes[0].type, levelNodes[0].completed, levelNodes[0].encounterReward, levelNodes[0].id));
+                EncounterNode node = levelNodes[0];
+                StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(node.type, node.completed, node.encounterReward, node.id));
+                nodeIdToGameObject[node.id] = icon;
             }
             else
             {
@@ -56,11 +61,44 @@ public class PathSelectionUIController : MonoBehaviour
                     icon.transform.localPosition = new Vector2(x_position, y_position);
                     StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(node.type, node.completed, node.encounterReward, node.id));
                     y_position += 250;
+                    nodeIdToGameObject[node.id] = icon;
                 }
             }
-            x_position += 350;
+            x_position += 450;
         }
 
-        // Creating all the arrows indicators
+        foreach (EncounterNode node in map.nodes)
+        {
+            if (!nodeIdToGameObject.ContainsKey(node.id)) continue;
+            GameObject fromIcon = nodeIdToGameObject[node.id];
+
+            foreach (EncounterNode targetNode in node.progressPaths)
+            {
+                if (!nodeIdToGameObject.ContainsKey(targetNode.id)) continue;
+                GameObject toIcon = nodeIdToGameObject[targetNode.id];
+                createArrowBetween(fromIcon.GetComponent<RectTransform>(), toIcon.GetComponent<RectTransform>());
+            }
+        }
+    }
+
+    private void createArrowBetween(RectTransform from, RectTransform to)
+    {
+        GameObject arrow = Instantiate(arrowIndicator, scrollViewContent.transform);
+        RectTransform arrowRect = arrow.GetComponent<RectTransform>();
+
+        // Add 85 to start/end outside the icon container
+        Vector3 start = from.localPosition;
+        start.x += 95;
+        Vector3 end = to.localPosition;
+        end.x -= 95;
+        Vector3 direction = end - start;
+
+        float distance = direction.magnitude;
+        Vector3 midPoint = (start + end) / 2;
+
+        arrowRect.localPosition = midPoint;
+        arrowRect.sizeDelta = new Vector2(distance, arrowRect.sizeDelta.y); // Stretch arrow
+        arrowRect.rotation = Quaternion.FromToRotation(Vector3.right, direction.normalized);
+        arrow.transform.SetAsFirstSibling();
     }
 }
