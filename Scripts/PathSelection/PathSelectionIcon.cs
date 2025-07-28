@@ -10,7 +10,7 @@ public class PathSelectionIcon : MonoBehaviour
     [SerializeField] private GameObject rewardContainer;
     private Button iconButton;
     private Image iconImage;
-    private Image completedOutline; // TO-DO: add this and enable if the path has been completed
+    private Image container; // TO-DO: add this and enable if the path has been completed
     private Tooltip tooltip;
 
     void Start()
@@ -18,6 +18,7 @@ public class PathSelectionIcon : MonoBehaviour
         iconButton = GetComponent<Button>();
         iconImage = transform.GetChild(0).GetComponent<Image>();
         tooltip = GetComponent<Tooltip>();
+        container = GetComponent<Image>();
     }
 
     public IEnumerator instantiateIcon(EncounterType type, bool completed, EncounterReward reward, int nodeId)
@@ -33,7 +34,13 @@ public class PathSelectionIcon : MonoBehaviour
         if (EncounterData.InfoMap.TryGetValue(type, out var info))
         {
             iconImage.sprite = Resources.Load<Sprite>(info.iconPath);
-            tooltip.setTooltipData(info.title, info.message);
+            string message = info.message + "\n\n" + reward.ToDisplayString();
+            tooltip.setTooltipData(info.title, message);
+        }
+
+        if (completed)
+        {
+            container.sprite = Resources.Load<Sprite>("UI/Art/Icons/completed_icon_container");
         }
 
         
@@ -49,13 +56,13 @@ public class PathSelectionIcon : MonoBehaviour
         switch (reward)
         {
             case EncounterReward.CardRarity:
-                rewardIcon.sprite = Resources.Load<Sprite>("UI/Icons/rarity_icon");
+                rewardIcon.sprite = Resources.Load<Sprite>("UI/Art/Icons/rarity_icon");
                 break;
             case EncounterReward.CardChoices:
-                rewardIcon.sprite = Resources.Load<Sprite>("UI/Icons/card_choices_icon");
+                rewardIcon.sprite = Resources.Load<Sprite>("UI/Art/Icons/extra_card_icon");
                 break;
             case EncounterReward.Gold:
-                rewardIcon.sprite = Resources.Load<Sprite>("UI/Icons/gold_icon");
+                rewardIcon.sprite = Resources.Load<Sprite>("UI/Art/Icons/gold_icon");
                 break;
         }
     }

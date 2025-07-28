@@ -19,6 +19,20 @@ public enum EncounterReward
     Gold,
 }
 
+public static class EncounterRewardExtensions
+{
+    public static string ToDisplayString(this EncounterReward eff)
+    {
+        switch (eff)
+        {
+            case EncounterReward.CardRarity: return "+25% Card Rarity";
+            case EncounterReward.CardChoices: return "+1 Card Choice";
+            case EncounterReward.Gold: return "+25 Gold";
+            default: return "Default";
+        }
+    }
+}
+
 public class PathSelectionSceneController : MonoBehaviour
 {
     public static PathSelectionSceneController instance;
