@@ -37,7 +37,7 @@ public class PathSelectionSceneController : MonoBehaviour
 {
     public static PathSelectionSceneController instance;
 
-    [SerializeField] private EncounterMap map = new EncounterMap();
+    [SerializeField] private EncounterMap map;
     private int levels = 10;
 
     private PathSelectionUIController pathSelectionUIController;
@@ -48,13 +48,18 @@ public class PathSelectionSceneController : MonoBehaviour
         pathSelectionUIController = FindFirstObjectByType<PathSelectionUIController>();
         pathSelectionUIController.Initialize();
 
+        map = GameManager.instance.getEncounterMap();
+
         // Check if on a current map, if not create one
-        if (GameManager.instance.getEncounterMap() != null)
+        if (map.nodes.Count > 0)
         {
-            map = GameManager.instance.getEncounterMap();
+            map.rebuildPaths();
+            Debug.Log("Map found!");
         }
         else
         {
+            map = new EncounterMap();
+            Debug.Log("No encounter map present!");
             map.generateRandomMap(levels);
             GameManager.instance.setEncounterMap(map);
         }

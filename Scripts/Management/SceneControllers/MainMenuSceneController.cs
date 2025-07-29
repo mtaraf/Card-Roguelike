@@ -47,7 +47,7 @@ public class MainMenuSceneController : MonoBehaviour
     public void enterGame(int saveSlot)
     {
         GameManager.instance.setCurrentSaveSlot(saveSlot);
-        GameManager.instance.loadScene(1);
+        GameManager.instance.loadScene(2);
         AudioManager.instance.playClick();
     }
 

@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
     private void onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Game Manager detected scene loaded: {scene.name}");
-        if (scene.buildIndex == 1)
+        if (scene.buildIndex != 0)
         {
             if (!loadGame(currentSaveSlot))
             {
@@ -78,6 +78,10 @@ public class GameManager : MonoBehaviour
                 playerGold = 0;
                 playerHandEnergy = 3;
             }
+        }
+
+        if (scene.buildIndex == 1)
+        {
             StartCoroutine(waitForBaseLevelUI());
         }
     }
@@ -310,8 +314,8 @@ public class GameManager : MonoBehaviour
         saveData.playerGold = playerGold;
         saveData.playerHandSize = playerHandSize;
         saveData.playerHandEnergy = playerHandEnergy;
-
         saveData.playerCards = new List<SerializableCardModel>();
+        saveData.encounterMap = map;
 
         foreach (CardModelSO model in playerDeck.cards)
         {
@@ -337,9 +341,10 @@ public class GameManager : MonoBehaviour
         playerGold = data.playerGold;
         playerHandSize = data.playerHandSize;
         playerHandEnergy = data.playerHandEnergy;
-
         playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
         playerDeck.cards = new List<CardModelSO>();
+        map = data.encounterMap;
+        //map.rebuildPaths();
 
         foreach (SerializableCardModel serializableCardModel in data.playerCards)
         {

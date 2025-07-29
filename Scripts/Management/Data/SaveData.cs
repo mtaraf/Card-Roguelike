@@ -12,6 +12,7 @@ public class SaveData
     public int playerHandEnergy;
     public string saveName = "Save Name";
     public List<SerializableCardModel> playerCards; // Unique card IDs or titles
+    public EncounterMap encounterMap;
 }
 
 [Serializable]

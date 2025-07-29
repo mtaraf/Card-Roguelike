@@ -1,7 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class EncounterMap
 {
     public int currentEncounterId = 0;
@@ -10,6 +11,27 @@ public class EncounterMap
     public EncounterNode getNode(int id)
     {
         return nodes.Find((node) => node.id == id);
+    }
+
+    public void rebuildPaths()
+    {
+        Dictionary<int, EncounterNode> nodeLookup = new();
+        foreach (EncounterNode node in nodes)
+        {
+            nodeLookup[node.id] = node;
+        }
+
+        foreach (EncounterNode node in nodes)
+        {
+            node.progressPaths = new List<EncounterNode>();
+            foreach (int pathId in node.progressPathIds)
+            {
+                if (nodeLookup.TryGetValue(pathId, out EncounterNode targetNode))
+                {
+                    node.progressPaths.Add(targetNode);
+                }
+            }
+        }
     }
 
     public void generateRandomMap(int levels)
@@ -32,17 +54,19 @@ public class EncounterMap
                 foreach (EncounterNode node in previousLevelNodes)
                 {
                     node.progressPaths.Add(forgeNode);
+                    node.progressPathIds.Add(forgeNode.id);
                 }
             }
             else if (i % 5 == 1)
             {
                 // Adds 3-5 encounter paths from the starting node or the forge nodes
                 EncounterNode previousNode = nodes.Find((node) => node.level == i - 1);
-                int random = Random.Range(3, 6);
+                int random = UnityEngine.Random.Range(3, 6);
                 for (int j = 0; j < random; j++)
                 {
                     EncounterNode newNode = generateRandomEncounter(nodeId, i);
                     previousNode.progressPaths.Add(newNode);
+                    previousNode.progressPathIds.Add(newNode.id);
                     nodes.Add(newNode);
                     nodeId++;
                 }
@@ -59,6 +83,7 @@ public class EncounterMap
                 {
                     EncounterNode newNode = generateRandomEncounter(nodeId, i);
                     node.progressPaths.Add(newNode);
+                    node.progressPathIds.Add(newNode.id);
                     nodeId++;
                     nodes.Add(newNode);
                 }
@@ -68,7 +93,7 @@ public class EncounterMap
 
     private EncounterNode generateRandomEncounter(int nodeId, int level)
     {
-        int random = Random.Range(0, 11);
+        int random = UnityEngine.Random.Range(0, 11);
         EncounterNode node;
 
         if (level == 1)
@@ -112,12 +137,14 @@ public class EncounterMap
     }
 }
 
+[Serializable]
 public class EncounterNode
 {
     public int id;
     public int level;
     public EncounterType type;
-    public List<EncounterNode> progressPaths = new List<EncounterNode>();
+    [NonSerialized] public List<EncounterNode> progressPaths = new List<EncounterNode>();
+    public List<int> progressPathIds = new();
     public bool completed;
     public EncounterReward encounterReward;
     public int rewardValue;
