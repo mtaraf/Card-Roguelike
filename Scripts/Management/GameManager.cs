@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     // Controllers
+    private TopBarUIManager topBarUIManager;
     private BaseLevelUIController baseLevelUIController;
     private VictoryManager victoryManager;
     private int currentSaveSlot = -1;
@@ -78,12 +79,20 @@ public class GameManager : MonoBehaviour
                 playerGold = 0;
                 playerHandEnergy = 3;
             }
+            StartCoroutine(updateUI());
         }
 
         if (scene.buildIndex == 1)
         {
             StartCoroutine(waitForBaseLevelUI());
         }
+    }
+
+    private IEnumerator updateUI()
+    {
+        yield return null;
+        topBarUIManager = FindFirstObjectByType<TopBarUIManager>();
+        topBarUIManager.Initialize(playerGold, currentLevel);
     }
 
     private void initializePrefabs()
@@ -93,10 +102,10 @@ public class GameManager : MonoBehaviour
         starterDeck = Resources.Load<DeckModelSO>("ScriptableObjects/Decks/StarterDeck");
 
         // Get Victory Card Pools
-        victoryCardPools.Insert(0,cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/CommonVictoryCards")));
-        victoryCardPools.Insert(1,cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/RareVictoryCards")));
-        victoryCardPools.Insert(2,cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/EpicVictoryCards")));
-        victoryCardPools.Insert(3,cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/MythicVictoryCards")));
+        victoryCardPools.Insert(0, cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/CommonVictoryCards")));
+        victoryCardPools.Insert(1, cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/RareVictoryCards")));
+        victoryCardPools.Insert(2, cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/EpicVictoryCards")));
+        victoryCardPools.Insert(3, cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/MythicVictoryCards")));
     }
 
     private IEnumerator waitForBaseLevelUI()
@@ -109,8 +118,6 @@ public class GameManager : MonoBehaviour
         }
 
         baseLevelUIController.Initialize();
-        baseLevelUIController.updateLevelCount(currentLevel);
-        baseLevelUIController.updateGoldCount(playerGold);
 
 
         victoryManager = transform.AddComponent<VictoryManager>();
@@ -172,7 +179,7 @@ public class GameManager : MonoBehaviour
         {
             case EncounterReward.Gold:
                 playerGold += 5 * currentLevel;
-                baseLevelUIController.updateGoldCount(playerGold);
+                topBarUIManager.updateGoldCount(playerGold);
                 break;
             case EncounterReward.CardRarity:
                 cardRarity += 1;

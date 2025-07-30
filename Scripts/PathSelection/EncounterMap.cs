@@ -38,6 +38,7 @@ public class EncounterMap
     {
         int nodeId = 0;
         EncounterNode startingNode = new EncounterNode(nodeId, 0, EncounterType.Regular_Encounter);
+        startingNode.encounterReward = EncounterReward.Gold;
         nodeId++;
         nodes.Add(startingNode);
 
@@ -96,12 +97,11 @@ public class EncounterMap
         int random = UnityEngine.Random.Range(0, 11);
         EncounterNode node;
 
-        if (level == 1)
+        if (level < 3)
         {
-            return new EncounterNode(nodeId, level, EncounterType.Regular_Encounter);
+            node = new EncounterNode(nodeId, level, EncounterType.Regular_Encounter);
         }
-
-        if (level < 6)
+        else if (level < 6)
         {
             node = random switch
             {
@@ -122,7 +122,10 @@ public class EncounterMap
             };
         }
 
-        generateRandomReward(node);
+        if (node.type != EncounterType.Forge && node.type != EncounterType.Final_Boss)
+        {
+            generateRandomReward(node);
+        }
 
         return node;
     }
@@ -130,7 +133,19 @@ public class EncounterMap
     // Rewards weighted mostly towards gold -> card rarity -> card choice
     void generateRandomReward(EncounterNode node)
     {
-        if (node.type != EncounterType.Forge && node.type != EncounterType.Final_Boss)
+
+        int random = UnityEngine.Random.Range(0, 101);
+
+        if (node.type == EncounterType.Mini_Boss_Encounter)
+        {
+            // Specific mini-boss rewards
+        }
+
+        if (random < 71)
+        {
+            node.encounterReward = EncounterReward.Gold;
+        }
+        else
         {
             node.encounterReward = Helpers.GetRandomEnumValue<EncounterReward>();
         }

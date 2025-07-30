@@ -1621,6 +1621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1024863986}
   - component: {fileID: 1024863985}
+  - component: {fileID: 1024863987}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1640,9 +1641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d756d9862e29548a02090e90da91ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenu: {fileID: 1242335109}
-  optionsMenu: {fileID: 704149009}
-  loadGameMenu: {fileID: 2043236172}
   victoryCardPools: []
   turnBasedStatuses: []
   valueBasedStatuses: []
@@ -1662,6 +1660,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1024863987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024863984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd9516900ec3f9429574a71d6a07b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldCount: {fileID: 0}
+  levelCount: {fileID: 0}
 --- !u!1 &1076921568
 GameObject:
   m_ObjectHideFlags: 0
