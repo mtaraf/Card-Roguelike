@@ -17,13 +17,22 @@ Add/Debug cards (TO-DO)
 
 - Move value based effects (armor/strength/posion) to a seperate UI, turn based effects on same ui (divine mark, weakness) (done)
     - Add tooltips to effects
-    - implement frostbite (value-based, if player deals damage equal to frostbite value, entity takes 10% max health as damage)
 - Check if enemy dies from start of turn effects
 
 Add card selection before scene transition
 
-Menu TO-DO:
-- 
+Path Selection:
+    - Change arrow color if path is taken
+    - only allow user to click on the current level thery are on
+    - add highlighted icon for current level selection
+
+Top Bar UI:
+    - Add settings pop-up when clicking on the settings icon 
+        - Create Icons, background image, button image (done)
+        - Return to main Menu (done)
+        - Quit Game (done)
+        - Audio adjustment
+    - Add card rarity and card selection number to top bar
 
 
 Animations List:
@@ -33,17 +42,8 @@ Animations List:
     - Add attack, buff effects
         - Add damage/effects numbers that fade when hit (done)
 
-
-
-Create Setting Menu
-    - Return to main Menu
-    - Quit Game
-    - Audio adjustment
-
 Fix feedback ui when multiple effects from one card
-
 When reached max card slots, create UI for user to replace card with a new one
-
 Cycle through background music playlist
 
 Art:

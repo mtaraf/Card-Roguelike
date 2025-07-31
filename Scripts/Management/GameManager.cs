@@ -375,10 +375,17 @@ public class GameManager : MonoBehaviour
     {
         saveGame(currentSaveSlot);
 
-        #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
                     Application.Quit();
-        #endif
+#endif
+    }
+
+    public void exitToMainMenu()
+    {
+        saveGame(currentSaveSlot);
+
+        loadScene(0);
     }
 }

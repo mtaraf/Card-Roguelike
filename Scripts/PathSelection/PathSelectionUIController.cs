@@ -60,7 +60,6 @@ public class PathSelectionUIController : MonoBehaviour
                 {
                     icon = Instantiate(pathSelectionIcon, scrollViewContent.transform);
                     icon.transform.localPosition = new Vector2(x_position, y_position);
-                    Debug.Log(y_position);
                     StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(node.type, node.completed, node.encounterReward, node.id));
                     y_position += 250;
                     nodeIdToGameObject[node.id] = icon;
