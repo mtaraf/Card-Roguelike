@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     // Game States
     private EncounterMap map;
-    private int currentLevel = 1;
+    private int currentLevel = -1;
     private DeckModelSO playerDeck;
     private int playerMaxHealth;
     private int playerCurrentHealth;
@@ -69,7 +69,21 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Game Manager detected scene loaded: {scene.name}");
         if (scene.buildIndex != 0)
         {
-            if (!loadGame(currentSaveSlot))
+            // for dev testing
+            if (currentSaveSlot != -1)
+            {
+                if (!loadGame(currentSaveSlot))
+                {
+                    createPlayerDeckCopy();
+                    playerMaxHealth = 50;
+                    playerHandSize = 6;
+                    playerHandEnergy = 3;
+                    playerCurrentHealth = 50;
+                    playerGold = 0;
+                    playerHandEnergy = 3;
+                }
+            }
+            else
             {
                 createPlayerDeckCopy();
                 playerMaxHealth = 50;
@@ -79,6 +93,16 @@ public class GameManager : MonoBehaviour
                 playerGold = 0;
                 playerHandEnergy = 3;
             }
+            // if (!loadGame(currentSaveSlot))
+            // {
+            //     createPlayerDeckCopy();
+            //     playerMaxHealth = 50;
+            //     playerHandSize = 6;
+            //     playerHandEnergy = 3;
+            //     playerCurrentHealth = 50;
+            //     playerGold = 0;
+            //     playerHandEnergy = 3;
+            // }
             StartCoroutine(updateUI());
         }
 
@@ -92,7 +116,7 @@ public class GameManager : MonoBehaviour
     {
         yield return null;
         topBarUIManager = FindFirstObjectByType<TopBarUIManager>();
-        topBarUIManager.Initialize(playerGold, currentLevel);
+        topBarUIManager.Initialize(playerGold, currentLevel, cardRarity);
     }
 
     private void initializePrefabs()
@@ -284,6 +308,8 @@ public class GameManager : MonoBehaviour
         encounterReward = currentNode.encounterReward;
         //encounterRewardValue = rewardValue;
         currentLevel = currentNode.level;
+
+        StartCoroutine(updateUI());
     }
 
     public void setEncounterMap(EncounterMap map)

@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class EncounterMap
 {
-    public int currentEncounterId = 0;
+    public int currentEncounterId = -1;
     public List<EncounterNode> nodes = new List<EncounterNode>();
 
     public EncounterNode getNode(int id)

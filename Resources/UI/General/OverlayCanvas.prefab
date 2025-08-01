@@ -31,7 +31,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1112929819743331901}
+  - {fileID: 6870999805750806223}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1001 &2565013460366672072
+--- !u!1001 &8337174511987449914
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -199,8 +199,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd3f43fa1e90b854b84165b5f6940584, type: 3}
---- !u!224 &1112929819743331901 stripped
+--- !u!224 &6870999805750806223 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3236163852261254901, guid: cd3f43fa1e90b854b84165b5f6940584, type: 3}
-  m_PrefabInstance: {fileID: 2565013460366672072}
+  m_PrefabInstance: {fileID: 8337174511987449914}
   m_PrefabAsset: {fileID: 0}

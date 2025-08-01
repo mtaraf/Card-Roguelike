@@ -5,21 +5,24 @@ public class TopBarUIManager : MonoBehaviour
 {
     [SerializeField] private GameObject goldCount;
     [SerializeField] private GameObject levelCount;
+    [SerializeField] private GameObject cardRarity;
     private GameObject settingsMenuPrefab;
     private GameObject settingsMenuObject;
     private SettingsMenu settingsMenu;
 
-    public void Initialize(int gold, int level)
+    public void Initialize(int gold, int level, int rarity)
     {
+        level += 1;
         goldCount = GameObject.FindGameObjectWithTag("GoldCount");
         levelCount = GameObject.FindGameObjectWithTag("LevelCount");
         settingsMenuPrefab = Resources.Load<GameObject>("UI/General/SettingsMenu");
 
-        if (goldCount == null || levelCount == null)
+        if (goldCount == null || levelCount == null || cardRarity == null)
         {
             Debug.LogError("Could not find UI for top bar");
         }
 
+        cardRarity.GetComponent<TextMeshProUGUI>().text = rarity.ToString() + "%";
         goldCount.GetComponent<TextMeshProUGUI>().text = gold.ToString();
         levelCount.GetComponent<TextMeshProUGUI>().text = "Level " + level.ToString();
 

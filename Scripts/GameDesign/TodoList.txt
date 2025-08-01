@@ -26,14 +26,6 @@ Path Selection:
     - only allow user to click on the current level thery are on
     - add highlighted icon for current level selection
 
-Top Bar UI:
-    - Add settings pop-up when clicking on the settings icon 
-        - Create Icons, background image, button image (done)
-        - Return to main Menu (done)
-        - Quit Game (done)
-        - Audio adjustment
-    - Add card rarity and card selection number to top bar
-
 
 Animations List:
     - Adjust player card animations 

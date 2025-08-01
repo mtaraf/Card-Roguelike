@@ -51,7 +51,7 @@ public class PathSelectionSceneController : MonoBehaviour
         map = GameManager.instance.getEncounterMap();
 
         // Check if on a current map, if not create one
-        if (map.nodes.Count > 0)
+        if (map != null && map.nodes.Count > 0)
         {
             map.rebuildPaths();
             Debug.Log("Map found!");

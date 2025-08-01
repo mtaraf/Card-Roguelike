@@ -29,6 +29,21 @@ public class PathSelectionUIController : MonoBehaviour
 
     public void fillUIWithCurrentEncounterMap(EncounterMap map, int levels)
     {
+        if (map == null)
+        {
+            Debug.LogError("Map is null when trying to fill ui");
+            return;
+        }
+        List<int> interactableNodeIds;
+        EncounterNode currentNode = map.nodes.Find((node) => node.id == map.currentEncounterId);
+        if (currentNode != null)
+        {
+            interactableNodeIds = currentNode.progressPathIds;
+        }
+        else
+        {
+            interactableNodeIds = new List<int>{0};
+        }
         GameObject icon;
 
         float x_position = mapStartingPosition.x;
@@ -45,12 +60,13 @@ public class PathSelectionUIController : MonoBehaviour
         {
             levelNodes = map.nodes.FindAll((node) => node.level == i);
             numberOfNodesOnLevel = levelNodes.Count;
+
             if (numberOfNodesOnLevel == 1)
             {
                 icon = Instantiate(pathSelectionIcon, scrollViewContent.transform);
                 icon.transform.localPosition = new Vector2(x_position, mapStartingPosition.y);
                 EncounterNode node = levelNodes[0];
-                StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(node.type, node.completed, node.encounterReward, node.id));
+                StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(node.type, node.completed, node.encounterReward, node.id, interactableNodeIds.Contains(node.id)));
                 nodeIdToGameObject[node.id] = icon;
             }
             else
@@ -60,7 +76,7 @@ public class PathSelectionUIController : MonoBehaviour
                 {
                     icon = Instantiate(pathSelectionIcon, scrollViewContent.transform);
                     icon.transform.localPosition = new Vector2(x_position, y_position);
-                    StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(node.type, node.completed, node.encounterReward, node.id));
+                    StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(node.type, node.completed, node.encounterReward, node.id, interactableNodeIds.Contains(node.id)));
                     y_position += 250;
                     nodeIdToGameObject[node.id] = icon;
                 }
