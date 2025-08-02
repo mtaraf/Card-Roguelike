@@ -19,12 +19,12 @@ Add/Debug cards (TO-DO)
     - Add tooltips to effects
 - Check if enemy dies from start of turn effects
 
-Add card selection before scene transition
+Add card selection before scene transition (done)
 
 Path Selection:
     - Change arrow color if path is taken
-    - only allow user to click on the current level thery are on
-    - add highlighted icon for current level selection
+    - only allow user to click on the current level thery are on (done)
+    - add highlighted icon for current path
 
 
 Animations List:

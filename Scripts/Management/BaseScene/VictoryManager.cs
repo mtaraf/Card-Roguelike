@@ -6,7 +6,7 @@ using System.Linq;
 
 public class VictoryManager : MonoBehaviour
 {
-    [SerializeField] private GameObject victoryScreenPrefab;
+    [SerializeField] private GameObject victoryCardSelectionScreenPrefab;
     [SerializeField] private GameObject cardSelectionDisplayPrefab;
     [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
     [SerializeField] private Transform canvasTransform;
@@ -23,20 +23,20 @@ public class VictoryManager : MonoBehaviour
 
     public void instantiate()
     {
-        victoryScreenPrefab = Resources.Load<GameObject>("UI/BaseScene/VictoryUI");
+        victoryCardSelectionScreenPrefab = Resources.Load<GameObject>("UI/General/VictoryCardSelection");
         cardSelectionDisplayPrefab = Resources.Load<GameObject>("UI/Cards/CardNoAnimation");
-        canvasTransform = GameObject.FindGameObjectWithTag("BaseLevelCanvas").transform;
+        canvasTransform = GameObject.FindGameObjectWithTag("OverlayCanvas").transform;
         victoryCardPools = GameManager.instance.getVictoryCardsPools();
     }
 
     // TO-DO: implement card choices / card rarity
     public void showVictoryScreen(int cardChoices, int cardRarity)
     {
-        victoryScreenInstance = Instantiate(victoryScreenPrefab, canvasTransform);
+        victoryScreenInstance = Instantiate(victoryCardSelectionScreenPrefab, canvasTransform);
         generateCardRewards();
 
         var slotsParent = victoryScreenInstance.transform.Find("Slots");
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < cardChoices; i++)
         {
             var slot = slotsParent.GetChild(i).gameObject;
             int index = i;
