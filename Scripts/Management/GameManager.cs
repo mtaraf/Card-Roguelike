@@ -150,6 +150,17 @@ public class GameManager : MonoBehaviour
         player = BaseLevelSceneController.instance.getPlayer();
     }
 
+    public void updateDrawPile(int count)
+    {
+        baseLevelUIController.updateDrawPile(count);
+    }
+
+    public void updateDiscardPile(int count)
+    {
+        baseLevelUIController.updateDiscardPile(count);
+        Debug.Log("discard pile count:" + count);
+    }
+
     private DeckModelSO cloneDeck(DeckModelSO deck)
     {
         DeckModelSO clonedDeck = ScriptableObject.CreateInstance<DeckModelSO>();

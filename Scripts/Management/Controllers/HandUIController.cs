@@ -59,14 +59,14 @@ public class HandUIController : MonoBehaviour
         return count;
     }
 
-    public void shuffleHandIntoDiscard(DeckModelSO discardPile)
+    public void shuffleHandIntoDiscard(ObservableDeck discardPile)
     {
         foreach (var slot in cardSlotsList)
         {
             if (slot.transform.childCount > 0)
             {
                 GameObject card = slot.transform.GetChild(0).gameObject;
-                discardPile.cards.Add(card.GetComponent<Card>().getCardModel());
+                discardPile.Add(card.GetComponent<Card>().getCardModel());
                 Destroy(card);
             }
         }

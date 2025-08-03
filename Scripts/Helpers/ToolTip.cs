@@ -41,7 +41,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         tooltipTitleComponent = tooltipObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         tooltipTitleComponent.text = tooltipTitle;
         
-        if (tooltipSize != ToolTipSize.Small)
+        if (tooltipSize == ToolTipSize.Large)
         {
             tooltipDescriptionComponent = tooltipObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
             tooltipDescriptionComponent.text = tooltipMessage;

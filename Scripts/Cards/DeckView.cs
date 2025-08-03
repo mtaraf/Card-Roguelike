@@ -18,6 +18,7 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
     [SerializeField] private DeckViewType view;
     [SerializeField] private GameObject deckViewUI;
     [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private TextMeshProUGUI currentDeckCount;
 
 
     private DeckModelSO deck;
@@ -29,6 +30,11 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
         canvasTransform = transform.parent.transform.parent;
         deck = ScriptableObject.CreateInstance<DeckModelSO>();
         deck.cards = new List<CardModelSO>();
+
+        if (currentDeckCount == null)
+        {
+            Debug.LogError("Could not find UI for deck view");
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -42,12 +48,12 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
         }
         else if (view == DeckViewType.DrawPile)
         {
-            deck = HandManager.instance.getDrawPile();
+            deck.cards = HandManager.instance.getDrawPile().cards;
             fillDeckView(deck, "Draw Pile", deckViewScrollBarContent);
         }
         else
         {
-            deck = HandManager.instance.getDiscardPile();
+            deck.cards = HandManager.instance.getDiscardPile().cards;
             fillDeckView(deck, "Discard Pile", deckViewScrollBarContent);
         }
     }
@@ -111,5 +117,10 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
                 }
             }
         }
+    }
+
+    public void setDeckCount(int count)
+    {
+        currentDeckCount.text = count.ToSafeString();
     }
 }

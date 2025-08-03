@@ -19,7 +19,9 @@ Add/Debug cards (TO-DO)
     - Add tooltips to effects
 - Check if enemy dies from start of turn effects
 
-Add card selection before scene transition (done)
+- Fix discard and draw pile numbers (done)
+- Re-do the Deck View UI
+    - new background image, deckview icon, corrupt card prefab
 
 Path Selection:
     - Change arrow color if path is taken

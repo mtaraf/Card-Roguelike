@@ -14,8 +14,8 @@ public class HandManager : MonoBehaviour
     private CardProcessor cardProcessor;
 
     // Decks
-    private DeckModelSO drawPile;
-    private DeckModelSO discardPile;
+    private ObservableDeck drawPile;
+    private ObservableDeck discardPile;
     private DeckModelSO playerDeck;
     private DeckModelSO corruptedCards;
 
@@ -58,11 +58,12 @@ public class HandManager : MonoBehaviour
         playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
         playerDeck.cards = new List<CardModelSO>(player?.getCards().cards);
 
-        drawPile = ScriptableObject.CreateInstance<DeckModelSO>();
-        drawPile.cards = new List<CardModelSO>(playerDeck != null ? playerDeck.cards : new List<CardModelSO>());
+        drawPile = new ObservableDeck();
+        drawPile.cards.AddRange(playerDeck.cards);
+        drawPile.OnDeckSizeChanged += GameManager.instance.updateDrawPile;
 
-        discardPile = ScriptableObject.CreateInstance<DeckModelSO>();
-        discardPile.cards = new List<CardModelSO>();
+        discardPile = new ObservableDeck();
+        discardPile.OnDeckSizeChanged += GameManager.instance.updateDiscardPile;
 
         cardSlots = GameObject.FindGameObjectWithTag("CardSlots");
 
@@ -110,12 +111,12 @@ public class HandManager : MonoBehaviour
     }
 
     // Deck Functions
-    public DeckModelSO getDiscardPile()
+    public ObservableDeck getDiscardPile()
     {
         return discardPile;
     }
 
-    public DeckModelSO getDrawPile()
+    public ObservableDeck getDrawPile()
     {
         return drawPile;
     }
@@ -136,7 +137,7 @@ public class HandManager : MonoBehaviour
         int randomCardIndex;
 
         // Reshuffle discard and draw if drawPile does not have enough cards
-        if (drawPile.cards.Count < numCards)
+        if (drawPile.Count < numCards)
         {
             shuffleDiscardPileIntoDrawPile();
         }
@@ -144,16 +145,16 @@ public class HandManager : MonoBehaviour
         for (int i = 0; i < numCards; i++)
         {
             // Don't draw cards if out of cards
-            if (drawPile.cards.Count == 0)
+            if (drawPile.Count == 0)
             {
                 return;
             }
 
-            randomCardIndex = Random.Range(0, drawPile.cards.Count);
+            randomCardIndex = Random.Range(0, drawPile.Count);
             bool spaceInHandRemaining = addCardToCardSlot(drawPile.cards[randomCardIndex]);
             if (spaceInHandRemaining)
             {
-                drawPile.cards.RemoveAt(randomCardIndex);
+                drawPile.RemoveAt(randomCardIndex);
             }
         }
     }
@@ -173,17 +174,17 @@ public class HandManager : MonoBehaviour
         List<CardModelSO> discardCopy = new List<CardModelSO>(discardPile.cards);
         foreach (CardModelSO card in discardCopy)
         {
-            drawPile.cards.Add(card);
+            drawPile.Add(card);
             if (!card.corrupts)
             {
-                discardPile.cards.Remove(card);
+                discardPile.Remove(card);
             }
         }
     }
 
     private void addCardToDiscardPile(Card card)
     {
-        discardPile.cards.Add(card.getCardModel());
+        discardPile.Add(card.getCardModel());
     }
 
     // Card Processing

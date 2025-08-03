@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 177048423}
   m_Layer: 5
   m_Name: DiscardPile
-  m_TagString: Untagged
+  m_TagString: DiscardPile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,6 +252,7 @@ MonoBehaviour:
   view: 1
   deckViewUI: {fileID: 5858184892181692343, guid: a8f2c061d3adff94db9070cf1546b77c, type: 3}
   cardPrefab: {fileID: 3229093071805968601, guid: 4657f2a5ab830b44a813a0350c5445d1, type: 3}
+  currentDeckCount: {fileID: 2006650918}
 --- !u!114 &177048423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1909,7 +1910,7 @@ GameObject:
   - component: {fileID: 946521702}
   m_Layer: 5
   m_Name: DrawPile
-  m_TagString: Untagged
+  m_TagString: DrawPile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1950,6 +1951,7 @@ MonoBehaviour:
   view: 2
   deckViewUI: {fileID: 5858184892181692343, guid: a8f2c061d3adff94db9070cf1546b77c, type: 3}
   cardPrefab: {fileID: 3229093071805968601, guid: 4657f2a5ab830b44a813a0350c5445d1, type: 3}
+  currentDeckCount: {fileID: 1434671031}
 --- !u!114 &946521702
 MonoBehaviour:
   m_ObjectHideFlags: 0
