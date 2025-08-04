@@ -18,13 +18,13 @@ MonoBehaviour:
   effects:
   - type: 2
     value: 1
-  turns: 0
+    turns: 0
   special: 0
   condition:
     conditionValue: 0
     metric: 4
   multiplier: 0
-  details: Adds 1 strength for this encounter
+  details: Adds 1 strength.
   title: Bulk Up
   image: {fileID: 0}
   target: 2

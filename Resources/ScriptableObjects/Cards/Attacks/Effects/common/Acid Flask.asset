@@ -24,7 +24,7 @@ MonoBehaviour:
     conditionValue: 0
     metric: 4
   multiplier: 0
-  details: Poison an enemy for 2 damage for the next 3 turns
+  details: Poison an enemy for 6 damage for the next 3 turns
   title: Acid Flask
   image: {fileID: 0}
   target: 1

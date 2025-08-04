@@ -21,7 +21,7 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Adds 1 strength per corrupted card this encounter. Corrupt.
+  details: Adds 1 strength per corrupted card played this encounter. Corrupts.
   title: Corruptable
   image: {fileID: 0}
   target: 2

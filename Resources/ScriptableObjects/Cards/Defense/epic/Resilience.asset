@@ -21,9 +21,9 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Adds 3 armor everytime you take on-hit damage
+  details: Adds 3 armor after taking on-hit damage. Corrupts.
   title: Resilience
   image: {fileID: 0}
   target: 2
   cardsDrawn: 0
-  corrupts: 0
+  corrupts: 1

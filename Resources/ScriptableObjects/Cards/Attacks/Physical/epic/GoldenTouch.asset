@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
   m_Name: GoldenTouch
   m_EditorClassIdentifier: 
-  type: 2
+  type: 0
   rarity: 2
   energy: 2
-  effects: []
+  effects:
+  - type: 0
+    value: 10
+    turns: 0
   special: 1
   condition:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Gives the same amount of gold as damage dealt for any on hit attacks this
-    turn. Corrupts.
+  details: Deals 10 damage, gives gold based on damage dealt. Corrupts.
   title: Golden Touch
   image: {fileID: 0}
-  target: 2
+  target: 1
   cardsDrawn: 0
   corrupts: 1

@@ -10,26 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: Regroup
+  m_Name: ComboAttack
   m_EditorClassIdentifier: 
-  type: 1
-  rarity: 1
+  type: 0
+  rarity: 0
   energy: 1
-  effects:
-  - type: 3
-    value: 1
-    turns: 1
-  - type: 1
-    value: 8
-    turns: 0
-  special: 0
+  effects: []
+  special: 1
   condition:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Adds 8 armor, 1 stack of weaken for current turn.
-  title: Regroup
+  details: Deals 2 damage per unique effect on the target.
+  title: Combo Attack
   image: {fileID: 0}
-  target: 2
+  target: 1
   cardsDrawn: 0
   corrupts: 0

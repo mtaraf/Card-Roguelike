@@ -21,8 +21,7 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Frostbite now deals 20% max health damage, frostbite threshold is multiplied
-    by 1.5x
+  details: Frostbite now deals 20% max health damage.
   title: Frosty
   image: {fileID: 0}
   target: 2

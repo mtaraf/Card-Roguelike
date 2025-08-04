@@ -27,11 +27,18 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
-        canvasTransform = transform.parent.transform.parent;
+        GameObject overlayCanvas = GameObject.FindGameObjectWithTag("OverlayCanvas");
+
+        if (overlayCanvas == null)
+        {
+            Debug.LogError("Could not find overlay canvas for deck view");
+        }
+
+        canvasTransform = overlayCanvas.transform;
         deck = ScriptableObject.CreateInstance<DeckModelSO>();
         deck.cards = new List<CardModelSO>();
 
-        if (currentDeckCount == null)
+        if (currentDeckCount == null && view != DeckViewType.FullDeck)
         {
             Debug.LogError("Could not find UI for deck view");
         }

@@ -17,14 +17,14 @@ MonoBehaviour:
   energy: 0
   effects:
   - type: 1
-    value: 8
-  turns: 0
+    value: 6
+    turns: 0
   special: 0
   condition:
     conditionValue: 0
     metric: 4
   multiplier: 0
-  details: Adds 8 armor. Corrupts.
+  details: Adds 6 armor. Corrupts.
   title: Iron Will
   image: {fileID: 0}
   target: 2

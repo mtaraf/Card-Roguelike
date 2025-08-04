@@ -18,13 +18,13 @@ MonoBehaviour:
   effects:
   - type: 0
     value: 2
-  turns: 0
+    turns: 0
   special: 0
   condition:
     conditionValue: 0
     metric: 4
   multiplier: 0
-  details: Attacks enemy for 2 damage
+  details: Deals 2 damage.
   title: Stab
   image: {fileID: 0}
   target: 1

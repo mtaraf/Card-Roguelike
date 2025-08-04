@@ -24,7 +24,7 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Adds frostbite threshold of 10 to the selected enemy until your next turn.
+  details: Adds frostbite threshold of 10 until your next turn.
   title: Chill
   image: {fileID: 0}
   target: 1

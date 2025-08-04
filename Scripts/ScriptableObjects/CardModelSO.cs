@@ -66,6 +66,7 @@ public class CardModelSO : ScriptableObject
     public Target target;
     public int cardsDrawn;
     public bool corrupts;
+    public CardModelSO upgradedCard;
 
     public void multiplyValues(int multiplier)
     {
@@ -95,6 +96,7 @@ public class CardModelSO : ScriptableObject
         copy.target = target;
         copy.cardsDrawn = cardsDrawn;
         copy.corrupts = corrupts;
+        copy.upgradedCard = upgradedCard;
 
         // Clone effects list
         copy.effects = new List<CardEffect>();

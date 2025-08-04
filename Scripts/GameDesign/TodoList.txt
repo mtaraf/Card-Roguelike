@@ -3,6 +3,7 @@ Add/Debug cards (TO-DO)
         - Add corrupted card display prefab for discard pile (done)
             - Add tooltip for corrupt icon
     - Apply card effects to damage done/taken for strength (+1 to all on-hit) / weakness (weakness 10%)
+    - Multi hit cards should proc on-hit multiple times (i.e. divine mark, etc.)
     - Cards to implement:
         - Acid flask: decide on poison DoT mechanic and how it will work
         - Reroll
@@ -28,6 +29,15 @@ Path Selection:
     - only allow user to click on the current level thery are on (done)
     - add highlighted icon for current path
 
+Forge:
+    - Upgrade card:
+        - add popup when clicked to confirm with before -> after, confirm/cancel button at buttom
+        - replace the card in the player deck when confirmed
+        - decrease player gold
+    - Remove card:
+        - add pupup to comfirm removal with confirm and cancel buttons
+        - remove card from player deck
+        - decrease player gold
 
 Animations List:
     - Adjust player card animations 

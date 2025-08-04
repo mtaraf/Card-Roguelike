@@ -27,7 +27,8 @@ public class Card : MonoBehaviour
             return;
         }
 
-        switch (model.rarity) {
+        switch (model.rarity)
+        {
             case CardRarity.COMMON:
                 background = Resources.Load<Sprite>("UI/Art/Cards/common_card");
                 break;
@@ -113,5 +114,16 @@ public class Card : MonoBehaviour
     public void mulitplyValues(int multiplier)
     {
         cardModel.multiplyValues(multiplier);
+    }
+
+    public CardModelSO getUpgradedCard()
+    {
+        if (cardModel.upgradedCard != null)
+        {
+            Debug.Log("upgraded card present");
+            CardModelSO clonedModel = cardModel.upgradedCard.clone();
+            return clonedModel;
+        }
+        return null;
     }
 }
