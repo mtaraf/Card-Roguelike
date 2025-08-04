@@ -47,7 +47,10 @@ public class HoverButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void setButtonFunction(Action action)
     {
         button.onClick.RemoveAllListeners();
-        button.onClick.AddListener(() => action());
+        if (action != null)
+        {
+            button.onClick.AddListener(() => action());
+        }
     }
 
     public void setButtonText(string buttonText)

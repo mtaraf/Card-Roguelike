@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
                 playerHandSize = 6;
                 playerHandEnergy = 3;
                 playerCurrentHealth = 50;
-                playerGold = 0;
+                playerGold = 30;
                 playerHandEnergy = 3;
             }
             // if (!loadGame(currentSaveSlot))
@@ -213,8 +213,7 @@ public class GameManager : MonoBehaviour
         switch (encounterReward)
         {
             case EncounterReward.Gold:
-                playerGold += 5 * currentLevel;
-                topBarUIManager.updateGoldCount(playerGold);
+                addPlayerGold(5 * currentLevel);
                 break;
             case EncounterReward.CardRarity:
                 cardRarity += 1;
@@ -227,7 +226,13 @@ public class GameManager : MonoBehaviour
 
     public void addCardToPlayerDeck(CardModelSO model)
     {
-        playerDeck.cards.Add(model);
+        CardModelSO clone = model.clone();
+        playerDeck.cards.Add(clone);
+    }
+
+    public void removeCardFromPlayerDeck(CardModelSO model)
+    {
+        playerDeck.cards.Remove(model);
     }
 
 
@@ -255,14 +260,18 @@ public class GameManager : MonoBehaviour
         return playerGold;
     }
 
+    // TO-DO: add cha-ching sound
     public void addPlayerGold(int value)
     {
         playerGold += value;
+        topBarUIManager.updateGoldCount(playerGold);
     }
 
+    // TO-DO: add gold spending sound
     public void subtractPlayerGold(int value)
     {
         playerGold -= value;
+        topBarUIManager.updateGoldCount(playerGold);
     }
 
     public int getPlayerHandSize()

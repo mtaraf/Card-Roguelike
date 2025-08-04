@@ -11,9 +11,6 @@ public class CardInteractions : MonoBehaviour//, IPointerEnterHandler, IPointerE
     private GameObject cardObj;
     private Card card;
     private Transform cardTransform;
-    private Vector3 cardStartingPosition;
-    private Vector3 cardAnimationEndingPosition;
-    private int animationDistance = 50;
     private HoverButton upgradeHoverButton;
     private CardModelSO currentCard;
 
@@ -36,50 +33,85 @@ public class CardInteractions : MonoBehaviour//, IPointerEnterHandler, IPointerE
         upgradeHoverButton = upgradeButton.GetComponent<HoverButton>();
     }
 
-    private void showUpgradedCardOnHover() {
+    private void showUpgradedCardOnHover()
+    {
         CardModelSO upgradedCard = card.getUpgradedCard();
-
         card.setCardDisplayInformation(upgradedCard);
     }
 
-    // void getUpdatedPositions()
-    // {
-    //     cardStartingPosition = cardTransform.position;
-    //     cardAnimationEndingPosition = new Vector3(cardStartingPosition.x, cardStartingPosition.y + animationDistance, cardStartingPosition.z);
-    // }
+    public IEnumerator cardUpgradeAnimation(Action onComplete = null)
+    {
+        float duration = 1.0f;
+        float tiltSpeed = 5.0f;
+        float tiltAngle = 15f;
 
-    // public void OnPointerEnter(PointerEventData eventData)
-    // {
-    //     //getUpdatedPositions();
-    //     //StartCoroutine(cardAnimation(0.2f, cardAnimationEndingPosition));
-    // }
+        Quaternion startRotation = cardTransform.rotation;
 
-    // public void OnPointerExit(PointerEventData eventData)
-    // {
-    //     //StartCoroutine(cardAnimation(0.2f, cardStartingPosition));
-    // }
+        float elapsedTime = 0f;
 
-    // IEnumerator cardAnimation(float duration, Vector3 targetPos, Action onComplete = null)
-    // {
-    //     Vector3 startPos = cardTransform.position;
-    //     float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            if (cardTransform == null)
+            {
+                yield break;
+            }
 
-    //     while (elapsedTime < duration)
-    //     {
-    //         if (cardTransform == null)
-    //         {
-    //             yield break;
-    //         }
+            float zRotation = Mathf.Sin(elapsedTime * tiltSpeed) * tiltAngle;
+            cardTransform.rotation = Quaternion.Euler(0f, 0f, zRotation);
 
-    //         float t = elapsedTime / duration;
-    //         cardTransform.position = Vector3.Lerp(startPos, targetPos, t);
-    //         elapsedTime += Time.deltaTime;
-    //         yield return null;
-    //     }
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
 
-    //     cardTransform.position = targetPos;
-    //     onComplete?.Invoke();
-    // }
+        // flip
+        cardTransform.rotation = Quaternion.Euler(0f, 90f, 0f);
+
+        onComplete?.Invoke();
+
+        // Rotate back to original rotation
+        elapsedTime = 0f;
+        duration = 0.5f;
+        while (elapsedTime < duration)
+        {
+            if (cardTransform == null) yield break;
+
+            cardTransform.rotation = Quaternion.Lerp(
+                Quaternion.Euler(0f, 90f, 0f),
+                startRotation,
+                elapsedTime / duration
+            );
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        cardTransform.rotation = startRotation;
+    }
+
+    public IEnumerator cardRemovalAnimation()
+    {
+        float duration = 1.0f;
+        float tiltSpeed = 5.0f;
+        float tiltAngle = 15f;
+
+
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            if (cardTransform == null)
+            {
+                yield break;
+            }
+
+            float zRotation = Mathf.Sin(elapsedTime * tiltSpeed) * tiltAngle;
+            cardTransform.rotation = Quaternion.Euler(0f, 0f, zRotation);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Fade card, then destroy
+    }
 
     public void fillCardInformation(CardModelSO model)
     {
@@ -89,11 +121,20 @@ public class CardInteractions : MonoBehaviour//, IPointerEnterHandler, IPointerE
         if (model.upgradedCard == null)
         {
             upgradeHoverButton.setButtonText("Fully Upgraded");
+            upgradeHoverButton.setHoverEnterAction(null);
+            upgradeHoverButton.setHoverExitAction(null);
+            upgradeHoverButton.setButtonFunction(null);
         }
         else
         {
             upgradeHoverButton.setHoverEnterAction(() => showUpgradedCardOnHover());
             upgradeHoverButton.setHoverExitAction(() => fillCardInformation(currentCard));
+            upgradeHoverButton.setButtonFunction(() => ForgeSceneController.instance.instatiateForgeUpgradeCardDisplay(model, model.upgradedCard));
         }
+    }
+
+    public CardModelSO getCurrentCard()
+    {
+        return currentCard;
     }
 }

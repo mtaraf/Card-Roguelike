@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ForgeSceneController : MonoBehaviour
@@ -6,10 +7,11 @@ public class ForgeSceneController : MonoBehaviour
     public static ForgeSceneController instance;
     private GameObject forgeCardContainer;
     private GameObject forgeScrollViewContent;
+    private GameObject forgeUpgradeCardDisplay;
     private DeckModelSO deck;
-    private int gold;
     private int containerXPosition = -1000;
     private int containerYPosition = -300;
+    private List<GameObject> displayedCards = new();
 
     void Awake()
     {
@@ -30,8 +32,8 @@ public class ForgeSceneController : MonoBehaviour
     private void InitializeScene()
     {
         deck = GameManager.instance.getPlayerDeck();
-        gold = GameManager.instance.getPlayerGold();
         forgeCardContainer = Resources.Load<GameObject>("UI/ForgeScene/ForgeCardContainer");
+        forgeUpgradeCardDisplay = Resources.Load<GameObject>("UI/ForgeScene/UpgradeCardConfirmationScreen");
         forgeScrollViewContent = GameObject.Find("ForgeScrollViewContent");
 
         if (forgeScrollViewContent == null)
@@ -58,6 +60,7 @@ public class ForgeSceneController : MonoBehaviour
         foreach (CardModelSO cardModel in deck.cards)
         {
             newCardContainer = Instantiate(forgeCardContainer, forgeScrollViewContent.transform);
+            displayedCards.Add(newCardContainer);
             newCardContainer.transform.localPosition = new Vector2(containerXPosition, containerYPosition);
 
             // Fill Card Information
@@ -73,6 +76,27 @@ public class ForgeSceneController : MonoBehaviour
             {
                 containerXPosition += 400;
             }
+        }
+    }
+
+    public void updateUpgradedCardDisplay(CardModelSO current, CardModelSO upgraded)
+    {
+        GameObject upgradedCard = displayedCards.Find((obj) => obj.GetComponent<CardInteractions>().getCurrentCard() == current);
+        CardInteractions cardInteractions = upgradedCard.GetComponent<CardInteractions>();
+        StartCoroutine(cardInteractions.cardUpgradeAnimation(() => cardInteractions.fillCardInformation(upgraded)));
+    }
+
+    public void instatiateForgeUpgradeCardDisplay(CardModelSO currentCard, CardModelSO upgradedCard)
+    {
+        if (GameManager.instance.getPlayerGold() >= 30)
+        {
+            GameObject upgradeDisplay = Instantiate(forgeUpgradeCardDisplay, forgeScrollViewContent.transform);
+            UpgradeCardConfirmation upgradeCardConfirmation = upgradeDisplay.GetComponent<UpgradeCardConfirmation>();
+            upgradeCardConfirmation.setCardInformation(currentCard, upgradedCard);
+        }
+        else
+        {
+            // TO-DO: Add not enough gold message
         }
     }
 }
