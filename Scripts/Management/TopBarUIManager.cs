@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class TopBarUIManager : MonoBehaviour
@@ -6,6 +7,7 @@ public class TopBarUIManager : MonoBehaviour
     [SerializeField] private GameObject goldCount;
     [SerializeField] private GameObject levelCount;
     [SerializeField] private GameObject cardRarity;
+    [SerializeField] private GameObject fullDeck;
     private GameObject settingsMenuPrefab;
     private GameObject settingsMenuObject;
     private SettingsMenu settingsMenu;

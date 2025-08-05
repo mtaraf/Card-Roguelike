@@ -30,15 +30,8 @@ Path Selection:
     - add highlighted icon for current path
 
 Forge:
-    - Upgrade card:
-        - add popup when clicked to confirm with before -> after, confirm/cancel button at buttom
-        - replace the card in the player deck when confirmed
-        - decrease player gold
-    - Remove card:
-        - add pupup to comfirm removal with confirm and cancel buttons
-        - remove card from player deck
-        - decrease player gold
-
+    - Add "Insufficient gold popup when trying to remove/upgrade with not enough gold"
+    - Add new animation for card removal
 Animations List:
     - Adjust player card animations 
     - Adjust enemy card animations (done)

@@ -7,7 +7,9 @@ public class ForgeSceneController : MonoBehaviour
     public static ForgeSceneController instance;
     private GameObject forgeCardContainer;
     private GameObject forgeScrollViewContent;
+    private GameObject overlayCanvas;
     private GameObject forgeUpgradeCardDisplay;
+    private GameObject forgeRemovalConfirmation;
     private DeckModelSO deck;
     private int containerXPosition = -1000;
     private int containerYPosition = -300;
@@ -34,7 +36,9 @@ public class ForgeSceneController : MonoBehaviour
         deck = GameManager.instance.getPlayerDeck();
         forgeCardContainer = Resources.Load<GameObject>("UI/ForgeScene/ForgeCardContainer");
         forgeUpgradeCardDisplay = Resources.Load<GameObject>("UI/ForgeScene/UpgradeCardConfirmationScreen");
+        forgeRemovalConfirmation = Resources.Load<GameObject>("UI/ForgeScene/RemovalConfirmation");
         forgeScrollViewContent = GameObject.Find("ForgeScrollViewContent");
+        overlayCanvas = GameObject.FindGameObjectWithTag("OverlayCanvas");
 
         if (forgeScrollViewContent == null)
         {
@@ -47,36 +51,44 @@ public class ForgeSceneController : MonoBehaviour
     private IEnumerator instantiateCards()
     {
         yield return null;
-        int deckSize = deck.cards.Count;
-        int rows = deckSize / 6;
 
-        // Adjust the scroll view width
-        RectTransform scrollViewContentRect = forgeScrollViewContent.GetComponent<RectTransform>();
-        scrollViewContentRect.sizeDelta = new Vector2(scrollViewContentRect.sizeDelta.x, rows * 800);
-
-        containerXPosition = 250;
-
-        GameObject newCardContainer;
         foreach (CardModelSO cardModel in deck.cards)
         {
-            newCardContainer = Instantiate(forgeCardContainer, forgeScrollViewContent.transform);
+            GameObject newCardContainer = Instantiate(forgeCardContainer, forgeScrollViewContent.transform);
             displayedCards.Add(newCardContainer);
-            newCardContainer.transform.localPosition = new Vector2(containerXPosition, containerYPosition);
-
-            // Fill Card Information
             newCardContainer.GetComponent<CardInteractions>().fillCardInformation(cardModel);
-
-            // adjust x/y position of next card
-            if (containerXPosition > 2000)
-            {
-                containerXPosition = 250;
-                containerYPosition -= 500;
-            }
-            else
-            {
-                containerXPosition += 400;
-            }
         }
+
+        // int deckSize = deck.cards.Count;
+        // int rows = deckSize / 6;
+
+        // // Adjust the scroll view width
+        // RectTransform scrollViewContentRect = forgeScrollViewContent.GetComponent<RectTransform>();
+        // scrollViewContentRect.sizeDelta = new Vector2(scrollViewContentRect.sizeDelta.x, rows * 800);
+
+        // containerXPosition = 250;
+
+        // GameObject newCardContainer;
+        // foreach (CardModelSO cardModel in deck.cards)
+        // {
+        //     newCardContainer = Instantiate(forgeCardContainer, forgeScrollViewContent.transform);
+        //     displayedCards.Add(newCardContainer);
+        //     newCardContainer.transform.localPosition = new Vector2(containerXPosition, containerYPosition);
+
+        //     // Fill Card Information
+        //     newCardContainer.GetComponent<CardInteractions>().fillCardInformation(cardModel);
+
+        //     // adjust x/y position of next card
+        //     if (containerXPosition > 2000)
+        //     {
+        //         containerXPosition = 250;
+        //         containerYPosition -= 500;
+        //     }
+        //     else
+        //     {
+        //         containerXPosition += 400;
+        //     }
+        // }
     }
 
     public void updateUpgradedCardDisplay(CardModelSO current, CardModelSO upgraded)
@@ -90,13 +102,39 @@ public class ForgeSceneController : MonoBehaviour
     {
         if (GameManager.instance.getPlayerGold() >= 30)
         {
-            GameObject upgradeDisplay = Instantiate(forgeUpgradeCardDisplay, forgeScrollViewContent.transform);
+            GameObject upgradeDisplay = Instantiate(forgeUpgradeCardDisplay, overlayCanvas.transform);
             UpgradeCardConfirmation upgradeCardConfirmation = upgradeDisplay.GetComponent<UpgradeCardConfirmation>();
             upgradeCardConfirmation.setCardInformation(currentCard, upgradedCard);
         }
         else
         {
             // TO-DO: Add not enough gold message
+        }
+    }
+
+    public void instatiateForgeRemovalCardConfirmation(CardModelSO card)
+    {
+        if (GameManager.instance.getPlayerGold() >= 25)
+        {
+            GameObject removalConfirmation = Instantiate(forgeRemovalConfirmation, overlayCanvas.transform);
+            CardRemovalConfirmation cardRemovalConfirmation = removalConfirmation.GetComponent<CardRemovalConfirmation>();
+            cardRemovalConfirmation.setCardInformation(card);
+        }
+        else
+        {
+            // Add insufficient gold message
+        }
+    }
+
+    public void removeCardDisplay(CardModelSO card)
+    {
+        GameObject removedCard = displayedCards.Find((obj) => obj.GetComponent<CardInteractions>().getCurrentCard() == card);
+
+        if (removedCard != null)
+        {
+            displayedCards.Remove(removedCard);
+            StartCoroutine(removedCard.GetComponent<CardInteractions>()
+            .cardRemovalAnimation(() => Destroy(removedCard)));
         }
     }
 }

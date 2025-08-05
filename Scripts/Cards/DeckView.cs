@@ -42,6 +42,11 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
         {
             Debug.LogError("Could not find UI for deck view");
         }
+
+        if (HandManager.instance == null)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)

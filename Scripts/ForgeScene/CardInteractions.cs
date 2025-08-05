@@ -12,6 +12,7 @@ public class CardInteractions : MonoBehaviour//, IPointerEnterHandler, IPointerE
     private Card card;
     private Transform cardTransform;
     private HoverButton upgradeHoverButton;
+    private HoverButton removalHoverButton;
     private CardModelSO currentCard;
 
     void Awake()
@@ -31,6 +32,7 @@ public class CardInteractions : MonoBehaviour//, IPointerEnterHandler, IPointerE
         }
 
         upgradeHoverButton = upgradeButton.GetComponent<HoverButton>();
+        removalHoverButton = removalButton.GetComponent<HoverButton>();
     }
 
     private void showUpgradedCardOnHover()
@@ -88,7 +90,7 @@ public class CardInteractions : MonoBehaviour//, IPointerEnterHandler, IPointerE
         cardTransform.rotation = startRotation;
     }
 
-    public IEnumerator cardRemovalAnimation()
+    public IEnumerator cardRemovalAnimation(Action onComplete = null)
     {
         float duration = 1.0f;
         float tiltSpeed = 5.0f;
@@ -110,7 +112,11 @@ public class CardInteractions : MonoBehaviour//, IPointerEnterHandler, IPointerE
             yield return null;
         }
 
-        // Fade card, then destroy
+        // Fade card
+
+
+        // destroy obj
+        onComplete?.Invoke();
     }
 
     public void fillCardInformation(CardModelSO model)
@@ -131,6 +137,8 @@ public class CardInteractions : MonoBehaviour//, IPointerEnterHandler, IPointerE
             upgradeHoverButton.setHoverExitAction(() => fillCardInformation(currentCard));
             upgradeHoverButton.setButtonFunction(() => ForgeSceneController.instance.instatiateForgeUpgradeCardDisplay(model, model.upgradedCard));
         }
+
+        removalHoverButton.setButtonFunction(() => ForgeSceneController.instance.instatiateForgeRemovalCardConfirmation(model));
     }
 
     public CardModelSO getCurrentCard()
