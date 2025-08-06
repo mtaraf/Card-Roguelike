@@ -171,7 +171,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7477416842158978755
 CanvasRenderer:
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3338749442709606003, guid: 7f8b92b7a03ab9e4c878ea2ef88f7103, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d9e36a00215ce54f83f8f8a49d585d2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -700,6 +700,7 @@ MonoBehaviour:
   goldCount: {fileID: 9166562326199354453}
   levelCount: {fileID: 9149391692375411693}
   cardRarity: {fileID: 8913777067939941507}
+  fullDeck: {fileID: 0}
 --- !u!1 &8913777067939941507
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,7 +31,7 @@ Path Selection:
 
 Forge:
     - Add "Insufficient gold popup when trying to remove/upgrade with not enough gold"
-    - Add new animation for card removal
+
 Animations List:
     - Adjust player card animations 
     - Adjust enemy card animations (done)
@@ -45,7 +45,6 @@ Cycle through background music playlist
 
 Art:
     - Create tooltip outline for top, bottom, left, right
-
 
 
 

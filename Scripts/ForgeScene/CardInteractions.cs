@@ -95,6 +95,7 @@ public class CardInteractions : MonoBehaviour//, IPointerEnterHandler, IPointerE
         float duration = 1.0f;
         float tiltSpeed = 5.0f;
         float tiltAngle = 15f;
+        CanvasGroup cg = GetComponent<CanvasGroup>() ?? gameObject.AddComponent<CanvasGroup>();
 
 
         float elapsedTime = 0f;
@@ -104,7 +105,7 @@ public class CardInteractions : MonoBehaviour//, IPointerEnterHandler, IPointerE
             {
                 yield break;
             }
-
+            cg.alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
             float zRotation = Mathf.Sin(elapsedTime * tiltSpeed) * tiltAngle;
             cardTransform.rotation = Quaternion.Euler(0f, 0f, zRotation);
 
@@ -112,8 +113,7 @@ public class CardInteractions : MonoBehaviour//, IPointerEnterHandler, IPointerE
             yield return null;
         }
 
-        // Fade card
-
+        cg.alpha = 0f;
 
         // destroy obj
         onComplete?.Invoke();

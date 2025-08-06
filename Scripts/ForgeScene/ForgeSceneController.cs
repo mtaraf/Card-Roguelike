@@ -11,8 +11,6 @@ public class ForgeSceneController : MonoBehaviour
     private GameObject forgeUpgradeCardDisplay;
     private GameObject forgeRemovalConfirmation;
     private DeckModelSO deck;
-    private int containerXPosition = -1000;
-    private int containerYPosition = -300;
     private List<GameObject> displayedCards = new();
 
     void Awake()
@@ -52,43 +50,19 @@ public class ForgeSceneController : MonoBehaviour
     {
         yield return null;
 
+        int deckSize = deck.cards.Count;
+        int rows = deckSize / 6;
+
+        // Adjust the scroll view height
+        RectTransform scrollViewContentRect = forgeScrollViewContent.GetComponent<RectTransform>();
+        scrollViewContentRect.sizeDelta = new Vector2(scrollViewContentRect.sizeDelta.x, rows * 800);
+
         foreach (CardModelSO cardModel in deck.cards)
         {
             GameObject newCardContainer = Instantiate(forgeCardContainer, forgeScrollViewContent.transform);
             displayedCards.Add(newCardContainer);
             newCardContainer.GetComponent<CardInteractions>().fillCardInformation(cardModel);
         }
-
-        // int deckSize = deck.cards.Count;
-        // int rows = deckSize / 6;
-
-        // // Adjust the scroll view width
-        // RectTransform scrollViewContentRect = forgeScrollViewContent.GetComponent<RectTransform>();
-        // scrollViewContentRect.sizeDelta = new Vector2(scrollViewContentRect.sizeDelta.x, rows * 800);
-
-        // containerXPosition = 250;
-
-        // GameObject newCardContainer;
-        // foreach (CardModelSO cardModel in deck.cards)
-        // {
-        //     newCardContainer = Instantiate(forgeCardContainer, forgeScrollViewContent.transform);
-        //     displayedCards.Add(newCardContainer);
-        //     newCardContainer.transform.localPosition = new Vector2(containerXPosition, containerYPosition);
-
-        //     // Fill Card Information
-        //     newCardContainer.GetComponent<CardInteractions>().fillCardInformation(cardModel);
-
-        //     // adjust x/y position of next card
-        //     if (containerXPosition > 2000)
-        //     {
-        //         containerXPosition = 250;
-        //         containerYPosition -= 500;
-        //     }
-        //     else
-        //     {
-        //         containerXPosition += 400;
-        //     }
-        // }
     }
 
     public void updateUpgradedCardDisplay(CardModelSO current, CardModelSO upgraded)
