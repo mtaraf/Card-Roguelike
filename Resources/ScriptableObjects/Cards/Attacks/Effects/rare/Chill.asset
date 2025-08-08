@@ -14,19 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   rarity: 1
-  energy: 0
+  energy: 1
   effects:
-  - type: 6
-    value: 10
+  - type: 7
+    value: 15
     turns: 1
   special: 0
   condition:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Adds frostbite threshold of 10 until your next turn.
+  details: Adds frostbite threshold of 15 until your next turn.
   title: Chill
   image: {fileID: 0}
   target: 1
   cardsDrawn: 0
   corrupts: 0
+  upgradedCard: {fileID: 11400000, guid: 0a8f02e5983b0a14c89b833d8968cf23, type: 2}

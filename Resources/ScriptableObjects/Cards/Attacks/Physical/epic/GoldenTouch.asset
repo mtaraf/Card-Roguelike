@@ -24,9 +24,10 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Deals 10 damage, gives gold based on damage dealt. Corrupts.
+  details: Deals 10 damage, gives gold equal to damage dealt. Corrupts.
   title: Golden Touch
   image: {fileID: 0}
   target: 1
   cardsDrawn: 0
   corrupts: 1
+  upgradedCard: {fileID: 11400000, guid: dd281096956702644acad0adf1c46b12, type: 2}

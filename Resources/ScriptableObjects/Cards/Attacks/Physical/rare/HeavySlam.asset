@@ -14,19 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   rarity: 1
-  energy: 0
+  energy: 3
   effects:
   - type: 0
-    value: 25
-  turns: 0
+    value: 20
+    turns: 0
   special: 0
   condition:
     conditionValue: 0
     metric: 4
   multiplier: 0
-  details: Deals 25 damage. Corrupts
+  details: Deals 20 damage. Corrupts
   title: Heavy Slam
   image: {fileID: 0}
   target: 1
   cardsDrawn: 0
   corrupts: 1
+  upgradedCard: {fileID: 11400000, guid: 665258a06064c0b48bc5292b5c1a08a2, type: 2}

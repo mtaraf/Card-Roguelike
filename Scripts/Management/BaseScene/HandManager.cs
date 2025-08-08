@@ -260,10 +260,12 @@ public enum EffectType
     Armor,
     Strength,
     Weaken,
+    Blind,
     Divinity,
     Poison,
     Frostbite,
-    HealDamageDone
+    HealDamageDone,
+    Heal
 }
 
 public static class EffectTypeExtensions
@@ -278,6 +280,7 @@ public static class EffectTypeExtensions
             case EffectType.Divinity: return "DivinityEffect";
             case EffectType.Weaken: return "WeakenEffect";
             case EffectType.Frostbite: return "FrostbiteEffect";
+            case EffectType.Blind: return "BlindEffect";
             default: return "Default";
         }
     }

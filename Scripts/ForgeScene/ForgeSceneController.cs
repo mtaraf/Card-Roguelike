@@ -111,4 +111,9 @@ public class ForgeSceneController : MonoBehaviour
             .cardRemovalAnimation(() => Destroy(removedCard)));
         }
     }
+
+    public void moveToNextEncounter()
+    {
+        SceneLoader.instance.loadScene("PathSelectionScene");
+    }
 }

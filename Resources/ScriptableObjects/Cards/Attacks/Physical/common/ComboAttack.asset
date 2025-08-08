@@ -27,3 +27,4 @@ MonoBehaviour:
   target: 1
   cardsDrawn: 0
   corrupts: 0
+  upgradedCard: {fileID: 11400000, guid: 897698c9da79a2642a307728ba4a5715, type: 2}

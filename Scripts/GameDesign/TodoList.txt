@@ -45,6 +45,7 @@ Cycle through background music playlist
 
 Art:
     - Create tooltip outline for top, bottom, left, right
+    - Make Health Bar UI in pixel art
 
 
 

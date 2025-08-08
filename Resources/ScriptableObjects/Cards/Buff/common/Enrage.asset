@@ -14,19 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   rarity: 0
-  energy: 0
+  energy: 1
   effects:
   - type: 2
-    value: 3
+    value: 2
     turns: 0
   special: 0
   condition:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Adds 3 strength. Corrupts.
+  details: Adds 2 strength. Corrupts.
   title: Enrage
   image: {fileID: 0}
   target: 2
   cardsDrawn: 0
   corrupts: 1
+  upgradedCard: {fileID: 11400000, guid: b51b42f18b9968a439752f2b4faac1e9, type: 2}

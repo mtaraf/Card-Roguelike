@@ -19,7 +19,7 @@ MonoBehaviour:
   - type: 0
     value: 8
     turns: 0
-  - type: 4
+  - type: 5
     value: 1
     turns: 0
   special: 0
@@ -34,3 +34,4 @@ MonoBehaviour:
   target: 1
   cardsDrawn: 0
   corrupts: 1
+  upgradedCard: {fileID: 11400000, guid: 5944d9a45acec43479ff96f68ace4d70, type: 2}

@@ -41,7 +41,7 @@ public class BaseLevelSceneController : MonoBehaviour
         HandManager.instance.Initialize();
 
         // Get Enemy Group prefabs
-        foreach (GameObject singleEnemy in Resources.LoadAll<GameObject>("EnemyPrefabs/Regular/ES1"))
+        foreach (GameObject singleEnemy in Resources.LoadAll<GameObject>("CharacterPrefabs/Enemies/ES1"))
         {
             EnemyGroup enemyGroup = new EnemyGroup();
             enemyGroup.size = 1;

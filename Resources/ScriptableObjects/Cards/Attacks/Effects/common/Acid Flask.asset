@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   rarity: 0
-  energy: 0
+  energy: 2
   effects:
-  - type: 5
+  - type: 6
     value: 2
     turns: 3
   special: 0
@@ -30,3 +30,4 @@ MonoBehaviour:
   target: 1
   cardsDrawn: 0
   corrupts: 0
+  upgradedCard: {fileID: 11400000, guid: ee1e8e01cdb7be74fad48e7e15480492, type: 2}

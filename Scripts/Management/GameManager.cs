@@ -159,7 +159,6 @@ public class GameManager : MonoBehaviour
     public void updateDiscardPile(int count)
     {
         baseLevelUIController.updateDiscardPile(count);
-        Debug.Log("discard pile count:" + count);
     }
 
     private DeckModelSO cloneDeck(DeckModelSO deck)
