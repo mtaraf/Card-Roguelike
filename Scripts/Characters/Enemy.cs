@@ -39,7 +39,7 @@ public class Enemy : Character
         {
             BaseLevelSceneController.instance.removeDeadEnemy(id);
             dead = false;
-            animator.SetTrigger("die");
+            animator.SetTrigger("death");
         }
     }
 

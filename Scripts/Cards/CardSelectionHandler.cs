@@ -118,7 +118,6 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                     if (BaseLevelSceneController.instance.getCurrentPlayerEnergy() >= cardEnergy)
                     {
                         // Use card
-                        Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on player");
                         List<CardEffect> effects = HandManager.instance.useSelectedCard();
                         player.processCardEffects(effects);
 

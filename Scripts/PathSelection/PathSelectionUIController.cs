@@ -10,6 +10,7 @@ public class PathSelectionUIController : MonoBehaviour
     private GameObject scrollViewContent;
     [SerializeField] private GameObject pathSelectionIcon;
     [SerializeField] private GameObject arrowIndicator;
+    [SerializeField] private GameObject highlightedArrowIndicator;
     [SerializeField] private Vector2 mapStartingPosition;
     private Dictionary<int, GameObject> nodeIdToGameObject = new();
     private float height;
@@ -25,6 +26,7 @@ public class PathSelectionUIController : MonoBehaviour
 
         pathSelectionIcon = Resources.Load<GameObject>("UI/PathSelectionUI/PathIconContainer");
         arrowIndicator = Resources.Load<GameObject>("UI/PathSelectionUI/ArrowIndicator");
+        highlightedArrowIndicator = Resources.Load<GameObject>("UI/PathSelectionUI/HighlightedArrowIndicator");
     }
 
     public void fillUIWithCurrentEncounterMap(EncounterMap map, int levels)
@@ -34,18 +36,21 @@ public class PathSelectionUIController : MonoBehaviour
             Debug.LogError("Map is null when trying to fill ui");
             return;
         }
+
+
         List<int> interactableNodeIds;
         EncounterNode currentNode = map.nodes.Find((node) => node.id == map.currentEncounterId);
+        
         if (currentNode != null)
         {
             interactableNodeIds = currentNode.progressPathIds;
         }
         else
         {
-            interactableNodeIds = new List<int>{0};
+            interactableNodeIds = new List<int> { 0 };
         }
-        GameObject icon;
 
+        GameObject icon;
         float x_position = mapStartingPosition.x;
         float y_position = 0;
         int numberOfNodesOnLevel;
@@ -54,6 +59,8 @@ public class PathSelectionUIController : MonoBehaviour
         // Adjust the scroll view width
         RectTransform scrollViewContentRect = scrollViewContent.GetComponent<RectTransform>();
         scrollViewContentRect.sizeDelta = new Vector2(x_position + (200 * levels) + 1000, scrollViewContentRect.sizeDelta.y);
+
+        Debug.Log(map.currentEncounterId);
 
         // Creating all the icons
         for (int i = 0; i < levels; i++)
@@ -88,19 +95,20 @@ public class PathSelectionUIController : MonoBehaviour
         {
             if (!nodeIdToGameObject.ContainsKey(node.id)) continue;
             GameObject fromIcon = nodeIdToGameObject[node.id];
-
+            bool completedNode = node.completed;
             foreach (EncounterNode targetNode in node.progressPaths)
             {
+
                 if (!nodeIdToGameObject.ContainsKey(targetNode.id)) continue;
                 GameObject toIcon = nodeIdToGameObject[targetNode.id];
-                createArrowBetween(fromIcon.GetComponent<RectTransform>(), toIcon.GetComponent<RectTransform>());
+                createArrowBetween(fromIcon.GetComponent<RectTransform>(), toIcon.GetComponent<RectTransform>(), completedNode);
             }
         }
     }
 
-    private void createArrowBetween(RectTransform from, RectTransform to)
+    private void createArrowBetween(RectTransform from, RectTransform to, bool completed)
     {
-        GameObject arrow = Instantiate(arrowIndicator, scrollViewContent.transform);
+        GameObject arrow = completed ? Instantiate(highlightedArrowIndicator, scrollViewContent.transform) : Instantiate(arrowIndicator, scrollViewContent.transform);
         RectTransform arrowRect = arrow.GetComponent<RectTransform>();
 
         // Add 85 to start/end outside the icon container

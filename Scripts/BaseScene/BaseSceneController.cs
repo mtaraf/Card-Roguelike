@@ -41,11 +41,22 @@ public class BaseLevelSceneController : MonoBehaviour
         HandManager.instance.Initialize();
 
         // Get Enemy Group prefabs
+
+        // Single Enemies
         foreach (GameObject singleEnemy in Resources.LoadAll<GameObject>("CharacterPrefabs/Enemies/ES1"))
         {
             EnemyGroup enemyGroup = new EnemyGroup();
             enemyGroup.size = 1;
             enemyGroup.enemyParentObj = singleEnemy;
+            enemyPrefabs.Add(enemyGroup);
+        }
+
+        // Two Enemies
+        foreach (GameObject enemies in Resources.LoadAll<GameObject>("CharacterPrefabs/Enemies/ES2"))
+        {
+            EnemyGroup enemyGroup = new EnemyGroup();
+            enemyGroup.size = 2;
+            enemyGroup.enemyParentObj = enemies;
             enemyPrefabs.Add(enemyGroup);
         }
 
@@ -76,7 +87,7 @@ public class BaseLevelSceneController : MonoBehaviour
         }
         else
         {
-            int randomSize = Random.Range(1, 2); // TO-DO: change back to 1,5 after testing
+            int randomSize = Random.Range(1, 3); // TO-DO: change back to 1,5 after testing
             List<EnemyGroup> enemyGroups = enemyPrefabs.FindAll((group) => group.size == randomSize);
 
             int randomGroup = Random.Range(0, enemyGroups.Count);

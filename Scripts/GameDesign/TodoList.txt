@@ -20,14 +20,16 @@ Add/Debug cards (TO-DO)
     - Add tooltips to effects
 - Check if enemy dies from start of turn effects
 
-- Fix discard and draw pile numbers (done)
 - Re-do the Deck View UI
     - new background image, deckview icon, corrupt card prefab
 
+Base Scene:
+    - Add floating feedback for healing
+    - Work on victory card selection screen
+    - Fix death for enemies
+    - death animations should not loop
+
 Path Selection:
-    - Change arrow color if path is taken
-    - only allow user to click on the current level thery are on (done)
-    - add highlighted icon for current path
 
 Forge:
     - Add "Insufficient gold popup when trying to remove/upgrade with not enough gold"
@@ -61,26 +63,5 @@ Game loops:
         - Leads to one big boss (should be very hard to beat)
             - Find ideal # of encounters so the player can build a deck with synergy
             - Defeating boss, gives different starter deck maybe? or increases hand/deck size?
-        
-        -TO-DO:
-            - Path Selection Scene
-                - UI with interactable/hoverable locations
-            - Forge Scene
-                - User can select a card within the deck to show what it will become
-                - Submit button after viewing the enhanced card
-            - Reward Scene after encounter
-                - UI for card selection
-                - UI for card removal
 
 
-Ideas:
-    - Boss Mechanics:
-        - Stun meter: After certain damage threshold, they are stunned for a turn
-
-    - Encounter Mechanics:
-        - Enemy cards injected into draw pile, will disappear after discarded or played (unstable keyword)
-
-    - Rewards:
-        - Unstable cards (one use, really OP, used when in trouble or bosses)?
-        - Removal of cards
-        - Upgrading cards (max of 1-2 upgrades depending on card, maybe less rare has more upgrades to balance the epic/rare cards)

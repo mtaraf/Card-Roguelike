@@ -2,7 +2,7 @@ using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TargetableObject : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
+public class TargetableObject : MonoBehaviour
 {
     [SerializeField] private GameObject targetSprites;
 
@@ -71,15 +71,6 @@ public class TargetableObject : MonoBehaviour, IPointerClickHandler, IPointerEnt
         }
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        // For hover on target, probably stop animations when they are in
-    }
 
     public void showTarget()
     {

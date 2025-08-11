@@ -35,6 +35,7 @@ public class PathSelectionIcon : MonoBehaviour
         {
             iconImage.sprite = Resources.Load<Sprite>(info.iconPath);
             string message = info.message + "\n\n" + reward.ToDisplayString();
+            message = completed ? message + " Completed!" : message;
             tooltip.setTooltipData(info.title, message);
         }
 
@@ -48,6 +49,7 @@ public class PathSelectionIcon : MonoBehaviour
         {
             iconButton.onClick.AddListener(() =>
             PathSelectionSceneController.instance.navigateToScene(nodeId));
+            container.sprite = Resources.Load<Sprite>("UI/Art/Icons/current_icon_container");
         }
 
         updateRewardIcon(reward);

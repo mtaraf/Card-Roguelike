@@ -160,7 +160,7 @@ public class EncounterNode
     public EncounterType type;
     [NonSerialized] public List<EncounterNode> progressPaths = new List<EncounterNode>();
     public List<int> progressPathIds = new();
-    public bool completed;
+    public bool completed = false;
     public EncounterReward encounterReward;
     public int rewardValue;
 

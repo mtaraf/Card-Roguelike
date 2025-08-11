@@ -18,6 +18,7 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
     [SerializeField] private DeckViewType view;
     [SerializeField] private GameObject deckViewUI;
     [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private GameObject corruptCardPrefab;
     [SerializeField] private TextMeshProUGUI currentDeckCount;
 
 
@@ -94,7 +95,7 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
                 scrollViewContentRect.sizeDelta = new Vector2(scrollViewContentRect.sizeDelta.x, scrollViewContentRect.sizeDelta.y + corruptedCards.Count / 5 * 800);
                 foreach (CardModelSO model in corruptedCards)
                 {
-                    GameObject cardObj = Instantiate(cardPrefab, content.transform);
+                    GameObject cardObj = Instantiate(corruptCardPrefab, content.transform);
                     Card cardComponent = cardObj.GetComponent<Card>();
                     cardComponent.setCardDisplayInformation(model);
                     cardObj.SetActive(true);
