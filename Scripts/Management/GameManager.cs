@@ -309,12 +309,6 @@ public class GameManager : MonoBehaviour
         return playerCurrentHealth;
     }
 
-    public void updatePlayerHealth(int current, int max)
-    {
-        playerCurrentHealth = current;
-        playerMaxHealth = max;
-    }
-
     public DeckModelSO getStarterDeck()
     {
         return starterDeck;
