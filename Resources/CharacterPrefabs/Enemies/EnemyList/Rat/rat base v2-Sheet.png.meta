@@ -1,0 +1,1066 @@
+fileFormatVersion: 2
+guid: f1b1e8710114d3d47867cc613b9670ae
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4356651741459562575
+    second: rat base v2-Sheet_0
+  - first:
+      213: 9010366943343214587
+    second: rat base v2-Sheet_1
+  - first:
+      213: 8220122575663041413
+    second: rat base v2-Sheet_2
+  - first:
+      213: 4528950622974884336
+    second: rat base v2-Sheet_3
+  - first:
+      213: -5029292366627913125
+    second: rat base v2-Sheet_4
+  - first:
+      213: 3403462893720720360
+    second: rat base v2-Sheet_5
+  - first:
+      213: -3965665278027449090
+    second: rat base v2-Sheet_6
+  - first:
+      213: -5783532962349768871
+    second: rat base v2-Sheet_7
+  - first:
+      213: -8558700367936667700
+    second: rat base v2-Sheet_8
+  - first:
+      213: -2750939472093232443
+    second: rat base v2-Sheet_9
+  - first:
+      213: 2077710964253532724
+    second: rat base v2-Sheet_10
+  - first:
+      213: 7782670590893068309
+    second: rat base v2-Sheet_11
+  - first:
+      213: 6241400733332611707
+    second: rat base v2-Sheet_12
+  - first:
+      213: -4595916031192647590
+    second: rat base v2-Sheet_13
+  - first:
+      213: 3299980743699747214
+    second: rat base v2-Sheet_14
+  - first:
+      213: -8999320540632152761
+    second: rat base v2-Sheet_15
+  - first:
+      213: 7413723458073878020
+    second: rat base v2-Sheet_16
+  - first:
+      213: -3281379764128518011
+    second: rat base v2-Sheet_17
+  - first:
+      213: -4164927211740034110
+    second: rat base v2-Sheet_18
+  - first:
+      213: -5847860865567848853
+    second: rat base v2-Sheet_19
+  - first:
+      213: 9076994687111441151
+    second: rat base v2-Sheet_20
+  - first:
+      213: 4574862609590233029
+    second: rat base v2-Sheet_21
+  - first:
+      213: -7590641903951158604
+    second: rat base v2-Sheet_22
+  - first:
+      213: 2263868053453748258
+    second: rat base v2-Sheet_23
+  - first:
+      213: -3003718398115811623
+    second: rat base v2-Sheet_24
+  - first:
+      213: 6421908881165488369
+    second: rat base v2-Sheet_25
+  - first:
+      213: 681135639920232939
+    second: rat base v2-Sheet_26
+  - first:
+      213: 1887495783757182374
+    second: rat base v2-Sheet_27
+  - first:
+      213: 5448755943338737548
+    second: rat base v2-Sheet_28
+  - first:
+      213: -2048962656565796470
+    second: rat base v2-Sheet_29
+  - first:
+      213: 2405814539826030843
+    second: rat base v2-Sheet_30
+  - first:
+      213: 968486008289927167
+    second: rat base v2-Sheet_31
+  - first:
+      213: 257717698177061375
+    second: rat base v2-Sheet_32
+  - first:
+      213: -1177372568573740831
+    second: rat base v2-Sheet_33
+  - first:
+      213: 4428702098596237586
+    second: rat base v2-Sheet_34
+  - first:
+      213: 3767386550001653812
+    second: rat base v2-Sheet_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: rat base v2-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 399
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f40c8c32dafe57c30800000000000000
+      internalID: 4356651741459562575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 399
+        width: 26
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfff4e9fef04b0d70800000000000000
+      internalID: 9010366943343214587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 399
+        width: 26
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58b80943eedb31270800000000000000
+      internalID: 8220122575663041413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 399
+        width: 25
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f9b3bf98901ade30800000000000000
+      internalID: 4528950622974884336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 399
+        width: 25
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b524f872d3d543ab0800000000000000
+      internalID: -5029292366627913125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 399
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e3527238778b3f20800000000000000
+      internalID: 3403462893720720360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 399
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efcb21dc07027f8c0800000000000000
+      internalID: -3965665278027449090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 399
+        width: 27
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95f1168c963ccbfa0800000000000000
+      internalID: -5783532962349768871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 399
+        width: 26
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccf312e7c53693980800000000000000
+      internalID: -8558700367936667700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 399
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c2484f0023b2d9d0800000000000000
+      internalID: -2750939472093232443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 335
+        width: 24
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43224422d1385dc10800000000000000
+      internalID: 2077710964253532724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 335
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5109f060ba9910c60800000000000000
+      internalID: 7782670590893068309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 335
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b72272b06e8ed9650800000000000000
+      internalID: 6241400733332611707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 271
+        width: 24
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a583d3748b60830c0800000000000000
+      internalID: -4595916031192647590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 271
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e815ad99003ebcd20800000000000000
+      internalID: 3299980743699747214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 273
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7458eb316adfb1380800000000000000
+      internalID: -8999320540632152761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 208
+        width: 27
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40e597d9436d2e660800000000000000
+      internalID: 7413723458073878020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 208
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 580f6f17d723672d0800000000000000
+      internalID: -3281379764128518011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 208
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cb80e484c43336c0800000000000000
+      internalID: -4164927211740034110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 143
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b668beba68938dea0800000000000000
+      internalID: -5847860865567848853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 143
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffaa2617396f7fd70800000000000000
+      internalID: 9076994687111441151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 143
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c7a7d40e4d2d7f30800000000000000
+      internalID: 4574862609590233029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 143
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b2ebc1c76f98a690800000000000000
+      internalID: -7590641903951158604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 143
+        width: 38
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22837780000ea6f10800000000000000
+      internalID: 2263868053453748258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 143
+        width: 41
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9de60030806a056d0800000000000000
+      internalID: -3003718398115811623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 143
+        width: 39
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f09bc94a143f1950800000000000000
+      internalID: 6421908881165488369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 143
+        width: 30
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be9cd457141e37900800000000000000
+      internalID: 681135639920232939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 143
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a5f4e93a6bb13a10800000000000000
+      internalID: 1887495783757182374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 79
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8ff08669aedd9b40800000000000000
+      internalID: 5448755943338737548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 79
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a81ea59d15f9093e0800000000000000
+      internalID: -2048962656565796470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_30
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 15
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf8ecc1d39b236120800000000000000
+      internalID: 2405814539826030843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_31
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 15
+        width: 23
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fff9e0ea4e0c07d00800000000000000
+      internalID: 968486008289927167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_32
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 15
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff1dc2c81e8939300800000000000000
+      internalID: 257717698177061375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_33
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 15
+        width: 31
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e87fd903e129afe0800000000000000
+      internalID: -1177372568573740831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_34
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 15
+        width: 34
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2111bda2819e57d30800000000000000
+      internalID: 4428702098596237586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat base v2-Sheet_35
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 15
+        width: 34
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 438de645b12784430800000000000000
+      internalID: 3767386550001653812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      rat base v2-Sheet_0: 4356651741459562575
+      rat base v2-Sheet_1: 9010366943343214587
+      rat base v2-Sheet_10: 2077710964253532724
+      rat base v2-Sheet_11: 7782670590893068309
+      rat base v2-Sheet_12: 6241400733332611707
+      rat base v2-Sheet_13: -4595916031192647590
+      rat base v2-Sheet_14: 3299980743699747214
+      rat base v2-Sheet_15: -8999320540632152761
+      rat base v2-Sheet_16: 7413723458073878020
+      rat base v2-Sheet_17: -3281379764128518011
+      rat base v2-Sheet_18: -4164927211740034110
+      rat base v2-Sheet_19: -5847860865567848853
+      rat base v2-Sheet_2: 8220122575663041413
+      rat base v2-Sheet_20: 9076994687111441151
+      rat base v2-Sheet_21: 4574862609590233029
+      rat base v2-Sheet_22: -7590641903951158604
+      rat base v2-Sheet_23: 2263868053453748258
+      rat base v2-Sheet_24: -3003718398115811623
+      rat base v2-Sheet_25: 6421908881165488369
+      rat base v2-Sheet_26: 681135639920232939
+      rat base v2-Sheet_27: 1887495783757182374
+      rat base v2-Sheet_28: 5448755943338737548
+      rat base v2-Sheet_29: -2048962656565796470
+      rat base v2-Sheet_3: 4528950622974884336
+      rat base v2-Sheet_30: 2405814539826030843
+      rat base v2-Sheet_31: 968486008289927167
+      rat base v2-Sheet_32: 257717698177061375
+      rat base v2-Sheet_33: -1177372568573740831
+      rat base v2-Sheet_34: 4428702098596237586
+      rat base v2-Sheet_35: 3767386550001653812
+      rat base v2-Sheet_4: -5029292366627913125
+      rat base v2-Sheet_5: 3403462893720720360
+      rat base v2-Sheet_6: -3965665278027449090
+      rat base v2-Sheet_7: -5783532962349768871
+      rat base v2-Sheet_8: -8558700367936667700
+      rat base v2-Sheet_9: -2750939472093232443
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

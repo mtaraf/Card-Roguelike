@@ -46,6 +46,9 @@ public class GameManager : MonoBehaviour
     private EncounterReward encounterReward;
     private int encounterRewardValue;
 
+    // Scene
+    private string currentScene;
+
 
     public void Awake()
     {
@@ -67,6 +70,7 @@ public class GameManager : MonoBehaviour
 
     private void onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        currentScene = scene.name;
         Debug.Log($"Game Manager detected scene loaded: {scene.name}");
         if (scene.buildIndex != 0)
         {
@@ -107,10 +111,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(updateUI());
         }
 
-        if (scene.buildIndex == 1)
-        {
-            StartCoroutine(waitForBaseLevelUI());
-        }
+        StartCoroutine(waitForUI());
     }
 
     private IEnumerator updateUI()
@@ -133,32 +134,51 @@ public class GameManager : MonoBehaviour
         victoryCardPools.Insert(3, cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/MythicVictoryCards")));
     }
 
-    private IEnumerator waitForBaseLevelUI()
+    private IEnumerator waitForUI()
     {
         yield return null;
-        baseLevelUIController = FindFirstObjectByType<BaseLevelUIController>();
-        if (baseLevelUIController == null)
-        {
-            baseLevelUIController = transform.AddComponent<BaseLevelUIController>();
-        }
-
-        baseLevelUIController.Initialize();
-
-
         victoryManager = transform.AddComponent<VictoryManager>();
         victoryManager.instantiate();
 
-        player = BaseLevelSceneController.instance.getPlayer();
+
+        getPlayer();
+    }
+
+    private void getPlayer()
+    {
+        if (currentScene == "BaseLevelScene")
+        {
+            player = BaseLevelSceneController.instance.getPlayer();
+        }
+        else if (currentScene == "CulverScene")
+        {
+            player = CulverSceneController.instance.getPlayer();
+        }
     }
 
     public void updateDrawPile(int count)
     {
-        baseLevelUIController.updateDrawPile(count);
+        if (currentScene == "BaseLevelScene")
+        {
+            BaseLevelSceneController.instance.updateDrawPile(count);
+        }
+        else
+        {
+            CulverSceneController.instance.updateDrawPile(count);
+        }
     }
 
     public void updateDiscardPile(int count)
     {
         baseLevelUIController.updateDiscardPile(count);
+        if (currentScene == "BaseLevelScene")
+        {
+            BaseLevelSceneController.instance.updateDiscardPile(count);
+        }
+        else
+        {
+            CulverSceneController.instance.updateDiscardPile(count);
+        }
     }
 
     private DeckModelSO cloneDeck(DeckModelSO deck)

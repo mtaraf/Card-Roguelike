@@ -33,6 +33,44 @@ public class TurnManager : MonoBehaviour
         this.enemies = enemies;
     }
 
+    // Culver Scene Turns
+    public void startCulver(int turns)
+    {
+        Debug.Log("Start Culver Turns: " + turns);
+        StartCoroutine(culverTurnLoop(turns));
+    }
+
+    public IEnumerator culverTurnLoop(int turns)
+    {
+        int currentTurn = 1;
+        while (currentTurn <= turns && enemies.Count > 0)
+        {
+            yield return StartCoroutine(playerCulverTurn());
+            endPlayerTurn();
+
+            CulverSceneController.instance.updateTurnCount(currentTurn);
+            yield return new WaitForSeconds(1.5f);
+        }
+
+        if (enemies.Count == 0)
+            StartCoroutine(GameManager.instance.encounterVictory(goldEarned));
+    }
+
+    private IEnumerator playerCulverTurn()
+    {
+        Debug.Log("Player Culver Turn");
+        yield return new WaitForSeconds(0.2f);
+
+        player.processStartOfTurnEffects();
+        CulverSceneController.instance.resetPlayerEnergy();
+        HandManager.instance.drawCards(GameManager.instance.getPlayerHandSize());
+
+        endPlayerTurnBool = false;
+        yield return new WaitUntil(() => endPlayerTurnBool || enemies.Count == 0);
+    }
+
+
+    // Base Scene Turns
     public void startTurns()
     {
         StartCoroutine(turnLoop());

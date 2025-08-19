@@ -9,7 +9,7 @@ public class BaseLevelUIController : MonoBehaviour
     private DeckView drawPile;
     private DeckView discardPile;
 
-    public void Initialize()
+    public virtual void Initialize()
     {
         endTurnButton = GameObject.FindGameObjectWithTag("EndTurnButton");
         GameObject drawPileObj = GameObject.FindGameObjectWithTag("DrawPile");

@@ -23,11 +23,18 @@ Add/Debug cards (TO-DO)
 - Re-do the Deck View UI
     - new background image, deckview icon, corrupt card prefab
 
+- Add new effect 'Take Damage'
+
 Base Scene:
     - Add floating feedback for healing
     - Work on victory card selection screen
     - Fix death for enemies
     - death animations should not loop
+
+Culver's: 
+    - MAKE ALL MANAGERS SCENE AGNOSTIC
+    - MAKE PARENTSCENECONTROLLER
+
 
 Path Selection:
 

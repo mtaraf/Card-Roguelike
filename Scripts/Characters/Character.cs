@@ -21,7 +21,6 @@ public class Character : MonoBehaviour
     protected TargetableObject targetableObject;
     protected GameObject floatingFeedbackUI;
     protected Color floatingFeedbackColor = Color.crimson;
-    protected Transform mainCanvasTransfrom;
     protected RectTransform characterRect;
 
     // Animations
@@ -55,8 +54,6 @@ public class Character : MonoBehaviour
         // UI set up
         uIUpdater = GetComponent<UIUpdater>();
         uIUpdater.setHealth(currentHealth, maxHealth);
-        
-        mainCanvasTransfrom = BaseLevelSceneController.instance.getMainCanvasTransfom();
 
         if (uIUpdater == null)
         {

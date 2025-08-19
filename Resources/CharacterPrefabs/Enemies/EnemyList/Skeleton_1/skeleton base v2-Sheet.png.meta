@@ -1,0 +1,1612 @@
+fileFormatVersion: 2
+guid: a68c97b106c8a714685d393987b2bfa2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8399224006767002833
+    second: skeleton base v2-Sheet_0
+  - first:
+      213: 4635749915248902753
+    second: skeleton base v2-Sheet_1
+  - first:
+      213: 6642971459225967122
+    second: skeleton base v2-Sheet_2
+  - first:
+      213: 2644632985562178045
+    second: skeleton base v2-Sheet_3
+  - first:
+      213: 3331293937243742820
+    second: skeleton base v2-Sheet_4
+  - first:
+      213: 321653608381880772
+    second: skeleton base v2-Sheet_5
+  - first:
+      213: -3069323844520713826
+    second: skeleton base v2-Sheet_6
+  - first:
+      213: -8291140675674462082
+    second: skeleton base v2-Sheet_7
+  - first:
+      213: 7274824349705026035
+    second: skeleton base v2-Sheet_8
+  - first:
+      213: -8869892874601575975
+    second: skeleton base v2-Sheet_9
+  - first:
+      213: 6298662267401752746
+    second: skeleton base v2-Sheet_10
+  - first:
+      213: 5941469371784107381
+    second: skeleton base v2-Sheet_11
+  - first:
+      213: 3796165488936884244
+    second: skeleton base v2-Sheet_12
+  - first:
+      213: -8440574438272601105
+    second: skeleton base v2-Sheet_13
+  - first:
+      213: -1215975336470816187
+    second: skeleton base v2-Sheet_14
+  - first:
+      213: -3719662818817482606
+    second: skeleton base v2-Sheet_15
+  - first:
+      213: -2321062585315742225
+    second: skeleton base v2-Sheet_16
+  - first:
+      213: -1691918260235561169
+    second: skeleton base v2-Sheet_17
+  - first:
+      213: -2690790095310199167
+    second: skeleton base v2-Sheet_18
+  - first:
+      213: 7311095154534736959
+    second: skeleton base v2-Sheet_19
+  - first:
+      213: -1145129217287485615
+    second: skeleton base v2-Sheet_20
+  - first:
+      213: 2652264855668869207
+    second: skeleton base v2-Sheet_21
+  - first:
+      213: -8322069206771666327
+    second: skeleton base v2-Sheet_22
+  - first:
+      213: 3367537243439898969
+    second: skeleton base v2-Sheet_23
+  - first:
+      213: -7540213175787711697
+    second: skeleton base v2-Sheet_24
+  - first:
+      213: -5290986739748363952
+    second: skeleton base v2-Sheet_25
+  - first:
+      213: 6133075039695641656
+    second: skeleton base v2-Sheet_26
+  - first:
+      213: -7361046432568035920
+    second: skeleton base v2-Sheet_27
+  - first:
+      213: 6042605450416403940
+    second: skeleton base v2-Sheet_28
+  - first:
+      213: 8544109457792031680
+    second: skeleton base v2-Sheet_29
+  - first:
+      213: 8333077565770662294
+    second: skeleton base v2-Sheet_30
+  - first:
+      213: 7153204830795634867
+    second: skeleton base v2-Sheet_31
+  - first:
+      213: 8713521657180780215
+    second: skeleton base v2-Sheet_32
+  - first:
+      213: -5122738102373345061
+    second: skeleton base v2-Sheet_33
+  - first:
+      213: -8592969732939226477
+    second: skeleton base v2-Sheet_34
+  - first:
+      213: 8747765776566517732
+    second: skeleton base v2-Sheet_35
+  - first:
+      213: -2700492594881974931
+    second: skeleton base v2-Sheet_36
+  - first:
+      213: 465804247600698325
+    second: skeleton base v2-Sheet_37
+  - first:
+      213: 8527251750846888036
+    second: skeleton base v2-Sheet_38
+  - first:
+      213: -7087497574191469396
+    second: skeleton base v2-Sheet_39
+  - first:
+      213: -4243350414700459384
+    second: skeleton base v2-Sheet_40
+  - first:
+      213: -6004518269327730250
+    second: skeleton base v2-Sheet_41
+  - first:
+      213: -4987478988183201579
+    second: skeleton base v2-Sheet_42
+  - first:
+      213: -5473606326539251459
+    second: skeleton base v2-Sheet_43
+  - first:
+      213: -7263186469185680692
+    second: skeleton base v2-Sheet_44
+  - first:
+      213: 1539758509129362750
+    second: skeleton base v2-Sheet_45
+  - first:
+      213: 6098711331793607320
+    second: skeleton base v2-Sheet_46
+  - first:
+      213: -4148373271611586451
+    second: skeleton base v2-Sheet_47
+  - first:
+      213: 19828772073762589
+    second: skeleton base v2-Sheet_48
+  - first:
+      213: -8845156804106150237
+    second: skeleton base v2-Sheet_49
+  - first:
+      213: 3109278686682156849
+    second: skeleton base v2-Sheet_50
+  - first:
+      213: -6185854534618937725
+    second: skeleton base v2-Sheet_51
+  - first:
+      213: 5877708610416870174
+    second: skeleton base v2-Sheet_52
+  - first:
+      213: -4821444401772816839
+    second: skeleton base v2-Sheet_53
+  - first:
+      213: -4823544120311469889
+    second: skeleton base v2-Sheet_54
+  - first:
+      213: -5344711187473535103
+    second: skeleton base v2-Sheet_55
+  - first:
+      213: 7014962463238877150
+    second: skeleton base v2-Sheet_56
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 335
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2b38bf4446ff6b80800000000000000
+      internalID: -8399224006767002833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 335
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16245f59cfd755040800000000000000
+      internalID: 4635749915248902753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 335
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21ad830a853903c50800000000000000
+      internalID: 6642971459225967122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 335
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df1e6b140bf93b420800000000000000
+      internalID: 2644632985562178045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 335
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46263db9f222b3e20800000000000000
+      internalID: 3331293937243742820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 335
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c9135ca04eb67400800000000000000
+      internalID: 321653608381880772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 335
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e91e4b2b9329765d0800000000000000
+      internalID: -3069323844520713826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 335
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e78a1abdb73ffec80800000000000000
+      internalID: -8291140675674462082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 335
+        width: 16
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f9b78fc33e55f460800000000000000
+      internalID: 7274824349705026035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 335
+        width: 16
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d9ca9ddc6fc7e480800000000000000
+      internalID: -8869892874601575975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 335
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa053a0e5f7596750800000000000000
+      internalID: 6298662267401752746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 271
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5751e051ae6547250800000000000000
+      internalID: 5941469371784107381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 271
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4181ea43660bea430800000000000000
+      internalID: 3796165488936884244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 271
+        width: 20
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe3f48ab44e0dda80800000000000000
+      internalID: -8440574438272601105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 271
+        width: 20
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54a550ebfdcff1fe0800000000000000
+      internalID: -1215975336470816187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 271
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 290e728bf5a116cc0800000000000000
+      internalID: -3719662818817482606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 271
+        width: 16
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fed2ecc40ede9cfd0800000000000000
+      internalID: -2321062585315742225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 271
+        width: 14
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2799a57e491588e0800000000000000
+      internalID: -1691918260235561169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 271
+        width: 15
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18665eb2aa468aad0800000000000000
+      internalID: -2690790095310199167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 207
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f346f15ae4a367560800000000000000
+      internalID: 7311095154534736959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 207
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15788a54b0fab10f0800000000000000
+      internalID: -1145129217287485615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 207
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 758456c75dcbec420800000000000000
+      internalID: 2652264855668869207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 207
+        width: 38
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 962782e0622128c80800000000000000
+      internalID: -8322069206771666327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 207
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 951222be745ebbe20800000000000000
+      internalID: 3367537243439898969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 207
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f23147ef018cb5790800000000000000
+      internalID: -7540213175787711697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 207
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0512ff1d793a296b0800000000000000
+      internalID: -5290986739748363952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 207
+        width: 19
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83c9fd1114f0d1550800000000000000
+      internalID: 6133075039695641656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 207
+        width: 14
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b530a3254f48d990800000000000000
+      internalID: -7361046432568035920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 207
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e5b8ed54a5abd350800000000000000
+      internalID: 6042605450416403940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 143
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cbdfb18846c29670800000000000000
+      internalID: 8544109457792031680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_30
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 143
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 691898145e905a370800000000000000
+      internalID: 8333077565770662294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_31
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 143
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b89e21f4e9454360800000000000000
+      internalID: 7153204830795634867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_32
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 143
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b6feeee7c5ace870800000000000000
+      internalID: 8713521657180780215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_33
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 143
+        width: 18
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd89daa56d068e8b0800000000000000
+      internalID: -5122738102373345061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_34
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 143
+        width: 20
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 392697e2e83afb880800000000000000
+      internalID: -8592969732939226477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_35
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 143
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4eff09a40ae466970800000000000000
+      internalID: 8747765776566517732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_36
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 143
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6dac73fa4ce58ad0800000000000000
+      internalID: -2700492594881974931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_37
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 143
+        width: 29
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d39b19ce7ed67600800000000000000
+      internalID: 465804247600698325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_38
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 143
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4687e8fb942e65670800000000000000
+      internalID: 8527251750846888036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_39
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 143
+        width: 20
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cacefd7e18624ad90800000000000000
+      internalID: -7087497574191469396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_40
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 143
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88ac542b7479c15c0800000000000000
+      internalID: -4243350414700459384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_41
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 79
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b99065827aabaca0800000000000000
+      internalID: -6004518269327730250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_42
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 79
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d89d98f84ae8cab0800000000000000
+      internalID: -4987478988183201579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_43
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 15
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df01c42eb08d904b0800000000000000
+      internalID: -5473606326539251459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_44
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 34
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cca83c6636af33b90800000000000000
+      internalID: -7263186469185680692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_45
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 22
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3d6a80c4325e5510800000000000000
+      internalID: 1539758509129362750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_46
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 31
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89a1537d4a9f2a450800000000000000
+      internalID: 6098711331793607320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_47
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 34
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d68cddd0d740e66c0800000000000000
+      internalID: -4148373271611586451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_48
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 15
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1fe9c3c922764000800000000000000
+      internalID: 19828772073762589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_49
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 32
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ae9f9410c0bf3580800000000000000
+      internalID: -8845156804106150237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_50
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 15
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13f026bed70662b20800000000000000
+      internalID: 3109278686682156849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_51
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 24
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3868cc7231e672aa0800000000000000
+      internalID: -6185854534618937725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_52
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 15
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e130729f6d0d19150800000000000000
+      internalID: 5877708610416870174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_53
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 20
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93619089cd9c61db0800000000000000
+      internalID: -4821444401772816839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_54
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 15
+        width: 23
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb82966cd245f0db0800000000000000
+      internalID: -4823544120311469889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_55
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 15
+        width: 25
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18f65931e75c3d5b0800000000000000
+      internalID: -5344711187473535103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton base v2-Sheet_56
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 15
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edf6d0681372a5160800000000000000
+      internalID: 7014962463238877150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      skeleton base v2-Sheet_0: -8399224006767002833
+      skeleton base v2-Sheet_1: 4635749915248902753
+      skeleton base v2-Sheet_10: 6298662267401752746
+      skeleton base v2-Sheet_11: 5941469371784107381
+      skeleton base v2-Sheet_12: 3796165488936884244
+      skeleton base v2-Sheet_13: -8440574438272601105
+      skeleton base v2-Sheet_14: -1215975336470816187
+      skeleton base v2-Sheet_15: -3719662818817482606
+      skeleton base v2-Sheet_16: -2321062585315742225
+      skeleton base v2-Sheet_17: -1691918260235561169
+      skeleton base v2-Sheet_18: -2690790095310199167
+      skeleton base v2-Sheet_19: 7311095154534736959
+      skeleton base v2-Sheet_2: 6642971459225967122
+      skeleton base v2-Sheet_20: -1145129217287485615
+      skeleton base v2-Sheet_21: 2652264855668869207
+      skeleton base v2-Sheet_22: -8322069206771666327
+      skeleton base v2-Sheet_23: 3367537243439898969
+      skeleton base v2-Sheet_24: -7540213175787711697
+      skeleton base v2-Sheet_25: -5290986739748363952
+      skeleton base v2-Sheet_26: 6133075039695641656
+      skeleton base v2-Sheet_27: -7361046432568035920
+      skeleton base v2-Sheet_28: 6042605450416403940
+      skeleton base v2-Sheet_29: 8544109457792031680
+      skeleton base v2-Sheet_3: 2644632985562178045
+      skeleton base v2-Sheet_30: 8333077565770662294
+      skeleton base v2-Sheet_31: 7153204830795634867
+      skeleton base v2-Sheet_32: 8713521657180780215
+      skeleton base v2-Sheet_33: -5122738102373345061
+      skeleton base v2-Sheet_34: -8592969732939226477
+      skeleton base v2-Sheet_35: 8747765776566517732
+      skeleton base v2-Sheet_36: -2700492594881974931
+      skeleton base v2-Sheet_37: 465804247600698325
+      skeleton base v2-Sheet_38: 8527251750846888036
+      skeleton base v2-Sheet_39: -7087497574191469396
+      skeleton base v2-Sheet_4: 3331293937243742820
+      skeleton base v2-Sheet_40: -4243350414700459384
+      skeleton base v2-Sheet_41: -6004518269327730250
+      skeleton base v2-Sheet_42: -4987478988183201579
+      skeleton base v2-Sheet_43: -5473606326539251459
+      skeleton base v2-Sheet_44: -7263186469185680692
+      skeleton base v2-Sheet_45: 1539758509129362750
+      skeleton base v2-Sheet_46: 6098711331793607320
+      skeleton base v2-Sheet_47: -4148373271611586451
+      skeleton base v2-Sheet_48: 19828772073762589
+      skeleton base v2-Sheet_49: -8845156804106150237
+      skeleton base v2-Sheet_5: 321653608381880772
+      skeleton base v2-Sheet_50: 3109278686682156849
+      skeleton base v2-Sheet_51: -6185854534618937725
+      skeleton base v2-Sheet_52: 5877708610416870174
+      skeleton base v2-Sheet_53: -4821444401772816839
+      skeleton base v2-Sheet_54: -4823544120311469889
+      skeleton base v2-Sheet_55: -5344711187473535103
+      skeleton base v2-Sheet_56: 7014962463238877150
+      skeleton base v2-Sheet_6: -3069323844520713826
+      skeleton base v2-Sheet_7: -8291140675674462082
+      skeleton base v2-Sheet_8: 7274824349705026035
+      skeleton base v2-Sheet_9: -8869892874601575975
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

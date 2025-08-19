@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BaseLevelSceneController : MonoBehaviour
@@ -13,6 +14,7 @@ public class BaseLevelSceneController : MonoBehaviour
     // UI
     private GameObject mainCanvas;
     private GameObject playerEnergyUI;
+    private BaseLevelUIController baseLevelUIController;
 
     // Game States
     private Player player;
@@ -21,6 +23,7 @@ public class BaseLevelSceneController : MonoBehaviour
 
     void Start()
     {
+        baseLevelUIController = transform.AddComponent<BaseLevelUIController>();
         InitializeScene();
     }
 
@@ -37,6 +40,9 @@ public class BaseLevelSceneController : MonoBehaviour
 
     void InitializeScene()
     {
+        baseLevelUIController.Initialize();
+
+
         mainCanvas = GameObject.FindGameObjectWithTag("BaseLevelCanvas");
         HandManager.instance.Initialize();
 
@@ -216,6 +222,16 @@ public class BaseLevelSceneController : MonoBehaviour
     public Player getPlayer()
     {
         return player;
+    }
+
+    public void updateDrawPile(int count)
+    {
+        baseLevelUIController.updateDrawPile(count);
+    }
+
+    public void updateDiscardPile(int count)
+    {
+        baseLevelUIController.updateDiscardPile(count);
     }
 }
 
