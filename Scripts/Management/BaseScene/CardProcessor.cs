@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CardProcessor
 {
-    private readonly BaseLevelSceneController sceneController;
+    private readonly ParentSceneController sceneController;
 
-    public CardProcessor(BaseLevelSceneController controller)
+    public CardProcessor(ParentSceneController controller)
     {
         sceneController = controller;
     }

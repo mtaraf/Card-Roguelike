@@ -21,6 +21,8 @@ public class TurnManager : MonoBehaviour
     private Player player;
     private int goldEarned = 20;
 
+    private ParentSceneController sceneController;
+
     public void Awake()
     {
         if (instance != null) { Destroy(gameObject); return; }
@@ -31,6 +33,7 @@ public class TurnManager : MonoBehaviour
     {
         this.player = player;
         this.enemies = enemies;
+        sceneController = GameManager.instance.getCurrentSceneController();
     }
 
     // Culver Scene Turns
@@ -109,7 +112,7 @@ public class TurnManager : MonoBehaviour
         }
 
         player.processStartOfTurnEffects();
-        BaseLevelSceneController.instance.resetPlayerEnergy();
+        sceneController.resetPlayerEnergy();
         HandManager.instance.drawCards(GameManager.instance.getPlayerHandSize());
 
         endPlayerTurnBool = false;

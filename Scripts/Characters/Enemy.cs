@@ -30,14 +30,14 @@ public class Enemy : Character
 
         currentHealth = maxHealth;
 
-        cardProcessor = new CardProcessor(BaseLevelSceneController.instance);
+        cardProcessor = new CardProcessor(sceneController);
     }
 
     public void Update()
     {
         if (currentHealth < 1 && dead)
         {
-            BaseLevelSceneController.instance.removeDeadEnemy(id);
+            sceneController.removeDeadEnemy(id);
             dead = false;
             animator.SetTrigger("death");
         }

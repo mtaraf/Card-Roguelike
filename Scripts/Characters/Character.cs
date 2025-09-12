@@ -27,6 +27,8 @@ public class Character : MonoBehaviour
     [SerializeField] protected GameObject spriteObject;
     protected Animator animator;
 
+    protected ParentSceneController sceneController;
+
     public virtual void Start()
     {
         // Initializers
@@ -50,6 +52,8 @@ public class Character : MonoBehaviour
     private IEnumerator findComponentsAfterFrame()
     {
         yield return null;
+
+        sceneController = GameManager.instance.getCurrentSceneController();
 
         // UI set up
         uIUpdater = GetComponent<UIUpdater>();
@@ -174,7 +178,7 @@ public class Character : MonoBehaviour
         {
             if (enemy == null)
             {
-                BaseLevelSceneController.instance.healPlayer(damageDealt);
+                sceneController.healPlayer(damageDealt);
             }
             else
             {
@@ -187,7 +191,7 @@ public class Character : MonoBehaviour
         {
             if (enemy == null)
             {
-                BaseLevelSceneController.instance.healPlayer(5);
+                sceneController.healPlayer(5);
             }
             else
             {

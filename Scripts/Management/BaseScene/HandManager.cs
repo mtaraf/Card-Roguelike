@@ -12,6 +12,7 @@ public class HandManager : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private HandUIController handUI;
     private CardProcessor cardProcessor;
+    private ParentSceneController sceneController;
 
     // Decks
     private ObservableDeck drawPile;
@@ -38,13 +39,20 @@ public class HandManager : MonoBehaviour
 
     public void Initialize()
     {
-        StartCoroutine(createDecksAfterStartHasRun());
+        sceneController = GameManager.instance.getCurrentSceneController();
 
+        if (sceneController == null)
+        {
+            Debug.LogError("Could not find scene controller in hand manager");
+            return;
+        }
+
+        StartCoroutine(createDecksAfterStartHasRun(sceneController));
         cardSlotsList = new List<GameObject>();
     }
 
     // Any data that is created in Start() functions of other files needs to be accessed after the first frame
-    private IEnumerator createDecksAfterStartHasRun()
+    private IEnumerator createDecksAfterStartHasRun(ParentSceneController controller)
     {
         yield return null;
 
@@ -74,7 +82,7 @@ public class HandManager : MonoBehaviour
             cardSlotsList.Add(cardSlots.transform.Find(cardSlotName).gameObject);
         }
 
-        cardProcessor = new CardProcessor(BaseLevelSceneController.instance);
+        cardProcessor = new CardProcessor(controller);
 
         corruptedCards = ScriptableObject.CreateInstance<DeckModelSO>();
         corruptedCards.cards = new List<CardModelSO>();
@@ -191,7 +199,7 @@ public class HandManager : MonoBehaviour
     public List<CardEffect> useSelectedCard()
     {
         // Get player attributes
-        Dictionary<EffectType, int> playerAttributes = BaseLevelSceneController.instance.getPlayerAttributes();
+        Dictionary<EffectType, int> playerAttributes = sceneController.getPlayerAttributes();
 
         // Get card effects
         List<CardEffect> effects = cardProcessor.processCard(selectedCard, playerAttributes);
@@ -252,6 +260,7 @@ public class HandManager : MonoBehaviour
     {
         cardProcessor.checkOnDeathEffect(lastCardPlayed);
     }
+
 }
 
 public enum EffectType

@@ -32,8 +32,13 @@ Base Scene:
     - death animations should not loop
 
 Culver's: 
-    - MAKE ALL MANAGERS SCENE AGNOSTIC
-    - MAKE PARENTSCENECONTROLLER
+    - Link up turn count to UI
+
+
+General:
+    - Add classes to cards
+    - only allow class cards to show up
+    - create deck for class cards
 
 
 Path Selection:

@@ -19,6 +19,8 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
     private float cardMoveSpeed = 0.4f;
     private float cardHoverSpeed = 0.1f;
 
+    private ParentSceneController sceneController;
+
     private void Start()
     {
         handUIController = HandManager.instance.getHandUIContoller();
@@ -27,6 +29,13 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
         startPos = transform.position;
         startScale = transform.localScale;
         originalIndex = transform.parent.gameObject.transform.GetSiblingIndex();
+        StartCoroutine(getController());
+    }
+
+    private IEnumerator getController()
+    {
+        yield return null;
+        sceneController = GameManager.instance.getCurrentSceneController();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -115,15 +124,14 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                 {
                     // Check if player has enough energy to use the card
                     int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
-                    if (BaseLevelSceneController.instance.getCurrentPlayerEnergy() >= cardEnergy)
+                    if (sceneController.getCurrentPlayerEnergy() >= cardEnergy)
                     {
                         // Use card
                         List<CardEffect> effects = HandManager.instance.useSelectedCard();
                         player.processCardEffects(effects);
 
                         // update player energy
-                        //GameManager.instance.usePlayerEnergy(cardEnergy);
-                        BaseLevelSceneController.instance.usePlayerEnergy(cardEnergy);
+                        sceneController.usePlayerEnergy(cardEnergy);
 
                         // card animation
                         StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
@@ -143,9 +151,9 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                     Card selectedCardModel = HandManager.instance.getSelectedCard();
                     if (selectedCardModel.getCardTarget() == Target.Enemy_Multiple)
                     {
-                        List<Enemy> enemies = BaseLevelSceneController.instance.getEnemies();
+                        List<Enemy> enemies = sceneController.getEnemies();
                         int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
-                        if (BaseLevelSceneController.instance.getCurrentPlayerEnergy() < cardEnergy)
+                        if (sceneController.getCurrentPlayerEnergy() < cardEnergy)
                         {
                             // If player does not have energy for the card, but tries to play, display feedback message
                             StartCoroutine(HandManager.instance.displayFeedbackMessage("Not enough energy!"));
@@ -165,7 +173,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                             }
 
                             // update player energy
-                            BaseLevelSceneController.instance.usePlayerEnergy(cardEnergy);
+                            sceneController.usePlayerEnergy(cardEnergy);
 
                             // card animation
                             StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
@@ -180,14 +188,14 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                         {
                             // Check if player has enough energy to use the card
                             int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
-                            if (BaseLevelSceneController.instance.getCurrentPlayerEnergy() >= cardEnergy)
+                            if (sceneController.getCurrentPlayerEnergy() >= cardEnergy)
                             {
                                 // Use card
                                 List<CardEffect> effects = HandManager.instance.useSelectedCard();
                                 enemy.processCardEffects(effects);
 
                                 // update player energy
-                                BaseLevelSceneController.instance.usePlayerEnergy(cardEnergy);
+                                sceneController.usePlayerEnergy(cardEnergy);
 
                                 // card animation
                                 StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));

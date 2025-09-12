@@ -92,10 +92,15 @@ public class PathSelectionSceneController : MonoBehaviour
                 SceneLoader.instance.loadScene("BaseLevelScene", () => GameManager.instance.loadEncounterTypeAndRewards(map));
                 break;
             case EncounterType.Mini_Boss_Encounter:
+                // TODO: Change this
                 SceneLoader.instance.loadScene("BaseLevelScene", () => GameManager.instance.loadEncounterTypeAndRewards(map));
                 break;
             case EncounterType.Final_Boss:
+                // TODO: Change this
                 SceneLoader.instance.loadScene("BaseLevelScene", () => GameManager.instance.loadEncounterTypeAndRewards(map));
+                break;
+            case EncounterType.Culver_Encounter:
+                SceneLoader.instance.loadScene("CulverScene", () => GameManager.instance.loadEncounterTypeAndRewards(map));
                 break;
         }
     }

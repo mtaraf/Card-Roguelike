@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
 
     // Controllers
     private TopBarUIManager topBarUIManager;
-    private BaseLevelUIController baseLevelUIController;
     private VictoryManager victoryManager;
     private int currentSaveSlot = -1;
 
@@ -32,6 +31,7 @@ public class GameManager : MonoBehaviour
     private int cardRarity = 0;
     private int cardChoices = 3;
     [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
+    private ParentSceneController currentSceneController;
 
     // UI
     [SerializeField] private List<GameObject> turnBasedStatuses = new List<GameObject>();
@@ -121,6 +121,16 @@ public class GameManager : MonoBehaviour
         topBarUIManager.Initialize(playerGold, currentLevel, cardRarity);
     }
 
+    public void setCurrentSceneController(ParentSceneController controller)
+    {
+        currentSceneController = controller;
+    }
+
+    public ParentSceneController getCurrentSceneController()
+    {
+        return currentSceneController;
+    }
+
     private void initializePrefabs()
     {
         turnBasedStatuses = new List<GameObject>(Resources.LoadAll<GameObject>("UI/Effects/TurnBasedEffects"));
@@ -146,39 +156,17 @@ public class GameManager : MonoBehaviour
 
     private void getPlayer()
     {
-        if (currentScene == "BaseLevelScene")
-        {
-            player = BaseLevelSceneController.instance.getPlayer();
-        }
-        else if (currentScene == "CulverScene")
-        {
-            player = CulverSceneController.instance.getPlayer();
-        }
+        currentSceneController.getPlayer();
     }
 
     public void updateDrawPile(int count)
     {
-        if (currentScene == "BaseLevelScene")
-        {
-            BaseLevelSceneController.instance.updateDrawPile(count);
-        }
-        else
-        {
-            CulverSceneController.instance.updateDrawPile(count);
-        }
+        currentSceneController.updateDrawPile(count);
     }
 
     public void updateDiscardPile(int count)
     {
-        baseLevelUIController.updateDiscardPile(count);
-        if (currentScene == "BaseLevelScene")
-        {
-            BaseLevelSceneController.instance.updateDiscardPile(count);
-        }
-        else
-        {
-            CulverSceneController.instance.updateDiscardPile(count);
-        }
+        currentSceneController.updateDiscardPile(count);
     }
 
     private DeckModelSO cloneDeck(DeckModelSO deck)

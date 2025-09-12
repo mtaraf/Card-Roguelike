@@ -33,6 +33,7 @@ public class CulverSceneController : ParentSceneController
 
     public override void InitializeScene()
     {
+        GameManager.instance.setCurrentSceneController(instance);
         culverSceneUIController.Initialize();
         updateTurnCount(1);
 
@@ -53,12 +54,12 @@ public class CulverSceneController : ParentSceneController
         culverSceneUIController.updateTurnCount(currentTurn, turns);
     }
 
-    public void updateDrawPile(int count)
+    public override void updateDrawPile(int count)
     {
         culverSceneUIController.updateDrawPile(count);
     }
 
-    public void updateDiscardPile(int count)
+    public override void updateDiscardPile(int count)
     {
         culverSceneUIController.updateDiscardPile(count);
     }

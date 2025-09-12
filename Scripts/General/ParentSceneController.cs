@@ -23,8 +23,8 @@ public class ParentSceneController : MonoBehaviour
 
     public virtual void InitializeScene()
     {
-        mainCanvas = GameObject.FindGameObjectWithTag("BaseLevelCanvas");
         HandManager.instance.Initialize();
+        mainCanvas = GameObject.FindGameObjectWithTag("BaseLevelCanvas");
 
         // Spawn player
         GameObject playerObj = Instantiate(playerPrefab, mainCanvas.transform);
@@ -114,5 +114,13 @@ public class ParentSceneController : MonoBehaviour
     public Player getPlayer()
     {
         return player;
+    }
+
+    public virtual void updateDrawPile(int count)
+    {
+    }
+
+    public virtual void updateDiscardPile(int count)
+    {
     }
 }
