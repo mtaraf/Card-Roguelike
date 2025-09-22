@@ -127,7 +127,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                     if (sceneController.getCurrentPlayerEnergy() >= cardEnergy)
                     {
                         // Use card
-                        List<CardEffect> effects = HandManager.instance.useSelectedCard();
+                        List<CardEffect> effects = HandManager.instance.useSelectedCard(null);
                         player.processCardEffects(effects);
 
                         // update player energy
@@ -162,7 +162,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                         {
                             // Use card
                             Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on all enemies");
-                            List<CardEffect> effects = HandManager.instance.useSelectedCard();
+                            List<CardEffect> effects = HandManager.instance.useSelectedCard(enemies);
 
                             foreach (Enemy enemy in enemies)
                             {
@@ -191,7 +191,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                             if (sceneController.getCurrentPlayerEnergy() >= cardEnergy)
                             {
                                 // Use card
-                                List<CardEffect> effects = HandManager.instance.useSelectedCard();
+                                List<CardEffect> effects = HandManager.instance.useSelectedCard(new List<Enemy>{enemy});
                                 enemy.processCardEffects(effects);
 
                                 // update player energy

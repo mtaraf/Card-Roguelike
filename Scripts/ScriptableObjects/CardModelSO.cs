@@ -65,6 +65,7 @@ public class CardModelSO : ScriptableObject
     public Sprite image;
     public Target target;
     public int cardsDrawn;
+    public int cardsDiscarded;
     public bool corrupts;
     public CardModelSO upgradedCard;
 
@@ -97,6 +98,7 @@ public class CardModelSO : ScriptableObject
         copy.cardsDrawn = cardsDrawn;
         copy.corrupts = corrupts;
         copy.upgradedCard = upgradedCard;
+        copy.cardsDiscarded = cardsDiscarded;
 
         // Clone effects list
         copy.effects = new List<CardEffect>();

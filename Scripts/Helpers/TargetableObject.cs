@@ -15,6 +15,7 @@ public class TargetableObject : MonoBehaviour
 
     private Enemy enemy;
     private bool targetable = false;
+    private bool hasUpdated = false;
 
     void Start()
     {
@@ -56,21 +57,41 @@ public class TargetableObject : MonoBehaviour
 
     void Update()
     {
-        if (HandManager.instance.hasSelectedCard())
-        {
-            // Check if this object can be targeted before showing target
-            Card card = HandManager.instance.getSelectedCard();
-            if ((card.getCardTarget() == Target.Player && !isEnemy) || (card.getCardTarget() != Target.Player && isEnemy))
-            {
-                showTarget();
-            }
-        }
-        else
+        if (!HandManager.instance.hasSelectedCard())
         {
             hideTarget();
+            hasUpdated = false;
+        }
+        else if (!hasUpdated)
+        {
+            updateTarget();
+            hasUpdated = true;
         }
     }
 
+    public bool checkEnemyForSpecialParameters(Card card)
+    {
+        switch (card.getCardTitle())
+        {
+            case "Divine Smite":
+            case "Divine Smite+":
+                if (!enemy.hasAttribute(EffectType.Divinity))
+                {
+                    return false;
+                }
+                break;
+        }
+        return true;
+    }
+
+    public bool checkPlayerForSpecialParameters(Card card)
+    {
+        switch (card.getCardTitle())
+        {
+        }
+
+        return true;
+    }
 
     public void showTarget()
     {
@@ -87,5 +108,40 @@ public class TargetableObject : MonoBehaviour
     public bool isTargetable()
     {
         return targetable;
+    }
+
+    public void updateTarget()
+    {
+        // Check if this object can be targeted before showing target
+        Card card = HandManager.instance.getSelectedCard();
+        bool targetable = false;
+
+        if (card.isSpecial())
+        {
+            if (!isEnemy && card.getCardTarget() == Target.Player)
+            {
+                targetable = checkPlayerForSpecialParameters(card);
+            }
+            else if (isEnemy && card.getCardTarget() != Target.Player)
+            {
+                targetable = checkEnemyForSpecialParameters(card);
+            }
+
+            if (!targetable)
+            {
+                    hideTarget();
+                return;
+            }
+        }
+
+        if ((card.getCardTarget() == Target.Player && !isEnemy) || (card.getCardTarget() != Target.Player && isEnemy))
+        {
+            targetable = true;
+        }
+
+        if (targetable)
+        {
+            showTarget();
+        }
     }
 }

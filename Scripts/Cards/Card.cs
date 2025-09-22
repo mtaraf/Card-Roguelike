@@ -91,6 +91,11 @@ public class Card : MonoBehaviour
         return cardModel.cardsDrawn;
     }
 
+    public int getCardsDiscarded()
+    {
+        return cardModel.cardsDiscarded;
+    }
+
     public bool isSpecial()
     {
         return cardModel.special;

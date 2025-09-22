@@ -42,6 +42,7 @@ public class Character : MonoBehaviour
         attributes.Add(EffectType.Divinity, 0);
         attributes.Add(EffectType.Poison, 0);
         attributes.Add(EffectType.Frostbite, 0);
+        attributes.Add(EffectType.Blind, 0);
 
         initializeEndTurnBehaviors();
 
@@ -54,6 +55,10 @@ public class Character : MonoBehaviour
         yield return null;
 
         sceneController = GameManager.instance.getCurrentSceneController();
+        if (sceneController == null)
+        {
+            Debug.LogError("Could not find scene controller for character!");
+        }
 
         // UI set up
         uIUpdater = GetComponent<UIUpdater>();
@@ -81,6 +86,7 @@ public class Character : MonoBehaviour
         {
             Debug.Log("Process Card Enemy: " + enemy.currentHealth);
         }
+
         foreach (CardEffect effect in effects)
         {
             addAudioCue(effect);
@@ -310,6 +316,12 @@ public class Character : MonoBehaviour
     public Dictionary<EffectType, int> getAttributes()
     {
         return attributes;
+    }
+
+    public bool hasAttribute(EffectType effectType)
+    {
+        Debug.Log(attributes[effectType]);
+        return attributes[effectType] > 0;
     }
 
     public bool checkifTargetable()

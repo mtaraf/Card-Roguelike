@@ -3,16 +3,24 @@ using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum PlayerClass
+{
+    Paladin,
+    Fighter
+}
 
 public class Player : Character
 {
     private Deck deck = null;
+    private PlayerClass playerClass;
 
     // Attributes
 
     public override void Start()
     {
         base.Start();
+
+        playerClass = PlayerClass.Paladin;
     }
 
     public bool hasDeck()
@@ -49,5 +57,10 @@ public class Player : Character
     {
         deck = new Deck(deckModel);
         HandManager.instance.setPlayerDeck(deck.deck);
+    }
+
+    public PlayerClass getPlayerClass()
+    {
+        return playerClass;
     }
 }

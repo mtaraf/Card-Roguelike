@@ -82,8 +82,12 @@ public class HandManager : MonoBehaviour
             cardSlotsList.Add(cardSlots.transform.Find(cardSlotName).gameObject);
         }
 
-        cardProcessor = new CardProcessor(controller);
-
+        cardProcessor = player.getPlayerClass() switch
+        {
+            PlayerClass.Paladin => new PaladinCardProcessor(controller),
+            _ => new CardProcessor(controller),
+        };
+        
         corruptedCards = ScriptableObject.CreateInstance<DeckModelSO>();
         corruptedCards.cards = new List<CardModelSO>();
 
@@ -196,13 +200,13 @@ public class HandManager : MonoBehaviour
     }
 
     // Card Processing
-    public List<CardEffect> useSelectedCard()
+    public List<CardEffect> useSelectedCard(List<Enemy> enemies)
     {
         // Get player attributes
         Dictionary<EffectType, int> playerAttributes = sceneController.getPlayerAttributes();
 
         // Get card effects
-        List<CardEffect> effects = cardProcessor.processCard(selectedCard, playerAttributes);
+        List<CardEffect> effects = cardProcessor.processCard(selectedCard, playerAttributes,enemies);
 
         // Add card to discard pile and remove card
         if (selectedCard.isCorrupt())

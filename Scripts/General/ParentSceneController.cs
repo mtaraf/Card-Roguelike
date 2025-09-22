@@ -98,6 +98,7 @@ public class ParentSceneController : MonoBehaviour
 
     public void processEnemyCardEffectsOnPlayer(List<CardEffect> effects, Enemy enemy)
     {
+        Debug.Log("parentscene");
         player.processCardEffects(effects, enemy);
     }
 

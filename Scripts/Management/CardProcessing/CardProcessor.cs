@@ -1,31 +1,30 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CardProcessor
 {
-    private readonly ParentSceneController sceneController;
+    protected ParentSceneController sceneController;
 
-    public CardProcessor(ParentSceneController controller)
+    public CardProcessor(ParentSceneController parentSceneController)
     {
-        sceneController = controller;
+        sceneController = parentSceneController;
     }
 
-    public List<CardEffect> processCard(Card card, Dictionary<EffectType, int> attributes)
+    public virtual List<CardEffect> processCard(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies)
     {
         List<CardEffect> cardEffects = applyEffectsToCardDamage(card.getEffects(), attributes);
 
-        if (card.isSpecial())
-        {
-            sceneController.playAnimationsForCard(card.getCardType());
-            return processSpecialCard(card, attributes);
-        }
-
         int draw = card.getCardsToDraw();
+        int discard = card.getCardsDiscarded();
 
         if (draw > 0)
         {
             HandManager.instance.drawCards(draw);
+        }
+
+        if (discard > 0)
+        {
+            // TO-DO: add discard functionality to parent scene controller and call here
         }
 
         sceneController.playAnimationsForCard(card.getCardType());
@@ -47,7 +46,7 @@ public class CardProcessor
     }
 
     // applies Strenth and Weakness attributes to the Cards effects
-    List<CardEffect> applyEffectsToCardDamage(List<CardEffect> cardEffects, Dictionary<EffectType, int> attributes)
+    protected List<CardEffect> applyEffectsToCardDamage(List<CardEffect> cardEffects, Dictionary<EffectType, int> attributes)
     {
         // Deep copy the effects
         List<CardEffect> modifiedEffects = new List<CardEffect>();
@@ -72,7 +71,7 @@ public class CardProcessor
         return modifiedEffects;
     }
 
-    private List<CardEffect> processSpecialCard(Card specialCard, Dictionary<EffectType, int> attributes)
+    protected virtual List<CardEffect> processSpecialCard(Card specialCard, Dictionary<EffectType, int> attributes, List<Enemy> enemies)
     {
         List<CardEffect> cardEffects = new List<CardEffect>();
 

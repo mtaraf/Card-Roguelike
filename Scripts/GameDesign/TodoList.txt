@@ -39,6 +39,10 @@ General:
     - Add classes to cards
     - only allow class cards to show up
     - create deck for class cards
+    - rework blind to last indefinetly, max 3 stacks
+    - add discard UI and functionality to parent scene controller
+    - Add heal functionality
+    - Adjust enemy positioning
 
 
 Path Selection:
@@ -60,6 +64,7 @@ Cycle through background music playlist
 Art:
     - Create tooltip outline for top, bottom, left, right
     - Make Health Bar UI in pixel art
+    - Make new card background for each class
 
 
 

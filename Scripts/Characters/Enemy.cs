@@ -30,7 +30,17 @@ public class Enemy : Character
 
         currentHealth = maxHealth;
 
+        StartCoroutine(findComponentsAfterFrame());
+    }
+
+    private IEnumerator findComponentsAfterFrame()
+    {
+        yield return null;
         cardProcessor = new CardProcessor(sceneController);
+        if (sceneController == null)
+        {
+            Debug.LogError("Could not find scene controller for enemy!");
+        }
     }
 
     public void Update()

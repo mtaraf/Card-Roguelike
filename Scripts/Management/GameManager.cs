@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
     {
         turnBasedStatuses = new List<GameObject>(Resources.LoadAll<GameObject>("UI/Effects/TurnBasedEffects"));
         valueBasedStatuses = new List<GameObject>(Resources.LoadAll<GameObject>("UI/Effects/ValueBasedEffects"));
-        starterDeck = Resources.Load<DeckModelSO>("ScriptableObjects/Decks/StarterDeck");
+        starterDeck = Resources.Load<DeckModelSO>("ScriptableObjects/Decks/PaladinTestDeck");
 
         // Get Victory Card Pools
         victoryCardPools.Insert(0, cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/CommonVictoryCards")));
