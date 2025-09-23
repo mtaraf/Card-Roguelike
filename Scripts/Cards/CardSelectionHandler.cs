@@ -5,12 +5,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler, IPointerClickHandler
+public class CardSelectionHandler : MonoBehaviour,
+IPointerEnterHandler,
+IPointerExitHandler,
+ISelectHandler,
+IDeselectHandler,
+IPointerClickHandler
 {
     [SerializeField] private float verticalMoveAmount = 300f;
 
     private Vector3 startPos;
-    private Vector3 startScale;
     private int originalIndex = -1;
 
     private HandUIController handUIController;
@@ -26,8 +30,8 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
         handUIController = HandManager.instance.getHandUIContoller();
         centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI");
 
+
         startPos = transform.position;
-        startScale = transform.localScale;
         originalIndex = transform.parent.gameObject.transform.GetSiblingIndex();
         StartCoroutine(getController());
     }
@@ -38,6 +42,8 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
         sceneController = GameManager.instance.getCurrentSceneController();
     }
 
+
+    // Selecting
     public void OnPointerEnter(PointerEventData eventData)
     {
         // Only allow card animation if a card is not selected for playing
@@ -110,6 +116,39 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
         }
     }
 
+    private void useCard(List<Enemy> enemies, Player player, int cardEnergy)
+    {
+        // Card animation
+        StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
+
+        // Check if discards needed
+
+        // use card
+        if (player == null)
+        {
+            List<CardEffect> effects = HandManager.instance.useSelectedCard(enemies);
+
+            foreach (Enemy enemy in enemies)
+            {
+                if (enemy.checkifTargetable())
+                {
+                    enemy.processCardEffects(effects);
+                }
+            }
+        }
+        else
+        {
+            List<CardEffect> effects = HandManager.instance.useSelectedCard(null);
+            player.processCardEffects(effects);
+        }
+
+        // update player energy
+        sceneController.usePlayerEnergy(cardEnergy);
+
+        // Clear card
+        HandManager.instance.clearSelectedCard();
+    }
+
     // if a card is selected, use card on clicked object if possible 
     public void OnDeselect(BaseEventData eventData)
     {
@@ -126,18 +165,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                     int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
                     if (sceneController.getCurrentPlayerEnergy() >= cardEnergy)
                     {
-                        // Use card
-                        List<CardEffect> effects = HandManager.instance.useSelectedCard(null);
-                        player.processCardEffects(effects);
-
-                        // update player energy
-                        sceneController.usePlayerEnergy(cardEnergy);
-
-                        // card animation
-                        StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
-                        
-
-                        HandManager.instance.clearSelectedCard();
+                        useCard(null, player, cardEnergy);
                         return;
                     }
                     else
@@ -160,25 +188,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                         }
                         else
                         {
-                            // Use card
-                            Debug.Log(HandManager.instance.getSelectedCard().getCardModel().name + " used on all enemies");
-                            List<CardEffect> effects = HandManager.instance.useSelectedCard(enemies);
-
-                            foreach (Enemy enemy in enemies)
-                            {
-                                if (enemy.checkifTargetable())
-                                {
-                                    enemy.processCardEffects(effects);
-                                }
-                            }
-
-                            // update player energy
-                            sceneController.usePlayerEnergy(cardEnergy);
-
-                            // card animation
-                            StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
-
-                            HandManager.instance.clearSelectedCard();
+                            useCard(enemies, null, cardEnergy);
                         }
                     }
                     else
@@ -190,17 +200,7 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
                             int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
                             if (sceneController.getCurrentPlayerEnergy() >= cardEnergy)
                             {
-                                // Use card
-                                List<CardEffect> effects = HandManager.instance.useSelectedCard(new List<Enemy>{enemy});
-                                enemy.processCardEffects(effects);
-
-                                // update player energy
-                                sceneController.usePlayerEnergy(cardEnergy);
-
-                                // card animation
-                                StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
-
-                                HandManager.instance.clearSelectedCard();
+                                useCard(new List<Enemy> { enemy }, null, cardEnergy);
                                 return;
                             }
                             else
@@ -216,7 +216,6 @@ public class CardSelectionHandler : MonoBehaviour, IPointerEnterHandler, IPointe
 
         // Card Animation
         handUIController.animateCardMovement(transform, startPos, transform.localScale, cardHoverSpeed, null);
-        
 
         // Remove from game manager and reorder
         HandManager.instance.clearSelectedCard();

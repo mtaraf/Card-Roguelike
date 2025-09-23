@@ -308,6 +308,7 @@ public static class EffectTypeExtensions
             case EffectType.Divinity: return "+divinity";
             case EffectType.Weaken: return "+weaken";
             case EffectType.Frostbite: return "+frostbite";
+            case EffectType.Blind: return "+blind";
             default: return "Default";
         }
     }

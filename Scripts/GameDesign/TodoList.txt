@@ -43,6 +43,10 @@ General:
     - add discard UI and functionality to parent scene controller
     - Add heal functionality
     - Adjust enemy positioning
+    - Reorganize cards on discard/draw
+
+Bugs:
+    - Enemy not disappearing when dead when more than 1 enemy is alive
 
 
 Path Selection:

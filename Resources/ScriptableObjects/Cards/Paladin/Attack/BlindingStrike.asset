@@ -30,7 +30,8 @@ MonoBehaviour:
   details: Deals 5 damage, adds 1 stack of blind for 1 turn.
   title: Blinding Strike
   image: {fileID: 0}
-  target: 2
+  target: 1
   cardsDrawn: 0
+  cardsDiscarded: 0
   corrupts: 0
   upgradedCard: {fileID: 11400000, guid: 111663ef30f715d40bf8cb42254180f0, type: 2}

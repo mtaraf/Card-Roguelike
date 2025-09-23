@@ -105,7 +105,6 @@ public class HandUIController : MonoBehaviour
 
     public void reorganizeCardsInHand()
     {
-        Debug.Log("Reorganize!");
         List<GameObject> cardsInHand = new List<GameObject>();
 
         // Step 1: Collect all existing cards
