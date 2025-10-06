@@ -48,7 +48,7 @@ public class BaseLevelSceneController : ParentSceneController
             enemyPrefabs.Add(enemyGroup);
         }
 
-        // Two Enemies
+        // Two Enemies (uncomment later)
         foreach (GameObject enemies in Resources.LoadAll<GameObject>("CharacterPrefabs/Enemies/ES2"))
         {
             EnemyGroup enemyGroup = new EnemyGroup();
@@ -71,7 +71,7 @@ public class BaseLevelSceneController : ParentSceneController
         }
         else
         {
-            int randomSize = Random.Range(1, 3); // TO-DO: change back to 1,5 after testing
+            int randomSize = Random.Range(1, 2); // TO-DO: change back to 1,5 after testing
             List<EnemyGroup> enemyGroups = enemyPrefabs.FindAll((group) => group.size == randomSize);
 
             int randomGroup = Random.Range(0, enemyGroups.Count);

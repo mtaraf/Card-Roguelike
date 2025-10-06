@@ -48,6 +48,8 @@ General:
 Bugs:
     - Enemy not disappearing when dead when more than 1 enemy is alive
 
+Current Work:
+    - Discard: Don't show target sprites when discard is in progress
 
 Path Selection:
 

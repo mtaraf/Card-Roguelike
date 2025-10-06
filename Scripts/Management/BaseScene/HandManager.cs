@@ -194,7 +194,7 @@ public class HandManager : MonoBehaviour
         }
     }
 
-    private void addCardToDiscardPile(Card card)
+    public void addCardToDiscardPile(Card card)
     {
         discardPile.Add(card.getCardModel());
     }

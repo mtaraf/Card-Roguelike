@@ -26,6 +26,8 @@ IEndDragHandler
     private float cardHoverSpeed = 0.1f;
 
     private ParentSceneController sceneController;
+    private DiscardUI discardUI;
+    private bool discardInProgress = false;
 
     private void Start()
     {
@@ -46,6 +48,10 @@ IEndDragHandler
     // Dragging
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (discardInProgress)
+        {
+            return;
+        }
         // bring card in front
         transform.SetAsLastSibling();
         HandManager.instance.setSelectedCard(gameObject);
@@ -57,29 +63,51 @@ IEndDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (discardInProgress)
+        {
+            return;
+        }
         // Move card with cursor
         transform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (discardInProgress)
+        {
+            return;
+        }
+
         Debug.Log(eventData.pointerEnter.tag);
+        if (eventData.pointerEnter == null)
+        {
+            Debug.LogError("Error dragging card");
+        }
 
         // If dropped somewhere invalid, return to start position
-        if (eventData.pointerEnter == null || !eventData.pointerEnter.CompareTag("DragZone"))
+        if (eventData.pointerEnter.CompareTag("DragZone") && !sceneController.getDiscardInProgress())
+        {
+            checkCardUsageRequirements(eventData);
+        }
+        else if (eventData.pointerEnter.CompareTag("DiscardUI"))
+        {
+            sceneController.getDiscardUI().discardCard(HandManager.instance.getSelectedCard());
+
+            // TO-DO: Change this to a different animation
+            StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
+        }
+        else
         {
             transform.position = startPos;
 
             HandManager.instance.clearSelectedCard();
         }
-        else
-        {
-            checkCardUsageRequirements(eventData);
-        }
     }
 
     private void checkCardUsageRequirements(PointerEventData eventData)
     {
+        Debug.Log("Checking Card Usage");
+
         // Get parent object
         GameObject parentObj = eventData.pointerEnter.transform.parent.transform.parent.gameObject;
 
@@ -94,7 +122,7 @@ IEndDragHandler
                     int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
                     if (sceneController.getCurrentPlayerEnergy() >= cardEnergy)
                     {
-                        useCard(null, player, cardEnergy);
+                        StartCoroutine(useCard(null, player, cardEnergy));
                         return;
                     }
                     else
@@ -117,12 +145,13 @@ IEndDragHandler
                         }
                         else
                         {
-                            useCard(enemies, null, cardEnergy);
+                            StartCoroutine(useCard(enemies, null, cardEnergy));
                             return;
                         }
                     }
                     else
                     {
+                        Debug.Log('1');
                         Enemy enemy = parentObj.GetComponent<Enemy>();
                         if (enemy != null && enemy.checkifTargetable())
                         {
@@ -130,7 +159,8 @@ IEndDragHandler
                             int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
                             if (sceneController.getCurrentPlayerEnergy() >= cardEnergy)
                             {
-                                useCard(new List<Enemy> { enemy }, null, cardEnergy);
+                                Debug.Log('2');
+                                StartCoroutine(useCard(new List<Enemy> { enemy }, null, cardEnergy));
                                 return;
                             }
                             else
@@ -156,7 +186,7 @@ IEndDragHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         // Only allow card animation if a card is not selected for playing
-        if (!HandManager.instance.hasSelectedCard())
+        if (!HandManager.instance.hasSelectedCard() && !discardInProgress)
         {
             eventData.selectedObject = gameObject;
 
@@ -182,26 +212,6 @@ IEndDragHandler
         handUIController.animateCardMovement(transform, startPos + new Vector3(0f, verticalMoveAmount, 0f), transform.localScale, cardHoverSpeed, null);
     }
 
-    // private GameObject getGameObjectedClicked()
-    // {
-    //     PointerEventData pointerData = new PointerEventData(EventSystem.current)
-    //     {
-    //         position = Mouse.current.position.ReadValue()
-    //     };
-
-    //     // Raycast UI
-    //     List<RaycastResult> results = new List<RaycastResult>();
-    //     EventSystem.current.RaycastAll(pointerData, results);
-
-    //     if (results.Count > 0)
-    //     {
-    //         GameObject clickedUI = results[0].gameObject;
-    //         return findParent(clickedUI);
-    //     }
-
-    //     return null;
-    // }
-
     private GameObject findParent(GameObject obj)
     {
         if (obj.transform.parent == null || obj.transform.parent.gameObject.CompareTag("BaseLevelCanvas"))
@@ -218,30 +228,52 @@ IEndDragHandler
         }
     }
 
-    private void useCard(List<Enemy> enemies, Player player, int cardEnergy)
+    private IEnumerator useCard(List<Enemy> enemies, Player player, int cardEnergy)
     {
+        // Check if discards needed
+        Card card = HandManager.instance.getSelectedCard();
+        int numDiscards = card.getCardsDiscarded();
+
+        if (numDiscards > 0)
+        {
+            discardInProgress = true;
+
+            // Move card above discard pile and save it for after this
+            handUIController.animateCardMovement(transform, Vector3.zero, transform.localScale, cardHoverSpeed, null);
+
+
+            sceneController.startDiscard(numDiscards);
+            discardUI = sceneController.getDiscardUI();
+
+            if (discardUI == null)
+            {
+                Debug.LogError("Error retrieving discardUI component");
+            }
+
+            discardUI.setDiscardNum(numDiscards);
+
+            yield return new WaitUntil(() => discardUI.getDiscardNum() == 0);
+            discardUI.setInactive();
+        }
+
+        sceneController.setDiscardInProgress(false);
+
+        HandManager.instance.setSelectedCard(gameObject);
+
         // Card animation
         StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
 
-        // Check if discards needed
-
         // use card
-        if (player == null)
+        List<CardEffect> effects = HandManager.instance.useSelectedCard(enemies);
+        if (player != null)
+            player.processCardEffects(effects);
+        else if (enemies != null)
         {
-            List<CardEffect> effects = HandManager.instance.useSelectedCard(enemies);
-
             foreach (Enemy enemy in enemies)
             {
                 if (enemy.checkifTargetable())
-                {
                     enemy.processCardEffects(effects);
-                }
             }
-        }
-        else
-        {
-            List<CardEffect> effects = HandManager.instance.useSelectedCard(null);
-            player.processCardEffects(effects);
         }
 
         // update player energy
@@ -249,15 +281,20 @@ IEndDragHandler
 
         // Clear card
         HandManager.instance.clearSelectedCard();
+
+        discardInProgress = false;
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        handUIController.animateCardMovement(transform, startPos, transform.localScale, cardHoverSpeed, null);
+        if (!discardInProgress)
+            handUIController.animateCardMovement(transform, startPos, transform.localScale, cardHoverSpeed, null);
     }
 
     public void setStartPos(Vector3 pos)
     {
         startPos = pos;
     }
+    
+
 }

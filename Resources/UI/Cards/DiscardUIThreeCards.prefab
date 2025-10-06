@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 9150192990348784239}
   m_Layer: 5
   m_Name: CardSlot2
-  m_TagString: Untagged
+  m_TagString: DiscardDragZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 4737373025962314199}
   m_Layer: 5
   m_Name: CardSlot1
-  m_TagString: Untagged
+  m_TagString: DiscardDragZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -442,6 +442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1589200091300394254}
+  - component: {fileID: 7809702110413355340}
   m_Layer: 5
   m_Name: DiscardUIThreeCards
   m_TagString: Untagged
@@ -472,6 +473,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7809702110413355340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6986406872408298219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb09aa5c371646c4fb4b2f1d17774030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  discardSlots:
+  - {fileID: 6667290154080335715}
+  - {fileID: 874065095664586986}
+  - {fileID: 8286944847995214319}
 --- !u!1 &7200078422521462385
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,7 +621,7 @@ GameObject:
   - component: {fileID: 6966174016994638276}
   m_Layer: 5
   m_Name: CardSlot3
-  m_TagString: Untagged
+  m_TagString: DiscardDragZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -3,34 +3,26 @@ using UnityEngine;
 
 public class DiscardUI : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> discardSlots = new List<GameObject>();
+    [SerializeField] private int discardNum = 0;
 
-    void Start()
+    public void setDiscardNum(int num)
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            GameObject child = transform.GetChild(i).gameObject;
-            if (child.name != "ConfirmationButton")
-            {
-                discardSlots.Add(child);
-            }
-        }
+        discardNum = num;
     }
 
-    void Update()
+    public int getDiscardNum()
     {
-
+        return discardNum;
     }
 
-    public void addCardToSlot(GameObject card)
+    public void discardCard(Card card)
     {
-        for (int i = 0; i < discardSlots.Count; i++)
-        {
-            if (discardSlots[i].transform.childCount == 0)
-            {
-                card.transform.SetParent(discardSlots[i].transform);
-                card.transform.localPosition = Vector3.zero;
-            }
-        }
+        HandManager.instance.addCardToDiscardPile(card);
+        discardNum--;
+    }
+
+    public void setInactive()
+    {
+        gameObject.SetActive(false);
     }
 }

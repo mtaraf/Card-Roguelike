@@ -6,10 +6,12 @@ public class ParentSceneController : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] protected GameObject enemySpawnLocation;
+    private bool discardInProgress = false;
 
     // UI
     private GameObject mainCanvas;
     private GameObject playerEnergyUI;
+    private GameObject discardUI;
 
     // Game States
     protected Player player;
@@ -38,6 +40,10 @@ public class ParentSceneController : MonoBehaviour
         playerEnergyUI = Helpers.findDescendant(mainCanvas.transform, "EnergyUI");
         playerCurrentEnergy = GameManager.instance.getPlayerHandEnergy();
         setPlayerEnergy(playerCurrentEnergy);
+
+        // Find Discard UI
+        discardUI = GameObject.FindGameObjectWithTag("DiscardUI");
+        discardUI.gameObject.SetActive(false);
     }
 
     public void removeDeadEnemy(int id)
@@ -123,5 +129,36 @@ public class ParentSceneController : MonoBehaviour
 
     public virtual void updateDiscardPile(int count)
     {
+    }
+
+    public void toggleDiscardUI()
+    {
+        discardUI.gameObject.SetActive(true);
+    }
+
+    public DiscardUI getDiscardUI()
+    {
+        return discardUI.GetComponent<DiscardUI>();
+    }
+
+    public void startDiscard(int numberToDiscard)
+    {
+        discardInProgress = true;
+        discardUI.gameObject.SetActive(true);
+        DiscardUI discard = discardUI.GetComponent<DiscardUI>();
+
+        discard.setDiscardNum(numberToDiscard);
+
+        HandManager.instance.clearSelectedCard();
+    }
+
+    public bool getDiscardInProgress()
+    {
+        return discardInProgress;
+    }
+
+    public void setDiscardInProgress(bool inProgress)
+    {
+        discardInProgress = inProgress;
     }
 }
