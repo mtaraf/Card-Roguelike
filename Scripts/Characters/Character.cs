@@ -90,6 +90,7 @@ public class Character : MonoBehaviour
         foreach (CardEffect effect in effects)
         {
             addAudioCue(effect);
+
             // Calculate this with on-hit effects 
             if (effect.type == EffectType.HealDamageDone)
             {

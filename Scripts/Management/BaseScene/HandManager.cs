@@ -278,7 +278,9 @@ public enum EffectType
     Poison,
     Frostbite,
     HealDamageDone,
-    Heal
+    Heal,
+    HealOverTime,
+    Stun
 }
 
 public static class EffectTypeExtensions
@@ -294,6 +296,7 @@ public static class EffectTypeExtensions
             case EffectType.Weaken: return "WeakenEffect";
             case EffectType.Frostbite: return "FrostbiteEffect";
             case EffectType.Blind: return "BlindEffect";
+            case EffectType.HealOverTime: return "HealOverTimeEffect";
             default: return "Default";
         }
     }
@@ -309,6 +312,10 @@ public static class EffectTypeExtensions
             case EffectType.Weaken: return "+weaken";
             case EffectType.Frostbite: return "+frostbite";
             case EffectType.Blind: return "+blind";
+            case EffectType.Stun: return "+stun";
+            case EffectType.Heal:
+            case EffectType.HealDamageDone:
+            case EffectType.HealOverTime: return "+hp";
             default: return "Default";
         }
     }
