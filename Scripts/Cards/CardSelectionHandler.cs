@@ -28,6 +28,7 @@ IEndDragHandler
     private ParentSceneController sceneController;
     private DiscardUI discardUI;
     private bool discardInProgress = false;
+    private Vector3 discardCardHoldPosition;
 
     private void Start()
     {
@@ -43,6 +44,10 @@ IEndDragHandler
     {
         yield return null;
         sceneController = GameManager.instance.getCurrentSceneController();
+
+        discardCardHoldPosition = centerOfUI.transform.position;
+        discardCardHoldPosition.x -= 150;
+        discardCardHoldPosition.y += 150;
     }
 
     // Dragging
@@ -91,10 +96,11 @@ IEndDragHandler
         }
         else if (eventData.pointerEnter.CompareTag("DiscardUI"))
         {
+            Vector3 discardPileLocation = GameObject.FindGameObjectWithTag("DiscardPile").transform.position;
             sceneController.getDiscardUI().discardCard(HandManager.instance.getSelectedCard());
 
             // TO-DO: Change this to a different animation
-            StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
+            StartCoroutine(handUIController.animateCardPlayed(transform, discardPileLocation, transform.localScale, cardMoveSpeed));
         }
         else
         {
@@ -239,7 +245,7 @@ IEndDragHandler
             discardInProgress = true;
 
             // Move card above discard pile and save it for after this
-            handUIController.animateCardMovement(transform, Vector3.zero, transform.localScale, cardHoverSpeed, null);
+            handUIController.animateCardMovement(transform, discardCardHoldPosition, transform.localScale, cardHoverSpeed, null);
 
 
             sceneController.startDiscard(numDiscards);

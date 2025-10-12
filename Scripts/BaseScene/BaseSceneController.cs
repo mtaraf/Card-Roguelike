@@ -8,7 +8,6 @@ public class BaseLevelSceneController : ParentSceneController
 {
     public static BaseLevelSceneController instance;
     [SerializeField] private List<EnemyGroup> enemyPrefabs;
-    [SerializeField] private List<GameObject> enemySpawnLocations;
 
     // UI
     private BaseLevelUIController baseLevelUIController;
@@ -112,17 +111,14 @@ public class BaseLevelSceneController : ParentSceneController
 
     GameObject spawnEnemy(GameObject enemyObj, int numEnemies)
     {
-        GameObject spawnLocationParent = enemySpawnLocations[numEnemies];
-        GameObject enemy = null;
-        for (int i = 0; i < spawnLocationParent.transform.childCount; i++)
-        {
-            if (spawnLocationParent.transform.GetChild(i).childCount == 0)
-            {
-                return Instantiate(enemyObj, spawnLocationParent.transform.GetChild(i).transform);
-            }
-        }
-
-        return enemy;
+        // for (int i = 0; i < spawnLocationParent.transform.childCount; i++)
+        // {
+        //     if (spawnLocationParent.transform.GetChild(i).childCount == 0)
+        //     {
+        //         return Instantiate(enemyObj, spawnLocationParent.transform.GetChild(i).transform);
+        //     }
+        // }
+        return Instantiate(enemyObj, enemySpawnLocation.transform);
     }
 
     public override void updateDrawPile(int count)

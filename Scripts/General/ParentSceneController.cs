@@ -5,7 +5,7 @@ using UnityEngine;
 public class ParentSceneController : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] protected GameObject enemySpawnLocation;
+    protected GameObject enemySpawnLocation;
     private bool discardInProgress = false;
 
     // UI
@@ -44,6 +44,11 @@ public class ParentSceneController : MonoBehaviour
         // Find Discard UI
         discardUI = GameObject.FindGameObjectWithTag("DiscardUI");
         discardUI.gameObject.SetActive(false);
+
+        if (enemySpawnLocation == null)
+        {
+            enemySpawnLocation = GameObject.FindGameObjectWithTag("EnemySpawnLocation");
+        }
     }
 
     public void removeDeadEnemy(int id)
