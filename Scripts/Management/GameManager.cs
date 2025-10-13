@@ -150,7 +150,6 @@ public class GameManager : MonoBehaviour
         victoryManager = transform.AddComponent<VictoryManager>();
         victoryManager.instantiate();
 
-
         getPlayer();
     }
 

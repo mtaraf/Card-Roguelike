@@ -23,6 +23,7 @@ public class UIUpdater : MonoBehaviour
     private List<GameObject> turnEffectUISlots = new();
     private List<GameObject> valueEffectUISlots = new();
     private HashSet<EffectType> turnEffects = new HashSet<EffectType>();
+    private bool invincible = false;
 
     void Awake()
     {
@@ -46,8 +47,21 @@ public class UIUpdater : MonoBehaviour
 
     public void setHealth(float current, float max)
     {
-        healthText.text = $"{current}/{max}";
-        healthSlider.value = current / max;
+        if (invincible)
+        {
+            healthText.text = $"\u221E/\u221E";
+            healthSlider.value = 1;
+        }
+        else if (current < 1)
+        {
+            healthText.text = $"0/{max}";
+            healthSlider.value = 0;
+        }
+        else
+        {
+            healthText.text = $"{current}/{max}";
+            healthSlider.value = current / max;
+        }
     }
 
     public void updateEffect(EffectType type, int value)
@@ -224,8 +238,6 @@ public class UIUpdater : MonoBehaviour
         }
     }
 
-    
-
     public void clearAllEffects()
     {
         foreach (GameObject effect in activeEffects.Values)
@@ -233,5 +245,10 @@ public class UIUpdater : MonoBehaviour
             Destroy(effect);
         }
         activeEffects.Clear();
+    }
+    
+    public void setInvincible()
+    {
+        invincible = true;
     }
 }
