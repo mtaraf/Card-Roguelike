@@ -262,7 +262,10 @@ public class HandManager : MonoBehaviour
 
     public void checkOnDeathEffect()
     {
-        cardProcessor.checkOnDeathEffect(lastCardPlayed);
+        if (lastCardPlayed != null)
+        {
+            cardProcessor.checkOnDeathEffect(lastCardPlayed);
+        }
     }
 
 }

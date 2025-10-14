@@ -113,6 +113,8 @@ public class CardProcessor
                 string details = "Deals " + damage.value + " damage. Corrupts. When this card deals the killing blow, adds 2 damage.";
                 lastCardPlayed.setCardDetails(details);
                 break;
+            default:
+                break;
         }
     }
 }

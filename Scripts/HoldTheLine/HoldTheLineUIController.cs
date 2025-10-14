@@ -1,23 +1,24 @@
+using TMPro;
 using UnityEngine;
 
 public class HoldTheLineUIController : BaseLevelUIController
 {
-    // private TextMeshProUGUI turnCount;
+    private TextMeshProUGUI roundCount;
 
-    // public override void Initialize()
-    // {
-    //     base.Initialize();
+    public override void Initialize()
+    {
+        base.Initialize();
 
-    //     turnCount = GameObject.FindGameObjectWithTag("CulverTurnCount").GetComponent<TextMeshProUGUI>();
+        roundCount = GameObject.FindGameObjectWithTag("RoundCount").GetComponent<TextMeshProUGUI>();
 
-    //     if (turnCount == null)
-    //     {
-    //         Debug.LogError("Could not find culver turn counter");
-    //     }
-    // }
+        if (roundCount == null)
+        {
+            Debug.LogError("Could not find round counter ui");
+        }
+    }
 
-    // public void updateTurnCount(int currentTurn, int totalTurns)
-    // {
-    //     turnCount.text = "Turn " + currentTurn + " / " + totalTurns;
-    // }
+    public void updateRoundCount(int currentTurn, int totalTurns)
+    {
+        roundCount.text = "Round " + currentTurn + " / " + totalTurns;
+    }
 }

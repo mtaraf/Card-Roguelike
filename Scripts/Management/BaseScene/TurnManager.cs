@@ -72,6 +72,46 @@ public class TurnManager : MonoBehaviour
         yield return new WaitUntil(() => endPlayerTurnBool || enemies.Count == 0);
     }
 
+    // Total round turn loop
+    public void startRoundBasedTurnLoop(int rounds)
+    {
+        StartCoroutine(roundBasedTurnLoop(rounds));
+    }
+    
+    private IEnumerator roundBasedTurnLoop(int rounds)
+    {
+        int currentRound = 0;
+        currentState = TurnState.PlayerTurn;
+        sceneController.updateCurrentRound(currentRound, rounds);
+
+        while (currentRound < rounds && player.getCurrentHealth() > 0)
+        {
+            if (currentState == TurnState.PlayerTurn)
+            {
+                yield return StartCoroutine(playerTurn());
+                endPlayerTurn();
+                currentState = TurnState.EnemyTurn;
+            }
+            else
+            {
+                yield return StartCoroutine(enemyTurn());
+                currentState = TurnState.PlayerTurn;
+                currentRound++;
+                if (currentRound + 1 <= rounds)
+                {
+                    sceneController.updateCurrentRound(currentRound, rounds);
+                }
+            }
+            yield return null;
+        }
+
+        if (player.getCurrentHealth() > 0)
+            StartCoroutine(GameManager.instance.encounterVictory(goldEarned));
+        else
+            Debug.Log("Game over!");
+            // StartCoroutine(GameManager.instance.encounterDefeat()); TO-DO: add encounter defeat function
+    }
+
 
     // Base Scene Turns
     public void startTurns()
@@ -82,7 +122,7 @@ public class TurnManager : MonoBehaviour
     private IEnumerator turnLoop()
     {
         currentState = TurnState.PlayerTurn;
-        while (enemies.Count > 0 && player.getCurrentHealth() > 1)
+        while (enemies.Count > 0 && player.getCurrentHealth() > 0)
         {
             if (currentState == TurnState.PlayerTurn)
             {

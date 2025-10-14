@@ -166,4 +166,9 @@ public class ParentSceneController : MonoBehaviour
     {
         discardInProgress = inProgress;
     }
+
+    public virtual void updateCurrentRound(int currentRound, int totalTurns)
+    {
+        Debug.Log("Parent update round count called");
+    }
 }

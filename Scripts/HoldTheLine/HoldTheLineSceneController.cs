@@ -37,6 +37,11 @@ public class HoldTheLineSceneController : ParentSceneController
 
         // Start turn sequence
         TurnManager.instance.Initialize(player, enemies);
-        TurnManager.instance.startTurns();
+        TurnManager.instance.startRoundBasedTurnLoop(3); // TO-DO: make this dynamically scale with level
+    }
+
+    public override void updateCurrentRound(int currentRound, int totalTurns)
+    {
+        holdTheLineUIController.updateRoundCount(currentRound + 1, totalTurns);
     }
 }
