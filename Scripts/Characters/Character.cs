@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -36,13 +37,10 @@ public class Character : MonoBehaviour
         floatingFeedbackUI = Resources.Load<GameObject>("UI/General/FloatingFeedbackUIPrefab");
         characterRect = GetComponent<RectTransform>();
 
-        attributes.Add(EffectType.Strength, 0);
-        attributes.Add(EffectType.Armor, 0);
-        attributes.Add(EffectType.Weaken, 0);
-        attributes.Add(EffectType.Divinity, 0);
-        attributes.Add(EffectType.Poison, 0);
-        attributes.Add(EffectType.Frostbite, 0);
-        attributes.Add(EffectType.Blind, 0);
+        foreach (EffectType effectType in Enum.GetValues(typeof(EffectType)))
+        {
+            attributes.Add(effectType, 0);
+        }
 
         initializeEndTurnBehaviors();
 
@@ -114,6 +112,10 @@ public class Character : MonoBehaviour
                     showFloatingFeedbackUI(effect.value.ToString(), Color.darkSlateGray);
                     AudioManager.instance.playBlock();
                 }
+            }
+            else if (effect.type == EffectType.Heal)
+            {
+                healCharacter(effect.value);
             }
             else
             {
@@ -378,6 +380,7 @@ public class Character : MonoBehaviour
 
     public void healCharacter(int amount)
     {
+        showFloatingFeedbackUI(amount.ToString(), Color.seaGreen);
         currentHealth += amount;
         if (currentHealth > maxHealth)
         {

@@ -284,10 +284,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_0
       rect:
         serializedVersion: 2
-        x: 24
-        y: 335
-        width: 18
-        height: 29
+        x: 0
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -306,10 +306,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_1
       rect:
         serializedVersion: 2
-        x: 88
-        y: 335
-        width: 18
-        height: 29
+        x: 64
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,10 +328,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_2
       rect:
         serializedVersion: 2
-        x: 152
-        y: 335
-        width: 18
-        height: 29
+        x: 128
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -350,10 +350,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_3
       rect:
         serializedVersion: 2
-        x: 216
-        y: 335
-        width: 18
-        height: 30
+        x: 192
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -372,10 +372,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_4
       rect:
         serializedVersion: 2
-        x: 280
-        y: 335
-        width: 18
-        height: 30
+        x: 256
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -394,10 +394,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_5
       rect:
         serializedVersion: 2
-        x: 344
-        y: 335
-        width: 18
-        height: 29
+        x: 320
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -416,10 +416,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_6
       rect:
         serializedVersion: 2
-        x: 408
-        y: 335
-        width: 18
-        height: 28
+        x: 384
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -438,10 +438,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_7
       rect:
         serializedVersion: 2
-        x: 472
-        y: 335
-        width: 17
-        height: 28
+        x: 448
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -460,10 +460,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_8
       rect:
         serializedVersion: 2
-        x: 537
-        y: 335
-        width: 16
-        height: 28
+        x: 512
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -482,10 +482,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_9
       rect:
         serializedVersion: 2
-        x: 601
-        y: 335
-        width: 16
-        height: 28
+        x: 576
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -504,10 +504,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_10
       rect:
         serializedVersion: 2
-        x: 664
-        y: 335
-        width: 18
-        height: 28
+        x: 640
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -526,10 +526,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_11
       rect:
         serializedVersion: 2
-        x: 24
-        y: 271
-        width: 18
-        height: 29
+        x: 0
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -548,10 +548,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_12
       rect:
         serializedVersion: 2
-        x: 87
-        y: 271
-        width: 20
-        height: 28
+        x: 64
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -570,10 +570,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_13
       rect:
         serializedVersion: 2
-        x: 151
-        y: 271
-        width: 20
-        height: 30
+        x: 128
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -592,10 +592,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_14
       rect:
         serializedVersion: 2
-        x: 215
-        y: 271
-        width: 20
-        height: 30
+        x: 192
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -614,10 +614,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_15
       rect:
         serializedVersion: 2
-        x: 280
-        y: 271
-        width: 18
-        height: 29
+        x: 256
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -636,10 +636,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_16
       rect:
         serializedVersion: 2
-        x: 345
-        y: 271
-        width: 16
-        height: 28
+        x: 320
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -658,10 +658,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_17
       rect:
         serializedVersion: 2
-        x: 409
-        y: 271
-        width: 14
-        height: 30
+        x: 384
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -680,10 +680,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_18
       rect:
         serializedVersion: 2
-        x: 473
-        y: 271
-        width: 15
-        height: 30
+        x: 448
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -702,10 +702,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_19
       rect:
         serializedVersion: 2
-        x: 24
-        y: 207
-        width: 18
-        height: 29
+        x: 0
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -724,10 +724,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_20
       rect:
         serializedVersion: 2
-        x: 83
-        y: 207
-        width: 21
-        height: 29
+        x: 64
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -746,10 +746,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_21
       rect:
         serializedVersion: 2
-        x: 144
-        y: 207
-        width: 22
-        height: 29
+        x: 128
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -768,10 +768,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_22
       rect:
         serializedVersion: 2
-        x: 211
-        y: 207
-        width: 38
-        height: 29
+        x: 192
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -790,10 +790,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_23
       rect:
         serializedVersion: 2
-        x: 282
-        y: 207
-        width: 29
-        height: 29
+        x: 256
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -812,10 +812,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_24
       rect:
         serializedVersion: 2
-        x: 346
-        y: 207
-        width: 28
-        height: 29
+        x: 320
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -834,10 +834,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_25
       rect:
         serializedVersion: 2
-        x: 410
-        y: 207
-        width: 26
-        height: 29
+        x: 384
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -856,10 +856,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_26
       rect:
         serializedVersion: 2
-        x: 473
-        y: 207
-        width: 19
-        height: 29
+        x: 448
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -878,10 +878,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_27
       rect:
         serializedVersion: 2
-        x: 537
-        y: 207
-        width: 14
-        height: 29
+        x: 512
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -900,10 +900,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_28
       rect:
         serializedVersion: 2
-        x: 600
-        y: 207
-        width: 18
-        height: 29
+        x: 576
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -922,10 +922,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_29
       rect:
         serializedVersion: 2
-        x: 24
-        y: 143
-        width: 18
-        height: 29
+        x: 0
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -944,10 +944,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_30
       rect:
         serializedVersion: 2
-        x: 87
-        y: 143
-        width: 18
-        height: 29
+        x: 64
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -966,10 +966,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_31
       rect:
         serializedVersion: 2
-        x: 148
-        y: 143
-        width: 22
-        height: 28
+        x: 128
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -988,10 +988,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_32
       rect:
         serializedVersion: 2
-        x: 214
-        y: 143
-        width: 18
-        height: 28
+        x: 192
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1010,10 +1010,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_33
       rect:
         serializedVersion: 2
-        x: 278
-        y: 143
-        width: 18
-        height: 34
+        x: 256
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1032,10 +1032,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_34
       rect:
         serializedVersion: 2
-        x: 338
-        y: 143
-        width: 20
-        height: 46
+        x: 320
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1054,10 +1054,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_35
       rect:
         serializedVersion: 2
-        x: 405
-        y: 143
-        width: 36
-        height: 45
+        x: 384
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1076,10 +1076,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_36
       rect:
         serializedVersion: 2
-        x: 473
-        y: 143
-        width: 31
-        height: 18
+        x: 448
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1098,10 +1098,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_37
       rect:
         serializedVersion: 2
-        x: 537
-        y: 143
-        width: 29
-        height: 18
+        x: 512
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1120,10 +1120,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_38
       rect:
         serializedVersion: 2
-        x: 601
-        y: 143
-        width: 25
-        height: 23
+        x: 576
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1142,10 +1142,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_39
       rect:
         serializedVersion: 2
-        x: 665
-        y: 143
-        width: 20
-        height: 29
+        x: 640
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1164,10 +1164,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_40
       rect:
         serializedVersion: 2
-        x: 728
-        y: 143
-        width: 18
-        height: 29
+        x: 704
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1186,10 +1186,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_41
       rect:
         serializedVersion: 2
-        x: 17
-        y: 79
-        width: 21
-        height: 29
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1208,10 +1208,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_42
       rect:
         serializedVersion: 2
-        x: 81
-        y: 79
-        width: 21
-        height: 29
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1230,10 +1230,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_43
       rect:
         serializedVersion: 2
-        x: 17
-        y: 15
-        width: 21
-        height: 29
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1252,10 +1252,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_44
       rect:
         serializedVersion: 2
-        x: 85
-        y: 34
-        width: 10
-        height: 10
+        x: 64
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1274,10 +1274,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_45
       rect:
         serializedVersion: 2
-        x: 89
-        y: 22
-        width: 9
-        height: 13
+        x: 128
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1296,10 +1296,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_46
       rect:
         serializedVersion: 2
-        x: 94
-        y: 31
-        width: 7
-        height: 10
+        x: 192
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1318,10 +1318,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_47
       rect:
         serializedVersion: 2
-        x: 149
-        y: 34
-        width: 10
-        height: 10
+        x: 256
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1340,10 +1340,10 @@ TextureImporter:
       name: skeleton base v2-Sheet_48
       rect:
         serializedVersion: 2
-        x: 150
-        y: 15
-        width: 16
-        height: 24
+        x: 320
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1358,187 +1358,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: skeleton base v2-Sheet_49
-      rect:
-        serializedVersion: 2
-        x: 213
-        y: 32
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3ae9f9410c0bf3580800000000000000
-      internalID: -8845156804106150237
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton base v2-Sheet_50
-      rect:
-        serializedVersion: 2
-        x: 272
-        y: 15
-        width: 25
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 13f026bed70662b20800000000000000
-      internalID: 3109278686682156849
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton base v2-Sheet_51
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 24
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3868cc7231e672aa0800000000000000
-      internalID: -6185854534618937725
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton base v2-Sheet_52
-      rect:
-        serializedVersion: 2
-        x: 87
-        y: 15
-        width: 7
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e130729f6d0d19150800000000000000
-      internalID: 5877708610416870174
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton base v2-Sheet_53
-      rect:
-        serializedVersion: 2
-        x: 146
-        y: 20
-        width: 7
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 93619089cd9c61db0800000000000000
-      internalID: -4821444401772816839
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton base v2-Sheet_54
-      rect:
-        serializedVersion: 2
-        x: 208
-        y: 15
-        width: 23
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fb82966cd245f0db0800000000000000
-      internalID: -4823544120311469889
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton base v2-Sheet_55
-      rect:
-        serializedVersion: 2
-        x: 336
-        y: 15
-        width: 25
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 18f65931e75c3d5b0800000000000000
-      internalID: -5344711187473535103
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton base v2-Sheet_56
-      rect:
-        serializedVersion: 2
-        x: 95
-        y: 15
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: edf6d0681372a5160800000000000000
-      internalID: 7014962463238877150
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 59345d26a0b099c4ba410b68c6e360f6
     internalID: 0
     vertices: []
     indices: 
@@ -1546,7 +1370,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":12.0,"y":6.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       skeleton base v2-Sheet_0: -8399224006767002833
       skeleton base v2-Sheet_1: 4635749915248902753
@@ -1592,15 +1418,7 @@ TextureImporter:
       skeleton base v2-Sheet_46: 6098711331793607320
       skeleton base v2-Sheet_47: -4148373271611586451
       skeleton base v2-Sheet_48: 19828772073762589
-      skeleton base v2-Sheet_49: -8845156804106150237
       skeleton base v2-Sheet_5: 321653608381880772
-      skeleton base v2-Sheet_50: 3109278686682156849
-      skeleton base v2-Sheet_51: -6185854534618937725
-      skeleton base v2-Sheet_52: 5877708610416870174
-      skeleton base v2-Sheet_53: -4821444401772816839
-      skeleton base v2-Sheet_54: -4823544120311469889
-      skeleton base v2-Sheet_55: -5344711187473535103
-      skeleton base v2-Sheet_56: 7014962463238877150
       skeleton base v2-Sheet_6: -3069323844520713826
       skeleton base v2-Sheet_7: -8291140675674462082
       skeleton base v2-Sheet_8: 7274824349705026035

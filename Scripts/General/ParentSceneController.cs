@@ -67,7 +67,6 @@ public class ParentSceneController : MonoBehaviour
     public void healPlayer(int value)
     {
         player.healCharacter(value);
-        Debug.Log("Player healed by: " + value);
     }
 
     public void setPlayerEnergy(int energy)

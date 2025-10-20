@@ -8,7 +8,7 @@ public enum EncounterType
     Regular_Encounter,
     Mini_Boss_Encounter,
     Culver_Encounter,
-    Tank_Encounter,
+    Hold_The_Line_Encounter,
     Final_Boss
 }
 
@@ -101,6 +101,9 @@ public class PathSelectionSceneController : MonoBehaviour
                 break;
             case EncounterType.Culver_Encounter:
                 SceneLoader.instance.loadScene("CulverScene", () => GameManager.instance.loadEncounterTypeAndRewards(map));
+                break;
+            case EncounterType.Hold_The_Line_Encounter:
+                SceneLoader.instance.loadScene("HoldTheLine", () => GameManager.instance.loadEncounterTypeAndRewards(map));
                 break;
         }
     }

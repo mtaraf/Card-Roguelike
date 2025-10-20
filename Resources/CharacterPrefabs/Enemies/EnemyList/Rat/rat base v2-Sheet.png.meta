@@ -221,10 +221,10 @@ TextureImporter:
       name: rat base v2-Sheet_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 399
-        width: 25
-        height: 25
+        x: 0
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,10 +243,10 @@ TextureImporter:
       name: rat base v2-Sheet_1
       rect:
         serializedVersion: 2
-        x: 81
-        y: 399
-        width: 26
-        height: 25
+        x: 64
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,10 +265,10 @@ TextureImporter:
       name: rat base v2-Sheet_2
       rect:
         serializedVersion: 2
-        x: 145
-        y: 399
-        width: 26
-        height: 25
+        x: 128
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,10 +287,10 @@ TextureImporter:
       name: rat base v2-Sheet_3
       rect:
         serializedVersion: 2
-        x: 209
-        y: 399
-        width: 25
-        height: 27
+        x: 192
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -309,10 +309,10 @@ TextureImporter:
       name: rat base v2-Sheet_4
       rect:
         serializedVersion: 2
-        x: 273
-        y: 399
-        width: 25
-        height: 26
+        x: 256
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -331,10 +331,10 @@ TextureImporter:
       name: rat base v2-Sheet_5
       rect:
         serializedVersion: 2
-        x: 337
-        y: 399
-        width: 26
-        height: 26
+        x: 320
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -353,10 +353,10 @@ TextureImporter:
       name: rat base v2-Sheet_6
       rect:
         serializedVersion: 2
-        x: 401
-        y: 399
-        width: 26
-        height: 26
+        x: 384
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -375,10 +375,10 @@ TextureImporter:
       name: rat base v2-Sheet_7
       rect:
         serializedVersion: 2
-        x: 465
-        y: 399
-        width: 27
-        height: 25
+        x: 448
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -397,10 +397,10 @@ TextureImporter:
       name: rat base v2-Sheet_8
       rect:
         serializedVersion: 2
-        x: 529
-        y: 399
-        width: 26
-        height: 25
+        x: 512
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -419,10 +419,10 @@ TextureImporter:
       name: rat base v2-Sheet_9
       rect:
         serializedVersion: 2
-        x: 593
-        y: 399
-        width: 25
-        height: 25
+        x: 576
+        y: 384
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -441,10 +441,10 @@ TextureImporter:
       name: rat base v2-Sheet_10
       rect:
         serializedVersion: 2
-        x: 17
-        y: 335
-        width: 24
-        height: 31
+        x: 0
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -463,10 +463,10 @@ TextureImporter:
       name: rat base v2-Sheet_11
       rect:
         serializedVersion: 2
-        x: 83
-        y: 335
-        width: 22
-        height: 31
+        x: 64
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -485,10 +485,10 @@ TextureImporter:
       name: rat base v2-Sheet_12
       rect:
         serializedVersion: 2
-        x: 148
-        y: 335
-        width: 21
-        height: 31
+        x: 128
+        y: 320
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -507,10 +507,10 @@ TextureImporter:
       name: rat base v2-Sheet_13
       rect:
         serializedVersion: 2
-        x: 17
-        y: 271
-        width: 24
-        height: 31
+        x: 0
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -529,10 +529,10 @@ TextureImporter:
       name: rat base v2-Sheet_14
       rect:
         serializedVersion: 2
-        x: 79
-        y: 271
-        width: 26
-        height: 31
+        x: 64
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -551,10 +551,10 @@ TextureImporter:
       name: rat base v2-Sheet_15
       rect:
         serializedVersion: 2
-        x: 141
-        y: 273
-        width: 29
-        height: 29
+        x: 128
+        y: 256
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -573,10 +573,10 @@ TextureImporter:
       name: rat base v2-Sheet_16
       rect:
         serializedVersion: 2
-        x: 15
-        y: 208
-        width: 27
-        height: 30
+        x: 0
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -595,10 +595,10 @@ TextureImporter:
       name: rat base v2-Sheet_17
       rect:
         serializedVersion: 2
-        x: 79
-        y: 208
-        width: 27
-        height: 31
+        x: 64
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -617,10 +617,10 @@ TextureImporter:
       name: rat base v2-Sheet_18
       rect:
         serializedVersion: 2
-        x: 144
-        y: 208
-        width: 25
-        height: 32
+        x: 128
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -639,10 +639,10 @@ TextureImporter:
       name: rat base v2-Sheet_19
       rect:
         serializedVersion: 2
-        x: 17
-        y: 143
-        width: 25
-        height: 25
+        x: 0
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -661,10 +661,10 @@ TextureImporter:
       name: rat base v2-Sheet_20
       rect:
         serializedVersion: 2
-        x: 81
-        y: 143
-        width: 26
-        height: 26
+        x: 64
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -683,10 +683,10 @@ TextureImporter:
       name: rat base v2-Sheet_21
       rect:
         serializedVersion: 2
-        x: 145
-        y: 143
-        width: 22
-        height: 27
+        x: 128
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -705,10 +705,10 @@ TextureImporter:
       name: rat base v2-Sheet_22
       rect:
         serializedVersion: 2
-        x: 209
-        y: 143
-        width: 20
-        height: 28
+        x: 192
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -727,10 +727,10 @@ TextureImporter:
       name: rat base v2-Sheet_23
       rect:
         serializedVersion: 2
-        x: 269
-        y: 143
-        width: 38
-        height: 24
+        x: 256
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -749,10 +749,10 @@ TextureImporter:
       name: rat base v2-Sheet_24
       rect:
         serializedVersion: 2
-        x: 331
-        y: 143
-        width: 41
-        height: 20
+        x: 320
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -771,10 +771,10 @@ TextureImporter:
       name: rat base v2-Sheet_25
       rect:
         serializedVersion: 2
-        x: 395
-        y: 143
-        width: 39
-        height: 21
+        x: 384
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -793,10 +793,10 @@ TextureImporter:
       name: rat base v2-Sheet_26
       rect:
         serializedVersion: 2
-        x: 462
-        y: 143
-        width: 30
-        height: 24
+        x: 448
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -815,10 +815,10 @@ TextureImporter:
       name: rat base v2-Sheet_27
       rect:
         serializedVersion: 2
-        x: 529
-        y: 143
-        width: 25
-        height: 25
+        x: 512
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -837,10 +837,10 @@ TextureImporter:
       name: rat base v2-Sheet_28
       rect:
         serializedVersion: 2
-        x: 15
-        y: 79
-        width: 22
-        height: 30
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -859,10 +859,10 @@ TextureImporter:
       name: rat base v2-Sheet_29
       rect:
         serializedVersion: 2
-        x: 79
-        y: 79
-        width: 22
-        height: 30
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -881,10 +881,10 @@ TextureImporter:
       name: rat base v2-Sheet_30
       rect:
         serializedVersion: 2
-        x: 15
-        y: 15
-        width: 22
-        height: 30
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -903,10 +903,10 @@ TextureImporter:
       name: rat base v2-Sheet_31
       rect:
         serializedVersion: 2
-        x: 79
-        y: 15
-        width: 23
-        height: 28
+        x: 64
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -925,10 +925,10 @@ TextureImporter:
       name: rat base v2-Sheet_32
       rect:
         serializedVersion: 2
-        x: 143
-        y: 15
-        width: 25
-        height: 25
+        x: 128
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -947,10 +947,10 @@ TextureImporter:
       name: rat base v2-Sheet_33
       rect:
         serializedVersion: 2
-        x: 207
-        y: 15
-        width: 31
-        height: 17
+        x: 192
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -969,10 +969,10 @@ TextureImporter:
       name: rat base v2-Sheet_34
       rect:
         serializedVersion: 2
-        x: 271
-        y: 15
-        width: 34
-        height: 14
+        x: 256
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -991,10 +991,10 @@ TextureImporter:
       name: rat base v2-Sheet_35
       rect:
         serializedVersion: 2
-        x: 335
-        y: 15
-        width: 34
-        height: 11
+        x: 320
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1013,7 +1013,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0fbcd4cd48d7d99489780be8b8097156
     internalID: 0
     vertices: []
     indices: 
@@ -1021,7 +1021,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":10.0,"y":7.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       rat base v2-Sheet_0: 4356651741459562575
       rat base v2-Sheet_1: 9010366943343214587

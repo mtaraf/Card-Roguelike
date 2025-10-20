@@ -112,8 +112,6 @@ IEndDragHandler
 
     private void checkCardUsageRequirements(PointerEventData eventData)
     {
-        Debug.Log("Checking Card Usage");
-
         // Get parent object
         GameObject parentObj = eventData.pointerEnter.transform.parent.transform.parent.gameObject;
 

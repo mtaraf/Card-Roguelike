@@ -107,7 +107,7 @@ public class EncounterMap
             {
                 < 8 => new EncounterNode(nodeId, level, EncounterType.Regular_Encounter),
                 < 10 => new EncounterNode(nodeId, level, EncounterType.Culver_Encounter),
-                _ => new EncounterNode(nodeId, level, EncounterType.Tank_Encounter)
+                _ => new EncounterNode(nodeId, level, EncounterType.Hold_The_Line_Encounter)
             };
         }
         else
@@ -116,7 +116,7 @@ public class EncounterMap
             {
                 < 8 => new EncounterNode(nodeId, level, EncounterType.Regular_Encounter),
                 < 9 => new EncounterNode(nodeId, level, EncounterType.Culver_Encounter),
-                < 10 => new EncounterNode(nodeId, level, EncounterType.Tank_Encounter),
+                < 10 => new EncounterNode(nodeId, level, EncounterType.Hold_The_Line_Encounter),
                 10 => new EncounterNode(nodeId, level, EncounterType.Mini_Boss_Encounter),
                 _ => new EncounterNode(nodeId, level, EncounterType.Final_Boss)
             };

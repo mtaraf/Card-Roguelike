@@ -26,13 +26,12 @@ Add/Debug cards (TO-DO)
 - Add new effect 'Take Damage'
 
 Base Scene:
-    - Add floating feedback for healing
     - Work on victory card selection screen
     - Fix death for enemies
     - death animations should not loop
 
 Culver's: 
-    - Link up turn count to UI
+    - 
 
 
 General:
@@ -40,8 +39,7 @@ General:
     - only allow class cards to show up
     - create deck for class cards
     - rework blind to last indefinetly, max 3 stacks
-    - add discard UI and functionality to parent scene controller
-    - Add heal functionality
+    - improve discard UI
     - Adjust enemy positioning
     - Reorganize cards on discard/draw
 
