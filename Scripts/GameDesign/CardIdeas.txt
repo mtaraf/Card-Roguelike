@@ -37,3 +37,7 @@ Cards can trigger effects
     - Card to burst bleed stacks of enemy for damage
 
 Card Ideas:
+    - Boss ideas:
+        - Cards to reduce player hand size or player energy
+        
+    - Enemy ideas:
