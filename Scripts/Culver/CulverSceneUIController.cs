@@ -11,7 +11,7 @@ public class CulverSceneUIController : BaseLevelUIController
     {
         base.Initialize();
 
-        turnCount = GameObject.FindGameObjectWithTag("CulverTurnCount").GetComponent<TextMeshProUGUI>();
+        turnCount = GameObject.FindGameObjectWithTag("RoundCount").GetComponent<TextMeshProUGUI>();
 
         if (turnCount == null)
         {
