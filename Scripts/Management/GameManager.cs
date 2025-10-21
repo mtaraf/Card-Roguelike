@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     // Scene
     private string currentScene;
-    private HashSet<int> battleScenes = new HashSet<int>() {1,4,5};
+    private HashSet<int> battleScenes = new HashSet<int>() {1,4};
 
 
     public void Awake()
@@ -113,7 +113,10 @@ public class GameManager : MonoBehaviour
     {
         yield return null;
         topBarUIManager = FindFirstObjectByType<TopBarUIManager>();
-        topBarUIManager.Initialize(playerGold, currentLevel, cardRarity);
+        if (topBarUIManager != null)
+        {
+            topBarUIManager.Initialize(playerGold, currentLevel, cardRarity);
+        }
     }
 
     public void setCurrentSceneController(ParentSceneController controller)
