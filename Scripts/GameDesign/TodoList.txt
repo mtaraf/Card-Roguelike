@@ -25,6 +25,10 @@ Add/Debug cards (TO-DO)
 
 - Add new effect 'Take Damage'
 
+
+Main Menu:
+    - Add volume settings to save file, change them on load
+
 Base Scene:
     - Work on victory card selection screen
     - Fix death for enemies
@@ -40,7 +44,6 @@ General:
     - create deck for class cards
     - rework blind to last indefinetly, max 3 stacks
     - improve discard UI
-    - Adjust enemy positioning
     - Reorganize cards on discard/draw
 
 Bugs:

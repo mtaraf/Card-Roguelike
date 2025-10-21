@@ -1,12 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuSceneController : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject loadGameMenu;
-    private string[] saveGameDetails = new string[3];
     private SaveSlot[] saveSlots = new SaveSlot[3];
+    private Slider musicSlider;
+    private Slider sfxSlider;
 
     void Start()
     {
@@ -15,9 +17,19 @@ public class MainMenuSceneController : MonoBehaviour
         optionsMenu ??= GameObject.FindGameObjectWithTag("MainOptionsMenuUI");
         loadGameMenu ??= GameObject.FindGameObjectWithTag("LoadGameMenuUI");
 
-        mainMenu.gameObject.SetActive(true);
-        optionsMenu.gameObject.SetActive(false);
-        loadGameMenu.gameObject.SetActive(false);
+
+        // Get sliders in options menu
+        musicSlider = GameObject.Find("MusicVolumeSlider").GetComponent<Slider>();
+        sfxSlider = GameObject.Find("SFXVolumeSlider").GetComponent<Slider>();
+
+        if (musicSlider == null || sfxSlider == null)
+        {
+            Debug.LogError("Could not find options menu sliders");
+        }
+
+        // TO-DO: add this to global save data to retain volume settings
+        changeMusicVolume();
+        changeSFXVolume();
 
         // Fill save slot information if it exists
         for (int i = 0; i < loadGameMenu.transform.childCount; i++)
@@ -35,6 +47,10 @@ public class MainMenuSceneController : MonoBehaviour
                 saveSlots[i] = saveSlot;
             }
         }
+
+        mainMenu.gameObject.SetActive(true);
+        optionsMenu.gameObject.SetActive(false);
+        loadGameMenu.gameObject.SetActive(false);
     }
 
     public void openLoadGameScreen()
@@ -65,7 +81,7 @@ public class MainMenuSceneController : MonoBehaviour
         optionsMenu.gameObject.SetActive(true);
         AudioManager.instance.playClick();
     }
-    
+
     public void quitGame()
     {
 #if UNITY_EDITOR
@@ -73,5 +89,15 @@ public class MainMenuSceneController : MonoBehaviour
 #else
                     Application.Quit();
 #endif
+    }
+
+    public void changeMusicVolume()
+    {
+        AudioManager.instance.setBackgroundMusicVolume(musicSlider.value);
+    }
+    
+    public void changeSFXVolume()
+    {
+        AudioManager.instance.setSFXVolume(sfxSlider.value);
     }
 }

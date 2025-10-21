@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     // Scene
     private string currentScene;
+    private HashSet<int> battleScenes = new HashSet<int>() {1,4,5};
 
 
     public void Awake()
@@ -71,7 +72,7 @@ public class GameManager : MonoBehaviour
     private void onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         currentScene = scene.name;
-        Debug.Log($"Game Manager detected scene loaded: {scene.name}");
+        Debug.Log($"Game Manager detected scene loaded: {scene.name} + {scene.buildIndex}");
         if (scene.buildIndex != 0)
         {
             // for dev testing
@@ -98,20 +99,14 @@ public class GameManager : MonoBehaviour
                 playerGold = 30;
                 playerHandEnergy = 3;
             }
-            // if (!loadGame(currentSaveSlot))
-            // {
-            //     createPlayerDeckCopy();
-            //     playerMaxHealth = 50;
-            //     playerHandSize = 6;
-            //     playerHandEnergy = 3;
-            //     playerCurrentHealth = 50;
-            //     playerGold = 0;
-            //     playerHandEnergy = 3;
-            // }
+
             StartCoroutine(updateUI());
         }
 
-        StartCoroutine(waitForUI());
+        if (battleScenes.Contains(scene.buildIndex))
+        {
+            StartCoroutine(waitForUI());
+        }
     }
 
     private IEnumerator updateUI()

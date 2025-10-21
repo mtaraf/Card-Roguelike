@@ -118,4 +118,14 @@ public class AudioManager : MonoBehaviour
             sfxSource.PlayOneShot(debuffSound);
         }
     }
+
+    public void setBackgroundMusicVolume(float volume)
+    {
+        musicSource.volume = volume;
+    }
+
+    public void setSFXVolume(float volume)
+    {
+        sfxSource.volume = volume;
+    }
 }
