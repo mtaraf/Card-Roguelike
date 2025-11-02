@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,9 +13,11 @@ public class CharacterSelectionSceneController : MonoBehaviour
     private GameObject characterIconPrefab;
     private GameObject[] availableCharacters;
     private Transform canvasTransform;
+    private GameObject cardPrefab;
 
     void Start()
     {
+        cardPrefab = Resources.Load<GameObject>("UI/Cards/CardNoAnimation");
         characterIconPrefab = Resources.Load<GameObject>("UI/CharacterSelection/CharacterIcon");
         availableCharacters = Resources.LoadAll<GameObject>("CharacterPrefabs/CharacterDisplays");
 
@@ -44,25 +47,54 @@ public class CharacterSelectionSceneController : MonoBehaviour
             icon.transform.GetChild(0).GetComponent<Image>().sprite = displayInformation.characterIcon;
 
             // Set OnClick
-            icon.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => setSelectedCharacter(i));
+            icon.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => setSelectedCharacter(character.name));
         }
 
         // Set default character to first one
-        setSelectedCharacter(0);
+        setSelectedCharacter(availableCharacters[0].name);
     }
-    
-    void setSelectedCharacter(int index)
-    {
-        GameObject character = availableCharacters[index];
 
+    void setSelectedCharacter(string name)
+    {
+        GameObject character = Array.Find(availableCharacters, character => character.name == name);
+        DisplayInformation displayInformation = character.GetComponent<DisplayInformation>();
+        Debug.Log("Selected: " + character.name);
         if (characterDisplay.transform.childCount > 0)
         {
             // Destroy the current character display
             Destroy(characterDisplay.transform.GetChild(0).gameObject);
         }
 
-        characterName.GetComponent<TextMeshProUGUI>().text = character.GetComponent<DisplayInformation>().characterName;
+        characterName.GetComponent<TextMeshProUGUI>().text = displayInformation.characterName;
 
         Instantiate(character, characterDisplay.transform);
+
+        setDisplayDetails(displayInformation);
+    }
+    
+    void setDisplayDetails(DisplayInformation displayInformation)
+    {
+        string specialties = "";
+        for (int i=0; i<displayInformation.classDetails.Length; i++){
+            specialties += displayInformation.classDetails[i] + "\n";
+        }
+
+        characterDetails.transform.Find("CharacterClass").GetComponent<TextMeshProUGUI>().text = displayInformation.characterClass.ToString();
+        characterDetails.transform.Find("CharacterSpecialties").GetComponent<TextMeshProUGUI>().text = specialties;
+        Transform cardSlot1 = characterDetails.transform.Find("CardSlot1");
+        Transform cardSlot2 = characterDetails.transform.Find("CardSlot2");
+
+        // Destroy present cards
+        if (cardSlot1.childCount > 0)
+            Destroy(cardSlot1.GetChild(0).gameObject);
+        if (cardSlot2.childCount > 0)
+            Destroy(cardSlot2.GetChild(0).gameObject);
+
+        // Instatiate new cards
+        GameObject card1 = Instantiate(cardPrefab, cardSlot1);
+        card1.GetComponent<Card>().setCardDisplayInformation(displayInformation.displaycards[0]);
+
+        GameObject card2 = Instantiate(cardPrefab, cardSlot2);
+        card2.GetComponent<Card>().setCardDisplayInformation(displayInformation.displaycards[1]);
     }
 }

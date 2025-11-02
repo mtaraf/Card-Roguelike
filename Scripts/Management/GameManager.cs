@@ -1,12 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+
+public enum SceneBuildIndex
+{
+    MAIN_MENU = 0,
+    BASE_LEVEL = 1,
+    PATH_SELECTION = 2,
+    FORGE = 3,
+    HOLD_THE_LINE = 4,
+    CHARACTER_SELECTION = 5
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -45,10 +52,11 @@ public class GameManager : MonoBehaviour
     private EncounterType currentPath;
     private EncounterReward encounterReward;
     private int encounterRewardValue;
+    private EncounterType previousEncounter;
 
     // Scene
     private string currentScene;
-    private HashSet<int> battleScenes = new HashSet<int>() {1,4};
+    private HashSet<int> battleScenes = new HashSet<int>() { 1, 4 };
 
 
     public void Awake()
@@ -339,6 +347,11 @@ public class GameManager : MonoBehaviour
     public EncounterMap getEncounterMap()
     {
         return map;
+    }
+
+    public EncounterType getPreviousEncounter()
+    {
+        return previousEncounter;
     }
 
     // Save Functions

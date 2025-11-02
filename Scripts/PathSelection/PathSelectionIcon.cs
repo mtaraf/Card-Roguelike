@@ -21,8 +21,9 @@ public class PathSelectionIcon : MonoBehaviour
         container = GetComponent<Image>();
     }
 
-    public IEnumerator instantiateIcon(EncounterType type, bool completed, EncounterReward reward, int nodeId, bool clickable)
+    public IEnumerator instantiateIcon(EncounterType type, EncounterReward reward)
     {
+        Debug.Log("Instantiate Icon");
         // Wait for Start() to finish
         yield return null;
 
@@ -35,21 +36,7 @@ public class PathSelectionIcon : MonoBehaviour
         {
             iconImage.sprite = Resources.Load<Sprite>(info.iconPath);
             string message = info.message + "\n\n" + reward.ToDisplayString();
-            message = completed ? message + " Completed!" : message;
-            tooltip.setTooltipData(info.title, message);
-        }
-
-        if (completed)
-        {
-            container.sprite = Resources.Load<Sprite>("UI/Art/Icons/completed_icon_container");
-        }
-
-        iconButton.onClick.RemoveAllListeners();
-        if (clickable)
-        {
-            iconButton.onClick.AddListener(() =>
-            PathSelectionSceneController.instance.navigateToScene(nodeId));
-            container.sprite = Resources.Load<Sprite>("UI/Art/Icons/current_icon_container");
+            tooltip.setTooltipData(info.title, message, 20, ToolTipDirection.Above);
         }
 
         updateRewardIcon(reward);

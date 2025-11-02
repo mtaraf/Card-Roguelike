@@ -1,129 +1,63 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PathSelectionUIController : MonoBehaviour
 {
-    private GameObject scrollView;
-    private GameObject scrollViewContent;
-    [SerializeField] private GameObject pathSelectionIcon;
-    [SerializeField] private GameObject arrowIndicator;
-    [SerializeField] private GameObject highlightedArrowIndicator;
-    [SerializeField] private Vector2 mapStartingPosition;
-    private Dictionary<int, GameObject> nodeIdToGameObject = new();
-    private float height;
+    private GameObject grid;
+    private GameObject forgeGrid;
+    private List<Tuple<int, int>> iconPositions = new List<Tuple<int, int>>();
+    private GameObject pathSelectionIconPrefab;
+    private GameObject mainCanvas;
 
 
-    public void Initialize()
+
+    public void Initialize(List<Tuple<EncounterType, EncounterReward>> options)
     {
-        scrollView = GameObject.FindGameObjectWithTag("PathSelectionScrollView");
-        scrollViewContent = scrollView.transform.GetChild(0).transform.GetChild(0).gameObject;
-        RectTransform rectTransform = scrollView.GetComponent<RectTransform>();
-        mapStartingPosition = new Vector2(200, -(rectTransform.sizeDelta.y / 2));
-        height = rectTransform.sizeDelta.y;
+        iconPositions.Add(new Tuple<int, int>(-105, -120));
+        iconPositions.Add(new Tuple<int, int>(325, -120));
+        iconPositions.Add(new Tuple<int, int>(760, -120));
 
-        pathSelectionIcon = Resources.Load<GameObject>("UI/PathSelectionUI/PathIconContainer");
-        arrowIndicator = Resources.Load<GameObject>("UI/PathSelectionUI/ArrowIndicator");
-        highlightedArrowIndicator = Resources.Load<GameObject>("UI/PathSelectionUI/HighlightedArrowIndicator");
-    }
+        mainCanvas = GameObject.Find("MainCanvas");
+        grid = GameObject.Find("Grid");
+        forgeGrid = GameObject.Find("ForgeGrid");
+        pathSelectionIconPrefab = Resources.Load<GameObject>("UI/PathSelectionUI/PathIconContainer");
 
-    public void fillUIWithCurrentEncounterMap(EncounterMap map, int levels)
-    {
-        if (map == null)
+        if (grid == null || forgeGrid == null || mainCanvas == null)
         {
-            Debug.LogError("Map is null when trying to fill ui");
-            return;
+            Debug.LogError("Path Selection UI Error: Could not find grids");
         }
 
-
-        List<int> interactableNodeIds;
-        EncounterNode currentNode = map.nodes.Find((node) => node.id == map.currentEncounterId);
-        
-        if (currentNode != null)
+        // Change Layout depending on number of icons needed
+        if (options.Count == 1)
         {
-            interactableNodeIds = currentNode.progressPathIds;
+            grid.SetActive(false);
         }
         else
         {
-            interactableNodeIds = new List<int> { 0 };
+            forgeGrid.SetActive(false);
         }
 
-        GameObject icon;
-        float x_position = mapStartingPosition.x;
-        float y_position = 0;
-        int numberOfNodesOnLevel;
-        List<EncounterNode> levelNodes = new List<EncounterNode>();
-
-        // Adjust the scroll view width
-        RectTransform scrollViewContentRect = scrollViewContent.GetComponent<RectTransform>();
-        scrollViewContentRect.sizeDelta = new Vector2(x_position + (200 * levels) + 1000, scrollViewContentRect.sizeDelta.y);
-
-        Debug.Log(map.currentEncounterId);
-
-        // Creating all the icons
-        for (int i = 0; i < levels; i++)
-        {
-            levelNodes = map.nodes.FindAll((node) => node.level == i);
-            numberOfNodesOnLevel = levelNodes.Count;
-
-            if (numberOfNodesOnLevel == 1)
-            {
-                icon = Instantiate(pathSelectionIcon, scrollViewContent.transform);
-                icon.transform.localPosition = new Vector2(x_position, mapStartingPosition.y);
-                EncounterNode node = levelNodes[0];
-                StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(node.type, node.completed, node.encounterReward, node.id, interactableNodeIds.Contains(node.id)));
-                nodeIdToGameObject[node.id] = icon;
-            }
-            else
-            {
-                y_position = -125 * numberOfNodesOnLevel - 595;
-                foreach (EncounterNode node in levelNodes)
-                {
-                    icon = Instantiate(pathSelectionIcon, scrollViewContent.transform);
-                    icon.transform.localPosition = new Vector2(x_position, y_position);
-                    StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(node.type, node.completed, node.encounterReward, node.id, interactableNodeIds.Contains(node.id)));
-                    y_position += 250;
-                    nodeIdToGameObject[node.id] = icon;
-                }
-            }
-            x_position += 450;
-        }
-
-        foreach (EncounterNode node in map.nodes)
-        {
-            if (!nodeIdToGameObject.ContainsKey(node.id)) continue;
-            GameObject fromIcon = nodeIdToGameObject[node.id];
-            bool completedNode = node.completed;
-            foreach (EncounterNode targetNode in node.progressPaths)
-            {
-
-                if (!nodeIdToGameObject.ContainsKey(targetNode.id)) continue;
-                GameObject toIcon = nodeIdToGameObject[targetNode.id];
-                createArrowBetween(fromIcon.GetComponent<RectTransform>(), toIcon.GetComponent<RectTransform>(), completedNode);
-            }
-        }
+        fillIcons(options);
     }
 
-    private void createArrowBetween(RectTransform from, RectTransform to, bool completed)
+    private void fillIcons(List<Tuple<EncounterType, EncounterReward>> options)
     {
-        GameObject arrow = completed ? Instantiate(highlightedArrowIndicator, scrollViewContent.transform) : Instantiate(arrowIndicator, scrollViewContent.transform);
-        RectTransform arrowRect = arrow.GetComponent<RectTransform>();
-
-        // Add 85 to start/end outside the icon container
-        Vector3 start = from.localPosition;
-        start.x += 95;
-        Vector3 end = to.localPosition;
-        end.x -= 95;
-        Vector3 direction = end - start;
-
-        float distance = direction.magnitude;
-        Vector3 midPoint = (start + end) / 2;
-
-        arrowRect.localPosition = midPoint;
-        arrowRect.sizeDelta = new Vector2(distance, arrowRect.sizeDelta.y); // Stretch arrow
-        arrowRect.rotation = Quaternion.FromToRotation(Vector3.right, direction.normalized);
-        arrow.transform.SetAsFirstSibling();
+        GameObject icon;
+        if (options.Count == 1)
+        {
+            icon = Instantiate(pathSelectionIconPrefab, mainCanvas.transform);
+            icon.transform.position = new Vector2(iconPositions[1].Item1, iconPositions[1].Item2);
+            StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(options[1].Item1, options[1].Item2));
+        }
+        else
+        {
+            for (int i=0; i < options.Count; i++)
+            {
+                icon = Instantiate(pathSelectionIconPrefab, mainCanvas.transform);
+                icon.transform.localPosition = new Vector2(iconPositions[i].Item1, iconPositions[i].Item2);
+                StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(options[i].Item1, options[i].Item2));
+            }
+        }
     }
 }

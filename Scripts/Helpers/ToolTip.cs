@@ -89,11 +89,14 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         tooltipObject.SetActive(false);
     }
 
-    public void setTooltipData(string title, string message)
+    public void setTooltipData(string title, string message, int buf, ToolTipDirection direction)
     {
         tooltipTitle = title;
         tooltipMessage = message;
         tooltipTitleComponent.text = tooltipTitle;
         tooltipDescriptionComponent.text = tooltipMessage;
+        buffer = buf;
+        toolTipDirection = direction;
+        arrangeTooltip();
     }
 }

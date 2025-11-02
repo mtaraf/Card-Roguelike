@@ -51,7 +51,10 @@ Bugs:
     - Discard: Don't show target sprites when discard is in progress
 
 Current Work:
-    - Hold the Line: Add "Survive for _ more turns title"
+    - Add health bar to Character Display objects to display health
+    - Link up character selection scene to GameManager/MainMenuScene
+    - Add buttons to PathSelectionScene on top of doors with different cursor, link up to game manager to load correct scene
+    - Add logic to instatiate player display in pathselectionscene
 
 Path Selection:
 

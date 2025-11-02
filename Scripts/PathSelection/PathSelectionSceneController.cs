@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,32 +40,24 @@ public class PathSelectionSceneController : MonoBehaviour
 
     [SerializeField] private EncounterMap map;
     private int levels = 10;
+    private int currentLevel = 1;
 
     private PathSelectionUIController pathSelectionUIController;
+    private List<Tuple<EncounterType, EncounterReward>> options = new List<Tuple<EncounterType, EncounterReward>>();
 
 
     void Start()
     {
         pathSelectionUIController = FindFirstObjectByType<PathSelectionUIController>();
-        pathSelectionUIController.Initialize();
 
-        map = GameManager.instance.getEncounterMap();
-
-        // Check if on a current map, if not create one
-        if (map != null && map.nodes.Count > 0)
+        options.Add(generateOption());
+        if (currentLevel % 5 != 4)
         {
-            map.rebuildPaths();
-            Debug.Log("Map found!");
-        }
-        else
-        {
-            map = new EncounterMap();
-            Debug.Log("No encounter map present!");
-            map.generateRandomMap(levels);
-            GameManager.instance.setEncounterMap(map);
+            options.Add(generateOption());
+            options.Add(generateOption());
         }
 
-        pathSelectionUIController.fillUIWithCurrentEncounterMap(map, levels);
+        pathSelectionUIController.Initialize(options);
     }
 
     void Awake()
@@ -108,8 +101,57 @@ public class PathSelectionSceneController : MonoBehaviour
         }
     }
 
-    public void setEncounterReward()
+    private Tuple<EncounterType, EncounterReward> generateOption()
+    {
+        int random = UnityEngine.Random.Range(0, 11);
+        Tuple<EncounterType, EncounterReward> tuple;
+
+        if (currentLevel < 3)
+        {
+            tuple = new Tuple<EncounterType, EncounterReward>(EncounterType.Regular_Encounter, generateRandomReward(EncounterType.Regular_Encounter));
+        }
+        else if (currentLevel < 6)
+        {
+            tuple = random switch
+            {
+                < 8 => new Tuple<EncounterType, EncounterReward>(EncounterType.Regular_Encounter, generateRandomReward(EncounterType.Regular_Encounter)),
+                < 10 => new Tuple<EncounterType, EncounterReward>(EncounterType.Culver_Encounter, generateRandomReward(EncounterType.Culver_Encounter)),
+                _ => new Tuple<EncounterType, EncounterReward>(EncounterType.Hold_The_Line_Encounter, generateRandomReward(EncounterType.Hold_The_Line_Encounter))
+            };
+        }
+        else
+        {
+            tuple = random switch
+            {
+                < 8 => new Tuple<EncounterType, EncounterReward>(EncounterType.Regular_Encounter, generateRandomReward(EncounterType.Regular_Encounter)),
+                < 9 => new Tuple<EncounterType, EncounterReward>(EncounterType.Culver_Encounter, generateRandomReward(EncounterType.Culver_Encounter)),
+                < 10 => new Tuple<EncounterType, EncounterReward>(EncounterType.Hold_The_Line_Encounter, generateRandomReward(EncounterType.Hold_The_Line_Encounter)),
+                10 => new Tuple<EncounterType, EncounterReward>(EncounterType.Mini_Boss_Encounter, generateRandomReward(EncounterType.Mini_Boss_Encounter)),
+                _ => new Tuple<EncounterType, EncounterReward>(EncounterType.Final_Boss, generateRandomReward(EncounterType.Final_Boss))
+            };
+        }
+
+        return tuple;
+    }
+    
+    EncounterReward generateRandomReward(EncounterType encounterType)
     {
 
+        int random = UnityEngine.Random.Range(0, 101);
+
+        if (encounterType == EncounterType.Mini_Boss_Encounter)
+        {
+            // Specific mini-boss rewards
+            return EncounterReward.Gold;
+        }
+
+        if (random < 71)
+        {
+            return EncounterReward.Gold;
+        }
+        else
+        {
+            return Helpers.GetRandomEnumValue<EncounterReward>();
+        }
     }
 }
