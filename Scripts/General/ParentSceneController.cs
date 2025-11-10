@@ -29,6 +29,7 @@ public class ParentSceneController : MonoBehaviour
         mainCanvas = GameObject.FindGameObjectWithTag("BaseLevelCanvas");
 
         // Spawn player
+        playerPrefab = GameManager.instance.getPlayerCharacter();
         GameObject playerObj = Instantiate(playerPrefab, mainCanvas.transform);
         player = playerObj.GetComponent<Player>();
 

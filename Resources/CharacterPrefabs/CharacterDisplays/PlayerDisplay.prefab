@@ -56,6 +56,9 @@ MonoBehaviour:
   - test 3
   characterName: Test Name
   characterIcon: {fileID: -5215612764902218311, guid: e4c1bbef9fad7494eb1acc59604d8598, type: 3}
+  displaycards:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &8863711403973895507
 GameObject:
   m_ObjectHideFlags: 0

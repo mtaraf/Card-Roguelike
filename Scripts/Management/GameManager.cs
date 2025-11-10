@@ -28,8 +28,13 @@ public class GameManager : MonoBehaviour
     // Game States
     private EncounterMap map;
     private int currentLevel = -1;
-    private DeckModelSO playerDeck;
+    [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
+    private ParentSceneController currentSceneController;
+
+    // Player States
+    private GameObject playerObject;
     private int playerMaxHealth;
+    private DeckModelSO playerDeck;
     private int playerCurrentHealth;
     private int playerHandSize;
     private int playerHandEnergy;
@@ -37,8 +42,6 @@ public class GameManager : MonoBehaviour
     private Player player;
     private int cardRarity = 0;
     private int cardChoices = 3;
-    [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
-    private ParentSceneController currentSceneController;
 
     // UI
     [SerializeField] private List<GameObject> turnBasedStatuses = new List<GameObject>();
@@ -297,6 +300,16 @@ public class GameManager : MonoBehaviour
         return playerHandEnergy;
     }
 
+    public void setPlayerCharacter(GameObject obj)
+    {
+        playerObject = obj;
+    }
+
+    public GameObject getPlayerCharacter()
+    {
+        return playerObject;
+    }
+
     public int getCurrentLevel()
     {
         return currentLevel;
@@ -381,6 +394,7 @@ public class GameManager : MonoBehaviour
         saveData.playerHandEnergy = playerHandEnergy;
         saveData.playerCards = new List<SerializableCardModel>();
         saveData.encounterMap = map;
+        saveData.playerPrefab = playerObject;
 
         foreach (CardModelSO model in playerDeck.cards)
         {
@@ -409,6 +423,7 @@ public class GameManager : MonoBehaviour
         playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
         playerDeck.cards = new List<CardModelSO>();
         map = data.encounterMap;
+        playerObject = data.playerPrefab;
         //map.rebuildPaths();
 
         foreach (SerializableCardModel serializableCardModel in data.playerCards)

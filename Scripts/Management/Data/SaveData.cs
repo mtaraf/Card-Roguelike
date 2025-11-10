@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class SaveData
@@ -13,6 +14,7 @@ public class SaveData
     public string saveName = "Save Name";
     public List<SerializableCardModel> playerCards; // Unique card IDs or titles
     public EncounterMap encounterMap;
+    public GameObject playerPrefab;
 }
 
 [Serializable]

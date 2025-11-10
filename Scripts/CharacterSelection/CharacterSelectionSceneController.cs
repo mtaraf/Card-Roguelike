@@ -14,6 +14,7 @@ public class CharacterSelectionSceneController : MonoBehaviour
     private GameObject[] availableCharacters;
     private Transform canvasTransform;
     private GameObject cardPrefab;
+    private Button startGameButton;
 
     void Start()
     {
@@ -25,6 +26,9 @@ public class CharacterSelectionSceneController : MonoBehaviour
         characterSelector = GameObject.Find("CharacterSelector");
         characterDisplay = GameObject.Find("CharacterDisplay");
         characterName = GameObject.Find("CharacterName");
+
+        startGameButton = GameObject.Find("StartGameButton").GetComponent<Button>();
+        startGameButton.onClick.AddListener(() => startGame());
 
         if (characterDetails == null || characterSelector == null || characterDisplay == null || characterName == null)
         {
@@ -71,11 +75,12 @@ public class CharacterSelectionSceneController : MonoBehaviour
 
         setDisplayDetails(displayInformation);
     }
-    
+
     void setDisplayDetails(DisplayInformation displayInformation)
     {
         string specialties = "";
-        for (int i=0; i<displayInformation.classDetails.Length; i++){
+        for (int i = 0; i < displayInformation.classDetails.Length; i++)
+        {
             specialties += displayInformation.classDetails[i] + "\n";
         }
 
@@ -96,5 +101,32 @@ public class CharacterSelectionSceneController : MonoBehaviour
 
         GameObject card2 = Instantiate(cardPrefab, cardSlot2);
         card2.GetComponent<Card>().setCardDisplayInformation(displayInformation.displaycards[1]);
+    }
+    
+    public void startGame()
+    {
+        GameObject selectedCharacter = characterDisplay.transform.GetChild(0).gameObject;
+        DisplayInformation information = selectedCharacter.GetComponent<DisplayInformation>();
+        GameObject playerCharacter;
+
+        switch (information.characterClass)
+        {
+            case CharacterClass.Paladin:
+                playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Paladin/PaladinCharacter");
+                break;
+            case CharacterClass.Flower:
+                playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Paladin/PaladinCharacter");
+                break;
+            case CharacterClass.Witch:
+                playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Witch/WitchCharacter");
+                break;
+            default:
+                playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Player/Player");
+                break;
+        }
+
+        GameManager.instance.setPlayerCharacter(playerCharacter);
+
+        GameManager.instance.loadScene((int)SceneBuildIndex.BASE_LEVEL);
     }
 }
