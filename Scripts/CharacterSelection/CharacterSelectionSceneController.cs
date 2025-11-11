@@ -108,24 +108,30 @@ public class CharacterSelectionSceneController : MonoBehaviour
         GameObject selectedCharacter = characterDisplay.transform.GetChild(0).gameObject;
         DisplayInformation information = selectedCharacter.GetComponent<DisplayInformation>();
         GameObject playerCharacter;
+        GameObject playerDisplay;
 
         switch (information.characterClass)
         {
             case CharacterClass.Paladin:
                 playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Paladin/PaladinCharacter");
+                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/PaladinDisplay");
                 break;
             case CharacterClass.Flower:
                 playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Paladin/PaladinCharacter");
+                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/PaladinDisplay");
                 break;
             case CharacterClass.Witch:
                 playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Witch/WitchCharacter");
+                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/WitchDisplay");
                 break;
             default:
                 playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Player/Player");
+                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/PlayerDisplay");
                 break;
         }
 
         GameManager.instance.setPlayerCharacter(playerCharacter);
+        GameManager.instance.setPlayerDisplayObject(playerDisplay);
 
         GameManager.instance.loadScene((int)SceneBuildIndex.BASE_LEVEL);
     }

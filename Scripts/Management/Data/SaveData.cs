@@ -15,6 +15,7 @@ public class SaveData
     public List<SerializableCardModel> playerCards; // Unique card IDs or titles
     public EncounterMap encounterMap;
     public GameObject playerPrefab;
+    public GameObject playerDisplay;
 }
 
 [Serializable]

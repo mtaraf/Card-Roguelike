@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     // Player States
     private GameObject playerObject;
+    private GameObject playerDisplayObject;
     private int playerMaxHealth;
     private DeckModelSO playerDeck;
     private int playerCurrentHealth;
@@ -306,9 +307,24 @@ public class GameManager : MonoBehaviour
         return playerObject;
     }
 
+    public void setPlayerDisplayObject(GameObject display)
+    {
+        playerDisplayObject = display;
+    }
+    
+    public GameObject getPlayerDisplayObject()
+    {
+        return playerDisplayObject;
+    }
+
     public int getCurrentLevel()
     {
         return currentLevel;
+    }
+    
+    public void setPlayer(Player currentPlayer)
+    {
+        player = currentPlayer;
     }
 
     public void endTurn()
@@ -398,6 +414,7 @@ public class GameManager : MonoBehaviour
         saveData.playerCards = new List<SerializableCardModel>();
         saveData.encounterMap = map;
         saveData.playerPrefab = playerObject;
+        saveData.playerDisplay = playerDisplayObject;
 
         foreach (CardModelSO model in playerDeck.cards)
         {
@@ -427,7 +444,7 @@ public class GameManager : MonoBehaviour
         playerDeck.cards = new List<CardModelSO>();
         map = data.encounterMap;
         playerObject = data.playerPrefab;
-        //map.rebuildPaths();
+        playerDisplayObject = data.playerDisplay;
 
         foreach (SerializableCardModel serializableCardModel in data.playerCards)
         {

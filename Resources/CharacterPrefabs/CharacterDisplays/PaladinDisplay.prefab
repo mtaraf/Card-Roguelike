@@ -58,6 +58,8 @@ MonoBehaviour:
   displaycards:
   - {fileID: 11400000, guid: 6dcbcb52b5eef3349b534205a20bb877, type: 2}
   - {fileID: 11400000, guid: 7d05e225c3a4caa409bf2c751ebeac52, type: 2}
+  pathSelectionYOffset: -30
+  pathSelectionScale: 0.5
 --- !u!1 &8863711403973895507
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,15 +39,12 @@ public static class EncounterRewardExtensions
 public class PathSelectionSceneController : MonoBehaviour
 {
     public static PathSelectionSceneController instance;
-
-    [SerializeField] private EncounterMap map;
     private int levels = 10;
     private int currentLevel = 1;
-
     private PathSelectionUIController pathSelectionUIController;
     private List<Tuple<EncounterType, EncounterReward>> options = new List<Tuple<EncounterType, EncounterReward>>();
-
     private List<GameObject> doorButtons = new List<GameObject>();
+    private Transform playerDisplayLocation;
 
 
     void Start()
@@ -56,6 +53,20 @@ public class PathSelectionSceneController : MonoBehaviour
         doorButtons.Add(GameObject.Find("DoorOne"));
         doorButtons.Add(GameObject.Find("DoorTwo"));
         doorButtons.Add(GameObject.Find("DoorThree"));
+
+        playerDisplayLocation = GameObject.Find("PlayerDisplayPosition").transform;
+
+        GameObject playerDisplay;
+        // For testing purposes, TO-DO: Replace with error checking later
+        if (GameManager.instance.getPlayerDisplayObject() == null)
+        {
+            playerDisplay = Instantiate(Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/PaladinDisplay"), playerDisplayLocation);
+        }
+        else
+        {
+            playerDisplay = Instantiate(GameManager.instance.getPlayerDisplayObject(), playerDisplayLocation);
+        }
+        playerDisplay.GetComponent<DisplayInformation>().pathSelectionAlignment();
 
         options.Add(generateOption());
 

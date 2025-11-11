@@ -38,6 +38,8 @@ public class ParentSceneController : MonoBehaviour
         GameObject playerObj = Instantiate(playerPrefab, mainCanvas.transform);
         player = playerObj.GetComponent<Player>();
 
+        GameManager.instance.setPlayer(player);
+
         player.setDeck(GameManager.instance.getPlayerDeck());
         player.setMaxHealth(GameManager.instance.getPlayerMaxHealth());
         player.setCurrentHealth(GameManager.instance.getPlayerCurrentHealth());
