@@ -1,29 +1,9 @@
-Add/Debug cards (TO-DO)
-    - Add corruption system to cards (done)
-        - Add corrupted card display prefab for discard pile (done)
-            - Add tooltip for corrupt icon
-    - Apply card effects to damage done/taken for strength (+1 to all on-hit) / weakness (weakness 10%)
-    - Multi hit cards should proc on-hit multiple times (i.e. divine mark, etc.)
-    - Cards to implement:
-        - Acid flask: decide on poison DoT mechanic and how it will work
-        - Reroll
-        - Scaling Strike (done)
-        - Divine Mark: mark should heal player on hit, add tooltip for mark
-        - Heavens Hammer: calculate damage taken and apply heal to player (done)
-        - Agility: reduce energy cost of all cards by 1
-        - Combo attack: add 1 * all effects enemy is under damage for any attacks this turn, adds new effect type
-        - Golden Touch: adds gold for any on hit damage this turn
-        - Corruptable: add 1 strength for each corrupted card this encounter (done)
-        - Cleanse: Remove all negative effects on player (done)
-
 - Move value based effects (armor/strength/posion) to a seperate UI, turn based effects on same ui (divine mark, weakness) (done)
     - Add tooltips to effects
 - Check if enemy dies from start of turn effects
 
 - Re-do the Deck View UI
     - new background image, deckview icon, corrupt card prefab
-
-- Add new effect 'Take Damage'
 
 
 Main Menu:
@@ -37,12 +17,6 @@ Base Scene:
 Culver's: 
     - 
 
--105 -340
-140 280
-
-327
-
-759
 General:
     - Add classes to cards
     - only allow class cards to show up
