@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     // Game States
     private EncounterMap map;
-    private int currentLevel = -1;
+    private int currentLevel = 0;
     [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
     private ParentSceneController currentSceneController;
 
@@ -251,13 +251,9 @@ public class GameManager : MonoBehaviour
         playerDeck.cards.Remove(model);
     }
 
-
-    public IEnumerator moveToNextEncounter()
+    public IEnumerator moveToPathSelection()
     {
-        // Mark node as completed
-        map.getNode(map.currentEncounterId).completed = true;
-
-        // update player stats
+         // update player stats
         playerCurrentHealth = player.getCurrentHealth();
         playerMaxHealth = player.getMaxHealth();
 
@@ -340,26 +336,33 @@ public class GameManager : MonoBehaviour
         return starterDeck;
     }
 
-    public void loadEncounterTypeAndRewards(EncounterMap map)
+    public void loadEncounterTypeAndRewards(EncounterType type, EncounterReward reward)
     {
-        this.map = map;
-        EncounterNode currentNode = map.getNode(map.currentEncounterId);
-        currentPath = currentNode.type;
-        encounterReward = currentNode.encounterReward;
-        //encounterRewardValue = rewardValue;
-        currentLevel = currentNode.level;
-
+        encounterReward = reward;
+        switch (type)
+        {
+            case EncounterType.Forge:
+                //SceneLoader.instance.loadScene(3);
+                break;
+            case EncounterType.Regular_Encounter:
+                SceneLoader.instance.loadScene("BaseLevelScene");
+                break;
+            case EncounterType.Mini_Boss_Encounter:
+                // TODO: Change this
+                SceneLoader.instance.loadScene("BaseLevelScene");
+                break;
+            case EncounterType.Final_Boss:
+                // TODO: Change this
+                SceneLoader.instance.loadScene("BaseLevelScene");
+                break;
+            case EncounterType.Culver_Encounter:
+                SceneLoader.instance.loadScene("CulverScene");
+                break;
+            case EncounterType.Hold_The_Line_Encounter:
+                SceneLoader.instance.loadScene("HoldTheLine");
+                break;
+        }
         StartCoroutine(updateUI());
-    }
-
-    public void setEncounterMap(EncounterMap map)
-    {
-        this.map = map;
-    }
-
-    public EncounterMap getEncounterMap()
-    {
-        return map;
     }
 
     public EncounterType getPreviousEncounter()

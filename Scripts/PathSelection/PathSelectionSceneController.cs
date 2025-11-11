@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public enum EncounterType
@@ -45,19 +47,49 @@ public class PathSelectionSceneController : MonoBehaviour
     private PathSelectionUIController pathSelectionUIController;
     private List<Tuple<EncounterType, EncounterReward>> options = new List<Tuple<EncounterType, EncounterReward>>();
 
+    private List<GameObject> doorButtons = new List<GameObject>();
+
 
     void Start()
     {
         pathSelectionUIController = FindFirstObjectByType<PathSelectionUIController>();
+        doorButtons.Add(GameObject.Find("DoorOne"));
+        doorButtons.Add(GameObject.Find("DoorTwo"));
+        doorButtons.Add(GameObject.Find("DoorThree"));
 
         options.Add(generateOption());
+
         if (currentLevel % 5 != 4)
         {
             options.Add(generateOption());
             options.Add(generateOption());
         }
+        else
+        {
+            doorButtons[0].SetActive(false);
+            doorButtons[2].SetActive(false);
+        }
+
+        StartCoroutine(assignDoorButtonAction());
 
         pathSelectionUIController.Initialize(options);
+    }
+
+    IEnumerator assignDoorButtonAction()
+    {
+        yield return null;
+        if (options.Count == 1)
+        {
+            doorButtons[1].GetComponent<Button>().onClick.AddListener(() => moveToEncounter(options[0]));
+        }
+        else
+        {
+            for (int i=0; i<doorButtons.Count; i++)
+            {
+                int index = i;
+                doorButtons[index].GetComponent<Button>().onClick.AddListener(() => moveToEncounter(options[index]));
+            }
+        }
     }
 
     void Awake()
@@ -71,34 +103,9 @@ public class PathSelectionSceneController : MonoBehaviour
         instance = this;
     }
 
-    public void navigateToScene(int id)
+    public void moveToEncounter(Tuple<EncounterType, EncounterReward> tuple)
     {
-        map.currentEncounterId = id;
-        Debug.Log("Current Encounter Level ID: " + id);
-        EncounterType type = map.getNode(id).type;
-        switch (type)
-        {
-            case EncounterType.Forge:
-                //SceneLoader.instance.loadScene(3);
-                break;
-            case EncounterType.Regular_Encounter:
-                SceneLoader.instance.loadScene("BaseLevelScene", () => GameManager.instance.loadEncounterTypeAndRewards(map));
-                break;
-            case EncounterType.Mini_Boss_Encounter:
-                // TODO: Change this
-                SceneLoader.instance.loadScene("BaseLevelScene", () => GameManager.instance.loadEncounterTypeAndRewards(map));
-                break;
-            case EncounterType.Final_Boss:
-                // TODO: Change this
-                SceneLoader.instance.loadScene("BaseLevelScene", () => GameManager.instance.loadEncounterTypeAndRewards(map));
-                break;
-            case EncounterType.Culver_Encounter:
-                SceneLoader.instance.loadScene("CulverScene", () => GameManager.instance.loadEncounterTypeAndRewards(map));
-                break;
-            case EncounterType.Hold_The_Line_Encounter:
-                SceneLoader.instance.loadScene("HoldTheLine", () => GameManager.instance.loadEncounterTypeAndRewards(map));
-                break;
-        }
+        GameManager.instance.loadEncounterTypeAndRewards(tuple.Item1, tuple.Item2);
     }
 
     private Tuple<EncounterType, EncounterReward> generateOption()

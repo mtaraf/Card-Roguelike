@@ -30,6 +30,11 @@ public class ParentSceneController : MonoBehaviour
 
         // Spawn player
         playerPrefab = GameManager.instance.getPlayerCharacter();
+
+        if (playerPrefab == null)
+        {
+            playerPrefab = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Player/Player");
+        }
         GameObject playerObj = Instantiate(playerPrefab, mainCanvas.transform);
         player = playerObj.GetComponent<Player>();
 
