@@ -4,18 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public enum EnemyClass
-{
-    Minion,
-    Fighter,
-    Mage,
-    Healer
-}
-
 public class Enemy : Character
 {
     [SerializeField] private int moveset;
-    [SerializeField] private EnemyClass enemyClass;
     private List<CardModelSO> currentMoveset = new List<CardModelSO>();
     [SerializeField] private List<DeckModelSO> movesets = new List<DeckModelSO>();
     [SerializeField] private GameObject energyUI;
@@ -65,11 +56,6 @@ public class Enemy : Character
     public override void processCardEffects(List<CardEffect> effects, Enemy enemy = null)
     {
         base.processCardEffects(effects, enemy);
-    }
-
-    public EnemyClass getClass()
-    {
-        return enemyClass;
     }
 
     // Sets current energy and updates energyUI

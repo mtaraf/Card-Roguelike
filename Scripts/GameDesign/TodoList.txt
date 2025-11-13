@@ -31,8 +31,13 @@ Bugs:
     - Add health bar to Character Display objects to display health
     - Cards should be layered over everything in battle scenes
 
+Card Bugs:
+    - redemtion: heals the enemy not the player lol
+    - Judgement: needs to be implemented
+
 Current Work:
-    - 
+    - Add other classes
+    - Finally start end to end testing
 
 Path Selection:
 

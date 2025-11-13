@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     // Scene
     private string currentScene;
-    private HashSet<int> battleScenes = new HashSet<int>() { 1, 4 };
+    private HashSet<int> battleScenes = new HashSet<int>() { 1, 4, 6 };
 
 
     public void Awake()
@@ -160,6 +160,11 @@ public class GameManager : MonoBehaviour
         victoryManager = transform.AddComponent<VictoryManager>();
         victoryManager.instantiate();
 
+        if (victoryManager == null)
+        {
+            Debug.LogError("Could not instatiate victory manager");
+        }
+
         getPlayer();
     }
 
@@ -217,7 +222,7 @@ public class GameManager : MonoBehaviour
         return victoryCardPools;
     }
 
-    public IEnumerator encounterVictory(int goldEarned)
+    public IEnumerator encounterVictory()
     {
         AudioManager.instance.playVictory();
         addEncounterRewards();

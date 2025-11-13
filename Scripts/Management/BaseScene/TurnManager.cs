@@ -19,7 +19,6 @@ public class TurnManager : MonoBehaviour
 
     private List<Enemy> enemies;
     private Player player;
-    private int goldEarned = 20;
 
     private ParentSceneController sceneController;
 
@@ -39,7 +38,6 @@ public class TurnManager : MonoBehaviour
     // Culver Scene Turns
     public void startCulver(int turns)
     {
-        Debug.Log("Start Culver Turns: " + turns);
         StartCoroutine(culverTurnLoop(turns));
     }
 
@@ -48,15 +46,17 @@ public class TurnManager : MonoBehaviour
         int currentTurn = 1;
         while (currentTurn <= turns && enemies.Count > 0)
         {
+            CulverSceneController.instance.updateTurnCount(currentTurn);
             yield return StartCoroutine(playerCulverTurn());
             endPlayerTurn();
 
-            CulverSceneController.instance.updateTurnCount(currentTurn);
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
+
+            currentTurn++;
         }
 
         if (enemies.Count == 0)
-            StartCoroutine(GameManager.instance.encounterVictory(goldEarned));
+            StartCoroutine(GameManager.instance.encounterVictory());
     }
 
     private IEnumerator playerCulverTurn()
@@ -106,7 +106,7 @@ public class TurnManager : MonoBehaviour
         }
 
         if (player.getCurrentHealth() > 0)
-            StartCoroutine(GameManager.instance.encounterVictory(goldEarned));
+            StartCoroutine(GameManager.instance.encounterVictory());
         else
             Debug.Log("Game over!");
             // StartCoroutine(GameManager.instance.encounterDefeat()); TO-DO: add encounter defeat function
@@ -139,7 +139,7 @@ public class TurnManager : MonoBehaviour
         }
 
         if (enemies.Count == 0)
-            StartCoroutine(GameManager.instance.encounterVictory(goldEarned));
+            StartCoroutine(GameManager.instance.encounterVictory());
     }
 
     private IEnumerator playerTurn()

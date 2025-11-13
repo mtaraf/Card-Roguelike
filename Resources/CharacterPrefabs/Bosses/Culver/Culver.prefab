@@ -88,11 +88,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26add3cf1c31e341af8e517b5d58321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 10
   id: 0
   spriteObject: {fileID: 4653887851505298441}
   moveset: 0
-  enemyClass: 0
   movesets:
   - {fileID: 11400000, guid: 946eacfba4f407849a08075abab9bd52, type: 2}
   - {fileID: 11400000, guid: 09fc1bc6bfa476743894d5b7ac57c769, type: 2}
