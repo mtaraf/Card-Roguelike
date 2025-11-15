@@ -5,6 +5,7 @@ public enum BossType
 {
     HoldTheLine,
     Culver,
+    FinalBoss,
 }
 public class Boss : Enemy
 {

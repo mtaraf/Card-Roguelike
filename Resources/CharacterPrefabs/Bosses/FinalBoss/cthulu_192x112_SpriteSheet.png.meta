@@ -235,7 +235,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -270,10 +270,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -314,10 +314,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 63
-        y: 687
-        width: 62
-        height: 65
+        x: 0
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -336,10 +336,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 255
-        y: 687
-        width: 62
-        height: 65
+        x: 192
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -358,10 +358,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_2
       rect:
         serializedVersion: 2
-        x: 447
-        y: 687
-        width: 62
-        height: 65
+        x: 384
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -380,10 +380,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_3
       rect:
         serializedVersion: 2
-        x: 639
-        y: 687
-        width: 62
-        height: 65
+        x: 576
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -402,10 +402,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_4
       rect:
         serializedVersion: 2
-        x: 831
-        y: 687
-        width: 62
-        height: 65
+        x: 768
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -424,10 +424,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_5
       rect:
         serializedVersion: 2
-        x: 1023
-        y: 687
-        width: 62
-        height: 66
+        x: 960
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -446,10 +446,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_6
       rect:
         serializedVersion: 2
-        x: 1215
-        y: 687
-        width: 62
-        height: 66
+        x: 1152
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -468,10 +468,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_7
       rect:
         serializedVersion: 2
-        x: 1407
-        y: 687
-        width: 62
-        height: 66
+        x: 1344
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -490,10 +490,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_8
       rect:
         serializedVersion: 2
-        x: 1599
-        y: 687
-        width: 62
-        height: 66
+        x: 1536
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -512,10 +512,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_9
       rect:
         serializedVersion: 2
-        x: 1791
-        y: 687
-        width: 62
-        height: 66
+        x: 1728
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -534,10 +534,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_10
       rect:
         serializedVersion: 2
-        x: 1983
-        y: 687
-        width: 62
-        height: 65
+        x: 1920
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -556,10 +556,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_11
       rect:
         serializedVersion: 2
-        x: 2175
-        y: 687
-        width: 62
-        height: 65
+        x: 2112
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -578,10 +578,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_12
       rect:
         serializedVersion: 2
-        x: 2367
-        y: 687
-        width: 62
-        height: 65
+        x: 2304
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -600,10 +600,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_13
       rect:
         serializedVersion: 2
-        x: 2559
-        y: 687
-        width: 62
-        height: 65
+        x: 2496
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -622,10 +622,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_14
       rect:
         serializedVersion: 2
-        x: 2751
-        y: 687
-        width: 62
-        height: 65
+        x: 2688
+        y: 672
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -644,10 +644,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_15
       rect:
         serializedVersion: 2
-        x: 63
-        y: 575
-        width: 62
-        height: 65
+        x: 0
+        y: 560
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -666,10 +666,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_16
       rect:
         serializedVersion: 2
-        x: 257
-        y: 575
-        width: 58
-        height: 65
+        x: 192
+        y: 560
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -688,10 +688,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_17
       rect:
         serializedVersion: 2
-        x: 450
-        y: 575
-        width: 56
-        height: 65
+        x: 384
+        y: 560
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -710,10 +710,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_18
       rect:
         serializedVersion: 2
-        x: 642
-        y: 575
-        width: 56
-        height: 64
+        x: 576
+        y: 560
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -732,10 +732,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_19
       rect:
         serializedVersion: 2
-        x: 833
-        y: 575
-        width: 58
-        height: 64
+        x: 768
+        y: 560
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -754,10 +754,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_20
       rect:
         serializedVersion: 2
-        x: 1023
-        y: 575
-        width: 62
-        height: 64
+        x: 960
+        y: 560
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -776,10 +776,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_21
       rect:
         serializedVersion: 2
-        x: 1215
-        y: 575
-        width: 63
-        height: 65
+        x: 1152
+        y: 560
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -798,10 +798,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_22
       rect:
         serializedVersion: 2
-        x: 1406
-        y: 575
-        width: 64
-        height: 65
+        x: 1344
+        y: 560
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -820,10 +820,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_23
       rect:
         serializedVersion: 2
-        x: 1598
-        y: 575
-        width: 64
-        height: 64
+        x: 1536
+        y: 560
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -842,10 +842,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_24
       rect:
         serializedVersion: 2
-        x: 1791
-        y: 575
-        width: 62
-        height: 64
+        x: 1728
+        y: 560
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -864,10 +864,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_25
       rect:
         serializedVersion: 2
-        x: 1983
-        y: 575
-        width: 62
-        height: 65
+        x: 1920
+        y: 560
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -886,10 +886,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_26
       rect:
         serializedVersion: 2
-        x: 2175
-        y: 575
-        width: 62
-        height: 65
+        x: 2112
+        y: 560
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -908,10 +908,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_27
       rect:
         serializedVersion: 2
-        x: 47
-        y: 467
-        width: 97
-        height: 62
+        x: 0
+        y: 448
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -930,10 +930,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_28
       rect:
         serializedVersion: 2
-        x: 234
-        y: 466
-        width: 106
-        height: 70
+        x: 192
+        y: 448
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -952,10 +952,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_29
       rect:
         serializedVersion: 2
-        x: 430
-        y: 465
-        width: 96
-        height: 76
+        x: 384
+        y: 448
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -974,10 +974,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_30
       rect:
         serializedVersion: 2
-        x: 621
-        y: 467
-        width: 103
-        height: 61
+        x: 576
+        y: 448
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -996,10 +996,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_31
       rect:
         serializedVersion: 2
-        x: 826
-        y: 466
-        width: 76
-        height: 53
+        x: 768
+        y: 448
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1018,10 +1018,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_32
       rect:
         serializedVersion: 2
-        x: 1008
-        y: 468
-        width: 95
-        height: 51
+        x: 960
+        y: 448
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1040,10 +1040,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_33
       rect:
         serializedVersion: 2
-        x: 65
-        y: 351
-        width: 64
-        height: 69
+        x: 0
+        y: 336
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1062,10 +1062,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_34
       rect:
         serializedVersion: 2
-        x: 251
-        y: 351
-        width: 65
-        height: 67
+        x: 192
+        y: 336
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1084,10 +1084,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_35
       rect:
         serializedVersion: 2
-        x: 437
-        y: 351
-        width: 136
-        height: 67
+        x: 384
+        y: 336
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1106,10 +1106,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_36
       rect:
         serializedVersion: 2
-        x: 635
-        y: 351
-        width: 128
-        height: 65
+        x: 576
+        y: 336
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1128,10 +1128,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_37
       rect:
         serializedVersion: 2
-        x: 838
-        y: 351
-        width: 106
-        height: 64
+        x: 768
+        y: 336
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1150,10 +1150,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_38
       rect:
         serializedVersion: 2
-        x: 1029
-        y: 351
-        width: 55
-        height: 64
+        x: 960
+        y: 336
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1172,10 +1172,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_39
       rect:
         serializedVersion: 2
-        x: 1091
-        y: 379
-        width: 44
-        height: 21
+        x: 1152
+        y: 336
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1194,10 +1194,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_40
       rect:
         serializedVersion: 2
-        x: 1102
-        y: 375
-        width: 17
-        height: 13
+        x: 0
+        y: 224
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1216,10 +1216,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_41
       rect:
         serializedVersion: 2
-        x: 1219
-        y: 351
-        width: 59
-        height: 65
+        x: 192
+        y: 224
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1238,10 +1238,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_42
       rect:
         serializedVersion: 2
-        x: 53
-        y: 239
-        width: 67
-        height: 66
+        x: 384
+        y: 224
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1260,10 +1260,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_43
       rect:
         serializedVersion: 2
-        x: 244
-        y: 239
-        width: 67
-        height: 66
+        x: 576
+        y: 224
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1282,10 +1282,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_44
       rect:
         serializedVersion: 2
-        x: 437
-        y: 239
-        width: 113
-        height: 65
+        x: 768
+        y: 224
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1304,10 +1304,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_45
       rect:
         serializedVersion: 2
-        x: 629
-        y: 239
-        width: 138
-        height: 64
+        x: 960
+        y: 224
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1326,10 +1326,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_46
       rect:
         serializedVersion: 2
-        x: 821
-        y: 239
-        width: 138
-        height: 64
+        x: 1152
+        y: 224
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1348,10 +1348,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_47
       rect:
         serializedVersion: 2
-        x: 1014
-        y: 239
-        width: 138
-        height: 64
+        x: 1344
+        y: 224
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1370,10 +1370,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_48
       rect:
         serializedVersion: 2
-        x: 1206
-        y: 239
-        width: 137
-        height: 64
+        x: 1536
+        y: 224
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1392,10 +1392,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_49
       rect:
         serializedVersion: 2
-        x: 1410
-        y: 239
-        width: 87
-        height: 65
+        x: 0
+        y: 112
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1414,10 +1414,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_50
       rect:
         serializedVersion: 2
-        x: 1598
-        y: 239
-        width: 63
-        height: 65
+        x: 192
+        y: 112
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1436,10 +1436,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_51
       rect:
         serializedVersion: 2
-        x: 63
-        y: 127
-        width: 83
-        height: 65
+        x: 384
+        y: 112
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1458,10 +1458,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_52
       rect:
         serializedVersion: 2
-        x: 255
-        y: 127
-        width: 83
-        height: 65
+        x: 576
+        y: 112
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1480,10 +1480,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_53
       rect:
         serializedVersion: 2
-        x: 448
-        y: 127
-        width: 85
-        height: 66
+        x: 768
+        y: 112
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1502,10 +1502,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_54
       rect:
         serializedVersion: 2
-        x: 640
-        y: 127
-        width: 85
-        height: 65
+        x: 0
+        y: 0
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1524,10 +1524,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_55
       rect:
         serializedVersion: 2
-        x: 831
-        y: 127
-        width: 83
-        height: 65
+        x: 192
+        y: 0
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1546,10 +1546,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_56
       rect:
         serializedVersion: 2
-        x: 63
-        y: 15
-        width: 83
-        height: 65
+        x: 384
+        y: 0
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1568,10 +1568,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_57
       rect:
         serializedVersion: 2
-        x: 253
-        y: 15
-        width: 86
-        height: 69
+        x: 576
+        y: 0
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1590,10 +1590,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_58
       rect:
         serializedVersion: 2
-        x: 445
-        y: 18
-        width: 69
-        height: 59
+        x: 768
+        y: 0
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1612,10 +1612,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_59
       rect:
         serializedVersion: 2
-        x: 637
-        y: 15
-        width: 74
-        height: 50
+        x: 960
+        y: 0
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1634,10 +1634,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_60
       rect:
         serializedVersion: 2
-        x: 829
-        y: 15
-        width: 71
-        height: 43
+        x: 1152
+        y: 0
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1656,10 +1656,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_61
       rect:
         serializedVersion: 2
-        x: 1023
-        y: 15
-        width: 71
-        height: 25
+        x: 1344
+        y: 0
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1678,10 +1678,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_62
       rect:
         serializedVersion: 2
-        x: 1217
-        y: 15
-        width: 72
-        height: 17
+        x: 1536
+        y: 0
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1700,10 +1700,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_63
       rect:
         serializedVersion: 2
-        x: 1408
-        y: 15
-        width: 78
-        height: 13
+        x: 1728
+        y: 0
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1722,10 +1722,10 @@ TextureImporter:
       name: cthulu_192x112_SpriteSheet_64
       rect:
         serializedVersion: 2
-        x: 1600
-        y: 15
-        width: 78
-        height: 13
+        x: 1920
+        y: 0
+        width: 192
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1740,55 +1740,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: cthulu_192x112_SpriteSheet_65
-      rect:
-        serializedVersion: 2
-        x: 1787
-        y: 15
-        width: 83
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e378c23e3ab413a90800000000000000
-      internalID: -7335999150746728642
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cthulu_192x112_SpriteSheet_66
-      rect:
-        serializedVersion: 2
-        x: 1979
-        y: 15
-        width: 83
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3c52b3016be1699f0800000000000000
-      internalID: -462148144453704253
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 316189a1da1a6f24eb1371448d518eae
     internalID: 0
     vertices: []
     indices: 
@@ -1796,8 +1752,75 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
-    nameFileIdTable: {}
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":15.0,"y":7.0},"gridSpriteSize":{"x":192.0,"y":112.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      cthulu_192x112_SpriteSheet_0: -7234295187575980594
+      cthulu_192x112_SpriteSheet_1: 3055329012086565690
+      cthulu_192x112_SpriteSheet_10: 7528084841691784517
+      cthulu_192x112_SpriteSheet_11: 4241214028328255967
+      cthulu_192x112_SpriteSheet_12: 1172806068620428652
+      cthulu_192x112_SpriteSheet_13: 1893404621671472904
+      cthulu_192x112_SpriteSheet_14: 5521498048819751799
+      cthulu_192x112_SpriteSheet_15: 5310629213146381457
+      cthulu_192x112_SpriteSheet_16: -1302968552288949092
+      cthulu_192x112_SpriteSheet_17: -2524216330171578085
+      cthulu_192x112_SpriteSheet_18: 5681901883211953902
+      cthulu_192x112_SpriteSheet_19: 2211484472971695051
+      cthulu_192x112_SpriteSheet_2: -282151430108225488
+      cthulu_192x112_SpriteSheet_20: 7821603943922824110
+      cthulu_192x112_SpriteSheet_21: -3651495918614750681
+      cthulu_192x112_SpriteSheet_22: -7071227253031353399
+      cthulu_192x112_SpriteSheet_23: -9119204411976379021
+      cthulu_192x112_SpriteSheet_24: -3531736161425134170
+      cthulu_192x112_SpriteSheet_25: -11566732323138254
+      cthulu_192x112_SpriteSheet_26: 2676218746129643097
+      cthulu_192x112_SpriteSheet_27: 1104918514160811174
+      cthulu_192x112_SpriteSheet_28: 873442551276128184
+      cthulu_192x112_SpriteSheet_29: 8862625590422858158
+      cthulu_192x112_SpriteSheet_3: -7989165570766713714
+      cthulu_192x112_SpriteSheet_30: 7507560854653157343
+      cthulu_192x112_SpriteSheet_31: -5321957419163454560
+      cthulu_192x112_SpriteSheet_32: -4672627597402689407
+      cthulu_192x112_SpriteSheet_33: 7632618419068020433
+      cthulu_192x112_SpriteSheet_34: -580486812949994761
+      cthulu_192x112_SpriteSheet_35: -2284183325305846016
+      cthulu_192x112_SpriteSheet_36: 383011918011723878
+      cthulu_192x112_SpriteSheet_37: -4559394025566295164
+      cthulu_192x112_SpriteSheet_38: -4996757432377750526
+      cthulu_192x112_SpriteSheet_39: 2297633160045576860
+      cthulu_192x112_SpriteSheet_4: 4919507829194082570
+      cthulu_192x112_SpriteSheet_40: -1066888131687523853
+      cthulu_192x112_SpriteSheet_41: -7850477433971732992
+      cthulu_192x112_SpriteSheet_42: -1279346452394974927
+      cthulu_192x112_SpriteSheet_43: -2431502617471228255
+      cthulu_192x112_SpriteSheet_44: -5343731068958276724
+      cthulu_192x112_SpriteSheet_45: -5581906161589836166
+      cthulu_192x112_SpriteSheet_46: -3802813519771781509
+      cthulu_192x112_SpriteSheet_47: 1370038132697576524
+      cthulu_192x112_SpriteSheet_48: 7179486724997426172
+      cthulu_192x112_SpriteSheet_49: -1545914599376753398
+      cthulu_192x112_SpriteSheet_5: -3006873691943378498
+      cthulu_192x112_SpriteSheet_50: -6349487990790915964
+      cthulu_192x112_SpriteSheet_51: -7243725507249890531
+      cthulu_192x112_SpriteSheet_52: 2540734718814700232
+      cthulu_192x112_SpriteSheet_53: 2872527637198570047
+      cthulu_192x112_SpriteSheet_54: -5621652232610000478
+      cthulu_192x112_SpriteSheet_55: 7493991772268279587
+      cthulu_192x112_SpriteSheet_56: -818047731285528289
+      cthulu_192x112_SpriteSheet_57: -719670815358326395
+      cthulu_192x112_SpriteSheet_58: 8877502662090541033
+      cthulu_192x112_SpriteSheet_59: 977706827002444511
+      cthulu_192x112_SpriteSheet_6: 6157574547618014817
+      cthulu_192x112_SpriteSheet_60: -6820370011466495742
+      cthulu_192x112_SpriteSheet_61: 3570482153350594727
+      cthulu_192x112_SpriteSheet_62: -488773174028731157
+      cthulu_192x112_SpriteSheet_63: 7922170858519558410
+      cthulu_192x112_SpriteSheet_64: -8602256854950437948
+      cthulu_192x112_SpriteSheet_7: 3542001588751930237
+      cthulu_192x112_SpriteSheet_8: 265490905729259871
+      cthulu_192x112_SpriteSheet_9: 1537549656908392719
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
