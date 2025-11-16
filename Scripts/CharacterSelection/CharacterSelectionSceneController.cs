@@ -113,20 +113,20 @@ public class CharacterSelectionSceneController : MonoBehaviour
         switch (information.characterClass)
         {
             case CharacterClass.Paladin:
-                playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Paladin/PaladinCharacter");
-                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/PaladinDisplay");
-                break;
-            case CharacterClass.Flower:
-                playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Paladin/PaladinCharacter");
-                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/PaladinDisplay");
+                playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Dwarf/DwarfCharacter");
+                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/DwarfDisplay");
                 break;
             case CharacterClass.Witch:
                 playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Witch/WitchCharacter");
                 playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/WitchDisplay");
                 break;
+            case CharacterClass.Mistborn:
+                playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Witch/WitchCharacter");
+                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/WitchDisplay");
+                break;
             default:
-                playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Player/Player");
-                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/PlayerDisplay");
+                playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Mistborn/Mistborn");
+                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/MistbornDisplay");
                 break;
         }
 

@@ -3,8 +3,8 @@ using UnityEngine;
 public enum CharacterClass
 {
     Paladin,
-    Flower,
-    Witch
+    Witch,
+    Mistborn
 }
 public class DisplayInformation : MonoBehaviour
 {

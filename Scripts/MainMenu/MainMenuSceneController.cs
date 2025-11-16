@@ -42,11 +42,11 @@ public class MainMenuSceneController : MonoBehaviour
                 {
                     string details = GameManager.instance.getSaveSlotSummary(slotNumber);
                     string title = GameManager.instance.getSaveSlotTitle(slotNumber);
-                    saveSlot.setSaveSlotInformation(title, details, () => enterGame(slotNumber));
+                    saveSlot.setSaveSlotInformation(title, details);
                 }
                 else
                 {
-                    saveSlot.setSaveSlotInformation("Save Slot " + slotNumber, "", () => enterGame(slotNumber));
+                    saveSlot.setSaveSlotInformation("Save Slot " + slotNumber, "");
                 }
                 saveSlots[i] = saveSlot;
             }
@@ -61,24 +61,6 @@ public class MainMenuSceneController : MonoBehaviour
     {
         mainMenu.gameObject.SetActive(false);
         loadGameMenu.gameObject.SetActive(true);
-        AudioManager.instance.playClick();
-    }
-
-    public void enterGame(int saveSlot)
-    {
-        GameManager.instance.setCurrentSaveSlot(saveSlot);
-
-        // Check for SaveSlot
-        if (!GameManager.instance.checkForSavedGames(saveSlot))
-        {
-            // Navigate to Character Selection
-            GameManager.instance.loadScene((int)SceneBuildIndex.CHARACTER_SELECTION);
-        }
-        else
-        {
-            // TO-DO: Navigate to save slot level
-            
-        }
         AudioManager.instance.playClick();
     }
 

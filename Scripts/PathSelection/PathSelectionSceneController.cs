@@ -40,7 +40,7 @@ public class PathSelectionSceneController : MonoBehaviour
 {
     public static PathSelectionSceneController instance;
     private int levels = 10;
-    private int currentLevel = 1;
+    private int currentLevel;
     private PathSelectionUIController pathSelectionUIController;
     private List<Tuple<EncounterType, EncounterReward>> options = new List<Tuple<EncounterType, EncounterReward>>();
     private List<GameObject> doorButtons = new List<GameObject>();
@@ -68,17 +68,19 @@ public class PathSelectionSceneController : MonoBehaviour
         }
         playerDisplay.GetComponent<DisplayInformation>().pathSelectionAlignment();
 
-        options.Add(generateOption());
-
-        if (currentLevel % 5 != 4)
+        if (GameManager.instance.getPreviousSceneNumber() == 0)
         {
-            options.Add(generateOption());
-            options.Add(generateOption());
+            options = GameManager.instance.getPathOptions();
+            currentLevel = GameManager.instance.getCurrentLevel();
         }
         else
         {
-            doorButtons[0].SetActive(false);
-            doorButtons[2].SetActive(false);
+            GameManager.instance.incrementCurrentLevel();
+            currentLevel = GameManager.instance.getCurrentLevel();
+            options.Add(generateOption());
+            options.Add(generateOption());
+            options.Add(generateOption());
+            GameManager.instance.setPathOptions(options);
         }
 
         StartCoroutine(assignDoorButtonAction());
@@ -89,17 +91,10 @@ public class PathSelectionSceneController : MonoBehaviour
     IEnumerator assignDoorButtonAction()
     {
         yield return null;
-        if (options.Count == 1)
+        for (int i=0; i<doorButtons.Count; i++)
         {
-            doorButtons[1].GetComponent<Button>().onClick.AddListener(() => moveToEncounter(options[0]));
-        }
-        else
-        {
-            for (int i=0; i<doorButtons.Count; i++)
-            {
-                int index = i;
-                doorButtons[index].GetComponent<Button>().onClick.AddListener(() => moveToEncounter(options[index]));
-            }
+            int index = i;
+            doorButtons[index].GetComponent<Button>().onClick.AddListener(() => moveToEncounter(options[index]));
         }
     }
 

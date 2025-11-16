@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7394028603325780086}
   - component: {fileID: 7457640052164910411}
   m_Layer: 5
-  m_Name: DwarfDisplay
+  m_Name: MistbornDisplay
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,17 +49,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a552ae6341d54e42a9361a0c1d1760c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterClass: 0
+  characterClass: 3
   classDetails:
-  - High damage, high resource attacks that focus on applying blinds and divine marks
-  - High health pool with attacks and buffs to heal oneself
-  characterName: Mihile
-  characterIcon: {fileID: 377169971922339295, guid: 4931fbff0f3c8c941aff3f731b59f9a3, type: 3}
+  - High damage, low armor
+  - High blind and poison chance
+  characterName: Ren
+  characterIcon: {fileID: -3963609580147510630, guid: 71b304dff5e425e47b479cc6dff1ec81, type: 3}
   displaycards:
   - {fileID: 11400000, guid: 6dcbcb52b5eef3349b534205a20bb877, type: 2}
   - {fileID: 11400000, guid: 7d05e225c3a4caa409bf2c751ebeac52, type: 2}
   pathSelectionYOffset: -30
-  pathSelectionScale: 1
+  pathSelectionScale: 0.5
 --- !u!1 &8863711403973895507
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1199170327929559213, guid: 84d15b7845f8b6a4592ff03073d68f82, type: 3}
+  m_Sprite: {fileID: 795181594648314704, guid: 277537949a217ed4ba37384f4066e225, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -146,7 +146,7 @@ Animator:
   m_GameObject: {fileID: 8863711403973895507}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 33e75058971baa744af4ad20b23d9d58, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8edc799a8f3d66748a92c0023b64f4e2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

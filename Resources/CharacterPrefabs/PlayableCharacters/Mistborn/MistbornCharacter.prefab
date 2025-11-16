@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 251948656584741406}
   - component: {fileID: 3065877715806882391}
   m_Layer: 5
-  m_Name: DwarfCharacter
+  m_Name: MistbornCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -456,7 +456,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1199170327929559213, guid: 84d15b7845f8b6a4592ff03073d68f82, type: 3}
+  m_Sprite: {fileID: 795181594648314704, guid: 277537949a217ed4ba37384f4066e225, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -476,7 +476,7 @@ Animator:
   m_GameObject: {fileID: 8863711403973895507}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 33e75058971baa744af4ad20b23d9d58, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8edc799a8f3d66748a92c0023b64f4e2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

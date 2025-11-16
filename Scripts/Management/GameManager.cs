@@ -26,10 +26,10 @@ public class GameManager : MonoBehaviour
 
 
     // Game States
-    private EncounterMap map;
-    private int currentLevel = 0;
+    private int currentLevel;
     [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
     private ParentSceneController currentSceneController;
+    private List<Tuple<EncounterType, EncounterReward>> currentPathSelectionOptions;
 
     // Player States
     private GameObject playerObject;
@@ -53,13 +53,11 @@ public class GameManager : MonoBehaviour
 
 
     // Encounter Information
-    private EncounterType currentPath;
     private EncounterReward encounterReward;
-    private int encounterRewardValue;
     private EncounterType previousEncounter;
 
     // Scene
-    private string currentScene;
+    private int previousScene;
     private HashSet<int> battleScenes = new HashSet<int>() { 1, 4, 6 };
 
 
@@ -83,15 +81,12 @@ public class GameManager : MonoBehaviour
 
     private void onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        currentScene = scene.name;
         Debug.Log($"Game Manager detected scene loaded: {scene.name} + {scene.buildIndex}");
         if (scene.buildIndex != 0)
         {
             // for dev testing
-            if (currentSaveSlot != -1)
+            if (!loadGame(currentSaveSlot))
             {
-                if (!loadGame(currentSaveSlot))
-                {
                     createPlayerDeckCopy();
                     playerMaxHealth = 50;
                     playerHandSize = 6;
@@ -99,18 +94,18 @@ public class GameManager : MonoBehaviour
                     playerCurrentHealth = 50;
                     playerGold = 0;
                     playerHandEnergy = 3;
-                }
+                    currentLevel = 0;
             }
-            else
-            {
-                createPlayerDeckCopy();
-                playerMaxHealth = 50;
-                playerHandSize = 6;
-                playerHandEnergy = 3;
-                playerCurrentHealth = 50;
-                playerGold = 30;
-                playerHandEnergy = 3;
-            }
+            // else
+            // {
+            //     createPlayerDeckCopy();
+            //     playerMaxHealth = 50;
+            //     playerHandSize = 6;
+            //     playerHandEnergy = 3;
+            //     playerCurrentHealth = 50;
+            //     playerGold = 30;
+            //     playerHandEnergy = 3;
+            // }
 
             StartCoroutine(updateUI());
         }
@@ -127,6 +122,7 @@ public class GameManager : MonoBehaviour
         topBarUIManager = FindFirstObjectByType<TopBarUIManager>();
         if (topBarUIManager != null)
         {
+            Debug.Log("Player Gold:" + playerGold);
             topBarUIManager.Initialize(playerGold, currentLevel, cardRarity);
         }
     }
@@ -224,6 +220,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator encounterVictory()
     {
+        Debug.Log("Victory! rewards: " + encounterReward);
         AudioManager.instance.playVictory();
         addEncounterRewards();
         yield return new WaitForSeconds(1.0f);
@@ -235,7 +232,7 @@ public class GameManager : MonoBehaviour
         switch (encounterReward)
         {
             case EncounterReward.Gold:
-                addPlayerGold(5 * currentLevel);
+                addPlayerGold(25 +  (currentLevel * 2));
                 break;
             case EncounterReward.CardRarity:
                 cardRarity += 1;
@@ -326,7 +323,12 @@ public class GameManager : MonoBehaviour
     {
         return currentLevel;
     }
-    
+
+    public void incrementCurrentLevel()
+    {
+        currentLevel++;
+    }    
+
     public void setPlayer(Player currentPlayer)
     {
         player = currentPlayer;
@@ -391,6 +393,16 @@ public class GameManager : MonoBehaviour
         return previousEncounter;
     }
 
+    public void setPathOptions(List<Tuple<EncounterType, EncounterReward>> options)
+    {
+        currentPathSelectionOptions = options;
+    }
+
+    public List<Tuple<EncounterType, EncounterReward>> getPathOptions()
+    {
+        return currentPathSelectionOptions;
+    }
+
     // Save Functions
     public bool checkForSavedGames(int saveSlot)
     {
@@ -407,6 +419,11 @@ public class GameManager : MonoBehaviour
         return SaveSystem.getSlotTitle(saveSlot);
     }
 
+    public bool deleteSave(int saveSlot)
+    {
+        return SaveSystem.deleteSave(saveSlot);
+    }
+
     public bool saveGame(int saveSlot)
     {
         SaveData saveData = new SaveData();
@@ -417,9 +434,9 @@ public class GameManager : MonoBehaviour
         saveData.playerHandSize = playerHandSize;
         saveData.playerHandEnergy = playerHandEnergy;
         saveData.playerCards = new List<SerializableCardModel>();
-        saveData.encounterMap = map;
         saveData.playerPrefab = playerObject;
         saveData.playerDisplay = playerDisplayObject;
+        saveData.pathOptions = currentPathSelectionOptions;
 
         foreach (CardModelSO model in playerDeck.cards)
         {
@@ -447,7 +464,8 @@ public class GameManager : MonoBehaviour
         playerHandEnergy = data.playerHandEnergy;
         playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
         playerDeck.cards = new List<CardModelSO>();
-        map = data.encounterMap;
+        currentPathSelectionOptions = data.pathOptions;
+
         playerObject = data.playerPrefab;
         playerDisplayObject = data.playerDisplay;
 
@@ -466,7 +484,13 @@ public class GameManager : MonoBehaviour
 
     public void loadScene(int sceneNumber)
     {
+        previousScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(sceneNumber);
+    }
+
+    public int getPreviousSceneNumber()
+    {
+        return previousScene;
     }
 
     public void quitGame()

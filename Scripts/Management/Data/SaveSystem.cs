@@ -80,6 +80,22 @@ public static class SaveSystem
     {
         return File.Exists(getSlotPath(slotIndex));
     }
+    
+    public static bool deleteSave(int slotIndex)
+    {
+        string path = getSlotPath(slotIndex);
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+            return true;
+        }
+        else
+        {
+            Debug.LogError($"Could not find save file to delete in slot: {slotIndex}");
+            return false;
+        }
+    }
 
     public static string getSlotSummary(int slotIndex)
     {

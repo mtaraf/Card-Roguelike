@@ -105,7 +105,6 @@ public class Character : MonoBehaviour
                     showFloatingFeedbackUI(damageDealt.ToString(), Color.crimson);
                     attributes[EffectType.Armor] = 0;
                     AudioManager.instance.playDamage();
-                    Debug.Log("Took damage: " + damageDealt);
                 }
                 else
                 {
