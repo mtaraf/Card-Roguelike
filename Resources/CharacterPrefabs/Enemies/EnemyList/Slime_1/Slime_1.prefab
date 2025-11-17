@@ -59,9 +59,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 20
   id: 1
+  xSpawnOffset: 0
+  ySpawnOffset: -100
   spriteObject: {fileID: 4653887851505298441}
   moveset: 0
-  enemyClass: 0
   movesets:
   - {fileID: 11400000, guid: 946eacfba4f407849a08075abab9bd52, type: 2}
   - {fileID: 11400000, guid: 09fc1bc6bfa476743894d5b7ac57c769, type: 2}

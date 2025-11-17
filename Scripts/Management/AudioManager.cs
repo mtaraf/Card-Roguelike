@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -127,5 +128,10 @@ public class AudioManager : MonoBehaviour
     public void setSFXVolume(float volume)
     {
         sfxSource.volume = volume;
+    }
+
+    public Tuple<float,float> getAudioVolumes()
+    {
+        return new Tuple<float, float>(musicSource.volume, sfxSource.volume);
     }
 }

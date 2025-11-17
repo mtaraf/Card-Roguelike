@@ -33,7 +33,7 @@ public class ParentSceneController : MonoBehaviour
 
         if (playerPrefab == null)
         {
-            playerPrefab = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Player/Player");
+            playerPrefab = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Mistborn/MistbornCharacter");
         }
         GameObject playerObj = Instantiate(playerPrefab, mainCanvas.transform);
         player = playerObj.GetComponent<Player>();

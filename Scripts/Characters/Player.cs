@@ -19,8 +19,6 @@ public class Player : Character
     public override void Start()
     {
         base.Start();
-
-        playerClass = PlayerClass.Paladin;
     }
 
     public bool hasDeck()

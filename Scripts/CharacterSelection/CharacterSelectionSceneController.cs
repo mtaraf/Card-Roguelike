@@ -133,6 +133,6 @@ public class CharacterSelectionSceneController : MonoBehaviour
         GameManager.instance.setPlayerCharacter(playerCharacter);
         GameManager.instance.setPlayerDisplayObject(playerDisplay);
 
-        GameManager.instance.loadScene((int)SceneBuildIndex.BASE_LEVEL);
+        GameManager.instance.loadScene((int)SceneBuildIndex.PATH_SELECTION);
     }
 }

@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     private int currentLevel;
     [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
     private ParentSceneController currentSceneController;
-    private List<Tuple<EncounterType, EncounterReward>> currentPathSelectionOptions;
+    private List<PathOptionData> currentPathSelectionOptions;
 
     // Player States
     private GameObject playerObject;
@@ -84,7 +84,6 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Game Manager detected scene loaded: {scene.name} + {scene.buildIndex}");
         if (scene.buildIndex != 0)
         {
-            // for dev testing
             if (!loadGame(currentSaveSlot))
             {
                     createPlayerDeckCopy();
@@ -96,16 +95,6 @@ public class GameManager : MonoBehaviour
                     playerHandEnergy = 3;
                     currentLevel = 0;
             }
-            // else
-            // {
-            //     createPlayerDeckCopy();
-            //     playerMaxHealth = 50;
-            //     playerHandSize = 6;
-            //     playerHandEnergy = 3;
-            //     playerCurrentHealth = 50;
-            //     playerGold = 30;
-            //     playerHandEnergy = 3;
-            // }
 
             StartCoroutine(updateUI());
         }
@@ -122,7 +111,6 @@ public class GameManager : MonoBehaviour
         topBarUIManager = FindFirstObjectByType<TopBarUIManager>();
         if (topBarUIManager != null)
         {
-            Debug.Log("Player Gold:" + playerGold);
             topBarUIManager.Initialize(playerGold, currentLevel, cardRarity);
         }
     }
@@ -393,12 +381,12 @@ public class GameManager : MonoBehaviour
         return previousEncounter;
     }
 
-    public void setPathOptions(List<Tuple<EncounterType, EncounterReward>> options)
+    public void setPathOptions(List<PathOptionData> options)
     {
         currentPathSelectionOptions = options;
     }
 
-    public List<Tuple<EncounterType, EncounterReward>> getPathOptions()
+    public List<PathOptionData> getPathOptions()
     {
         return currentPathSelectionOptions;
     }
@@ -426,6 +414,8 @@ public class GameManager : MonoBehaviour
 
     public bool saveGame(int saveSlot)
     {
+        Tuple<float,float> currentVolume = AudioManager.instance.getAudioVolumes();
+
         SaveData saveData = new SaveData();
         saveData.currentLevel = currentLevel;
         saveData.playerCurrentHealth = playerCurrentHealth;
@@ -437,6 +427,9 @@ public class GameManager : MonoBehaviour
         saveData.playerPrefab = playerObject;
         saveData.playerDisplay = playerDisplayObject;
         saveData.pathOptions = currentPathSelectionOptions;
+        saveData.musicVolume = currentVolume.Item1;
+        saveData.sfxVolume = currentVolume.Item2;
+
 
         foreach (CardModelSO model in playerDeck.cards)
         {
@@ -465,6 +458,8 @@ public class GameManager : MonoBehaviour
         playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
         playerDeck.cards = new List<CardModelSO>();
         currentPathSelectionOptions = data.pathOptions;
+        AudioManager.instance.setBackgroundMusicVolume(data.musicVolume);
+        AudioManager.instance.setSFXVolume(data.sfxVolume);
 
         playerObject = data.playerPrefab;
         playerDisplayObject = data.playerDisplay;

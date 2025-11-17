@@ -14,7 +14,6 @@ public class TopBarUIManager : MonoBehaviour
 
     public void Initialize(int gold, int level, int rarity)
     {
-        level += 1;
         goldCount = GameObject.FindGameObjectWithTag("GoldCount");
         levelCount = GameObject.FindGameObjectWithTag("LevelCount");
         settingsMenuPrefab = Resources.Load<GameObject>("UI/General/SettingsMenu");

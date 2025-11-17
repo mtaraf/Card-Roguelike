@@ -38,7 +38,7 @@ Card Bugs:
 Current Work:
     - Align all characters with floor in battle scene
     - Add pop-up confirmation when delete save is pressed
-    - Discard borken with new drag cards (swicth to just click when discarding to move the cards to discard)
+    - Discard broken with new drag cards (switch to just click when discarding to move the cards to discard)
 
 Path Selection:
 

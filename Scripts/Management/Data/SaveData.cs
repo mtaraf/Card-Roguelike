@@ -15,7 +15,9 @@ public class SaveData
     public List<SerializableCardModel> playerCards; // Unique card IDs or titles
     public GameObject playerPrefab;
     public GameObject playerDisplay;
-    public List<Tuple<EncounterType, EncounterReward>> pathOptions;
+    public List<PathOptionData> pathOptions;
+    public float musicVolume;
+    public float sfxVolume;
 }
 
 [Serializable]
@@ -35,4 +37,17 @@ public class SerializableCardModel
     public bool corrupts;
 
     // Optional: Add any fields you care abou
+}
+
+[Serializable]
+public class PathOptionData
+{
+    public EncounterType encounterType;
+    public EncounterReward encounterReward;
+
+    public PathOptionData(EncounterType type, EncounterReward reward)
+    {
+        encounterType = type;
+        encounterReward = reward;
+    }
 }

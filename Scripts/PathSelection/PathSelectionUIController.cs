@@ -11,7 +11,7 @@ public class PathSelectionUIController : MonoBehaviour
 
 
 
-    public void Initialize(List<Tuple<EncounterType, EncounterReward>> options)
+    public void Initialize(List<PathOptionData> options)
     {
         iconPositions.Add(new Tuple<int, int>(-105, -120));
         iconPositions.Add(new Tuple<int, int>(325, -120));
@@ -28,7 +28,7 @@ public class PathSelectionUIController : MonoBehaviour
         fillIcons(options);
     }
 
-    private void fillIcons(List<Tuple<EncounterType, EncounterReward>> options)
+    private void fillIcons(List<PathOptionData> options)
     {
         GameObject icon;
         
@@ -36,7 +36,7 @@ public class PathSelectionUIController : MonoBehaviour
         {
             icon = Instantiate(pathSelectionIconPrefab, mainCanvas.transform);
             icon.transform.localPosition = new Vector2(iconPositions[i].Item1, iconPositions[i].Item2);
-            StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(options[i].Item1, options[i].Item2));
+            StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(options[i].encounterType, options[i].encounterReward));
         }
     }
 }

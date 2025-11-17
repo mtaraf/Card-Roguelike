@@ -16,6 +16,8 @@ public class Character : MonoBehaviour
     protected List<CardEffect> multipleTurnEffects = new List<CardEffect>();
     [SerializeField] protected int id;
     protected bool dead = false;
+    [SerializeField] private int xSpawnOffset;
+    [SerializeField] private int ySpawnOffset;
 
     // UI
     protected UIUpdater uIUpdater;
@@ -46,6 +48,9 @@ public class Character : MonoBehaviour
 
         // Set up after first frame
         StartCoroutine(findComponentsAfterFrame());
+
+        Vector2 position = transform.localPosition;
+        transform.localPosition = new Vector2(position.x + xSpawnOffset, position.y + ySpawnOffset);
     }
 
     private IEnumerator findComponentsAfterFrame()

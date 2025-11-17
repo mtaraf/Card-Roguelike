@@ -80,7 +80,6 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void showTooltip()
     {
-        Debug.Log("Show ToolTip");
         tooltipObject.SetActive(true);
     }
 

@@ -23,7 +23,6 @@ public class PathSelectionIcon : MonoBehaviour
 
     public IEnumerator instantiateIcon(EncounterType type, EncounterReward reward)
     {
-        Debug.Log("Instantiate Icon");
         // Wait for Start() to finish
         yield return null;
 

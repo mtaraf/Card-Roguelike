@@ -42,7 +42,7 @@ public class PathSelectionSceneController : MonoBehaviour
     private int levels = 10;
     private int currentLevel;
     private PathSelectionUIController pathSelectionUIController;
-    private List<Tuple<EncounterType, EncounterReward>> options = new List<Tuple<EncounterType, EncounterReward>>();
+    private List<PathOptionData> options = new List<PathOptionData>();
     private List<GameObject> doorButtons = new List<GameObject>();
     private Transform playerDisplayLocation;
 
@@ -109,42 +109,43 @@ public class PathSelectionSceneController : MonoBehaviour
         instance = this;
     }
 
-    public void moveToEncounter(Tuple<EncounterType, EncounterReward> tuple)
+    public void moveToEncounter(PathOptionData option)
     {
-        GameManager.instance.loadEncounterTypeAndRewards(tuple.Item1, tuple.Item2);
+        GameManager.instance.loadEncounterTypeAndRewards(option.encounterType, option.encounterReward);
     }
 
-    private Tuple<EncounterType, EncounterReward> generateOption()
+    private PathOptionData generateOption()
     {
         int random = UnityEngine.Random.Range(0, 11);
-        Tuple<EncounterType, EncounterReward> tuple;
+        PathOptionData option;
 
         if (currentLevel < 3)
         {
-            tuple = new Tuple<EncounterType, EncounterReward>(EncounterType.Regular_Encounter, generateRandomReward(EncounterType.Regular_Encounter));
+            option = new PathOptionData(EncounterType.Regular_Encounter, generateRandomReward(EncounterType.Regular_Encounter));
+            
         }
         else if (currentLevel < 6)
         {
-            tuple = random switch
+            option = random switch
             {
-                < 8 => new Tuple<EncounterType, EncounterReward>(EncounterType.Regular_Encounter, generateRandomReward(EncounterType.Regular_Encounter)),
-                < 10 => new Tuple<EncounterType, EncounterReward>(EncounterType.Culver_Encounter, generateRandomReward(EncounterType.Culver_Encounter)),
-                _ => new Tuple<EncounterType, EncounterReward>(EncounterType.Hold_The_Line_Encounter, generateRandomReward(EncounterType.Hold_The_Line_Encounter))
+                < 8 => new PathOptionData(EncounterType.Regular_Encounter, generateRandomReward(EncounterType.Regular_Encounter)),
+                < 10 => new PathOptionData(EncounterType.Culver_Encounter, generateRandomReward(EncounterType.Culver_Encounter)),
+                _ => new PathOptionData(EncounterType.Hold_The_Line_Encounter, generateRandomReward(EncounterType.Hold_The_Line_Encounter))
             };
         }
         else
         {
-            tuple = random switch
+            option = random switch
             {
-                < 8 => new Tuple<EncounterType, EncounterReward>(EncounterType.Regular_Encounter, generateRandomReward(EncounterType.Regular_Encounter)),
-                < 9 => new Tuple<EncounterType, EncounterReward>(EncounterType.Culver_Encounter, generateRandomReward(EncounterType.Culver_Encounter)),
-                < 10 => new Tuple<EncounterType, EncounterReward>(EncounterType.Hold_The_Line_Encounter, generateRandomReward(EncounterType.Hold_The_Line_Encounter)),
-                10 => new Tuple<EncounterType, EncounterReward>(EncounterType.Mini_Boss_Encounter, generateRandomReward(EncounterType.Mini_Boss_Encounter)),
-                _ => new Tuple<EncounterType, EncounterReward>(EncounterType.Final_Boss, generateRandomReward(EncounterType.Final_Boss))
+                < 8 => new PathOptionData(EncounterType.Regular_Encounter, generateRandomReward(EncounterType.Regular_Encounter)),
+                < 9 => new PathOptionData(EncounterType.Culver_Encounter, generateRandomReward(EncounterType.Culver_Encounter)),
+                < 10 => new PathOptionData(EncounterType.Hold_The_Line_Encounter, generateRandomReward(EncounterType.Hold_The_Line_Encounter)),
+                10 => new PathOptionData(EncounterType.Mini_Boss_Encounter, generateRandomReward(EncounterType.Mini_Boss_Encounter)),
+                _ => new PathOptionData(EncounterType.Final_Boss, generateRandomReward(EncounterType.Final_Boss))
             };
         }
 
-        return tuple;
+        return option;
     }
     
     EncounterReward generateRandomReward(EncounterType encounterType)
