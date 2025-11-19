@@ -13,6 +13,7 @@ public enum CardType
 }
 
 public enum CardRarity {
+    Starter,
     COMMON,
     RARE,
     EPIC,
@@ -68,6 +69,7 @@ public class CardModelSO : ScriptableObject
     public int cardsDiscarded;
     public bool corrupts;
     public CardModelSO upgradedCard;
+    public bool oneUse;
 
     public void multiplyValues(int multiplier)
     {
@@ -99,6 +101,7 @@ public class CardModelSO : ScriptableObject
         copy.corrupts = corrupts;
         copy.upgradedCard = upgradedCard;
         copy.cardsDiscarded = cardsDiscarded;
+        copy.oneUse = oneUse;
 
         // Clone effects list
         copy.effects = new List<CardEffect>();

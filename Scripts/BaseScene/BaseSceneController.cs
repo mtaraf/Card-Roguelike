@@ -118,7 +118,9 @@ public class BaseLevelSceneController : ParentSceneController
         //         return Instantiate(enemyObj, spawnLocationParent.transform.GetChild(i).transform);
         //     }
         // }
-        return Instantiate(enemyObj, enemySpawnLocation.transform);
+        GameObject enemy = Instantiate(enemyObj, enemySpawnLocation.transform);
+        enemy.transform.localPosition = new Vector2(-50,0);
+        return enemy;
     }
 
     public override void updateDrawPile(int count)

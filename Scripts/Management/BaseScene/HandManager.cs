@@ -283,7 +283,11 @@ public enum EffectType
     HealDamageDone,
     Heal,
     HealOverTime,
-    Stun
+    Stun,
+    Bleed,
+    Critical,
+    Agility,
+    Corruption
 }
 
 public static class EffectTypeExtensions
@@ -300,6 +304,9 @@ public static class EffectTypeExtensions
             case EffectType.Frostbite: return "FrostbiteEffect";
             case EffectType.Blind: return "BlindEffect";
             case EffectType.HealOverTime: return "HealOverTimeEffect";
+            case EffectType.Bleed: return "BleedEffect";
+            case EffectType.Agility: return "AgilityEffect";
+            case EffectType.Corruption: return "CorruptionEffect";
             default: return "Default";
         }
     }
@@ -319,6 +326,8 @@ public static class EffectTypeExtensions
             case EffectType.Heal:
             case EffectType.HealDamageDone:
             case EffectType.HealOverTime: return "+hp";
+            case EffectType.Bleed: return "+bleed";
+            case EffectType.Agility: return "agility+";
             default: return "Default";
         }
     }

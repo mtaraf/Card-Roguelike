@@ -60,7 +60,7 @@ MonoBehaviour:
   maxHealth: 20
   id: 1
   xSpawnOffset: 0
-  ySpawnOffset: -30
+  ySpawnOffset: -85
   spriteObject: {fileID: 4653887851505298441}
   moveset: 0
   movesets:

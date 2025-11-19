@@ -96,6 +96,10 @@ public class Card : MonoBehaviour
         return cardModel.cardsDiscarded;
     }
 
+    public bool isOneUse()
+    {
+        return cardModel.oneUse;
+    }
     public bool isSpecial()
     {
         return cardModel.special;
