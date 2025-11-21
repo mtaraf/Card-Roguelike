@@ -36,9 +36,9 @@ Card Bugs:
     - Judgement: needs to be implemented
 
 Current Work:
-    - Add bleed functionality and effect
-    - Add crit functionality and different text when crit
-    - Add corruption functionality
+    - Add bleed effect
+    - Add crit different text when crit
+    - Add corruption effect
     - Add pop-up confirmation when delete save is pressed
     - Discard broken with new drag cards (switch to just click when discarding to move the cards to discard)
 

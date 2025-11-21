@@ -64,7 +64,7 @@ public class TurnManager : MonoBehaviour
         Debug.Log("Player Culver Turn");
         yield return new WaitForSeconds(0.2f);
 
-        player.processStartOfTurnEffects();
+        //player.processStartOfTurnEffects();
         CulverSceneController.instance.resetPlayerEnergy();
         HandManager.instance.drawCards(GameManager.instance.getPlayerHandSize());
 
@@ -151,7 +151,7 @@ public class TurnManager : MonoBehaviour
             enemy.setEnergy(Random.Range(1, 4));
         }
 
-        player.processStartOfTurnEffects();
+        //player.processStartOfTurnEffects();
         sceneController.resetPlayerEnergy();
         HandManager.instance.drawCards(GameManager.instance.getPlayerHandSize());
 
@@ -170,7 +170,7 @@ public class TurnManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         foreach (Enemy enemy in enemies)
         {
-            enemy.processStartOfTurnEffects();
+            //enemy.processStartOfTurnEffects();
             // TO-DO: depending on current level adjust multiplier for enemy cards
             yield return StartCoroutine(enemy.playCards(1, enemy.getEnergy()));
             enemy.processEndOfTurnEffects();

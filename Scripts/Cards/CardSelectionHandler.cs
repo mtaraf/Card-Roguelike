@@ -155,7 +155,6 @@ IEndDragHandler
                     }
                     else
                     {
-                        Debug.Log('1');
                         Enemy enemy = parentObj.GetComponent<Enemy>();
                         if (enemy != null && enemy.checkifTargetable())
                         {
@@ -163,7 +162,6 @@ IEndDragHandler
                             int cardEnergy = HandManager.instance.getSelectedCard().getCardModel().energy;
                             if (sceneController.getCurrentPlayerEnergy() >= cardEnergy)
                             {
-                                Debug.Log('2');
                                 StartCoroutine(useCard(new List<Enemy> { enemy }, null, cardEnergy));
                                 return;
                             }

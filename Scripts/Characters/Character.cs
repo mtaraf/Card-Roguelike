@@ -12,8 +12,6 @@ public class Character : MonoBehaviour
     protected int currentHealth; // Set current health to max health only when a run starts not in start for player
     protected int weakness;
     protected Dictionary<EffectType, int> attributes = new Dictionary<EffectType, int>();
-    private Dictionary<EffectType, System.Action> endTurnBehaviors;
-    protected List<CardEffect> multipleTurnEffects = new List<CardEffect>();
     [SerializeField] protected int id;
     protected bool dead = false;
     [SerializeField] private int xSpawnOffset;
@@ -44,8 +42,6 @@ public class Character : MonoBehaviour
             attributes.Add(effectType, 0);
         }
 
-        initializeEndTurnBehaviors();
-
         // Set up after first frame
         StartCoroutine(findComponentsAfterFrame());
 
@@ -72,7 +68,6 @@ public class Character : MonoBehaviour
             Debug.LogError($"UIUpdater not found on {gameObject.name}");
         }
 
-
         // Find Animator
         if (spriteObject == null)
         {
@@ -81,141 +76,77 @@ public class Character : MonoBehaviour
         animator = spriteObject.GetComponent<Animator>();
     }
 
+
+    // Card Processing
     public virtual void processCardEffects(List<CardEffect> effects, Enemy enemy = null)
     {
-        int damageDealt = 0;
-
         if (enemy != null)
         {
             Debug.Log("Process Card Enemy: " + enemy.currentHealth);
         }
 
+        // Damage processing
+        int damageDealt = 0;
+        CardEffect damage = effects.Find((effect) => effect.type == EffectType.Damage);
+        CardEffect crit = effects.Find((effect) => effect.type == EffectType.Critical);
+        if (damage != null)
+        {
+            int critRate = -1;
+            if (crit != null)
+            {
+                critRate = crit.value;
+                effects.Remove(crit);
+            }
+            damageDealt = processDamage(damage.value, critRate);
+            effects.Remove(damage);
+        }
+
         foreach (CardEffect effect in effects)
         {
-            addAudioCue(effect);
-
-            // Calculate this with on-hit effects 
-            if (effect.type == EffectType.HealDamageDone)
-            {
-                continue;
-            }
-
-            if (effect.type == EffectType.Damage)
-            {
-                // Damage
-                if (effect.value - attributes[EffectType.Armor] > 0)
-                {
-                    currentHealth -= effect.value - attributes[EffectType.Armor];
-                    damageDealt = effect.value - attributes[EffectType.Armor];
-                    showFloatingFeedbackUI(damageDealt.ToString(), Color.crimson);
-                    attributes[EffectType.Armor] = 0;
-                    AudioManager.instance.playDamage();
-                }
-                else
-                {
-                    attributes[EffectType.Armor] -= effect.value;
-                    showFloatingFeedbackUI(effect.value.ToString(), Color.darkSlateGray);
-                    AudioManager.instance.playBlock();
-                }
-            }
-            else if (effect.type == EffectType.Heal)
-            {
-                healCharacter(effect.value);
-            }
-            else
-            {
-                showFloatingFeedbackUI(effect.type.ToFeedbackString(), Color.blueViolet);
-                if (effect.turns > 0)
-                {
-
-                    // multiple turn effects
-                    attributes[effect.type] += effect.value;
-                    effect.turns--;
-                    multipleTurnEffects.Add(effect);
-                }
-                else
-                {
-                    attributes[effect.type] += effect.value;
-                }
-            }
+            IStatusEffect statusEffect = StatusEffectFactory.create(effect);
+            statusEffect?.apply(this, damageDealt);
         }
 
-        processOnHitEffects(effects, damageDealt, attributes, enemy);
-
-        foreach (KeyValuePair<EffectType, int> attribute in attributes)
-        {
-            uIUpdater.updateEffect(attribute.Key, attribute.Value);
-        }
-
+        // Check if character is dead
         if (currentHealth == 0 || currentHealth < 0)
         {
             currentHealth = 0;
             dead = true;
             HandManager.instance.checkOnDeathEffect();
         }
+    }
 
+    public int processDamage(int damage, int critRate)
+    {
+        int damageDealt = 0;
+
+        // Check if Crit lands
+        float rand = UnityEngine.Random.Range(0,101);
+        if (rand <= critRate)
+        {
+            damage = (int)(damage * 2.5);
+        }
+
+        // Damage
+        if (damage - attributes[EffectType.Armor] > 0)
+        {
+            currentHealth -= damage - attributes[EffectType.Armor];
+            damageDealt = damage - attributes[EffectType.Armor];
+            showFloatingFeedbackUI(damageDealt.ToString(), Color.crimson);
+            attributes[EffectType.Armor] = 0;
+            AudioManager.instance.playDamage();
+        }
+        else
+        {
+            attributes[EffectType.Armor] -= damage;
+            showFloatingFeedbackUI(damage.ToString(), Color.darkSlateGray);
+            AudioManager.instance.playBlock();
+        }
+
+        // Update Health
         uIUpdater.setHealth(currentHealth, maxHealth);
-    }
 
-    void addAudioCue(CardEffect effect)
-    {
-        switch (effect.type)
-        {
-            case EffectType.Armor:
-                // Add armor audio cue
-                break;
-            case EffectType.Strength:
-                // Add armor audio cue
-                AudioManager.instance.playBuff();
-                break;
-            case EffectType.Poison:
-                // Add poison audio cue
-                break;
-            case EffectType.Frostbite:
-                // Add armor audio cue
-                break;
-            case EffectType.Divinity:
-            case EffectType.Weaken:
-            case EffectType.Blind:
-                // Add general debuff
-                AudioManager.instance.playDebuff();
-                break;
-            
-        }
-    }
-
-    void processOnHitEffects(List<CardEffect> effects, int damageDealt, Dictionary<EffectType, int> attributes, Enemy enemy = null)
-    {
-        CardEffect healDamage = effects.Find((effect) => effect.type == EffectType.HealDamageDone);
-        CardEffect divintiyCard = effects.Find((effect) => effect.type == EffectType.Divinity);
-
-        if (healDamage != null)
-        {
-            if (enemy == null)
-            {
-                sceneController.healPlayer(damageDealt);
-            }
-            else
-            {
-                enemy.healCharacter(damageDealt);
-            }
-        }
-
-        // Can not heal from divinity effect if the card applies divinity
-        if (attributes[EffectType.Divinity] > 0 && damageDealt > 0 && divintiyCard == null)
-        {
-            if (enemy == null)
-            {
-                sceneController.healPlayer(5);
-            }
-            else
-            {
-                enemy.healCharacter(5);
-            }
-        }
-
-        // Check Frostbite threshold
-        checkFrostbiteThreshold(damageDealt);
+        return damageDealt;
     }
 
     void checkFrostbiteThreshold(int damageDealt)
@@ -241,70 +172,57 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void processStartOfTurnEffects()
+    public void updateAttribute(EffectType type, int value)
     {
-        // Poison Damage
-        currentHealth -= attributes[EffectType.Poison];
-
-        // Decrease stacks
-        attributes[EffectType.Poison] = 0;
-
-        List<CardEffect> copy = new List<CardEffect>(multipleTurnEffects);
-
-        // apply effects
-        foreach (CardEffect effect in copy)
-        {
-            if (effect.turns == 0)
-            {
-                multipleTurnEffects.Remove(effect);
-            }
-            else
-            {
-                effect.turns--;
-
-                attributes[effect.type] += effect.value;
-            }
-        }
-
-        foreach (KeyValuePair<EffectType, int> attribute in attributes)
-        {
-            uIUpdater.updateEffect(attribute.Key, attribute.Value);
-        }
-        uIUpdater.setHealth(currentHealth, maxHealth);
+        attributes[type] += value;
+        uIUpdater.updateEffect(type, attributes[type]);
     }
 
     public void processEndOfTurnEffects()
     {
-        foreach (var effect in endTurnBehaviors)
+        Dictionary<EffectType, int> attributesCopy = new Dictionary<EffectType, int>(attributes);
+        foreach (EffectType type in attributesCopy.Keys)
         {
-            if (attributes.ContainsKey(effect.Key) && attributes[effect.Key] > 0)
+            if (attributesCopy[type] > 0)
             {
-                effect.Value.Invoke();
+                IStatusEffect effect = StatusEffectFactory.create(type);
+                effect?.onEndRound(this);
             }
         }
-
-        // update UI
-        foreach (KeyValuePair<EffectType, int> attribute in attributes)
-        {
-            uIUpdater.updateEffect(attribute.Key, attribute.Value);
-        }
-        uIUpdater.setHealth(currentHealth, maxHealth);
     }
 
-    private void initializeEndTurnBehaviors()
+    public void addAudioCue(EffectType effect)
     {
-        endTurnBehaviors = new Dictionary<EffectType, System.Action>
+        switch (effect)
         {
-            { EffectType.Weaken, () => decrementEffect(EffectType.Weaken) },
-            { EffectType.Divinity, () => decrementEffect(EffectType.Divinity) },
-            { EffectType.Frostbite, () => clearEffect(EffectType.Frostbite) },
-            // Add more here
-        };
+            case EffectType.Armor:
+                // Add armor audio cue
+                break;
+            case EffectType.Strength:
+                // Add armor audio cue
+                AudioManager.instance.playBuff();
+                break;
+            case EffectType.Poison:
+                // Add poison audio cue
+                break;
+            case EffectType.Frostbite:
+                // Add armor audio cue
+                break;
+            case EffectType.Divinity:
+            case EffectType.Weaken:
+            case EffectType.Blind:
+            case EffectType.Bleed:
+                // Add general debuff
+                AudioManager.instance.playDebuff();
+                break;
+            
+        }
     }
 
-    private void decrementEffect(EffectType type)
+    public void decrementEffect(EffectType type)
     {
         attributes[type] = Mathf.Max(0, attributes[type] - 1);
+        uIUpdater.updateEffect(type, attributes[type]);
     }
 
     private void clearEffect(EffectType type)
