@@ -23,6 +23,6 @@ public class AgilityEffect: IStatusEffect
     {
         // Lose 25% agility stacks
         Dictionary<EffectType, int> attributes = target.getAttributes();
-        target.updateAttribute(type, (int)(attributes[type] * .75));
+        target.updateAttribute(type, -(int)(attributes[type] * .25));
     }
 }

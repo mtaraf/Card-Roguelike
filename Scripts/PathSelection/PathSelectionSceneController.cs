@@ -60,7 +60,7 @@ public class PathSelectionSceneController : MonoBehaviour
         // For testing purposes, TO-DO: Replace with error checking later
         if (GameManager.instance.getPlayerDisplayObject() == null)
         {
-            playerDisplay = Instantiate(Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/PaladinDisplay"), playerDisplayLocation);
+            playerDisplay = Instantiate(Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/MistbornDisplay"), playerDisplayLocation);
         }
         else
         {

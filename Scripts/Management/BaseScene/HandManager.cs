@@ -64,7 +64,7 @@ public class HandManager : MonoBehaviour
 
         // Get player deck and create an empty discard deck and a full draw pile on load
         playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
-        playerDeck.cards = new List<CardModelSO>(player?.getCards().cards);
+        playerDeck.cards = new List<CardModelSO>(GameManager.instance.getPlayerDeck()?.cards);
 
         drawPile = new ObservableDeck();
         drawPile.cards.AddRange(playerDeck.cards);
@@ -85,6 +85,7 @@ public class HandManager : MonoBehaviour
         cardProcessor = player.getPlayerClass() switch
         {
             PlayerClass.Paladin => new PaladinCardProcessor(controller),
+            PlayerClass.Mistborn => new MistbornCardProcessor(controller),
             _ => new CardProcessor(controller),
         };
         

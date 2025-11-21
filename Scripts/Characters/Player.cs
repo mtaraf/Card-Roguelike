@@ -6,13 +6,13 @@ using UnityEngine;
 public enum PlayerClass
 {
     Paladin,
-    Fighter
+    Mistborn
 }
 
 public class Player : Character
 {
-    private Deck deck = null;
-    private PlayerClass playerClass;
+    [SerializeField] private Deck deck = null;
+    [SerializeField] private PlayerClass playerClass;
 
     // Attributes
 

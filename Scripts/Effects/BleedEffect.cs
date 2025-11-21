@@ -27,7 +27,8 @@ public class BleedEffect: IStatusEffect
         if (bleedValue > 0)
         {
             target.processDamage(bleedValue, -1);
-            target.updateAttribute(type, 0);
+            target.updateAttribute(type, -bleedValue);
         }
+
     }
 }

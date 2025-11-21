@@ -36,6 +36,7 @@ Card Bugs:
     - Judgement: needs to be implemented
 
 Current Work:
+    - Add functionality for one time use cards
     - Add bleed effect
     - Add crit different text when crit
     - Add corruption effect

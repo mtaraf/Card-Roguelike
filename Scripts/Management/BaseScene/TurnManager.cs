@@ -126,6 +126,7 @@ public class TurnManager : MonoBehaviour
         {
             if (currentState == TurnState.PlayerTurn)
             {
+                processEndTurnEffects();
                 yield return StartCoroutine(playerTurn());
                 endPlayerTurn();
                 currentState = TurnState.EnemyTurn;
@@ -136,10 +137,22 @@ public class TurnManager : MonoBehaviour
                 currentState = TurnState.PlayerTurn;
             }
             yield return null;
+
+
         }
 
         if (enemies.Count == 0)
             StartCoroutine(GameManager.instance.encounterVictory());
+    }
+
+    private void processEndTurnEffects()
+    {
+        player.processEndOfTurnEffects();
+
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.processEndOfTurnEffects();
+        }
     }
 
     private IEnumerator playerTurn()
@@ -162,7 +175,7 @@ public class TurnManager : MonoBehaviour
     private void endPlayerTurn()
     {
         HandManager.instance.shuffleCurrentHandIntoDiscardPile();
-        player.processEndOfTurnEffects();
+        //player.processEndOfTurnEffects();
     }
 
     IEnumerator enemyTurn()
@@ -173,7 +186,7 @@ public class TurnManager : MonoBehaviour
             //enemy.processStartOfTurnEffects();
             // TO-DO: depending on current level adjust multiplier for enemy cards
             yield return StartCoroutine(enemy.playCards(1, enemy.getEnergy()));
-            enemy.processEndOfTurnEffects();
+            //enemy.processEndOfTurnEffects();
         }
         yield return new WaitForSeconds(0.5f);
     }

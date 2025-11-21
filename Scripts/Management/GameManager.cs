@@ -45,8 +45,8 @@ public class GameManager : MonoBehaviour
     private int cardChoices = 3;
 
     // UI
-    [SerializeField] private List<GameObject> turnBasedStatuses = new List<GameObject>();
-    [SerializeField] private List<GameObject> valueBasedStatuses = new List<GameObject>();
+    [SerializeField] private List<GameObject> statusPrefabs = new List<GameObject>();
+    // [SerializeField] private List<GameObject> valueBasedStatuses = new List<GameObject>();
 
     // Cards
     [SerializeField] private DeckModelSO starterDeck;
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Game Manager detected scene loaded: {scene.name} + {scene.buildIndex}");
         if (scene.buildIndex != 0)
         {
-            if (!loadGame(currentSaveSlot))
+            if (!loadGame(currentSaveSlot) || currentSaveSlot == -1)
             {
                     createPlayerDeckCopy();
                     playerMaxHealth = 50;
@@ -127,9 +127,9 @@ public class GameManager : MonoBehaviour
 
     private void initializePrefabs()
     {
-        turnBasedStatuses = new List<GameObject>(Resources.LoadAll<GameObject>("UI/Effects/TurnBasedEffects"));
-        valueBasedStatuses = new List<GameObject>(Resources.LoadAll<GameObject>("UI/Effects/ValueBasedEffects"));
-        starterDeck = Resources.Load<DeckModelSO>("ScriptableObjects/Decks/PaladinTestDeck");
+        statusPrefabs = new List<GameObject>(Resources.LoadAll<GameObject>("UI/Effects/EffectPrefabs"));
+        //valueBasedStatuses = new List<GameObject>(Resources.LoadAll<GameObject>("UI/Effects/ValueBasedEffects"));
+        starterDeck = Resources.Load<DeckModelSO>("ScriptableObjects/Cards/Mistborn/MistbornStarterDeck");
 
         // Get Victory Card Pools
         victoryCardPools.Insert(0, cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/CommonVictoryCards")));
@@ -150,6 +150,8 @@ public class GameManager : MonoBehaviour
         }
 
         getPlayer();
+
+        player.setDeck(playerDeck);
     }
 
     private void getPlayer()
@@ -191,15 +193,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public List<GameObject> getTurnBasedStatusObjects()
+    public List<GameObject> getStatusPrefabs()
     {
-        return turnBasedStatuses;
+        return statusPrefabs;
     }
 
-    public List<GameObject> getValueBasedStatusObject()
-    {
-        return valueBasedStatuses;
-    }
+    // public List<GameObject> getValueBasedStatusObject()
+    // {
+    //     return valueBasedStatuses;
+    // }
 
     public List<DeckModelSO> getVictoryCardsPools()
     {
