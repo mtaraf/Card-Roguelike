@@ -19,11 +19,13 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject deckViewUI;
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private GameObject corruptCardPrefab;
+    [SerializeField] private GameObject disabledCardPrefab;
     [SerializeField] private TextMeshProUGUI currentDeckCount;
 
 
     private DeckModelSO deck;
     private List<CardModelSO> corruptedCards = new List<CardModelSO>();
+    private List<CardModelSO> disabledCards = new List<CardModelSO>();
     private Transform canvasTransform;
 
     void Start()
@@ -48,6 +50,8 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
         {
             gameObject.SetActive(false);
         }
+
+        disabledCardPrefab = Resources.Load<GameObject>("UI/Cards/DisabledCardNoAnimation");
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -86,7 +90,7 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
         RectTransform scrollViewContentRect = content.GetComponent<RectTransform>();
         scrollViewContentRect.sizeDelta = new Vector2(scrollViewContentRect.sizeDelta.x, rows * 800);
 
-        // Add corrupt cards if discard pile
+        // Add corrupt and disabled cards if discard pile
         if (title == "Discard Pile")
         {
             corruptedCards = HandManager.instance.getCorruptedCards();
@@ -96,6 +100,20 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
                 foreach (CardModelSO model in corruptedCards)
                 {
                     GameObject cardObj = Instantiate(corruptCardPrefab, content.transform);
+                    Card cardComponent = cardObj.GetComponent<Card>();
+                    cardComponent.setCardDisplayInformation(model);
+                    cardObj.SetActive(true);
+                    break;
+                }
+            }
+
+            disabledCards = HandManager.instance.getDisabledCards();
+            if (disabledCards.Count > 0)
+            {
+                scrollViewContentRect.sizeDelta = new Vector2(scrollViewContentRect.sizeDelta.x, scrollViewContentRect.sizeDelta.y + disabledCards.Count / 5 * 800);
+                foreach (CardModelSO model in disabledCards)
+                {
+                    GameObject cardObj = Instantiate(disabledCardPrefab, content.transform);
                     Card cardComponent = cardObj.GetComponent<Card>();
                     cardComponent.setCardDisplayInformation(model);
                     cardObj.SetActive(true);

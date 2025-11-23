@@ -8177,8 +8177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   victoryCardPools: []
-  turnBasedStatuses: []
-  valueBasedStatuses: []
+  statusPrefabs: []
   starterDeck: {fileID: 0}
 --- !u!4 &1773149073
 Transform:

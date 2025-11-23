@@ -24,7 +24,7 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Deals 2 damage. Shatters.
+  details: Deals 2 damage. Exhausts.
   title: Glass Dagger
   image: {fileID: 0}
   target: 1

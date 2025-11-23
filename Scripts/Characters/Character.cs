@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -23,6 +24,7 @@ public class Character : MonoBehaviour
     protected GameObject floatingFeedbackUI;
     protected Color floatingFeedbackColor = Color.crimson;
     protected RectTransform characterRect;
+    protected FeedbackUI feedbackUI;
 
     // Animations
     [SerializeField] protected GameObject spriteObject;
@@ -34,8 +36,10 @@ public class Character : MonoBehaviour
     {
         // Initializers
         targetableObject = GetComponent<TargetableObject>();
-        floatingFeedbackUI = Resources.Load<GameObject>("UI/General/FloatingFeedbackUIPrefab");
+        floatingFeedbackUI = Resources.Load<GameObject>("UI/General/Feedback/FloatingFeedbackUIPrefab");
         characterRect = GetComponent<RectTransform>();
+
+        feedbackUI = transform.AddComponent<FeedbackUI>();
 
         foreach (EffectType effectType in Enum.GetValues(typeof(EffectType)))
         {
@@ -97,7 +101,7 @@ public class Character : MonoBehaviour
                 critRate = crit.value;
                 effects.Remove(crit);
             }
-            damageDealt = processDamage(damage.value, critRate);
+            damageDealt = processDamage(damage.value, critRate, DamageType.General);
             effects.Remove(damage);
         }
 
@@ -116,7 +120,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public int processDamage(int damage, int critRate)
+    public int processDamage(int damage, int critRate, DamageType type)
     {
         int damageDealt = 0;
 
@@ -125,6 +129,7 @@ public class Character : MonoBehaviour
         if (rand <= critRate)
         {
             damage = (int)(damage * 2.5);
+            type = DamageType.Critical;
         }
 
         // Damage
@@ -132,14 +137,14 @@ public class Character : MonoBehaviour
         {
             currentHealth -= damage - attributes[EffectType.Armor];
             damageDealt = damage - attributes[EffectType.Armor];
-            showFloatingFeedbackUI(damageDealt.ToString(), Color.crimson);
+            showFloatingFeedbackUI(type, damageDealt.ToString());
             attributes[EffectType.Armor] = 0;
             AudioManager.instance.playDamage();
         }
         else
         {
             attributes[EffectType.Armor] -= damage;
-            showFloatingFeedbackUI(damage.ToString(), Color.darkSlateGray);
+            showFloatingFeedbackUI(type, damage.ToString());
             AudioManager.instance.playBlock();
         }
 
@@ -163,7 +168,7 @@ public class Character : MonoBehaviour
                 attributes[EffectType.Frostbite] = 0;
                 int frostbiteDamage = (int)(maxHealth * 0.1f);
                 currentHealth -= frostbiteDamage;
-                showFloatingFeedbackUI(frostbiteDamage.ToString(), Color.powderBlue);
+                //showFloatingFeedbackUI(frostbiteDamage.ToString(), Color.powderBlue);
                 uIUpdater.setHealth(currentHealth, maxHealth);
             }
 
@@ -304,7 +309,7 @@ public class Character : MonoBehaviour
 
     public void healCharacter(int amount)
     {
-        showFloatingFeedbackUI(amount.ToString(), Color.seaGreen);
+        showFloatingFeedbackUI(DamageType.Heal, amount.ToString());
         currentHealth += amount;
         if (currentHealth > maxHealth)
         {
@@ -330,12 +335,8 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void showFloatingFeedbackUI(string message, Color color)
+    public void showFloatingFeedbackUI(DamageType type, string message)
     {
-        GameObject feedback = Instantiate(floatingFeedbackUI, transform);
-        feedback.transform.localPosition = new Vector3(0, characterRect.sizeDelta.y / 2, 0);
-        FloatingFeedbackUI feedbackUI = feedback.GetComponent<FloatingFeedbackUI>();
-        feedbackUI.SetText(message, color);
-        StartCoroutine(feedbackUI.moveAndDestroy());
+        feedbackUI.showFloatingFeedback(type, message);
     }
 }

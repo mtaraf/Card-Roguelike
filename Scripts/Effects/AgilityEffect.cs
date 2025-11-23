@@ -15,7 +15,7 @@ public class AgilityEffect: IStatusEffect
     {
         target.updateAttribute(type, value);
 
-        target.showFloatingFeedbackUI(type.ToFeedbackString(), Color.blueViolet);
+        //target.showFloatingFeedbackUI(type.ToFeedbackString(), Color.blueViolet);
         target.addAudioCue(type);
     }
 

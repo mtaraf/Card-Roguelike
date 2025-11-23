@@ -15,7 +15,7 @@ public class BleedEffect: IStatusEffect
     {
         target.updateAttribute(type, value);
 
-        target.showFloatingFeedbackUI(type.ToFeedbackString(), Color.blueViolet);
+        //target.showFloatingFeedbackUI(type.ToFeedbackString(), Color.blueViolet);
         target.addAudioCue(type);
     }
 
@@ -26,7 +26,7 @@ public class BleedEffect: IStatusEffect
 
         if (bleedValue > 0)
         {
-            target.processDamage(bleedValue, -1);
+            target.processDamage(bleedValue, -1, DamageType.Bleed);
             target.updateAttribute(type, -bleedValue);
         }
 

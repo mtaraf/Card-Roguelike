@@ -21,7 +21,7 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Dodge the next attack.
+  details: Dodge the next attack. Corrupts.
   title: Dark Sight
   image: {fileID: 0}
   target: 2

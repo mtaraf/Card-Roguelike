@@ -14,7 +14,7 @@ public class HealEffect: IStatusEffect
     {
         target.healCharacter(value);
 
-        target.showFloatingFeedbackUI(type.ToFeedbackString(), Color.blueViolet);
+        target.showFloatingFeedbackUI(DamageType.Heal, value.ToString());
         target.addAudioCue(type);
     }
 

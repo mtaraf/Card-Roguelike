@@ -19,6 +19,7 @@ public class HandManager : MonoBehaviour
     private ObservableDeck discardPile;
     private DeckModelSO playerDeck;
     private DeckModelSO corruptedCards;
+    private DeckModelSO disabledCards;
 
     // Cards
     private Card selectedCard = null;
@@ -91,6 +92,9 @@ public class HandManager : MonoBehaviour
         
         corruptedCards = ScriptableObject.CreateInstance<DeckModelSO>();
         corruptedCards.cards = new List<CardModelSO>();
+
+        disabledCards = ScriptableObject.CreateInstance<DeckModelSO>();
+        disabledCards.cards = new List<CardModelSO>();
 
         handUI.Initialize();
     }
@@ -182,6 +186,16 @@ public class HandManager : MonoBehaviour
         return corruptedCards.cards;
     }
 
+    public void addDisabledCard(CardModelSO model)
+    {
+        disabledCards.cards.Add(model);
+    }
+
+    public List<CardModelSO> getDisabledCards()
+    {
+        return disabledCards.cards;
+    }
+
     private void shuffleDiscardPileIntoDrawPile()
     {
         List<CardModelSO> discardCopy = new List<CardModelSO>(discardPile.cards);
@@ -213,6 +227,10 @@ public class HandManager : MonoBehaviour
         if (selectedCard.isCorrupt())
         {
             addCorruptedCard(selectedCard.getCardModel());
+        }
+        else if (selectedCard.isOneUse())
+        {
+            addDisabledCard(selectedCard.getCardModel());
         }
         else
         {

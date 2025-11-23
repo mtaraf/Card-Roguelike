@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: PewterDrag+
+  m_Name: PewterDrag
   m_EditorClassIdentifier: 
   type: 2
   rarity: 2
@@ -21,8 +21,8 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Gain 2 energy. Shatters.
-  title: Pewter Drag+
+  details: Gain 2 energy. Lose 1 energy next turn. Exhausts.
+  title: Pewter Drag
   image: {fileID: 0}
   target: 2
   cardsDrawn: 0

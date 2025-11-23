@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: PewterDrag
+  m_Name: Cleanse
   m_EditorClassIdentifier: 
   type: 2
-  rarity: 2
+  rarity: 1
   energy: 0
   effects: []
   special: 1
@@ -21,12 +21,12 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Gain 2 energy. Lose 1 energy next turn. Shatters.
-  title: Pewter Drag
+  details: Cleanse all negative effects. Corrupts.
+  title: Cleanse
   image: {fileID: 0}
   target: 2
   cardsDrawn: 0
   cardsDiscarded: 0
-  corrupts: 0
+  corrupts: 1
   upgradedCard: {fileID: 0}
   oneUse: 1
