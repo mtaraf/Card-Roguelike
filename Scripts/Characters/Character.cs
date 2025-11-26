@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Common;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,6 +16,7 @@ public class Character : MonoBehaviour
     protected bool dead = false;
     [SerializeField] private int xSpawnOffset;
     [SerializeField] private int ySpawnOffset;
+    protected CardEffectHandler cardEffectHandler;
 
     // UI
     protected UIUpdater uIUpdater;
@@ -45,6 +45,8 @@ public class Character : MonoBehaviour
         {
             attributes.Add(effectType, 0);
         }
+
+        cardEffectHandler = new CardEffectHandler(this);
 
         // Set up after first frame
         StartCoroutine(findComponentsAfterFrame());
@@ -84,103 +86,24 @@ public class Character : MonoBehaviour
     // Card Processing
     public virtual void processCardEffects(List<CardEffect> effects, Enemy enemy = null)
     {
-        if (enemy != null)
-        {
-            Debug.Log("Process Card Enemy: " + enemy.currentHealth);
-        }
-
-        // Damage processing
-        int damageDealt = 0;
-        CardEffect damage = effects.Find((effect) => effect.type == EffectType.Damage);
-        CardEffect crit = effects.Find((effect) => effect.type == EffectType.Critical);
-        if (damage != null)
-        {
-            int critRate = -1;
-            if (crit != null)
-            {
-                critRate = crit.value;
-                effects.Remove(crit);
-            }
-            damageDealt = processDamage(damage.value, critRate, DamageType.General);
-            effects.Remove(damage);
-        }
-
-        foreach (CardEffect effect in effects)
-        {
-            IStatusEffect statusEffect = StatusEffectFactory.create(effect);
-            statusEffect?.apply(this, damageDealt);
-        }
-
-        // Check if character is dead
-        if (currentHealth == 0 || currentHealth < 0)
-        {
-            currentHealth = 0;
-            dead = true;
-            HandManager.instance.checkOnDeathEffect();
-        }
+        cardEffectHandler.processCardEffects(effects, enemy);
     }
 
     public int processDamage(int damage, int critRate, DamageType type)
     {
-        int damageDealt = 0;
-
-        // Check if Crit lands
-        float rand = UnityEngine.Random.Range(0,101);
-        if (rand <= critRate)
-        {
-            damage = (int)(damage * 2.5);
-            type = DamageType.Critical;
-        }
-
-        // Damage
-        if (damage - attributes[EffectType.Armor] > 0)
-        {
-            currentHealth -= damage - attributes[EffectType.Armor];
-            damageDealt = damage - attributes[EffectType.Armor];
-            showFloatingFeedbackUI(type, damageDealt.ToString());
-            attributes[EffectType.Armor] = 0;
-            AudioManager.instance.playDamage();
-        }
-        else
-        {
-            attributes[EffectType.Armor] -= damage;
-            showFloatingFeedbackUI(type, damage.ToString());
-            AudioManager.instance.playBlock();
-        }
-
-        // Update Health
-        uIUpdater.setHealth(currentHealth, maxHealth);
-
-        return damageDealt;
-    }
-
-    void checkFrostbiteThreshold(int damageDealt)
-    {
-        // Check Frostbite threshold
-        if (attributes[EffectType.Frostbite] > 0 && damageDealt > 0)
-        {
-            attributes[EffectType.Frostbite] -= damageDealt;
-
-            // Check if threshold is met
-            if (attributes[EffectType.Frostbite] <= 0)
-            {
-                // Do frostbite damage and frostbite animation
-                attributes[EffectType.Frostbite] = 0;
-                int frostbiteDamage = (int)(maxHealth * 0.1f);
-                currentHealth -= frostbiteDamage;
-                //showFloatingFeedbackUI(frostbiteDamage.ToString(), Color.powderBlue);
-                uIUpdater.setHealth(currentHealth, maxHealth);
-            }
-
-            // Updates the frostbite effect to either remove or lessen threshold
-            uIUpdater.updateEffect(EffectType.Frostbite, attributes[EffectType.Frostbite]);
-        }
+        return cardEffectHandler.processDamage(damage, critRate, type);
     }
 
     public void updateAttribute(EffectType type, int value)
     {
         attributes[type] += value;
         uIUpdater.updateEffect(type, attributes[type]);
+    }
+
+    public void updateCurrentHealth(int health)
+    {
+        currentHealth = health;
+        uIUpdater.setHealth(currentHealth, maxHealth);
     }
 
     public void processEndOfTurnEffects()
@@ -338,5 +261,11 @@ public class Character : MonoBehaviour
     public void showFloatingFeedbackUI(DamageType type, string message)
     {
         feedbackUI.showFloatingFeedback(type, message);
+    }
+
+    public void setCharacterDead()
+    {
+        currentHealth = 0;
+        dead = true;
     }
 }

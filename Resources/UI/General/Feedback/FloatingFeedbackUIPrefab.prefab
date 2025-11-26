@@ -150,5 +150,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 4213177375430498824}
-  lifetime: 1.5
-  riseSpeed: 55
+  lifetime: 2.5
+  riseSpeed: 75

@@ -20,8 +20,8 @@ MonoBehaviour:
     useGradient: 0
     gradientTop: {r: 0, g: 0, b: 0, a: 0}
     gradientBottom: {r: 0, g: 0, b: 0, a: 0}
-    bounceScale: 1.4
-    shakeIntensity: 8
+    bounceScale: 2
+    shakeIntensity: 10
   - type: 1
     color: {r: 0.5, g: 0.1533019, b: 0.1533019, a: 1}
     baseFontSize: 36

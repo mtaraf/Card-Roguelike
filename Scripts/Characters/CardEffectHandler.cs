@@ -1,0 +1,115 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public class CardEffectHandler
+{
+    private Character character;
+
+    public CardEffectHandler(Character myCharacter)
+    {
+        character = myCharacter;    
+    }
+
+    public virtual void processCardEffects(List<CardEffect> effects, Enemy enemy = null)
+    {
+        if (enemy != null)
+        {
+            Debug.Log("Process Card Enemy: " + enemy.name);
+        }
+
+        // Damage processing
+        int damageDealt = 0;
+        List<CardEffect> damage = effects.FindAll((effect) => effect.type == EffectType.Damage);
+        CardEffect crit = effects.Find((effect) => effect.type == EffectType.Critical);
+        if (damage != null && damage.Count > 0)
+        {
+            int critRate = -1;
+            if (crit != null)
+            {
+                critRate = crit.value;
+                effects.Remove(crit);
+            }
+            foreach (CardEffect effect in damage)
+            {
+                damageDealt = processDamage(effect.value, critRate, DamageType.General);
+                effects.Remove(effect);
+            }
+        }
+
+        foreach (CardEffect effect in effects)
+        {
+            IStatusEffect statusEffect = StatusEffectFactory.create(effect);
+            statusEffect?.apply(character, damageDealt);
+        }
+
+        // Check if character is dead
+        int currentHealth = character.getCurrentHealth();
+        if (currentHealth == 0 || currentHealth < 0)
+        {
+            character.setCharacterDead();
+            HandManager.instance.checkOnDeathEffect();
+        }
+    }
+
+    public int processDamage(int damage, int critRate, DamageType type)
+    {
+        int currentHealth = character.getCurrentHealth();
+        Dictionary<EffectType, int> attributes = character.getAttributes();
+        int damageDealt = 0;
+
+        // Check if Crit lands
+        float rand = UnityEngine.Random.Range(0,101);
+        if (rand <= critRate)
+        {
+            damage = (int)(damage * 2.5);
+            type = DamageType.Critical;
+        }
+
+        // Damage
+        if (damage - attributes[EffectType.Armor] > 0)
+        {
+            currentHealth -= damage - attributes[EffectType.Armor];
+            damageDealt = damage - attributes[EffectType.Armor];
+
+            character.showFloatingFeedbackUI(type, damageDealt.ToString());
+            character.updateAttribute(EffectType.Armor, 0);
+            AudioManager.instance.playDamage();
+        }
+        else
+        {
+            character.updateAttribute(EffectType.Armor, attributes[EffectType.Armor] - damage);
+            character.showFloatingFeedbackUI(type, damage.ToString());
+            AudioManager.instance.playBlock();
+        }
+
+        // Update Health
+        character.updateCurrentHealth(currentHealth);
+
+        return damageDealt;
+    }
+
+
+    // void checkFrostbiteThreshold(int damageDealt)
+    // {
+    //     // Check Frostbite threshold
+    //     if (attributes[EffectType.Frostbite] > 0 && damageDealt > 0)
+    //     {
+    //         attributes[EffectType.Frostbite] -= damageDealt;
+
+    //         // Check if threshold is met
+    //         if (attributes[EffectType.Frostbite] <= 0)
+    //         {
+    //             // Do frostbite damage and frostbite animation
+    //             attributes[EffectType.Frostbite] = 0;
+    //             int frostbiteDamage = (int)(maxHealth * 0.1f);
+    //             currentHealth -= frostbiteDamage;
+    //             //showFloatingFeedbackUI(frostbiteDamage.ToString(), Color.powderBlue);
+    //             uIUpdater.setHealth(currentHealth, maxHealth);
+    //         }
+
+    //         // Updates the frostbite effect to either remove or lessen threshold
+    //         uIUpdater.updateEffect(EffectType.Frostbite, attributes[EffectType.Frostbite]);
+    //     }
+    // }
+}

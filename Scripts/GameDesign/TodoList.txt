@@ -36,7 +36,9 @@ Card Bugs:
     - Judgement: needs to be implemented
 
 Current Work:
-    - Fix feedback position!
+    - Add onCrit functionality
+    - Fix feedback not listening to damagesettings
+    - Add Empower attack functionality
     - Add corruption effect
     - Add pop-up confirmation when delete save is pressed
     - Discard broken with new drag cards (switch to just click when discarding to move the cards to discard)

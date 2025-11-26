@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   rarity: 1
-  energy: 0
+  energy: 2
   effects: []
   special: 1
   condition:
@@ -28,5 +28,5 @@ MonoBehaviour:
   cardsDrawn: 0
   cardsDiscarded: 0
   corrupts: 1
-  upgradedCard: {fileID: 0}
-  oneUse: 1
+  upgradedCard: {fileID: 11400000, guid: 6f8b71a08d2cf9d4fbc38c599740c001, type: 2}
+  oneUse: 0

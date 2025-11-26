@@ -23,6 +23,7 @@ public class FeedbackUI: MonoBehaviour
     {
         floatingFeedbackUI = Resources.Load<GameObject>("UI/General/Feedback/FloatingFeedbackUIPrefab");
         damageSettings = Resources.Load<DamageTypeSettings>("UI/General/Feedback/DamageTypeSettings");
+        Debug.Log(damageSettings.damageTypes.Length);
 
         characterRect = gameObject.GetComponent<RectTransform>();
         mainCanvas = GameObject.FindGameObjectWithTag("BaseLevelCanvas");
@@ -40,10 +41,10 @@ public class FeedbackUI: MonoBehaviour
         if (info == null)
             return;
         
-        GameObject feedback = Instantiate(floatingFeedbackUI, mainCanvas.transform);
+        GameObject feedback = Instantiate(floatingFeedbackUI, gameObject.transform);
 
         feedback.transform.localPosition = 
-            new Vector3(transform.localPosition.x, characterRect.sizeDelta.y / 2, 0);
+            new Vector3(0, (characterRect.sizeDelta.y / 2) + 20, 0);
 
         FloatingFeedbackUI floatingFeedback = feedback.GetComponent<FloatingFeedbackUI>();
 
