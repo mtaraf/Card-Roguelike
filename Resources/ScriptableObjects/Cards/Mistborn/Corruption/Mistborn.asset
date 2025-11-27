@@ -16,15 +16,18 @@ MonoBehaviour:
   rarity: 3
   energy: 3
   effects:
-  - type: 15
+  - type: 14
     value: 15
     turns: 0
+    critRate: 0
   - type: 2
     value: 4
     turns: 0
-  - type: 14
+    critRate: 0
+  - type: 13
     value: 4
     turns: 0
+    critRate: 0
   special: 0
   condition:
     conditionValue: 0

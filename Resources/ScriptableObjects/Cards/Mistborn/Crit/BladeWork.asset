@@ -19,18 +19,17 @@ MonoBehaviour:
   - type: 0
     value: 4
     turns: 0
+    critRate: 40
   - type: 0
     value: 4
     turns: 0
-  - type: 13
-    value: 50
-    turns: 0
+    critRate: 40
   special: 0
   condition:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Deals 4 damage, twice. Each hit has a 50% change to be critical
+  details: Deals 4 damage, twice. Each hit has a 40% change to be critical
   title: Blade Work
   image: {fileID: 0}
   target: 1

@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
 {
     // Attributes
     [SerializeField] protected int maxHealth;
-    protected int currentHealth; // Set current health to max health only when a run starts not in start for player
+    protected int currentHealth;
     protected int weakness;
     protected Dictionary<EffectType, int> attributes = new Dictionary<EffectType, int>();
     [SerializeField] protected int id;
@@ -17,6 +17,7 @@ public class Character : MonoBehaviour
     [SerializeField] private int xSpawnOffset;
     [SerializeField] private int ySpawnOffset;
     protected CardEffectHandler cardEffectHandler;
+    private int corruptionLimit = 25;
 
     // UI
     protected UIUpdater uIUpdater;
@@ -100,6 +101,29 @@ public class Character : MonoBehaviour
         uIUpdater.updateEffect(type, attributes[type]);
     }
 
+    public void addCorruption(int amount)
+    {
+        Debug.Log($"Amount: {amount} limit: {corruptionLimit}");
+        int currentCorruption = attributes[EffectType.Corruption];
+        currentCorruption += amount;
+
+        if (currentCorruption >= corruptionLimit)
+        {
+            consumeCorruption(corruptionLimit);
+            return;
+        }
+
+        updateAttribute(EffectType.Corruption, currentCorruption);
+    }
+
+    public void consumeCorruption(int amount)
+    {
+        // TO-DO: Add corruption animation!
+        sceneController.healPlayer(amount);
+        attributes[EffectType.Corruption] = 0;
+        processDamage(amount, 0, DamageType.General);
+    }
+
     public void updateCurrentHealth(int health)
     {
         currentHealth = health;
@@ -175,7 +199,6 @@ public class Character : MonoBehaviour
 
     public bool hasAttribute(EffectType effectType)
     {
-        Debug.Log(attributes[effectType]);
         return attributes[effectType] > 0;
     }
 

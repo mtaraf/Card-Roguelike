@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class MistbornCardProcessor : CardProcessor
 {
+    private Dictionary<string, SpecialCardLogicInterface> specialCards;
 
     public MistbornCardProcessor(ParentSceneController parentSceneController) : base(parentSceneController)
     {
+        specialCards = new Dictionary<string, SpecialCardLogicInterface>
+        {
+            {"Cleanse", new CleanseLogic()},
+            {"Cleanse+", new CleanseLogic()},
+            {"Luck of the Draw", new LuckOfTheDrawLogic(1)},
+            {"Luck of the Draw+", new LuckOfTheDrawLogic(2)},
+            {"Taste of Blood", new TasteOfBloodLogic()},
+            {"Taste of Blood+", new TasteOfBloodLogic()},
+            {"Corrupt Dagger", new CorruptDaggerLogic()},
+            {"Corrupt Dagger+", new CorruptDaggerLogic()},
+        };
     }
 
     public override List<CardEffect> processCard(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies)
@@ -22,47 +34,59 @@ public class MistbornCardProcessor : CardProcessor
 
     protected override List<CardEffect> processSpecialCard(Card specialCard, Dictionary<EffectType, int> attributes, List<Enemy> enemies)
     {
-        List<CardEffect> cardEffects = new List<CardEffect>();
-
-        CardEffect damage = new CardEffect();
-        damage.type = EffectType.Damage;
-
-        CardEffect strength = new CardEffect();
-        strength.type = EffectType.Strength;
-
-        if ((specialCard.getCardTarget() == Target.Enemy_Multiple || specialCard.getCardTarget() == Target.Enemy_Single) && enemies == null)
+        if (specialCards.TryGetValue(specialCard.getCardTitle(), out var handler))
         {
-            Debug.LogError("No enemies selected for card processing");
-            return cardEffects;
+            Debug.LogError($"No Special Card Logic for {specialCard.getCardTitle()}");
+            return new List<CardEffect>();
         }
 
-        switch (specialCard.getCardTitle())
-        {
-            case "Blind Spot":
-            case "Blind Spot+":
-                if (enemies[0].getAttributes()[EffectType.Blind] > 0)
-                {
-                    damage.value = specialCard.getEffects()[0].value * 2;
-                }
-                else
-                {
-                    damage.value = specialCard.getEffects()[0].value;
-                }
-                cardEffects.Add(damage);
-                break;
-            case "Divine Smite":
-            case "Divine Smite+":
-                damage.value = specialCard.getEffects()[0].value;
-                cardEffects.Add(damage);
-                break;
-            case "Corruptable":
-                strength.value = HandManager.instance.getCorruptedCards().Count;
-                cardEffects.Add(strength);
-                break;
-        }
+        List<CardEffect> cardEffects = handler.process(specialCard,attributes,enemies,sceneController);
 
-        cardEffects = applyEffectsToCardDamage(cardEffects, attributes);
+        return applyEffectsToCardDamage(cardEffects, attributes);
 
-        return cardEffects;
+        // CardEffect damage = new CardEffect();
+        // damage.type = EffectType.Damage;
+
+        // CardEffect strength = new CardEffect();
+        // strength.type = EffectType.Strength;
+
+        // if ((specialCard.getCardTarget() == Target.Enemy_Multiple || specialCard.getCardTarget() == Target.Enemy_Single) && enemies == null)
+        // {
+        //     Debug.LogError("No enemies selected for card processing");
+        //     return cardEffects;
+        // }
+
+        // switch (specialCard.getCardTitle())
+        // {
+        //     case "Cleanse":
+        //     case "Cleanse+":
+        //         sceneController.clearPlayerNegativeEffects();
+        //         break;
+        //     case "Blind Spot":
+        //     case "Blind Spot+":
+        //         if (enemies[0].getAttributes()[EffectType.Blind] > 0)
+        //         {
+        //             damage.value = specialCard.getEffects()[0].value * 2;
+        //         }
+        //         else
+        //         {
+        //             damage.value = specialCard.getEffects()[0].value;
+        //         }
+        //         cardEffects.Add(damage);
+        //         break;
+        //     case "Divine Smite":
+        //     case "Divine Smite+":
+        //         damage.value = specialCard.getEffects()[0].value;
+        //         cardEffects.Add(damage);
+        //         break;
+        //     case "Corruptable":
+        //         strength.value = HandManager.instance.getCorruptedCards().Count;
+        //         cardEffects.Add(strength);
+        //         break;
+        // }
+
+        // cardEffects = applyEffectsToCardDamage(cardEffects, attributes);
+
+        // return cardEffects;
     }
 }

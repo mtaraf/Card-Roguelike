@@ -42,6 +42,7 @@ public class CardEffect
     public EffectType type;
     public int value;
     public int turns;
+    public int critRate;
 }
 
 [Serializable]

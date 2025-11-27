@@ -19,15 +19,17 @@ MonoBehaviour:
   - type: 0
     value: 6
     turns: 0
+    critRate: 0
   - type: 12
     value: 3
     turns: 0
+    critRate: 0
   special: 0
   condition:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Deals 6 damage to all enemies. Inflicts bleed for half the damage.
+  details: Deals 6 damage to all enemies. Inflicts bleed for half the base damage.
   title: Decimate+
   image: {fileID: 0}
   target: 0

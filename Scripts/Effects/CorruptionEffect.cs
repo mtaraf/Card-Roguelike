@@ -12,12 +12,14 @@ public class CorruptionEffect: IStatusEffect
 
     public void apply(Character target, int damageDealt = 0)
     {
-        target.updateAttribute(type, damageDealt);
+        int corruptionToHeal = target.processDamage(value, 0, DamageType.Corruption) / 2;
+
+        target.addCorruption(corruptionToHeal);
 
         // Player takes half the damage dealt, can mitigate this damage.
         ParentSceneController parentSceneController = GameManager.instance.getCurrentSceneController();
         Player player = parentSceneController.getPlayer();
-        player.processDamage(damageDealt / 2, -1, DamageType.Corruption);
+        player.processDamage(corruptionToHeal, -1, DamageType.Corruption);
 
         //target.showFloatingFeedbackUI(type.ToFeedbackString(), Color.blueViolet);
         target.addAudioCue(type);

@@ -21,18 +21,11 @@ public class CardEffectHandler
         // Damage processing
         int damageDealt = 0;
         List<CardEffect> damage = effects.FindAll((effect) => effect.type == EffectType.Damage);
-        CardEffect crit = effects.Find((effect) => effect.type == EffectType.Critical);
         if (damage != null && damage.Count > 0)
         {
-            int critRate = -1;
-            if (crit != null)
-            {
-                critRate = crit.value;
-                effects.Remove(crit);
-            }
             foreach (CardEffect effect in damage)
             {
-                damageDealt = processDamage(effect.value, critRate, DamageType.General);
+                damageDealt = processDamage(effect.value, effect.critRate, DamageType.General);
                 effects.Remove(effect);
             }
         }
@@ -54,13 +47,12 @@ public class CardEffectHandler
 
     public int processDamage(int damage, int critRate, DamageType type)
     {
+        bool corruption = type == DamageType.Corruption;
         int currentHealth = character.getCurrentHealth();
         Dictionary<EffectType, int> attributes = character.getAttributes();
         int damageDealt = 0;
 
-        // Check if Crit lands
-        float rand = UnityEngine.Random.Range(0,101);
-        if (rand <= critRate)
+        if (critRate == 100)
         {
             damage = (int)(damage * 2.5);
             type = DamageType.Critical;

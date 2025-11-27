@@ -17,8 +17,9 @@ MonoBehaviour:
   energy: 2
   effects:
   - type: 0
-    value: 10
+    value: 15
     turns: 0
+    critRate: 0
   special: 1
   condition:
     conditionValue: 0

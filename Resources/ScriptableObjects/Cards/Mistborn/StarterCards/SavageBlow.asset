@@ -16,9 +16,10 @@ MonoBehaviour:
   rarity: 0
   energy: 2
   effects:
-  - type: 15
+  - type: 14
     value: 10
     turns: 0
+    critRate: 0
   special: 0
   condition:
     conditionValue: 0

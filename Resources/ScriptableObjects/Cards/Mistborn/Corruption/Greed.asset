@@ -16,15 +16,16 @@ MonoBehaviour:
   rarity: 2
   energy: 1
   effects:
-  - type: 0
+  - type: 14
     value: 5
     turns: 0
+    critRate: 0
   special: 1
   condition:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Deals 5 damage. Consumes all corruption stacks on the enemy. Corrupts.
+  details: Deals 5 corruption. Consumes all corruption stacks on the enemy. Corrupts.
   title: Greed
   image: {fileID: 0}
   target: 1

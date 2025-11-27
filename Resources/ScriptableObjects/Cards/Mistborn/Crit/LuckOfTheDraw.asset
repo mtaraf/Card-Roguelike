@@ -19,9 +19,7 @@ MonoBehaviour:
   - type: 0
     value: 6
     turns: 0
-  - type: 13
-    value: 30
-    turns: 0
+    critRate: 30
   special: 1
   condition:
     conditionValue: 0

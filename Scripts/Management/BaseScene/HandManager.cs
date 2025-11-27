@@ -304,7 +304,6 @@ public enum EffectType
     HealOverTime,
     Stun,
     Bleed,
-    Critical,
     Agility,
     Corruption
 }
@@ -346,7 +345,7 @@ public static class EffectTypeExtensions
             case EffectType.HealDamageDone:
             case EffectType.HealOverTime: return "+hp";
             case EffectType.Bleed: return "+bleed";
-            case EffectType.Agility: return "agility+";
+            case EffectType.Agility: return "+agility";
             default: return "Default";
         }
     }

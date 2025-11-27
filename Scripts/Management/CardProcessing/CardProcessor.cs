@@ -27,6 +27,9 @@ public class CardProcessor
             // TO-DO: add discard functionality to parent scene controller and call here
         }
 
+        // Roll critical hits
+        cardEffects = checkCritHits(cardEffects);
+
         sceneController.playAnimationsForCard(card.getCardType());
 
         return cardEffects;
@@ -73,33 +76,7 @@ public class CardProcessor
 
     protected virtual List<CardEffect> processSpecialCard(Card specialCard, Dictionary<EffectType, int> attributes, List<Enemy> enemies)
     {
-        List<CardEffect> cardEffects = new List<CardEffect>();
-
-        CardEffect damage = new CardEffect();
-        damage.type = EffectType.Damage;
-
-        CardEffect strength = new CardEffect();
-        strength.type = EffectType.Strength;
-
-        switch (specialCard.getCardTitle())
-        {
-            case "Stacked Hand":
-                damage.value = (HandManager.instance.getNumCardsInHand() * 2) - 1;
-                damage.turns = 0;
-                cardEffects.Add(damage);
-                break;
-            case "Cleanse":
-                sceneController.clearPlayerNegativeEffects();
-                break;
-            case "Corruptable":
-                strength.value = HandManager.instance.getCorruptedCards().Count;
-                cardEffects.Add(strength);
-                break;
-        }
-
-        cardEffects = applyEffectsToCardDamage(cardEffects, attributes);
-
-        return cardEffects;
+        return new List<CardEffect>();
     }
 
     public void checkOnDeathEffect(Card lastCardPlayed)
@@ -116,5 +93,26 @@ public class CardProcessor
             default:
                 break;
         }
+    }
+
+    public List<CardEffect> checkCritHits(List<CardEffect> cardEffects)
+    {
+        foreach (CardEffect effect in cardEffects)
+        {
+            if (effect.type == EffectType.Damage && effect.critRate > 0)
+            {
+                float rand = Random.Range(0,101);
+                if (rand <= effect.critRate)
+                {
+                    effect.critRate = 100;
+                }
+                else
+                {
+                    effect.critRate = 0;
+                }
+            }
+        }
+
+        return cardEffects;
     }
 }
