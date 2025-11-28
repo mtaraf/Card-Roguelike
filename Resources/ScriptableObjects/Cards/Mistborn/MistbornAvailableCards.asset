@@ -12,4 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b04a2a5476ff64788caa87c41b8035, type: 3}
   m_Name: MistbornAvailableCards
   m_EditorClassIdentifier: 
-  cards: []
+  cards:
+  - {fileID: 11400000, guid: 919a23241a64b334db41e97fafde36fa, type: 2}
+  - {fileID: 11400000, guid: cc25b5d0dc778614bbf6dcac5e953a2f, type: 2}
+  - {fileID: 11400000, guid: a2f33ff152dfe914984d70541bb06641, type: 2}
+  - {fileID: 11400000, guid: 7a96a4ad35c411f4f8c0ea1507695f47, type: 2}
+  - {fileID: 11400000, guid: 13293e8c9c2448f4d9ed0f437eb193c1, type: 2}
+  - {fileID: 11400000, guid: 3594e0aa7c102924ebd9243670b5ac7d, type: 2}
+  - {fileID: 11400000, guid: 26f5498f06eedca43a53cb27017d0edb, type: 2}
+  - {fileID: 11400000, guid: 31b1d61849fde374a85e8553c9e7d809, type: 2}
+  - {fileID: 11400000, guid: bbe04dc026a4e0e4e81bb877a828ec0f, type: 2}
+  - {fileID: 11400000, guid: 252a82303f1be4348bb4fadb9a31728f, type: 2}
+  - {fileID: 11400000, guid: 34e6647ecd2adc54c85f4b603b4f5d91, type: 2}
+  - {fileID: 11400000, guid: aed5d6e8a47e5754f9f72bf485211027, type: 2}
+  - {fileID: 11400000, guid: 8a0b2443b7d2ede479ff3aecbf005987, type: 2}
+  - {fileID: 11400000, guid: 43b848be375c2e642a55a2dbf87dd5d9, type: 2}
+  - {fileID: 11400000, guid: 5b56569190f900e479e2ca49230beb1c, type: 2}
+  - {fileID: 11400000, guid: 2f4d4805ecde3e1498314d13926a19cb, type: 2}

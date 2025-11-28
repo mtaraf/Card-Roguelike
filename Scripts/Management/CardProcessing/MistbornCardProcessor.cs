@@ -10,14 +10,31 @@ public class MistbornCardProcessor : CardProcessor
     {
         specialCards = new Dictionary<string, SpecialCardLogicInterface>
         {
+            // Corruption
             {"Cleanse", new CleanseLogic()},
             {"Cleanse+", new CleanseLogic()},
-            {"Luck of the Draw", new LuckOfTheDrawLogic(1)},
-            {"Luck of the Draw+", new LuckOfTheDrawLogic(2)},
-            {"Taste of Blood", new TasteOfBloodLogic()},
-            {"Taste of Blood+", new TasteOfBloodLogic()},
             {"Corrupt Dagger", new CorruptDaggerLogic()},
             {"Corrupt Dagger+", new CorruptDaggerLogic()},
+            {"Greed", new GreedLogic()},
+            {"Greed+", new GreedLogic()},
+            // Bleed
+            {"Taste of Blood", new TasteOfBloodLogic()},
+            {"Taste of Blood+", new TasteOfBloodLogic()},
+            {"Vampiric", new VampiricLogic()},
+            {"Vampiric+", new VampiricLogic()},
+            // Crit
+            {"Luck of the Draw", new LuckOfTheDrawLogic(1)},
+            {"Luck of the Draw+", new LuckOfTheDrawLogic(2)},
+            {"Teamwork", new TeamworkLogic()},
+            {"Teamwork+", new TeamworkLogic()},
+            // Dagger
+            {"Close Combat", new CloseCombatLogic()},
+            {"Close Combat+", new CloseCombatLogic()},
+            {"Dance of Daggers", new DanceOfDaggersLogic()},
+            {"Dance of Daggers+", new DanceOfDaggersLogic()},
+            {"Hidden Inventory", new HiddenInventoryLogic(2)},
+            {"Hidden Inventory+", new HiddenInventoryLogic(3)},
+            // General
         };
     }
 
@@ -34,13 +51,15 @@ public class MistbornCardProcessor : CardProcessor
 
     protected override List<CardEffect> processSpecialCard(Card specialCard, Dictionary<EffectType, int> attributes, List<Enemy> enemies)
     {
-        if (specialCards.TryGetValue(specialCard.getCardTitle(), out var handler))
+        SpecialCardLogicInterface specialCardLogic = specialCards[specialCard.getCardTitle()];
+
+        if (specialCardLogic == null)
         {
             Debug.LogError($"No Special Card Logic for {specialCard.getCardTitle()}");
             return new List<CardEffect>();
         }
 
-        List<CardEffect> cardEffects = handler.process(specialCard,attributes,enemies,sceneController);
+        List<CardEffect> cardEffects = specialCardLogic.process(specialCard,attributes,enemies,sceneController);
 
         return applyEffectsToCardDamage(cardEffects, attributes);
 

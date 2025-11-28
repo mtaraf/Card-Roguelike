@@ -19,7 +19,7 @@ public static class StatusEffectFactory
             case EffectType.Poison: return null; // TO-DO: implement
             case EffectType.Strength: return new StrengthEffect(effect.value);
             case EffectType.Stun: return null; // TO-DO: implement
-            case EffectType.Weaken: return new AgilityEffect(effect.value);
+            case EffectType.Weaken: return new WeakenEffect(effect.value);
             default: return null;
         }
     }
@@ -41,7 +41,7 @@ public static class StatusEffectFactory
             case EffectType.Poison: return null; // TO-DO: implement
             case EffectType.Strength: return new StrengthEffect(0);
             case EffectType.Stun: return null; // TO-DO: implement
-            case EffectType.Weaken: return new AgilityEffect(0);
+            case EffectType.Weaken: return new WeakenEffect(0);
             default: return null;
         }
     }

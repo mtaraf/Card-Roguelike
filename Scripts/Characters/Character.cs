@@ -97,6 +97,13 @@ public class Character : MonoBehaviour
 
     public void updateAttribute(EffectType type, int value)
     {
+        Debug.Log($"updated {type} to {value} for {gameObject.name}");
+        attributes[type] = value;
+        uIUpdater.updateEffect(type, attributes[type]);
+    }
+
+    public void addAttributeValue(EffectType type, int value)
+    {
         attributes[type] += value;
         uIUpdater.updateEffect(type, attributes[type]);
     }

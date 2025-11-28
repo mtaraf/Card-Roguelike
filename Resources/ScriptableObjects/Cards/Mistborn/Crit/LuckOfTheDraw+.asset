@@ -29,7 +29,7 @@ MonoBehaviour:
   title: Luck of the Draw+
   image: {fileID: 0}
   target: 1
-  cardsDrawn: 2
+  cardsDrawn: 0
   cardsDiscarded: 0
   corrupts: 0
   upgradedCard: {fileID: 0}

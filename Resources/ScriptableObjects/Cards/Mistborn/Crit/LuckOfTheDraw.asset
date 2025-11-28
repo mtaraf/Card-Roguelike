@@ -29,7 +29,7 @@ MonoBehaviour:
   title: Luck of the Draw
   image: {fileID: 0}
   target: 1
-  cardsDrawn: 1
+  cardsDrawn: 0
   cardsDiscarded: 0
   corrupts: 0
   upgradedCard: {fileID: 11400000, guid: 3ee08517fead89f479f002c9247debf4, type: 2}

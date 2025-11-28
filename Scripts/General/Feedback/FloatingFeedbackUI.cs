@@ -29,6 +29,7 @@ public class FloatingFeedbackUI : MonoBehaviour
 
         if (useGradient)
         {
+            textComponent.enableVertexGradient = true;
             textComponent.colorGradient = new VertexGradient(gradientTop, gradientTop, gradientBottom, gradientBottom);
         }
         else

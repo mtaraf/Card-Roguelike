@@ -12,7 +12,7 @@ public class BlindEffect: IStatusEffect
 
     public void apply(Character target, int damageDealt = 0)
     {
-        target.updateAttribute(type, value);
+        target.addAttributeValue(type, value);
 
         //target.showFloatingFeedbackUI(type.ToFeedbackString(), Color.blueViolet);
         target.addAudioCue(type);

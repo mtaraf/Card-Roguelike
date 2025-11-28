@@ -214,6 +214,11 @@ public class HandManager : MonoBehaviour
         discardPile.Add(card.getCardModel());
     }
 
+    public bool addCardToCurrentHand(CardModelSO card)
+    {
+        return addCardToCardSlot(card);
+    }
+
     // Card Processing
     public List<CardEffect> useSelectedCard(List<Enemy> enemies)
     {

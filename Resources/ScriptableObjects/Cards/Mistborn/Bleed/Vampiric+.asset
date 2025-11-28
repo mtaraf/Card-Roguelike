@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: DeathFromBelow+
+  m_Name: Vampiric+
   m_EditorClassIdentifier: 
-  type: 0
-  rarity: 3
-  energy: 2
+  type: 2
+  rarity: 2
+  energy: 0
   effects:
-  - type: 0
-    value: 15
+  - type: 9
+    value: 0
     turns: 0
     critRate: 0
   special: 1
@@ -25,9 +25,8 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: 'Deals 15 damage. Executes targets below 10% health. Returns to hand with
-    0 energy cost if target is executed. '
-  title: Death From Below+
+  details: Consume and heal all bleed stacks on the target.
+  title: Vampiric+
   image: {fileID: 0}
   target: 1
   cardsDrawn: 0

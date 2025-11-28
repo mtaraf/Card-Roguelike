@@ -6,37 +6,10 @@ public interface SpecialCardLogicInterface
     List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController);
 }
 
+// Mistborn Cards
 
-public class CleanseLogic: SpecialCardLogicInterface
-{
-    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
-    {
-        parentSceneController.clearPlayerNegativeEffects();
-        return new List<CardEffect>();
-    }
-}
 
-public class LuckOfTheDrawLogic: SpecialCardLogicInterface
-{
-    int drawCards = 0;
-    public LuckOfTheDrawLogic(int cards)
-    {
-        drawCards = cards;
-    }
-    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
-    {
-        CardProcessor cardProcessor = new CardProcessor(parentSceneController);
-        List<CardEffect> effects = cardProcessor.processCard(card, attributes, enemies);
-
-        if (effects[0].critRate == 100)
-        {
-            HandManager.instance.drawCards(drawCards);
-        }
-
-        return effects;
-    }
-}
-
+// Bleed
 public class TasteOfBloodLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
@@ -57,6 +30,67 @@ public class TasteOfBloodLogic: SpecialCardLogicInterface
     }
 }
 
+public class VampiricLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        List<CardEffect> effects = card.getEffects();
+
+        if (enemies.Count < 1)
+        {
+            Debug.LogError("No enemies found for Taste of Blood");
+            return effects;
+        }
+
+        // Get bleed value
+        effects[0].value = enemies[0].getAttributes()[EffectType.Bleed];
+
+        // Remove bleed from target
+        enemies[0].updateAttribute(EffectType.Bleed, 0);
+
+        // Heal for bleed value
+        return effects;
+    }  
+}
+
+// Crit
+public class LuckOfTheDrawLogic: SpecialCardLogicInterface
+{
+    int drawCards = 0;
+    public LuckOfTheDrawLogic(int cards)
+    {
+        drawCards = cards;
+    }
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        CardProcessor cardProcessor = new CardProcessor(parentSceneController);
+        List<CardEffect> effects = cardProcessor.processCard(card, attributes, enemies);
+
+        Debug.Log("Crit hit: " + effects[0].critRate);
+
+        if (effects[0].critRate == 100)
+        {
+            Debug.Log("Draw Card");
+            HandManager.instance.drawCards(drawCards);
+        }
+
+        return effects;
+    }
+}
+
+public class TeamworkLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        List<CardEffect> effects = card.getEffects();
+
+        effects[0].critRate = HandManager.instance.getNumCardsInHand() * effects[0].critRate;
+
+        return effects;
+    }
+}
+
+// Corruption
 public class CorruptDaggerLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
@@ -73,3 +107,101 @@ public class CorruptDaggerLogic: SpecialCardLogicInterface
         return effects;
     }
 }
+
+public class CleanseLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        parentSceneController.clearPlayerNegativeEffects();
+        return new List<CardEffect>();
+    }
+}
+
+public class GreedLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        List<CardEffect> effects = card.getEffects();
+
+        if (enemies[0].hasAttribute(EffectType.Corruption))
+        {
+            CardEffect heal = new CardEffect
+            {
+                type = EffectType.Heal,
+                value = enemies[0].getAttributes()[EffectType.Corruption],
+                turns = 0,
+                critRate = 0
+            };
+            effects.Add(heal);
+
+            enemies[0].updateAttribute(EffectType.Corruption, 0);
+        }
+
+        return effects;
+    }
+}
+
+// Dagger
+public class CloseCombatLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        List<CardEffect> effects = card.getEffects();
+
+        int daggerCards = 0;
+        List<CardModelSO> cards = HandManager.instance.getPlayerDeck().cards;
+
+        foreach (CardModelSO item in cards)
+        {
+            if (item.title.ToLower().Contains("dagger"))
+                daggerCards++;
+        }
+
+        effects[0].value *= daggerCards;
+
+        return effects;
+    }
+}
+
+public class DanceOfDaggersLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        List<CardEffect> effects = card.getEffects();
+
+        effects[0].value *= parentSceneController.getPlayerAttributes()[EffectType.Agility];
+
+        return effects;
+    }
+}
+
+public class HiddenInventoryLogic:  SpecialCardLogicInterface
+{
+    int num = 0;
+    public HiddenInventoryLogic(int numCards)
+    {
+        num = numCards;
+    }
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        CardModelSO glassDaggerCard = (CardModelSO) Resources.Load("ScriptableObjects/Cards/Mistborn/StarterCards/GlassDagger");
+
+        bool success = true;
+
+        for (int i=0; i<num; i++)
+        {
+            success = HandManager.instance.addCardToCurrentHand(glassDaggerCard.clone());
+
+            if (!success)
+            {
+                Debug.Log("Hand is full");
+                // TO-DO: add hand is full message to player
+                break;
+            }
+        }
+
+        return new List<CardEffect>();
+    }
+}
+
+// General

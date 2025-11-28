@@ -21,7 +21,7 @@ public class HandUIController : MonoBehaviour
         centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI");
         cardSlots = GameObject.FindGameObjectWithTag("CardSlots");
 
-        feedbackMessage = Resources.Load<GameObject>("UI/General/FeedbackMessage");
+        feedbackMessage = Resources.Load<GameObject>("UI/General/Feedback/FeedbackMessage");
         cardPrefab = Resources.Load<GameObject>("UI/Cards/CardPrefab");
         noAnimationCardPrefab = Resources.Load<GameObject>("UI/Cards/CardNoAnimation");
 

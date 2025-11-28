@@ -68,7 +68,6 @@ public class CardProcessor
         {
             modifiedEffects[damage_index].value += attributes[EffectType.Strength];
             modifiedEffects[damage_index].value -= Mathf.FloorToInt(modifiedEffects[damage_index].value * 0.2f * attributes[EffectType.Weaken]);
-            Debug.Log("Damage after strength and weakness: " + modifiedEffects[damage_index].value);
         }
 
         return modifiedEffects;
