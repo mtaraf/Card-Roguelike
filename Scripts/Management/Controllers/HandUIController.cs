@@ -10,16 +10,22 @@ public class HandUIController : MonoBehaviour
     [SerializeField] private GameObject feedbackMessage;
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private GameObject noAnimationCardPrefab;
+    private Vector3 displayMessageLocation;
 
     private GameObject cardSlots;
     private List<GameObject> cardSlotsList = new();
     private List<Card> cardsInHand = new List<Card>();
+    [SerializeField] private float handWidth = 900f;
+    [SerializeField] private float cardSpacing = 160f;
+    [SerializeField] private float animationDuration = 0.25f;
 
 
 
     public void Initialize()
     {
         centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI");
+        displayMessageLocation = centerOfUI.transform.position;
+        centerOfUI.transform.localPosition = new Vector3(centerOfUI.transform.localPosition.x, centerOfUI.transform.localPosition.y - 600, 0);
         cardSlots = GameObject.FindGameObjectWithTag("CardSlots");
 
         feedbackMessage = Resources.Load<GameObject>("UI/General/Feedback/FeedbackMessage");
@@ -36,23 +42,69 @@ public class HandUIController : MonoBehaviour
 
     public void updateCardDisplay(CardModelSO card)
     {
-        Card cardToUpdate = cardsInHand.Find((card) => card.getCardModel() == card);
+        Card cardToUpdate = cardsInHand.Find((cardToChange) => cardToChange.getCardTitle() == card.title);
+        if (cardToUpdate == null)
+        {
+            Debug.LogError($"Could not update card display for {card.title}");
+            return;
+        }
+
         cardToUpdate.setCardDisplayInformation(card);
+        Debug.Log($"Card display updated for {card.title}");
+        // TO-DO: Add animation for this update
     }
 
-    public bool addCardToSlot(CardModelSO cardModel)
+    public void addCardToHand(CardModelSO cardModel)
     {
-        foreach (var slot in cardSlotsList)
+        GameObject cardObj = Instantiate(cardPrefab, centerOfUI.transform);
+        Card card = cardObj.GetComponent<Card>();
+        card.setCardDisplayInformation(cardModel);
+
+        cardsInHand.Add(card);
+        reflowHand();
+    }
+
+    public void removeCardFromHand(Card card)
+    {   
+        cardsInHand.Remove(card);
+        Destroy(card.gameObject);
+        reflowHand();
+    }
+
+    public void reflowHand()
+    {
+        if (cardsInHand.Count == 0)
+            return;
+
+        float totalWidth = (cardsInHand.Count - 1) * cardSpacing;
+        float startX = -totalWidth / 2f;
+
+        for (int i=0; i<cardsInHand.Count; i++)
         {
-            if (slot.transform.childCount == 0)
-            {
-                GameObject card = Instantiate(cardPrefab, slot.transform);
-                card.GetComponent<Card>().setCardDisplayInformation(cardModel);
-                cardsInHand.Add(card.GetComponent<Card>());
-                return true;
-            }
+            Card card = cardsInHand[i];
+            RectTransform rt = card.GetComponent<RectTransform>();
+
+            Vector3 targetPos = new Vector3(startX + i * cardSpacing, rt.anchoredPosition.y, 0);
+
+            StartCoroutine(moveCard(rt, targetPos, animationDuration, card.gameObject.GetComponent<CardSelectionHandler>()));
         }
-        return false;
+    }
+
+    private IEnumerator moveCard(RectTransform card, Vector3 target, float duration, CardSelectionHandler cardSelectionHandler)
+    {
+        Vector3 startPos = card.anchoredPosition;
+        float t = 0f;
+
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            card.anchoredPosition = Vector3.Lerp(startPos, target, t / duration);
+            yield return null;
+        }
+
+        card.anchoredPosition = target;
+
+        cardSelectionHandler.setNewStartPos(card.transform.position);
     }
 
     public int getNumCardsInHand()
@@ -74,9 +126,8 @@ public class HandUIController : MonoBehaviour
             {
                 GameObject card = slot.transform.GetChild(0).gameObject;
                 Card cardComponent = card.GetComponent<Card>();
-                cardsInHand.Remove(cardComponent);
                 discardPile.Add(cardComponent.getCardModel());
-                Destroy(card);
+                removeCardFromHand(cardComponent);
             }
         }
     }
@@ -107,51 +158,10 @@ public class HandUIController : MonoBehaviour
     public IEnumerator displayFeedbackMessage(string message)
     {
         GameObject msgObj = Instantiate(feedbackMessage, centerOfUI.transform);
+        msgObj.transform.position = displayMessageLocation;
         msgObj.GetComponent<TextMeshProUGUI>().text = message;
         yield return new WaitForSeconds(1.0f);
         Destroy(msgObj);
-    }
-
-    public void reorganizeCardsInHand()
-    {
-        List<GameObject> cardsInHand = new List<GameObject>();
-
-        // Step 1: Collect all existing cards
-        foreach (GameObject slot in cardSlotsList)
-        {
-            if (slot.transform.childCount > 0)
-            {
-                Transform child = slot.transform.GetChild(0);
-                if (child != null && child.gameObject != null)
-                {
-                    cardsInHand.Add(child.gameObject);
-                }
-            }
-        }
-
-        // Step 2: Clear all slots
-        foreach (GameObject slot in cardSlotsList)
-        {
-            foreach (Transform child in slot.transform)
-            {
-                child.SetParent(null); // detach
-            }
-        }
-
-        // Step 3: Reassign cards to the first available slots
-        for (int i = 0; i < cardsInHand.Count; i++)
-        {
-            cardsInHand[i].transform.SetParent(cardSlotsList[i].transform, false);
-
-            // Optional: Reset position/scale to avoid layout glitches
-            RectTransform rt = cardsInHand[i].GetComponent<RectTransform>();
-            rt.anchoredPosition = Vector2.zero;
-            rt.localScale = Vector3.one;
-            rt.localRotation = Quaternion.identity;
-
-            CardSelectionHandler selectionHandler = cardsInHand[i].GetComponent<CardSelectionHandler>();
-            selectionHandler.setStartPos(cardsInHand[i].transform.position);
-        }
     }
 
     public void animateCardMovement(Transform card, Vector3 targetPosition, Vector3 targetScale, float duration, Action onComplete = null)

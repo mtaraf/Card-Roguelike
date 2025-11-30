@@ -35,7 +35,6 @@ IEndDragHandler
         handUIController = HandManager.instance.getHandUIContoller();
         centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI");
 
-        startPos = transform.position;
         originalIndex = transform.parent.gameObject.transform.GetSiblingIndex();
         StartCoroutine(getController());
     }
@@ -48,6 +47,14 @@ IEndDragHandler
         discardCardHoldPosition = centerOfUI.transform.position;
         discardCardHoldPosition.x -= 150;
         discardCardHoldPosition.y += 150;
+
+        yield return new WaitForSeconds(0.5f);
+        startPos = transform.position;
+    }
+
+    public void setNewStartPos(Vector3 newPos)
+    {
+        startPos = newPos;
     }
 
     // Dragging
@@ -193,7 +200,7 @@ IEndDragHandler
             eventData.selectedObject = gameObject;
 
             // Layer card infront of all others
-            transform.parent.gameObject.transform.SetAsLastSibling();
+            //transform.parent.gameObject.transform.SetAsLastSibling();
         }
     }
 
@@ -204,7 +211,7 @@ IEndDragHandler
             eventData.selectedObject = null;
 
             // Set layering back to original
-            transform.parent.gameObject.transform.SetSiblingIndex(originalIndex);
+            //transform.parent.gameObject.transform.SetSiblingIndex(originalIndex);
         }
     }
 

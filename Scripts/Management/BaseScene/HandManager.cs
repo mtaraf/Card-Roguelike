@@ -216,6 +216,7 @@ public class HandManager : MonoBehaviour
     {
         discardPile.Add(card.getCardModel());
         currentHand.Remove(card.getCardModel());
+        handUI.removeCardFromHand(card);
     }
 
     public bool addCardToCurrentHand(CardModelSO card)
@@ -281,12 +282,8 @@ public class HandManager : MonoBehaviour
 
     public bool addCardToCardSlot(CardModelSO cardInformation)
     {
-        return handUI.addCardToSlot(cardInformation);
-    }
-
-    public void reorganizeHand()
-    {
-        handUI.reorganizeCardsInHand();
+        handUI.addCardToHand(cardInformation);
+        return true;
     }
 
     public int getNumCardsInHand()

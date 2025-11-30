@@ -24,8 +24,6 @@ public class MistbornCardProcessor : CardProcessor
             {"Vampiric+", new VampiricLogic()},
             {"Bleed It Out", new BleedItOutLogic()},
             {"Bleed It Out+", new BleedItOutLogic()},
-            {"Crimson Pact", new CrimsonPactLogic()},
-            {"Crimson Pact+", new CrimsonPactLogic()},
             {"Ravage", new RavageLogic()},
             {"Ravage+", new RavageLogic()},
             {"Transfusion", new TransfusionLogic()},
@@ -43,6 +41,8 @@ public class MistbornCardProcessor : CardProcessor
             {"Hidden Inventory", new HiddenInventoryLogic(2)},
             {"Hidden Inventory+", new HiddenInventoryLogic(3)},
             // General
+            {"Hunter's Instinct", new HuntersInstinctLogic()},
+            {"Hunter's Instinct+", new HuntersInstinctLogic()},
         };
     }
 
