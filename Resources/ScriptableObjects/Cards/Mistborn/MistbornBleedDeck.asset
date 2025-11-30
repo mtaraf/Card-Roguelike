@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b04a2a5476ff64788caa87c41b8035, type: 3}
+  m_Name: MistbornBleedDeck
+  m_EditorClassIdentifier: 
+  cards:
+  - {fileID: 11400000, guid: bfefdf98330a88d4cbdc2eaa92de80fa, type: 2}
+  - {fileID: 11400000, guid: 60235656190edbf469ef2e09ee8c4654, type: 2}
+  - {fileID: 11400000, guid: d26e486059c7b594f947f8146c64e0ed, type: 2}
+  - {fileID: 11400000, guid: b5c397b1efc66ad4a9f5173f44fefd4b, type: 2}
+  - {fileID: 11400000, guid: 542b5941073a59346abfc69c9519be88, type: 2}
+  - {fileID: 11400000, guid: 919a23241a64b334db41e97fafde36fa, type: 2}
+  - {fileID: 11400000, guid: 55483d6bead526b45af3c576cc38e6f0, type: 2}
+  - {fileID: 11400000, guid: cc25b5d0dc778614bbf6dcac5e953a2f, type: 2}
+  - {fileID: 11400000, guid: 8a0b2443b7d2ede479ff3aecbf005987, type: 2}
+  - {fileID: 11400000, guid: 46b40c68bb89c534f92bd8fecce5db46, type: 2}
+  - {fileID: 11400000, guid: ad01c6a9c4918cd478cf2d6b35d08e7d, type: 2}
+  - {fileID: 11400000, guid: d01c9a388e0dc5f49b2b5d461d21e989, type: 2}

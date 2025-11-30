@@ -118,4 +118,15 @@ public class CardModelSO : ScriptableObject
 
         return copy;
     }
+
+    public bool containsEffect(EffectType type)
+    {
+        foreach (CardEffect effect in effects)
+        {
+            if (effect.type == type)
+                return true;
+        }
+
+        return false;
+    }
 }

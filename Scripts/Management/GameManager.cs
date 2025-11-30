@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
     {
         statusPrefabs = new List<GameObject>(Resources.LoadAll<GameObject>("UI/Effects/EffectPrefabs"));
         //valueBasedStatuses = new List<GameObject>(Resources.LoadAll<GameObject>("UI/Effects/ValueBasedEffects"));
-        starterDeck = Resources.Load<DeckModelSO>("ScriptableObjects/Cards/Mistborn/MistbornAvailableCards");
+        starterDeck = Resources.Load<DeckModelSO>("ScriptableObjects/Cards/Mistborn/MistbornBleedDeck");
         
         // Get Victory Card Pools
         victoryCardPools.Insert(0, cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/CommonVictoryCards")));

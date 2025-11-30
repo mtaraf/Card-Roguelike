@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,6 +28,87 @@ public class TasteOfBloodLogic: SpecialCardLogicInterface
             effects[0].value *= (int)2.5;
 
         return effects;
+    }
+}
+
+public class TransfusionLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        List<CardEffect> effects = card.getEffects();
+        
+
+        if (enemies.Count < 1)
+        {
+            Debug.LogError("No enemies found for Taste of Blood");
+            return effects;
+        }
+
+        if (enemies[0].hasAttribute(EffectType.Bleed))
+        {
+            CardModelSO transfusionCard = HandManager.instance.getCardInDeckDuringEncounter("Transfusion");
+            transfusionCard.energy = Math.Max(0, transfusionCard.energy - 1);
+        }
+
+        return effects;
+    }
+}
+
+public class RavageLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        List<CardEffect> effects = card.getEffects();
+
+        CardModelSO bloodyDagger = (CardModelSO) Resources.Load("ScriptableObjects/Cards/Mistborn/Bleed/BloodyDagger");
+        
+
+        if (enemies.Count < 1)
+        {
+            Debug.LogError("No enemies found for Taste of Blood");
+            return effects;
+        }
+
+        if (enemies[0].hasAttribute(EffectType.Bleed))
+            HandManager.instance.addCardToCurrentHand(bloodyDagger);
+
+        return effects;
+    }
+}
+
+public class CrimsonPactLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        List<CardModelSO> hand = HandManager.instance.getCurrentHand();
+
+        foreach (CardModelSO cardModel in hand)
+        {
+
+            if (cardModel.containsEffect(EffectType.Bleed))
+            {
+                // Min value is 0 energy cost
+                cardModel.energy = Math.Max(0, cardModel.energy - 1);
+            }
+        }
+
+        return new List<CardEffect>();
+    }
+}
+
+public class BleedItOutLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        if (enemies.Count < 1)
+        {
+            Debug.LogError("No enemies found for Taste of Blood");
+        }
+
+        if (enemies[0].hasAttribute(EffectType.Bleed))
+            enemies[0].updateAttribute(EffectType.Bleed, enemies[0].getAttributes()[EffectType.Bleed] * 2);
+
+        return new List<CardEffect>();
     }
 }
 

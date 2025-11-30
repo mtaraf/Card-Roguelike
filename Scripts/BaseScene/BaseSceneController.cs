@@ -92,6 +92,7 @@ public class BaseLevelSceneController : ParentSceneController
                 }
                 else
                 {
+                    enemyComponent.setMaxHealth(50); // For Dev Testing
                     enemies.Add(enemyComponent);
                 }
             }

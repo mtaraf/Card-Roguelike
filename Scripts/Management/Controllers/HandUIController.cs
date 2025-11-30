@@ -13,6 +13,7 @@ public class HandUIController : MonoBehaviour
 
     private GameObject cardSlots;
     private List<GameObject> cardSlotsList = new();
+    private List<Card> cardsInHand = new List<Card>();
 
 
 
@@ -33,6 +34,12 @@ public class HandUIController : MonoBehaviour
         }
     }
 
+    public void updateCardDisplay(CardModelSO card)
+    {
+        Card cardToUpdate = cardsInHand.Find((card) => card.getCardModel() == card);
+        cardToUpdate.setCardDisplayInformation(card);
+    }
+
     public bool addCardToSlot(CardModelSO cardModel)
     {
         foreach (var slot in cardSlotsList)
@@ -41,6 +48,7 @@ public class HandUIController : MonoBehaviour
             {
                 GameObject card = Instantiate(cardPrefab, slot.transform);
                 card.GetComponent<Card>().setCardDisplayInformation(cardModel);
+                cardsInHand.Add(card.GetComponent<Card>());
                 return true;
             }
         }
@@ -65,7 +73,9 @@ public class HandUIController : MonoBehaviour
             if (slot.transform.childCount > 0)
             {
                 GameObject card = slot.transform.GetChild(0).gameObject;
-                discardPile.Add(card.GetComponent<Card>().getCardModel());
+                Card cardComponent = card.GetComponent<Card>();
+                cardsInHand.Remove(cardComponent);
+                discardPile.Add(cardComponent.getCardModel());
                 Destroy(card);
             }
         }

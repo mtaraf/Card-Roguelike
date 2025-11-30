@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class HandManager : MonoBehaviour
 {
@@ -17,6 +14,7 @@ public class HandManager : MonoBehaviour
     // Decks
     private ObservableDeck drawPile;
     private ObservableDeck discardPile;
+    private List<CardModelSO> currentHand = new List<CardModelSO>();
     private DeckModelSO playerDeck;
     private DeckModelSO corruptedCards;
     private DeckModelSO disabledCards;
@@ -65,7 +63,11 @@ public class HandManager : MonoBehaviour
 
         // Get player deck and create an empty discard deck and a full draw pile on load
         playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
-        playerDeck.cards = new List<CardModelSO>(GameManager.instance.getPlayerDeck()?.cards);
+        playerDeck.cards = new List<CardModelSO>();
+        foreach (CardModelSO cardModel in GameManager.instance.getPlayerDeck()?.cards)
+        {
+            playerDeck.cards.Add(cardModel.clone());
+        }
 
         drawPile = new ObservableDeck();
         drawPile.cards.AddRange(playerDeck.cards);
@@ -171,6 +173,7 @@ public class HandManager : MonoBehaviour
             bool spaceInHandRemaining = addCardToCardSlot(drawPile.cards[randomCardIndex]);
             if (spaceInHandRemaining)
             {
+                currentHand.Add(drawPile.cards[randomCardIndex]);
                 drawPile.RemoveAt(randomCardIndex);
             }
         }
@@ -202,7 +205,7 @@ public class HandManager : MonoBehaviour
         foreach (CardModelSO card in discardCopy)
         {
             drawPile.Add(card);
-            if (!card.corrupts)
+            if (!card.corrupts && !card.oneUse)
             {
                 discardPile.Remove(card);
             }
@@ -212,11 +215,28 @@ public class HandManager : MonoBehaviour
     public void addCardToDiscardPile(Card card)
     {
         discardPile.Add(card.getCardModel());
+        currentHand.Remove(card.getCardModel());
     }
 
     public bool addCardToCurrentHand(CardModelSO card)
     {
+        currentHand.Add(card);
         return addCardToCardSlot(card);
+    }
+
+    public CardModelSO getCardInDeckDuringEncounter(string title)
+    {
+        return playerDeck.cards.Find((card) => card.title == title || card.title == title + "+");
+    }
+
+    public void updateCardDisplay(CardModelSO card)
+    {
+        handUI.updateCardDisplay(card);
+    }
+
+    public List<CardModelSO> getCurrentHand()
+    {
+        return currentHand;
     }
 
     // Card Processing
