@@ -21,8 +21,9 @@ IEndDragHandler
 
     private HandUIController handUIController;
     private GameObject centerOfUI;
+    private GameObject discardPile;
 
-    private float cardMoveSpeed = 0.4f;
+    private float cardMoveSpeed = 0.6f;
     private float cardHoverSpeed = 0.1f;
 
     private ParentSceneController sceneController;
@@ -32,6 +33,7 @@ IEndDragHandler
 
     private void Start()
     {
+        discardPile = GameObject.FindGameObjectWithTag("DiscardPile");
         handUIController = HandManager.instance.getHandUIContoller();
         centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI");
 
@@ -103,11 +105,10 @@ IEndDragHandler
         }
         else if (eventData.pointerEnter.CompareTag("DiscardUI"))
         {
-            Vector3 discardPileLocation = GameObject.FindGameObjectWithTag("DiscardPile").transform.position;
             sceneController.getDiscardUI().discardCard(HandManager.instance.getSelectedCard());
 
             // TO-DO: Change this to a different animation
-            StartCoroutine(handUIController.animateCardPlayed(transform, discardPileLocation, transform.localScale, cardMoveSpeed));
+            StartCoroutine(handUIController.animateCardPlayed(transform, discardPile.transform.position, transform.localScale, cardMoveSpeed));
         }
         else
         {
@@ -248,7 +249,7 @@ IEndDragHandler
             discardInProgress = true;
 
             // Move card above discard pile and save it for after this
-            handUIController.animateCardMovement(transform, discardCardHoldPosition, transform.localScale, cardHoverSpeed, null);
+            handUIController.animateCardMovement(transform, discardCardHoldPosition, transform.localScale, cardHoverSpeed);
 
 
             sceneController.startDiscard(numDiscards);
@@ -270,7 +271,7 @@ IEndDragHandler
         HandManager.instance.setSelectedCard(gameObject);
 
         // Card animation
-        playCardAnimation(card);
+        StartCoroutine(playCardAnimation(card));
 
         // use card
         List<CardEffect> effects = HandManager.instance.useSelectedCard(enemies);
@@ -294,15 +295,15 @@ IEndDragHandler
         discardInProgress = false;
     }
 
-    public void playCardAnimation(Card card)
+    public IEnumerator playCardAnimation(Card card)
     {
         if (card.isLithe())
         {
-            StartCoroutine(handUIController.animateLitheCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
+            yield return StartCoroutine(handUIController.animateLitheCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed, () => handUIController.removeCardFromHand(card)));
         }
         else
         {
-            StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
+            yield return StartCoroutine(handUIController.animateCardPlayed(transform, discardPile.transform.position, transform.localScale, cardMoveSpeed, () => handUIController.removeCardFromHand(card)));
         }
     }
 

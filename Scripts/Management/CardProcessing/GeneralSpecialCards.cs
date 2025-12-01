@@ -6,19 +6,20 @@ public class HuntersInstinctLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
-        List<CardModelSO> hand = HandManager.instance.getCurrentHand();
+        List<Card> hand = HandManager.instance.getCurrentHand();
 
         int cardsEnhanced = 0;
 
-        foreach (CardModelSO cardModel in hand)
+        foreach (Card cardInHand in hand)
         {
 
-            if (cardModel.type == CardType.Attack && cardModel.energy > 0)
+            if (cardInHand.getCardType() == CardType.Attack && cardInHand.getEnergy() > 0)
             {
                 // Min value is 0 energy cost
-                cardModel.energy -= 1;
+                CardModelSO model = cardInHand.getCardModel();
+                model.energy -= 1;
                 cardsEnhanced++;
-                HandManager.instance.updateCardDisplay(cardModel);
+                HandManager.instance.updateCardDisplay(cardInHand);
             }
 
             if (cardsEnhanced > 1)
@@ -34,14 +35,14 @@ public class StockadeLogic: SpecialCardLogicInterface
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
         List<CardEffect> effects = card.getEffects();
-        List<CardModelSO> hand = HandManager.instance.getCurrentHand();
+        List<Card> hand = HandManager.instance.getCurrentHand();
 
         int multiplier = 1;
 
-        foreach (CardModelSO cardModel in hand)
+        foreach (Card cardInHand in hand)
         {
 
-            if (cardModel.type == CardType.Buff)
+            if (cardInHand.getCardType() == CardType.Buff)
                 multiplier++;
         }
 
@@ -56,14 +57,14 @@ public class OnslaughtLogic: SpecialCardLogicInterface
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
         List<CardEffect> effects = card.getEffects();
-        List<CardModelSO> hand = HandManager.instance.getCurrentHand();
+        List<Card> hand = HandManager.instance.getCurrentHand();
 
         int multiplier = 1;
 
-        foreach (CardModelSO cardModel in hand)
+        foreach (Card cardInHand in hand)
         {
 
-            if (cardModel.type == CardType.Attack)
+            if (cardInHand.getCardType() == CardType.Attack)
                 multiplier++;
         }
 

@@ -61,20 +61,22 @@ public class HandUIController : MonoBehaviour
         card.setCardDisplayInformation(cardModel);
 
         cardsInHand.Add(card);
-        reflowHand();
+        StartCoroutine(reflowHand());
     }
 
     public void removeCardFromHand(Card card)
     {   
         cardsInHand.Remove(card);
         Destroy(card.gameObject);
-        reflowHand();
+        StartCoroutine(reflowHand());
     }
 
-    public void reflowHand()
+    public IEnumerator reflowHand()
     {
+        yield return new WaitForSeconds(0.1f);
+
         if (cardsInHand.Count == 0)
-            return;
+            yield break;
 
         float totalWidth = (cardsInHand.Count - 1) * cardSpacing;
         float startX = -totalWidth / 2f;
@@ -168,6 +170,7 @@ public class HandUIController : MonoBehaviour
     public IEnumerator animateLitheCardPlayed(Transform card, Vector3 targetPosition, Vector3 targetScale, float duration, Action onComplete = null)
     {
         yield return StartCoroutine(litheCardAnimation(card, targetPosition, targetScale, duration, onComplete));
+        Debug.Log(cardsInHand.Count);
     }
 
     private IEnumerator litheCardAnimation(Transform card, Vector3 targetPosition, Vector3 targetScale, float duration, Action onComplete = null)
@@ -204,14 +207,17 @@ public class HandUIController : MonoBehaviour
         card.rotation = targetRot;
 
         // Small delay to let the player "see" the card
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
 
         // PHASE 2 — Light upward drift + fade out
-        float fadeDuration = 0.4f;
+        float fadeDuration = 0.5f;
         float fadeTimer = 0f;
 
         Vector3 driftStart = card.position;
         Vector3 driftTarget = driftStart + new Vector3(0, 60f, 0); // gentle lift
+
+        Vector3 startScaleFade = card.localScale;
+        Vector3 endScaleFade = startScaleFade * 0.5f;
 
         while (fadeTimer < fadeDuration)
         {
@@ -219,17 +225,14 @@ public class HandUIController : MonoBehaviour
 
             card.position = Vector3.Lerp(driftStart, driftTarget, f);
             cg.alpha = Mathf.Lerp(1f, 0f, f);
+            card.localScale = Vector3.Lerp(startScaleFade, endScaleFade, f);
 
             fadeTimer += Time.deltaTime;
             yield return null;
         }
 
         cg.alpha = 0f;
-
-        // Remove card from hand
-        Card cardComponent = card.GetComponent<Card>();
-        if (cardComponent != null)
-            removeCardFromHand(cardComponent);
+        card.localScale = endScaleFade;
 
         // Final callback
         onComplete?.Invoke();
@@ -237,11 +240,12 @@ public class HandUIController : MonoBehaviour
 
     public IEnumerator animateCardPlayed(Transform card, Vector3 targetPosition, Vector3 targetScale, float duration, Action onComplete = null)
     {
-        yield return StartCoroutine(moveCardCoroutine(card, targetPosition, targetScale, duration, onComplete));
-        yield return StartCoroutine(fadeOutCoroutine(card.gameObject, duration));
+        yield return StartCoroutine(moveCardCoroutine(card, targetPosition, targetScale, duration));
+        yield return StartCoroutine(fadeOutCoroutine(card.gameObject, duration, onComplete));
+        Debug.Log(cardsInHand.Count);
     }
 
-    IEnumerator moveCardCoroutine(Transform card, Vector3 targetPos, Vector3 targetScale, float duration, Action onComplete)
+    IEnumerator moveCardCoroutine(Transform card, Vector3 targetPos, Vector3 targetScale, float duration, Action onComplete = null)
     {
         Vector3 startPos = card.position;
         Vector3 startScale = card.localScale;
@@ -266,26 +270,37 @@ public class HandUIController : MonoBehaviour
         onComplete?.Invoke();
     }
 
-    public void fadeAndDestroy(GameObject card, float duration)
-    {
-        StartCoroutine(fadeOutCoroutine(card, duration));
-    }
-
-    IEnumerator fadeOutCoroutine(GameObject card, float duration)
+    IEnumerator fadeOutCoroutine(GameObject card, float duration, Action onComplete = null)
     {
         CanvasGroup cg = card.GetComponent<CanvasGroup>() ?? card.AddComponent<CanvasGroup>();
+
+        Transform cardTransform = card.transform;
+        Vector3 startScale = cardTransform.localScale;
+        Vector3 endScale = startScale * 0.5f;
+
         float elapsed = 0f;
+
         while (elapsed < duration)
         {
-            cg.alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+            float f = elapsed / duration;
+
+            cg.alpha = Mathf.Lerp(1f, 0f, f);
+
+            cardTransform.localScale = Vector3.Lerp(startScale, endScale, f);
             elapsed += Time.deltaTime;
             yield return null;
         }
         cg.alpha = 0f;
-        Destroy(card);
+        cardTransform.localScale = endScale;
+
         yield return null;
 
-        //reorganizeCardsInHand();
+        onComplete?.Invoke();
+    }
+
+    public List<Card> getCurrentHand()
+    {
+        return cardsInHand;
     }
     
 }

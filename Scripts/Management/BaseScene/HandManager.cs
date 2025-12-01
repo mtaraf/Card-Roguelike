@@ -14,7 +14,6 @@ public class HandManager : MonoBehaviour
     // Decks
     private ObservableDeck drawPile;
     private ObservableDeck discardPile;
-    private List<CardModelSO> currentHand = new List<CardModelSO>();
     private DeckModelSO playerDeck;
     private DeckModelSO corruptedCards;
     private DeckModelSO disabledCards;
@@ -173,7 +172,6 @@ public class HandManager : MonoBehaviour
             bool spaceInHandRemaining = addCardToCardSlot(drawPile.cards[randomCardIndex]);
             if (spaceInHandRemaining)
             {
-                currentHand.Add(drawPile.cards[randomCardIndex]);
                 drawPile.RemoveAt(randomCardIndex);
             }
         }
@@ -215,20 +213,17 @@ public class HandManager : MonoBehaviour
     public void addCardToDiscardPile(Card card)
     {
         discardPile.Add(card.getCardModel());
-        currentHand.Remove(card.getCardModel());
-        handUI.removeCardFromHand(card);
     }
 
     public void litheCardPlayed(Card card)
     {
-        currentHand.Remove(card.getCardModel());
         playerDeck.cards.Remove(card.getCardModel());
     }
 
     public bool addCardToCurrentHand(CardModelSO card)
     {
-        currentHand.Add(card);
-        return addCardToCardSlot(card);
+        handUI.addCardToHand(card);
+        return true;
     }
 
     public CardModelSO getCardInDeckDuringEncounter(string title)
@@ -236,19 +231,20 @@ public class HandManager : MonoBehaviour
         return playerDeck.cards.Find((card) => card.title == title || card.title == title + "+");
     }
 
-    public void updateCardDisplay(CardModelSO card)
+    public void updateCardDisplay(Card card)
     {
-        handUI.updateCardDisplay(card);
+        handUI.updateCardDisplay(card.getCardModel());
     }
 
-    public List<CardModelSO> getCurrentHand()
+    public List<Card> getCurrentHand()
     {
-        return currentHand;
+        return handUI.getCurrentHand();
     }
 
     // Card Processing
     public List<CardEffect> useSelectedCard(List<Enemy> enemies)
     {
+        Debug.Log("Use card in hand manager");
         // Get player attributes
         Dictionary<EffectType, int> playerAttributes = sceneController.getPlayerAttributes();
 
@@ -303,7 +299,6 @@ public class HandManager : MonoBehaviour
 
     public void shuffleCurrentHandIntoDiscardPile()
     {
-        currentHand = new List<CardModelSO>();
         handUI.shuffleHandIntoDiscard(discardPile);
     }
 

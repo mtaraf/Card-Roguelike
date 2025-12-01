@@ -126,6 +126,11 @@ public class Card : MonoBehaviour
         return cardModel.corrupts;
     }
 
+    public int getEnergy()
+    {
+        return cardModel.energy;
+    }
+
     public void mulitplyValues(int multiplier)
     {
         cardModel.multiplyValues(multiplier);
