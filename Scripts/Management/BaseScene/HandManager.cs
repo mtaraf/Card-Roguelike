@@ -219,6 +219,12 @@ public class HandManager : MonoBehaviour
         handUI.removeCardFromHand(card);
     }
 
+    public void litheCardPlayed(Card card)
+    {
+        currentHand.Remove(card.getCardModel());
+        playerDeck.cards.Remove(card.getCardModel());
+    }
+
     public bool addCardToCurrentHand(CardModelSO card)
     {
         currentHand.Add(card);
@@ -250,7 +256,11 @@ public class HandManager : MonoBehaviour
         List<CardEffect> effects = cardProcessor.processCard(selectedCard, playerAttributes,enemies);
 
         // Add card to discard pile and remove card
-        if (selectedCard.isCorrupt())
+        if (selectedCard.isLithe())
+        {
+            litheCardPlayed(selectedCard);
+        }
+        else if (selectedCard.isCorrupt())
         {
             addCorruptedCard(selectedCard.getCardModel());
         }
@@ -293,6 +303,7 @@ public class HandManager : MonoBehaviour
 
     public void shuffleCurrentHandIntoDiscardPile()
     {
+        currentHand = new List<CardModelSO>();
         handUI.shuffleHandIntoDiscard(discardPile);
     }
 

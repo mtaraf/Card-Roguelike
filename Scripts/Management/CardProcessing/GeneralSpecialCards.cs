@@ -28,3 +28,47 @@ public class HuntersInstinctLogic: SpecialCardLogicInterface
         return new List<CardEffect>();
     }
 }
+
+public class StockadeLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        List<CardEffect> effects = card.getEffects();
+        List<CardModelSO> hand = HandManager.instance.getCurrentHand();
+
+        int multiplier = 1;
+
+        foreach (CardModelSO cardModel in hand)
+        {
+
+            if (cardModel.type == CardType.Buff)
+                multiplier++;
+        }
+
+        effects[0].value *= multiplier;
+
+        return effects;
+    }
+}
+
+public class OnslaughtLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        List<CardEffect> effects = card.getEffects();
+        List<CardModelSO> hand = HandManager.instance.getCurrentHand();
+
+        int multiplier = 1;
+
+        foreach (CardModelSO cardModel in hand)
+        {
+
+            if (cardModel.type == CardType.Attack)
+                multiplier++;
+        }
+
+        effects[0].value *= multiplier;
+
+        return effects;
+    }
+}

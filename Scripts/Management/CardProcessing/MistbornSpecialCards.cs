@@ -53,7 +53,7 @@ public class RavageLogic: SpecialCardLogicInterface
     {
         List<CardEffect> effects = card.getEffects();
 
-        CardModelSO bloodyDagger = (CardModelSO) Resources.Load("ScriptableObjects/Cards/Mistborn/Bleed/BloodyDagger");
+        CardModelSO bloodyDagger = (CardModelSO) Resources.Load("ScriptableObjects/Cards/Mistborn/Bleed/LitheBloodyDagger");
         
 
         if (enemies.Count < 1)

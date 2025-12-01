@@ -100,6 +100,12 @@ public class Card : MonoBehaviour
     {
         return cardModel.oneUse;
     }
+
+    public bool isLithe()
+    {
+        return cardModel.lithe;
+    }
+    
     public bool isSpecial()
     {
         return cardModel.special;

@@ -43,6 +43,10 @@ public class MistbornCardProcessor : CardProcessor
             // General
             {"Hunter's Instinct", new HuntersInstinctLogic()},
             {"Hunter's Instinct+", new HuntersInstinctLogic()},
+            {"Stockade", new StockadeLogic()},
+            {"Stockade+", new StockadeLogic()},
+            {"Onslaught", new OnslaughtLogic()},
+            {"Onslaught+", new OnslaughtLogic()},
         };
     }
 

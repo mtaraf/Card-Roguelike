@@ -71,6 +71,7 @@ public class CardModelSO : ScriptableObject
     public bool corrupts;
     public CardModelSO upgradedCard;
     public bool oneUse;
+    public bool lithe;
 
     public void multiplyValues(int multiplier)
     {
@@ -103,6 +104,7 @@ public class CardModelSO : ScriptableObject
         copy.upgradedCard = upgradedCard;
         copy.cardsDiscarded = cardsDiscarded;
         copy.oneUse = oneUse;
+        copy.lithe = lithe;
 
         // Clone effects list
         copy.effects = new List<CardEffect>();

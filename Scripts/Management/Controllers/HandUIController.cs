@@ -10,7 +10,7 @@ public class HandUIController : MonoBehaviour
     [SerializeField] private GameObject feedbackMessage;
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private GameObject noAnimationCardPrefab;
-    private Vector3 displayMessageLocation;
+    private Vector3 cardSpawnPoint;
 
     private GameObject cardSlots;
     private List<GameObject> cardSlotsList = new();
@@ -24,8 +24,7 @@ public class HandUIController : MonoBehaviour
     public void Initialize()
     {
         centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI");
-        displayMessageLocation = centerOfUI.transform.position;
-        centerOfUI.transform.localPosition = new Vector3(centerOfUI.transform.localPosition.x, centerOfUI.transform.localPosition.y - 600, 0);
+        cardSpawnPoint = new Vector3(centerOfUI.transform.localPosition.x, centerOfUI.transform.localPosition.y + 180, 0);
         cardSlots = GameObject.FindGameObjectWithTag("CardSlots");
 
         feedbackMessage = Resources.Load<GameObject>("UI/General/Feedback/FeedbackMessage");
@@ -57,6 +56,7 @@ public class HandUIController : MonoBehaviour
     public void addCardToHand(CardModelSO cardModel)
     {
         GameObject cardObj = Instantiate(cardPrefab, centerOfUI.transform);
+        cardObj.transform.position = cardSpawnPoint;
         Card card = cardObj.GetComponent<Card>();
         card.setCardDisplayInformation(cardModel);
 
@@ -120,15 +120,12 @@ public class HandUIController : MonoBehaviour
 
     public void shuffleHandIntoDiscard(ObservableDeck discardPile)
     {
-        foreach (var slot in cardSlotsList)
+        List<Card> handCopy = new List<Card>(cardsInHand);
+        foreach (Card card in handCopy)
         {
-            if (slot.transform.childCount > 0)
-            {
-                GameObject card = slot.transform.GetChild(0).gameObject;
-                Card cardComponent = card.GetComponent<Card>();
-                discardPile.Add(cardComponent.getCardModel());
-                removeCardFromHand(cardComponent);
-            }
+            discardPile.Add(card.getCardModel());
+            cardsInHand.Remove(card);
+            Destroy(card.gameObject);
         }
     }
 
@@ -158,7 +155,6 @@ public class HandUIController : MonoBehaviour
     public IEnumerator displayFeedbackMessage(string message)
     {
         GameObject msgObj = Instantiate(feedbackMessage, centerOfUI.transform);
-        msgObj.transform.position = displayMessageLocation;
         msgObj.GetComponent<TextMeshProUGUI>().text = message;
         yield return new WaitForSeconds(1.0f);
         Destroy(msgObj);
@@ -167,6 +163,76 @@ public class HandUIController : MonoBehaviour
     public void animateCardMovement(Transform card, Vector3 targetPosition, Vector3 targetScale, float duration, Action onComplete = null)
     {
         StartCoroutine(moveCardCoroutine(card, targetPosition, targetScale, duration, onComplete));
+    }
+
+    public IEnumerator animateLitheCardPlayed(Transform card, Vector3 targetPosition, Vector3 targetScale, float duration, Action onComplete = null)
+    {
+        yield return StartCoroutine(litheCardAnimation(card, targetPosition, targetScale, duration, onComplete));
+    }
+
+    private IEnumerator litheCardAnimation(Transform card, Vector3 targetPosition, Vector3 targetScale, float duration, Action onComplete = null)
+    {
+        CanvasGroup cg = card.GetComponent<CanvasGroup>() ?? card.gameObject.AddComponent<CanvasGroup>();
+        cg.alpha = 1f;
+
+        Vector3 startPos = card.position;
+        Vector3 startScale = card.localScale;
+        Quaternion startRot = card.rotation;
+
+        // Add a soft tilt
+        Quaternion targetRot = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-10f, 10f));
+
+        float t = 0f;
+
+        // PHASE 1 — Move to target position + scale
+        while (t < duration)
+        {
+            float lerp = t / duration;
+
+            // Elegant movement & scale
+            card.position = Vector3.Lerp(startPos, targetPosition, lerp);
+            card.localScale = Vector3.Lerp(startScale, targetScale, lerp);
+            card.rotation = Quaternion.Slerp(startRot, targetRot, lerp);
+
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        // Snap to final transform
+        card.position = targetPosition;
+        card.localScale = targetScale;
+        card.rotation = targetRot;
+
+        // Small delay to let the player "see" the card
+        yield return new WaitForSeconds(0.1f);
+
+        // PHASE 2 — Light upward drift + fade out
+        float fadeDuration = 0.4f;
+        float fadeTimer = 0f;
+
+        Vector3 driftStart = card.position;
+        Vector3 driftTarget = driftStart + new Vector3(0, 60f, 0); // gentle lift
+
+        while (fadeTimer < fadeDuration)
+        {
+            float f = fadeTimer / fadeDuration;
+
+            card.position = Vector3.Lerp(driftStart, driftTarget, f);
+            cg.alpha = Mathf.Lerp(1f, 0f, f);
+
+            fadeTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        cg.alpha = 0f;
+
+        // Remove card from hand
+        Card cardComponent = card.GetComponent<Card>();
+        if (cardComponent != null)
+            removeCardFromHand(cardComponent);
+
+        // Final callback
+        onComplete?.Invoke();
     }
 
     public IEnumerator animateCardPlayed(Transform card, Vector3 targetPosition, Vector3 targetScale, float duration, Action onComplete = null)

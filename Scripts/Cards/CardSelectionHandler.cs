@@ -270,7 +270,7 @@ IEndDragHandler
         HandManager.instance.setSelectedCard(gameObject);
 
         // Card animation
-        StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
+        playCardAnimation(card);
 
         // use card
         List<CardEffect> effects = HandManager.instance.useSelectedCard(enemies);
@@ -292,6 +292,18 @@ IEndDragHandler
         HandManager.instance.clearSelectedCard();
 
         discardInProgress = false;
+    }
+
+    public void playCardAnimation(Card card)
+    {
+        if (card.isLithe())
+        {
+            StartCoroutine(handUIController.animateLitheCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
+        }
+        else
+        {
+            StartCoroutine(handUIController.animateCardPlayed(transform, centerOfUI.transform.position, transform.localScale, cardMoveSpeed));
+        }
     }
 
     public void OnDeselect(BaseEventData eventData)

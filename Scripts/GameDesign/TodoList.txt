@@ -36,6 +36,9 @@ Card Bugs:
     - Judgement: needs to be implemented
 
 Current Work:
+    - Adjust lithe animations
+    - Figure out when cards are destroyed / bugs with animation. Maybe move destroy logic to handui file!
+    - Work on samurai cards/movesets. 
     - Add delay between attacks for cards with multiple attacks
     - Add pop-up confirmation when delete save is pressed
     - Discard broken with new drag cards (switch to just click when discarding to move the cards to discard)
