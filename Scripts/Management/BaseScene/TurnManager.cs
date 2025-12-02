@@ -100,6 +100,7 @@ public class TurnManager : MonoBehaviour
                 if (currentRound + 1 <= rounds)
                 {
                     sceneController.updateCurrentRound(currentRound, rounds);
+                    generateEnemyCardsForNextTurn();
                 }
             }
             yield return null;
@@ -135,6 +136,7 @@ public class TurnManager : MonoBehaviour
             {
                 yield return StartCoroutine(enemyTurn());
                 currentState = TurnState.PlayerTurn;
+                generateEnemyCardsForNextTurn();
             }
             yield return null;
 
@@ -185,10 +187,18 @@ public class TurnManager : MonoBehaviour
         {
             //enemy.processStartOfTurnEffects();
             // TO-DO: depending on current level adjust multiplier for enemy cards
-            yield return StartCoroutine(enemy.playCards(1, enemy.getEnergy()));
+            yield return StartCoroutine(enemy.playCards(1));
             //enemy.processEndOfTurnEffects();
         }
         yield return new WaitForSeconds(0.5f);
+    }
+
+    private void generateEnemyCardsForNextTurn()
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.decideUpcomingMoveset();
+        }
     }
 
     public void endTurnButtonPressed()

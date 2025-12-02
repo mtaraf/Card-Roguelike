@@ -10,7 +10,10 @@ public class Enemy : Character
     private List<CardModelSO> currentMoveset = new List<CardModelSO>();
     [SerializeField] private List<DeckModelSO> movesets = new List<DeckModelSO>();
     [SerializeField] private GameObject energyUI;
-    private CardProcessor cardProcessor;
+    private EnemyCardProcessor enemyCardProcessor;
+    private DeckModelSO upcomingMoveSet = new DeckModelSO();
+    private EnemyCardAI enemyCardAI;
+
 
     // Attributes
     private int currentEnergy = 0;
@@ -18,6 +21,8 @@ public class Enemy : Character
     public override void Start()
     {
         base.Start();
+
+        enemyCardAI = new SamuraiCardAI(this);
 
         currentHealth = maxHealth;
 
@@ -27,10 +32,10 @@ public class Enemy : Character
     private IEnumerator findComponentsAfterFrame()
     {
         yield return null;
-        cardProcessor = new CardProcessor(sceneController);
+        enemyCardProcessor = new EnemyCardProcessor(sceneController);
         if (sceneController == null)
         {
-            Debug.LogError("Could not find scene controller for enemy!");
+            Debug.LogError($"Could not find scene controller for enemy: {gameObject.name}");
         }
     }
 
@@ -45,13 +50,13 @@ public class Enemy : Character
     }
 
     // Check if selected card can target self, display visual indicator if so
-    private void checkSelectedCard()
-    {
-        if (HandManager.instance.hasSelectedCard())
-        {
-            Card card = HandManager.instance.getSelectedCard();
-        }
-    }
+    // private void checkSelectedCard()
+    // {
+    //     if (HandManager.instance.hasSelectedCard())
+    //     {
+    //         Card card = HandManager.instance.getSelectedCard();
+    //     }
+    // }
 
     public override void processCardEffects(List<CardEffect> effects, Enemy enemy = null)
     {
@@ -74,46 +79,45 @@ public class Enemy : Character
         return currentEnergy;
     }
 
-    public IEnumerator playCards(int multiplier, int energy)
+    public void decideUpcomingMoveset()
     {
-        // Get all movesets with the number of cards equal to energy
-        List<DeckModelSO> applicableMovesets = movesets.FindAll((moveset) => moveset.cards.Count == energy);
-        if (applicableMovesets.Count == 0)
-        {
-            Debug.Log("No applicable movesets with " + energy + " energy for this enemy");
-        }
+        upcomingMoveSet = enemyCardAI.generateNextRoundMoves(sceneController.getPlayerAttributes());
+    }
 
-        // Get all the cards from a random moveset within the applicable movesets
-        int randomMoveset = Random.Range(0, applicableMovesets.Count);
-        yield return StartCoroutine(playAndProcessCards(applicableMovesets[randomMoveset].cards, multiplier));
+    public DeckModelSO getPlayerCurrentDeck()
+    {
+        return sceneController.getCurrentPlayerDeck();
+    }
+
+    public IEnumerator playCards(int multiplier)
+    {
+        yield return StartCoroutine(playAndProcessCards(upcomingMoveSet, multiplier));
 
         currentMoveset.Clear();
     }
 
-    IEnumerator playAndProcessCards(List<CardModelSO> moveset, int multiplier)
+    IEnumerator playAndProcessCards(DeckModelSO moveset, int multiplier)
     {
-        for (int i = 0; i < moveset.Count; i++)
+        foreach (CardModelSO card in moveset.cards)
         {
             if (dead)
             {
                 yield break;
             }
-            yield return new WaitForSeconds(1.0f);
-            setEnergy(currentEnergy - 1);
-            CardModelSO cardModel = moveset[i];
-            cardModel.multiplyValues(multiplier);
 
-            List<CardEffect> effects = cardProcessor.processEnemyCard(cardModel, attributes, this);
+            yield return new WaitForSeconds(0.5f);
+            setEnergy(currentEnergy - 1);
+
+            card.multiplyValues(multiplier);
+            List<CardEffect> effects = enemyCardProcessor.processCard(card, attributes, this);
+
             if (effects != null)
             {
                 processCardEffects(effects);
             }
-            else
-            {
-                playAnimation(cardModel.type);
-            }
+            
             // Card animation
-            yield return StartCoroutine(HandManager.instance.enemyCardAnimation(cardModel));
+            yield return StartCoroutine(HandManager.instance.enemyCardAnimation(card));
         }
     }
 }

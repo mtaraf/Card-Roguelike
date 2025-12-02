@@ -135,6 +135,11 @@ public class ParentSceneController : MonoBehaviour
         return player;
     }
 
+    public DeckModelSO getCurrentPlayerDeck()
+    {
+        return player.getCards();
+    }
+
     public virtual void updateDrawPile(int count)
     {
     }
