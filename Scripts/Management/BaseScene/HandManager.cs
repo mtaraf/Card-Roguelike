@@ -226,6 +226,13 @@ public class HandManager : MonoBehaviour
         return true;
     }
 
+    public void addCardToPlayerDeck(CardModelSO card)
+    {
+        // TO-DO: add animation for card entering draw pile
+        playerDeck.cards.Add(card);
+        drawPile.Add(card);
+    }
+
     public CardModelSO getCardInDeckDuringEncounter(string title)
     {
         return playerDeck.cards.Find((card) => card.title == title || card.title == title + "+");

@@ -23,7 +23,6 @@ public class FeedbackUI: MonoBehaviour
     {
         floatingFeedbackUI = Resources.Load<GameObject>("UI/General/Feedback/FloatingFeedbackUIPrefab");
         damageSettings = Resources.Load<DamageTypeSettings>("UI/General/Feedback/DamageTypeSettings");
-        Debug.Log(damageSettings.damageTypes.Length);
 
         characterRect = gameObject.GetComponent<RectTransform>();
         mainCanvas = GameObject.FindGameObjectWithTag("BaseLevelCanvas");

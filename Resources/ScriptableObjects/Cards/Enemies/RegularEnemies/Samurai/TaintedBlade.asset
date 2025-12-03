@@ -17,7 +17,7 @@ MonoBehaviour:
   energy: 0
   effects:
   - type: 0
-    value: 8
+    value: 6
     turns: 0
     critRate: 0
   special: 1
@@ -25,7 +25,8 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Deals 8 damage for each gash card in the player deck.
+  details: Deals 6 damage for each gash card in the player deck. Heal for half the
+    amount.
   title: Tainted Blade
   image: {fileID: 0}
   target: 2

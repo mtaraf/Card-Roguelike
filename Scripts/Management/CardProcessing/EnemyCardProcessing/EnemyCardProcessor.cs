@@ -10,6 +10,7 @@ public class EnemyCardProcessor
         sceneController = parentSceneController;
     }
 
+    // Returns card effects that apply to enemy, otherwise null
     public virtual List<CardEffect> processCard(CardModelSO card, Dictionary<EffectType, int> attributes, Enemy enemy)
     {
         List<CardEffect> cardEffects = applyEffectsToCardDamage(card.effects, attributes);
@@ -18,7 +19,6 @@ public class EnemyCardProcessor
         cardEffects = checkCritHits(cardEffects);
 
         sceneController.playAnimationsForCard(card.type);
-
 
         Target cardTarget = card.target;
         if (cardTarget == Target.Player)
@@ -35,20 +35,9 @@ public class EnemyCardProcessor
         return cardEffects;
     }
 
-    public List<CardEffect> processSpecialCardEffects(List<CardEffect> effects, Target target, Enemy enemy)
+    public void processSpecialCardEffectsOnPlayer(List<CardEffect> effects, Target target, Enemy enemy)
     {
-        if (target == Target.Player)
-        {
-            sceneController.processEnemyCardEffectsOnPlayer(effects, enemy);
-            return null;
-        }
-        else if (target == Target.Enemy_Multiple)
-        {
-            // TO-DO add functionality to allow enemies to buff different enemies
-            return null;
-        }
-
-        return effects;
+        sceneController.processEnemyCardEffectsOnPlayer(effects, enemy);
     }
 
     // applies Strenth and Weakness attributes to the Cards effects
@@ -76,9 +65,9 @@ public class EnemyCardProcessor
         return modifiedEffects;
     }
 
-    protected virtual void processSpecialCard(CardModelSO specialCard, Dictionary<EffectType, int> attributes, Enemy enemy)
+    protected virtual List<CardEffect> processSpecialCard(CardModelSO specialCard, Dictionary<EffectType, int> attributes, Enemy enemy)
     {
-        return;
+        return new List<CardEffect>();
     }
 
     public List<CardEffect> checkCritHits(List<CardEffect> cardEffects)

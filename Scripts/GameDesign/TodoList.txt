@@ -38,6 +38,7 @@ Card Bugs:
 Current Work:
     - Work on samurai cards/movesets.
         - Add movesets (attack, defense, special) then test new ai!
+    - Refactor Weaken to remove strength stacks on target!!!
     - Add delay between attacks for cards with multiple attacks
     - Add pop-up confirmation when delete save is pressed
     - Discard broken with new drag cards (switch to just click when discarding to move the cards to discard)

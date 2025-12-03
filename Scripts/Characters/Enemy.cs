@@ -4,14 +4,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+public enum EnemyName
+{
+    Samurai
+}
+
 public class Enemy : Character
 {
-    [SerializeField] private int moveset;
-    private List<CardModelSO> currentMoveset = new List<CardModelSO>();
-    [SerializeField] private List<DeckModelSO> movesets = new List<DeckModelSO>();
     [SerializeField] private GameObject energyUI;
+    [SerializeField] private EnemyName enemyName;
     private EnemyCardProcessor enemyCardProcessor;
-    private DeckModelSO upcomingMoveSet = new DeckModelSO();
+    private DeckModelSO upcomingMoveSet;
     private EnemyCardAI enemyCardAI;
 
 
@@ -21,9 +24,6 @@ public class Enemy : Character
     public override void Start()
     {
         base.Start();
-
-        enemyCardAI = new SamuraiCardAI(this);
-
         currentHealth = maxHealth;
 
         StartCoroutine(findComponentsAfterFrame());
@@ -32,11 +32,19 @@ public class Enemy : Character
     private IEnumerator findComponentsAfterFrame()
     {
         yield return null;
-        enemyCardProcessor = new EnemyCardProcessor(sceneController);
+        setAIandCardProcessor();
         if (sceneController == null)
         {
             Debug.LogError($"Could not find scene controller for enemy: {gameObject.name}");
         }
+
+        decideUpcomingMoveset();
+    }
+
+    private void setAIandCardProcessor()
+    {
+        enemyCardAI = new SamuraiCardAI(this);
+        enemyCardProcessor = new SamuraiCardProcessor(sceneController);
     }
 
     public void Update()
@@ -92,8 +100,6 @@ public class Enemy : Character
     public IEnumerator playCards(int multiplier)
     {
         yield return StartCoroutine(playAndProcessCards(upcomingMoveSet, multiplier));
-
-        currentMoveset.Clear();
     }
 
     IEnumerator playAndProcessCards(DeckModelSO moveset, int multiplier)
@@ -111,7 +117,7 @@ public class Enemy : Character
             card.multiplyValues(multiplier);
             List<CardEffect> effects = enemyCardProcessor.processCard(card, attributes, this);
 
-            if (effects != null)
+            if (effects != null && effects.Count > 0)
             {
                 processCardEffects(effects);
             }
