@@ -6,6 +6,7 @@ public enum BossType
     HoldTheLine,
     Culver,
     FinalBoss,
+    MiniBoss
 }
 public class Boss : Enemy
 {
@@ -28,6 +29,21 @@ public class Boss : Enemy
             invincible = true;
             uIUpdater.setInvincible();
             uIUpdater.setHealth(0, 0);
+        }
+    }
+
+    public override void setAIandCardProcessor()
+    {
+        switch (bossType)
+        {
+            case BossType.MiniBoss:
+                enemyCardAI = new DeathWitchAI(this);
+                enemyCardProcessor = new DeathWitchCardProcessor(sceneController);
+                break;
+            default:
+                enemyCardAI = new SamuraiCardAI(this);
+                enemyCardProcessor = new SamuraiCardProcessor(sceneController);
+                break;
         }
     }
 

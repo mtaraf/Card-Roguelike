@@ -18,7 +18,7 @@ public class EnemyCardProcessor
         // Roll critical hits
         cardEffects = checkCritHits(cardEffects);
 
-        sceneController.playAnimationsForCard(card.type);
+        enemy.playAnimation(card.type);
 
         Target cardTarget = card.target;
         if (cardTarget == Target.Player)

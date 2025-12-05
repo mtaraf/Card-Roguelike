@@ -12,7 +12,7 @@ public class SamuraiCardProcessor : EnemyCardProcessor
         {
             {"Tainted Blade", new TainedBladeLogic()},
             {"Bankai", new BankaiLogic()},
-            {"BloodyStrike", new BloodyStrikeLogic()},
+            {"Bloody Strike", new BloodyStrikeLogic()},
         };
     }
 
@@ -22,6 +22,7 @@ public class SamuraiCardProcessor : EnemyCardProcessor
         {
             sceneController.playAnimationsForCard(card.type);
             processSpecialCard(card, attributes, enemy);
+            enemy.playAnimation(card.type);
             return processSpecialCard(card, attributes, enemy);
         }
 

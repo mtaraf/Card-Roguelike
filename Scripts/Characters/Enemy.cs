@@ -13,9 +13,9 @@ public class Enemy : Character
 {
     [SerializeField] private GameObject energyUI;
     [SerializeField] private EnemyName enemyName;
-    private EnemyCardProcessor enemyCardProcessor;
-    private DeckModelSO upcomingMoveSet;
-    private EnemyCardAI enemyCardAI;
+    protected EnemyCardProcessor enemyCardProcessor;
+    protected DeckModelSO upcomingMoveSet;
+    protected EnemyCardAI enemyCardAI;
 
 
     // Attributes
@@ -41,7 +41,7 @@ public class Enemy : Character
         decideUpcomingMoveset();
     }
 
-    private void setAIandCardProcessor()
+    public virtual void setAIandCardProcessor()
     {
         enemyCardAI = new SamuraiCardAI(this);
         enemyCardProcessor = new SamuraiCardProcessor(sceneController);
@@ -76,6 +76,7 @@ public class Enemy : Character
     {
         currentEnergy = energy;
 
+
         for (int i = 0; i < 3; i++)
         {
             energyUI.transform.GetChild(i).gameObject.SetActive(i < energy);
@@ -90,6 +91,8 @@ public class Enemy : Character
     public void decideUpcomingMoveset()
     {
         upcomingMoveSet = enemyCardAI.generateNextRoundMoves(sceneController.getPlayerAttributes());
+        Debug.Log($"Decide upcoming moveset: {upcomingMoveSet.cards.Count}");
+        setEnergy(upcomingMoveSet.cards.Count);
     }
 
     public DeckModelSO getPlayerCurrentDeck()
@@ -106,13 +109,13 @@ public class Enemy : Character
     {
         foreach (CardModelSO card in moveset.cards)
         {
+            Debug.Log($"{gameObject.name} played card: {card.title}");
             if (dead)
             {
                 yield break;
             }
 
-            yield return new WaitForSeconds(0.5f);
-            setEnergy(currentEnergy - 1);
+            yield return new WaitForSeconds(1.0f);
 
             card.multiplyValues(multiplier);
             List<CardEffect> effects = enemyCardProcessor.processCard(card, attributes, this);
@@ -121,6 +124,8 @@ public class Enemy : Character
             {
                 processCardEffects(effects);
             }
+
+            setEnergy(currentEnergy-1);
             
             // Card animation
             yield return StartCoroutine(HandManager.instance.enemyCardAnimation(card));

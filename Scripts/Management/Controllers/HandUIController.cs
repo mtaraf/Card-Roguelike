@@ -138,7 +138,7 @@ public class HandUIController : MonoBehaviour
 
         CanvasGroup cg = card.GetComponent<CanvasGroup>() ?? card.AddComponent<CanvasGroup>();
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
 
         float fadeDuration = 1f;
         float elapsedTime = 0f;
@@ -150,7 +150,7 @@ public class HandUIController : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
         Destroy(card);
     }
 

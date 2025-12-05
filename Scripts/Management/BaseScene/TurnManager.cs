@@ -139,8 +139,6 @@ public class TurnManager : MonoBehaviour
                 generateEnemyCardsForNextTurn();
             }
             yield return null;
-
-
         }
 
         if (enemies.Count == 0)
@@ -160,11 +158,6 @@ public class TurnManager : MonoBehaviour
     private IEnumerator playerTurn()
     {
         yield return new WaitForSeconds(0.2f);
-
-        foreach (Enemy enemy in enemies)
-        {
-            enemy.setEnergy(Random.Range(1, 4));
-        }
 
         //player.processStartOfTurnEffects();
         sceneController.resetPlayerEnergy();

@@ -19,9 +19,6 @@ public class EnemyCardAI
         else
             moveset = randomMoveset(defenseMovesets);
 
-
-        // Update energy ui
-        character.setEnergy(moveset.cards.Count);
         return moveset;
     }
 

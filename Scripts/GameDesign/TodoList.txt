@@ -36,8 +36,10 @@ Card Bugs:
     - Judgement: needs to be implemented
 
 Current Work:
-    - Work on samurai cards/movesets.
-        - Add movesets (attack, defense, special) then test new ai!
+    - Work on mini boss
+        - Special card logic
+    - Create new mini-boss scene, with different tilemap
+    - Fix heal damage done for enemies
     - Refactor Weaken to remove strength stacks on target!!!
     - Add delay between attacks for cards with multiple attacks
     - Add pop-up confirmation when delete save is pressed

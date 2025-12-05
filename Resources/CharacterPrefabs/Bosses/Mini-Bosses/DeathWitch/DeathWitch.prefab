@@ -88,17 +88,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26add3cf1c31e341af8e517b5d58321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
   id: 0
+  xSpawnOffset: -20
+  ySpawnOffset: -110
   spriteObject: {fileID: 4653887851505298441}
-  moveset: 0
-  movesets:
-  - {fileID: 11400000, guid: 946eacfba4f407849a08075abab9bd52, type: 2}
-  - {fileID: 11400000, guid: 09fc1bc6bfa476743894d5b7ac57c769, type: 2}
-  - {fileID: 11400000, guid: f2af0028928e48e4d920e8d69af4b1c6, type: 2}
-  - {fileID: 11400000, guid: ce547713d92df8543b0d8d5ebd2fd7ff, type: 2}
   energyUI: {fileID: 3326835025415496621}
-  bossType: 1
+  enemyName: 0
+  bossType: 3
 --- !u!1 &4653887851505298441
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,8 +131,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -125, y: 0}
-  m_SizeDelta: {x: 500, y: 400}
+  m_AnchoredPosition: {x: -250, y: 200}
+  m_SizeDelta: {x: 1000, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6903727880379044601
 CanvasRenderer:
@@ -185,7 +182,7 @@ Animator:
   m_GameObject: {fileID: 4653887851505298441}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c4fd9118cd32cee43ba4ccd20a5b955d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2973d43285c30e7459c6485b5c47e59f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -346,7 +343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6352424104250590139, guid: ab76e973a31b8ff40b1d390b6ba46cc2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 45
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 6352424104250590139, guid: ab76e973a31b8ff40b1d390b6ba46cc2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -804,7 +801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7170742265325174066, guid: 68f835917a6042546a685cd4175a92d3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -50
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7170742265325174066, guid: 68f835917a6042546a685cd4175a92d3, type: 3}
       propertyPath: m_AnchoredPosition.y

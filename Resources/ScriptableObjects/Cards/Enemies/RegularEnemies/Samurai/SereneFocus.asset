@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
   m_Name: SereneFocus
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   rarity: 0
   energy: 0
   effects:

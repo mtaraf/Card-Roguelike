@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b04a2a5476ff64788caa87c41b8035, type: 3}
+  m_Name: Defense_3
+  m_EditorClassIdentifier: 
+  cards:
+  - {fileID: 11400000, guid: 88055a7bf07272a4e8824a76a323cf60, type: 2}
+  - {fileID: 11400000, guid: 4de0a4cbcf4ca3c48bad8e6271d35fd0, type: 2}

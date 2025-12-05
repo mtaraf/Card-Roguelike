@@ -44,6 +44,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8256164366995060795}
     m_Modifications:
+    - target: {fileID: 115143974249260187, guid: abe8191b5c6d89b43af45b69fda0d6f8, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1115958195323305224, guid: abe8191b5c6d89b43af45b69fda0d6f8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

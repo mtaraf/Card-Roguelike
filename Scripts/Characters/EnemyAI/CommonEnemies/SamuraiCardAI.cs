@@ -8,7 +8,7 @@ public class SamuraiCardAI: EnemyCardAI
     {
         character = enemy;
         attackMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Samurai/Movesets/Attack").ToList();
-        defenseMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Samurai/Movesets/Attack").ToList();
+        defenseMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Samurai/Movesets/Defense").ToList();
         specialMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Samurai/Movesets/Special").ToList();
     }
 
@@ -21,7 +21,9 @@ public class SamuraiCardAI: EnemyCardAI
 
         if (gashCardPresent != null)
         {
-            moveset = specialMovesets.Find((move) => move.name == "TaintedBladeMove");
+            // Choose random gash based card
+            List<DeckModelSO> gashMovesets = specialMovesets.FindAll((move) => move.name.Contains("Gash"));
+            moveset = gashMovesets[Random.Range(0,gashMovesets.Count)];
         }
 
         if (moveset != null)
