@@ -209,6 +209,11 @@ public class Character : MonoBehaviour
         return attributes[effectType] > 0;
     }
 
+    public int getAttributeValue(EffectType effectType)
+    {
+        return attributes[effectType];
+    }
+
     public bool checkifTargetable()
     {
         return targetableObject.isTargetable();

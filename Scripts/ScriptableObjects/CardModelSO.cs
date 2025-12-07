@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum CardType
@@ -43,6 +44,17 @@ public class CardEffect
     public int value;
     public int turns;
     public int critRate;
+
+    public CardEffect clone()
+    {
+        return new CardEffect
+        {
+            type = this.type,
+            value = this.value,
+            turns = this.turns,
+            critRate = this.critRate,
+        };
+    }
 }
 
 [Serializable]
@@ -130,5 +142,10 @@ public class CardModelSO : ScriptableObject
         }
 
         return false;
+    }
+
+    public List<CardEffect> getEffects()
+    {
+        return effects.Select(c => c.clone()).ToList();
     }
 }

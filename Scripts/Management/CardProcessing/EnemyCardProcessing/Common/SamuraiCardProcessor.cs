@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -20,8 +21,6 @@ public class SamuraiCardProcessor : EnemyCardProcessor
     {
         if (card.special)
         {
-            sceneController.playAnimationsForCard(card.type);
-            processSpecialCard(card, attributes, enemy);
             enemy.playAnimation(card.type);
             return processSpecialCard(card, attributes, enemy);
         }
@@ -83,7 +82,7 @@ public class BankaiLogic: SpecialEnemyCardLogicInterface
 {
     public List<CardEffect> process(CardModelSO card, Dictionary<EffectType, int> attributes, ParentSceneController parentSceneController, Enemy enemy)
     {
-        List<CardEffect> cardEffects = new List<CardEffect>(card.effects);
+        List<CardEffect> cardEffects = card.effects.Select(c => c.clone()).ToList();
 
         DeckModelSO playerDeck = enemy.getPlayerCurrentDeck();
         
@@ -108,7 +107,7 @@ public class BloodyStrikeLogic: SpecialEnemyCardLogicInterface
 
     public List<CardEffect> process(CardModelSO card, Dictionary<EffectType, int> attributes, ParentSceneController parentSceneController, Enemy enemy)
     {
-        List<CardEffect> cardEffects = new List<CardEffect>(card.effects);
+        List<CardEffect> cardEffects = card.effects.Select(c => c.clone()).ToList();
     
         // Add Gash card to player deck
         CardModelSO gash = gashCard.clone();

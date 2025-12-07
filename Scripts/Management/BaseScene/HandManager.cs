@@ -66,6 +66,7 @@ public class HandManager : MonoBehaviour
         foreach (CardModelSO cardModel in GameManager.instance.getPlayerDeck()?.cards)
         {
             playerDeck.cards.Add(cardModel.clone());
+            Debug.Log(cardModel.title);
         }
 
         drawPile = new ObservableDeck();

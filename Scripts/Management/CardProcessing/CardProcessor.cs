@@ -35,18 +35,18 @@ public class CardProcessor
         return cardEffects;
     }
 
-    public List<CardEffect> processEnemyCard(CardModelSO model, Dictionary<EffectType, int> attributes, Enemy enemy)
-    {
-        List<CardEffect> cardEffects = applyEffectsToCardDamage(model.effects, attributes);
+    // public List<CardEffect> processEnemyCard(CardModelSO model, Dictionary<EffectType, int> attributes, Enemy enemy)
+    // {
+    //     List<CardEffect> cardEffects = applyEffectsToCardDamage(model.effects, attributes);
 
-        if (model.target == Target.Player)
-        {
-            sceneController.processEnemyCardEffectsOnPlayer(cardEffects, enemy);
-            return null;
-        }
+    //     if (model.target == Target.Player)
+    //     {
+    //         sceneController.processEnemyCardEffectsOnPlayer(cardEffects, enemy);
+    //         return null;
+    //     }
 
-        return cardEffects;
-    }
+    //     return cardEffects;
+    // }
 
     // applies Strenth and Weakness attributes to the Cards effects
     protected List<CardEffect> applyEffectsToCardDamage(List<CardEffect> cardEffects, Dictionary<EffectType, int> attributes)

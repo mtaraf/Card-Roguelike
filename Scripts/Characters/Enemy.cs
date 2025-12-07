@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 
 public enum EnemyName
 {
-    Samurai
+    Samurai,
+    Knight
 }
 
 public class Enemy : Character
@@ -43,8 +44,20 @@ public class Enemy : Character
 
     public virtual void setAIandCardProcessor()
     {
-        enemyCardAI = new SamuraiCardAI(this);
-        enemyCardProcessor = new SamuraiCardProcessor(sceneController);
+        switch (enemyName)
+        {
+            case EnemyName.Samurai:
+                enemyCardAI = new SamuraiCardAI(this);
+                enemyCardProcessor = new SamuraiCardProcessor(sceneController);
+                break;
+            case EnemyName.Knight:
+                enemyCardAI = new KnightCardAI(this);
+                enemyCardProcessor = new KnightCardProccesor(sceneController);
+                break;
+            default:
+                Debug.LogError($"Could not find AI/Card processor for {gameObject.name}");
+                break;
+        }
     }
 
     public void Update()
@@ -91,7 +104,6 @@ public class Enemy : Character
     public void decideUpcomingMoveset()
     {
         upcomingMoveSet = enemyCardAI.generateNextRoundMoves(sceneController.getPlayerAttributes());
-        Debug.Log($"Decide upcoming moveset: {upcomingMoveSet.cards.Count}");
         setEnergy(upcomingMoveSet.cards.Count);
     }
 

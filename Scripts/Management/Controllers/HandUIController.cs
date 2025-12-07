@@ -138,7 +138,7 @@ public class HandUIController : MonoBehaviour
 
         CanvasGroup cg = card.GetComponent<CanvasGroup>() ?? card.AddComponent<CanvasGroup>();
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(3f);
 
         float fadeDuration = 1f;
         float elapsedTime = 0f;

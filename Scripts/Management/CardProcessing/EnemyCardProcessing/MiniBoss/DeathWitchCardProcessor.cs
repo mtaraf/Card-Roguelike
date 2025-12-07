@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -22,8 +23,6 @@ public class DeathWitchCardProcessor : EnemyCardProcessor
     {
         if (card.special)
         {
-            sceneController.playAnimationsForCard(card.type);
-            processSpecialCard(card, attributes, enemy);
             enemy.playAnimation(card.type);
             return processSpecialCard(card, attributes, enemy);
         }
@@ -49,7 +48,7 @@ public class SpiritPathLogic: SpecialEnemyCardLogicInterface
 {
     public List<CardEffect> process(CardModelSO card, Dictionary<EffectType, int> attributes, ParentSceneController parentSceneController, Enemy enemy)
     {
-        List<CardEffect> cardEffects = new List<CardEffect>(card.effects);
+        List<CardEffect> cardEffects = card.getEffects();
 
 
 
@@ -61,7 +60,7 @@ public class SpiritualLuckLogic: SpecialEnemyCardLogicInterface
 {
     public List<CardEffect> process(CardModelSO card, Dictionary<EffectType, int> attributes, ParentSceneController parentSceneController, Enemy enemy)
     {
-        List<CardEffect> cardEffects = new List<CardEffect>(card.effects);
+        List<CardEffect> cardEffects = card.getEffects();
 
 
 
@@ -73,7 +72,7 @@ public class TenguStrikeLogic: SpecialEnemyCardLogicInterface
 {
     public List<CardEffect> process(CardModelSO card, Dictionary<EffectType, int> attributes, ParentSceneController parentSceneController, Enemy enemy)
     {
-        List<CardEffect> cardEffects = new List<CardEffect>(card.effects);
+        List<CardEffect> cardEffects = card.getEffects();
 
 
 
@@ -85,7 +84,7 @@ public class VanquishLogic: SpecialEnemyCardLogicInterface
 {
     public List<CardEffect> process(CardModelSO card, Dictionary<EffectType, int> attributes, ParentSceneController parentSceneController, Enemy enemy)
     {
-        List<CardEffect> cardEffects = new List<CardEffect>(card.effects);
+        List<CardEffect> cardEffects = card.getEffects();
 
 
 
@@ -97,7 +96,7 @@ public class VanquishersCharmLogic: SpecialEnemyCardLogicInterface
 {
     public List<CardEffect> process(CardModelSO card, Dictionary<EffectType, int> attributes, ParentSceneController parentSceneController, Enemy enemy)
     {
-        List<CardEffect> cardEffects = new List<CardEffect>(card.effects);
+        List<CardEffect> cardEffects = card.getEffects();
 
 
 

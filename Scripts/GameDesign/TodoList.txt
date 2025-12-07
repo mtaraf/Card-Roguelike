@@ -32,12 +32,14 @@ Bugs:
     - Cards should be layered over everything in battle scenes
 
 Card Bugs:
+    - strength only applies on first or last (cant tell lol) of multi hit cards
     - redemtion: heals the enemy not the player lol
     - Judgement: needs to be implemented
 
 Current Work:
     - Work on mini boss
         - Special card logic
+    - Test all special samurai cards
     - Create new mini-boss scene, with different tilemap
     - Fix heal damage done for enemies
     - Refactor Weaken to remove strength stacks on target!!!

@@ -112,11 +112,11 @@ public class ParentSceneController : MonoBehaviour
     public void playAnimationsForCard(CardType type)
     {
         player.playAnimation(type);
+        Debug.Log("Playing player animation");
     }
 
     public void processEnemyCardEffectsOnPlayer(List<CardEffect> effects, Enemy enemy)
     {
-        Debug.Log("parentscene");
         player.processCardEffects(effects, enemy);
     }
 
@@ -182,5 +182,25 @@ public class ParentSceneController : MonoBehaviour
     public virtual void updateCurrentRound(int currentRound, int totalTurns)
     {
         Debug.Log("Parent update round count called");
+    }
+
+    public List<CardEffect> checkCritHits(List<CardEffect> cardEffects)
+    {
+        foreach (CardEffect effect in cardEffects)
+        {
+            if (effect.type == EffectType.Damage && effect.critRate > 0)
+            {
+                float rand = Random.Range(0,101);
+                if (rand <= effect.critRate)
+                {
+                    effect.critRate = 100;
+                }
+                else
+                {
+                    effect.critRate = 0;
+                }
+            }
+        }
+        return cardEffects;
     }
 }
