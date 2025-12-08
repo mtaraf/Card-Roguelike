@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class WeakenEffect: IStatusEffect
@@ -12,14 +13,29 @@ public class WeakenEffect: IStatusEffect
 
     public void apply(Character target, int damageDealt = 0)
     {
-        target.addAttributeValue(type, value);
+        if (target.getAttributeValue(EffectType.Strength) > 0)
+        {
+            int targetStrength = target.getAttributeValue(EffectType.Strength) - value;
+            if (targetStrength < 0)
+            {
+                target.addAttributeValue(type, Math.Abs(targetStrength));
+                target.updateAttribute(EffectType.Strength, 0);
+            }
+            else
+            {
+                target.updateAttribute(EffectType.Strength, targetStrength);
+            }
+        }
+        else
+        {
+            target.addAttributeValue(type, value);
+        }
 
-        //target.showFloatingFeedbackUI(type.ToFeedbackString(), Color.blueViolet);
         target.addAudioCue(type);
     }
 
     public void onEndRound(Character target)
     {
-        target.decrementEffect(type);
+        // Do nothing!
     }
 }

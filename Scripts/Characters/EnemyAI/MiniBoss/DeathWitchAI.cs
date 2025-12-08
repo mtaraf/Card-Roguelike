@@ -17,6 +17,7 @@ public class DeathWitchAI: EnemyCardAI
         DeckModelSO moveset = null;
 
         // Enemy specific logic
+        checkForHakuCardsInPlayerDeck();
 
         if (moveset != null)
         {
@@ -26,6 +27,17 @@ public class DeathWitchAI: EnemyCardAI
         {
             return base.generateNextRoundMoves(playerAttributes);
         }
+    }
+
+    private void checkForHakuCardsInPlayerDeck()
+    {
+        DeckModelSO playerCurrentDeck = HandManager.instance.getPlayerDeck();
+
+        List<CardModelSO> hakuCards = playerCurrentDeck.cards.FindAll((card) => card.title == "Haku's Curse");
+
+        int count = hakuCards.Count;
+
+        character.addAttributeValue(EffectType.Strength, count);
     }
 }
 

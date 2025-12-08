@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class StrengthEffect: IStatusEffect
@@ -12,9 +13,24 @@ public class StrengthEffect: IStatusEffect
 
     public void apply(Character target, int damageDealt = 0)
     {
-        target.addAttributeValue(type, value);
+        if (target.getAttributeValue(EffectType.Weaken) > 0)
+        {
+            int targetWeakness = target.getAttributeValue(EffectType.Weaken) - value;
+            if (targetWeakness < 0)
+            {
+                target.addAttributeValue(type, Math.Abs(targetWeakness));
+                target.updateAttribute(EffectType.Weaken, 0);
+            }
+            else
+            {
+                target.updateAttribute(EffectType.Weaken, targetWeakness);
+            }
+        }
+        else
+        {
+            target.addAttributeValue(type, value);
+        }
 
-        //target.showFloatingFeedbackUI(type.ToFeedbackString(), Color.blueViolet);
         target.addAudioCue(type);
     }
 

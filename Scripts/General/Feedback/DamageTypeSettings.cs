@@ -21,6 +21,7 @@ public class DamageTypeSettings: ScriptableObject
         [Header("Animation Settings")]
         public float bounceScale = 1.2f; 
         public float shakeIntensity = 5f;
+        public int rotationSpeed = 30;
     }
 
     public DamageTypeInfo [] damageTypes;

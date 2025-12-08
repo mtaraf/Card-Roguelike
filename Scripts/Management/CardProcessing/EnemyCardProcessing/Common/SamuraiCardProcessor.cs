@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class SamuraiCardProcessor : EnemyCardProcessor
 {
-    private Dictionary<string, SpecialEnemyCardLogicInterface> specialCards;
-
     public SamuraiCardProcessor(ParentSceneController parentSceneController) : base(parentSceneController)
     {
         specialCards = new Dictionary<string, SpecialEnemyCardLogicInterface>
@@ -16,39 +14,15 @@ public class SamuraiCardProcessor : EnemyCardProcessor
             {"Bloody Strike", new BloodyStrikeLogic()},
         };
     }
-
-    public override List<CardEffect> processCard(CardModelSO card, Dictionary<EffectType, int> attributes, Enemy enemy)
-    {
-        if (card.special)
-        {
-            enemy.playAnimation(card.type);
-            return processSpecialCard(card, attributes, enemy);
-        }
-
-        return base.processCard(card, attributes, enemy);
-    }
-
-    protected override List<CardEffect> processSpecialCard(CardModelSO specialCard, Dictionary<EffectType, int> attributes, Enemy enemy)
-    {
-        SpecialEnemyCardLogicInterface specialCardLogic = specialCards[specialCard.title];
-
-        if (specialCardLogic == null)
-        {
-            Debug.LogError($"No Special Card Logic for {specialCard.title}");
-            return new List<CardEffect>();
-        }
-        
-        return specialCardLogic.process(specialCard,attributes,sceneController, enemy);
-    }
 }
 
 public class TainedBladeLogic: SpecialEnemyCardLogicInterface
 {
     public List<CardEffect> process(CardModelSO card, Dictionary<EffectType, int> attributes, ParentSceneController parentSceneController, Enemy enemy)
     {
-        List<CardEffect> cardEffects = new List<CardEffect>(card.effects);
+        List<CardEffect> cardEffects = card.getEffects();
 
-        DeckModelSO playerDeck = enemy.getPlayerCurrentDeck();
+        DeckModelSO playerDeck = HandManager.instance.getPlayerDeck();
         
         // Find Gash Cards
         List<CardModelSO> gashCards = playerDeck.cards.FindAll((card) => card.title == "Gash");
@@ -60,19 +34,7 @@ public class TainedBladeLogic: SpecialEnemyCardLogicInterface
 
         int healAmount = cardEffects[0].value / 2;
 
-        parentSceneController.processEnemyCardEffectsOnPlayer(cardEffects, enemy);
-
-        cardEffects = new List<CardEffect>();
-
-        CardEffect heal = new CardEffect
-        {
-            type = EffectType.Heal,
-            value = healAmount,
-            turns = 0,
-            critRate = 0
-        };
-
-        cardEffects.Add(heal);
+        enemy.healCharacter(healAmount);
 
         return cardEffects;
     }
@@ -80,11 +42,13 @@ public class TainedBladeLogic: SpecialEnemyCardLogicInterface
 
 public class BankaiLogic: SpecialEnemyCardLogicInterface
 {
+    private CardModelSO gashCard = Resources.Load<CardModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Samurai/Gash");
+    
     public List<CardEffect> process(CardModelSO card, Dictionary<EffectType, int> attributes, ParentSceneController parentSceneController, Enemy enemy)
     {
-        List<CardEffect> cardEffects = card.effects.Select(c => c.clone()).ToList();
+        List<CardEffect> cardEffects = card.getEffects();
 
-        DeckModelSO playerDeck = enemy.getPlayerCurrentDeck();
+        DeckModelSO playerDeck = HandManager.instance.getPlayerDeck();
         
         // Find Gash Cards
         List<CardModelSO> gashCards = playerDeck.cards.FindAll((card) => card.title == "Gash");
@@ -94,9 +58,10 @@ public class BankaiLogic: SpecialEnemyCardLogicInterface
             cardEffects[0].value *= gashCards.Count;
         }
 
-        parentSceneController.processEnemyCardEffectsOnPlayer(cardEffects, enemy);
+        // Consume all Gash Cards
+        HandManager.instance.removeAllOfSpecificCardFromPlayerDeck(gashCard);
 
-        return new List<CardEffect>();
+        return cardEffects;
     }
 }
 
@@ -107,15 +72,13 @@ public class BloodyStrikeLogic: SpecialEnemyCardLogicInterface
 
     public List<CardEffect> process(CardModelSO card, Dictionary<EffectType, int> attributes, ParentSceneController parentSceneController, Enemy enemy)
     {
-        List<CardEffect> cardEffects = card.effects.Select(c => c.clone()).ToList();
+        List<CardEffect> cardEffects = card.getEffects();
     
         // Add Gash card to player deck
         CardModelSO gash = gashCard.clone();
 
         HandManager.instance.addCardToPlayerDeck(gash);
 
-        parentSceneController.processEnemyCardEffectsOnPlayer(cardEffects, enemy);
-
-        return new List<CardEffect>();
+        return cardEffects;
     }
 }

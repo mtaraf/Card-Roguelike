@@ -22,39 +22,44 @@ MonoBehaviour:
     gradientBottom: {r: 0, g: 0, b: 0, a: 0}
     bounceScale: 2
     shakeIntensity: 10
+    rotationSpeed: 30
   - type: 1
     color: {r: 0.5, g: 0.1533019, b: 0.1533019, a: 1}
-    baseFontSize: 36
+    baseFontSize: 48
     fontStyle: 0
     useGradient: 1
     gradientTop: {r: 0.3962264, g: 0, b: 0, a: 1}
     gradientBottom: {r: 0.4339623, g: 0, b: 0, a: 1}
     bounceScale: 0
     shakeIntensity: 4
+    rotationSpeed: 35
   - type: 2
     color: {r: 0.380548, g: 0.085751146, b: 0.4433962, a: 1}
-    baseFontSize: 40
+    baseFontSize: 60
     fontStyle: 0
     useGradient: 1
     gradientTop: {r: 0.47041297, g: 0.08966714, b: 0.6132076, a: 1}
     gradientBottom: {r: 0.33979663, g: 0.06065327, b: 0.4433962, a: 1}
     bounceScale: 1.15
     shakeIntensity: 3
+    rotationSpeed: 40
   - type: 0
     color: {r: 0.8490566, g: 0.6806321, b: 0.26032397, a: 1}
-    baseFontSize: 48
+    baseFontSize: 70
     fontStyle: 0
     useGradient: 1
     gradientTop: {r: 0.8962264, g: 0.61089337, b: 0.29169634, a: 1}
     gradientBottom: {r: 0.6886792, g: 0.4561593, b: 0.19815768, a: 1}
     bounceScale: 1.4
     shakeIntensity: 8
+    rotationSpeed: 50
   - type: 3
     color: {r: 0.2719384, g: 0.5943396, b: 0.30545104, a: 1}
-    baseFontSize: 36
+    baseFontSize: 48
     fontStyle: 0
     useGradient: 1
     gradientTop: {r: 0.27069238, g: 0.745283, b: 0.39401206, a: 1}
     gradientBottom: {r: 0.18689926, g: 0.5283019, b: 0.27436608, a: 1}
     bounceScale: 1
     shakeIntensity: 4
+    rotationSpeed: 30

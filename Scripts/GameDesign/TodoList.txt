@@ -37,12 +37,6 @@ Card Bugs:
     - Judgement: needs to be implemented
 
 Current Work:
-    - Work on mini boss
-        - Special card logic
-    - Test all special samurai cards
-    - Create new mini-boss scene, with different tilemap
-    - Fix heal damage done for enemies
-    - Refactor Weaken to remove strength stacks on target!!!
     - Add delay between attacks for cards with multiple attacks
     - Add pop-up confirmation when delete save is pressed
     - Discard broken with new drag cards (switch to just click when discarding to move the cards to discard)

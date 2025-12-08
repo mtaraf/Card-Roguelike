@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class DeathWitchCardProcessor : EnemyCardProcessor
 {
-    private Dictionary<string, SpecialEnemyCardLogicInterface> specialCards;
-
     public DeathWitchCardProcessor(ParentSceneController parentSceneController) : base(parentSceneController)
     {
         specialCards = new Dictionary<string, SpecialEnemyCardLogicInterface>
@@ -18,30 +16,6 @@ public class DeathWitchCardProcessor : EnemyCardProcessor
             {"Vanquisher's Charm", new VanquishersCharmLogic()},
         };
     }
-
-    public override List<CardEffect> processCard(CardModelSO card, Dictionary<EffectType, int> attributes, Enemy enemy)
-    {
-        if (card.special)
-        {
-            enemy.playAnimation(card.type);
-            return processSpecialCard(card, attributes, enemy);
-        }
-
-        return base.processCard(card, attributes, enemy);
-    }
-
-    protected override List<CardEffect> processSpecialCard(CardModelSO specialCard, Dictionary<EffectType, int> attributes, Enemy enemy)
-    {
-        SpecialEnemyCardLogicInterface specialCardLogic = specialCards[specialCard.title];
-
-        if (specialCardLogic == null)
-        {
-            Debug.LogError($"No Special Card Logic for {specialCard.title}");
-            return new List<CardEffect>();
-        }
-        
-        return specialCardLogic.process(specialCard,attributes,sceneController, enemy);
-    }
 }
 
 public class SpiritPathLogic: SpecialEnemyCardLogicInterface
@@ -50,6 +24,10 @@ public class SpiritPathLogic: SpecialEnemyCardLogicInterface
     {
         List<CardEffect> cardEffects = card.getEffects();
 
+        int strength = enemy.getAttributeValue(EffectType.Strength);
+        enemy.updateAttribute(EffectType.Strength, 0);
+
+        cardEffects[0].value = strength * 5;
 
 
         return cardEffects;
@@ -58,11 +36,18 @@ public class SpiritPathLogic: SpecialEnemyCardLogicInterface
 
 public class SpiritualLuckLogic: SpecialEnemyCardLogicInterface
 {
+    CardModelSO hakuCurseCard = Resources.Load<CardModelSO>("ScriptableObjects/Cards/Enemies/MiniBosses/DeathWitch/Haku'sCurse");
+
     public List<CardEffect> process(CardModelSO card, Dictionary<EffectType, int> attributes, ParentSceneController parentSceneController, Enemy enemy)
     {
         List<CardEffect> cardEffects = card.getEffects();
 
+        cardEffects = parentSceneController.checkCritHits(cardEffects);
 
+        if (cardEffects[0].critRate == 100)
+        {
+            HandManager.instance.addCardToPlayerDeck(hakuCurseCard);
+        }
 
         return cardEffects;
     }
@@ -70,11 +55,13 @@ public class SpiritualLuckLogic: SpecialEnemyCardLogicInterface
 
 public class TenguStrikeLogic: SpecialEnemyCardLogicInterface
 {
+    CardModelSO hakuCurseCard = Resources.Load<CardModelSO>("ScriptableObjects/Cards/Enemies/MiniBosses/DeathWitch/Haku'sCurse");
+
     public List<CardEffect> process(CardModelSO card, Dictionary<EffectType, int> attributes, ParentSceneController parentSceneController, Enemy enemy)
     {
         List<CardEffect> cardEffects = card.getEffects();
 
-
+        HandManager.instance.addCardToPlayerDeck(hakuCurseCard);
 
         return cardEffects;
     }
@@ -86,7 +73,13 @@ public class VanquishLogic: SpecialEnemyCardLogicInterface
     {
         List<CardEffect> cardEffects = card.getEffects();
 
+        int playerStrength = parentSceneController.getPlayerAttributes()[EffectType.Strength];
+        Debug.Log($"Player strength: {playerStrength}");
 
+        if (playerStrength == 0)
+        {
+            cardEffects[0].critRate = 100;
+        }
 
         return cardEffects;
     }
@@ -96,10 +89,12 @@ public class VanquishersCharmLogic: SpecialEnemyCardLogicInterface
 {
     public List<CardEffect> process(CardModelSO card, Dictionary<EffectType, int> attributes, ParentSceneController parentSceneController, Enemy enemy)
     {
-        List<CardEffect> cardEffects = card.getEffects();
+        Player player = parentSceneController.getPlayer();
+        int currentPlayerStrength = player.getAttributeValue(EffectType.Strength);
 
+        player.updateAttribute(EffectType.Strength, currentPlayerStrength / 2);
+        enemy.addAttributeValue(EffectType.Strength, currentPlayerStrength / 2);
 
-
-        return cardEffects;
+        return null;
     }
 }

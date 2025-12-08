@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyCardProcessor
 {
     protected ParentSceneController sceneController;
+    protected Dictionary<string, SpecialEnemyCardLogicInterface> specialCards;
 
     public EnemyCardProcessor(ParentSceneController parentSceneController)
     {
@@ -13,7 +14,18 @@ public class EnemyCardProcessor
     // Returns card effects that apply to enemy, otherwise null
     public virtual List<CardEffect> processCard(CardModelSO card, Dictionary<EffectType, int> attributes, Enemy enemy)
     {
-        List<CardEffect> cardEffects = applyEffectsToCardDamage(card.effects, attributes);
+        List<CardEffect> cardEffects;
+
+        if (card.special)
+        {
+            cardEffects = processSpecialCard(card, attributes, enemy);
+        }
+        else
+        {
+            cardEffects = card.getEffects();
+        }
+
+        cardEffects = applyEffectsToCardDamage(cardEffects, attributes);
 
         // Roll critical hits
         cardEffects = checkCritHits(cardEffects);
@@ -35,14 +47,12 @@ public class EnemyCardProcessor
         return cardEffects;
     }
 
-    public void processSpecialCardEffectsOnPlayer(List<CardEffect> effects, Target target, Enemy enemy)
-    {
-        sceneController.processEnemyCardEffectsOnPlayer(effects, enemy);
-    }
-
     // applies Strenth and Weakness attributes to the Cards effects
     protected List<CardEffect> applyEffectsToCardDamage(List<CardEffect> cardEffects, Dictionary<EffectType, int> attributes)
     {
+        if (cardEffects == null)
+            return new List<CardEffect>();
+
         // Deep copy the effects
         List<CardEffect> modifiedEffects = new List<CardEffect>();
         foreach (var effect in cardEffects)
@@ -51,15 +61,18 @@ public class EnemyCardProcessor
             {
                 type = effect.type,
                 value = effect.value,
-                turns = effect.turns
+                turns = effect.turns,
+                critRate = effect.critRate
             });
         }
+
+        Debug.Log("Applying effects to damage.");
 
         int damage_index = modifiedEffects.FindIndex((effect) => effect.type == EffectType.Damage);
         if (damage_index != -1)
         {
-            modifiedEffects[damage_index].value += attributes[EffectType.Strength];
-            modifiedEffects[damage_index].value -= Mathf.FloorToInt(modifiedEffects[damage_index].value * 0.2f * attributes[EffectType.Weaken]);
+            Debug.Log(attributes[EffectType.Weaken]);
+            modifiedEffects[damage_index].value += attributes[EffectType.Strength] - attributes[EffectType.Weaken];
         }
 
         return modifiedEffects;
@@ -67,7 +80,15 @@ public class EnemyCardProcessor
 
     protected virtual List<CardEffect> processSpecialCard(CardModelSO specialCard, Dictionary<EffectType, int> attributes, Enemy enemy)
     {
-        return new List<CardEffect>();
+        SpecialEnemyCardLogicInterface specialCardLogic = specialCards[specialCard.title];
+
+        if (specialCardLogic == null)
+        {
+            Debug.LogError($"No Special Card Logic for {specialCard.title}");
+            return new List<CardEffect>();
+        }
+        
+        return specialCardLogic.process(specialCard,attributes,sceneController, enemy);
     }
 
     public List<CardEffect> checkCritHits(List<CardEffect> cardEffects)

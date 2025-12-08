@@ -112,7 +112,6 @@ public class ParentSceneController : MonoBehaviour
     public void playAnimationsForCard(CardType type)
     {
         player.playAnimation(type);
-        Debug.Log("Playing player animation");
     }
 
     public void processEnemyCardEffectsOnPlayer(List<CardEffect> effects, Enemy enemy)

@@ -126,7 +126,8 @@ public class CardModelSO : ScriptableObject
             {
                 type = effect.type,
                 value = effect.value,
-                turns = effect.turns
+                turns = effect.turns,
+                critRate = effect.critRate
             });
         }
 

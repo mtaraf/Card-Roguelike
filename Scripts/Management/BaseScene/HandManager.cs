@@ -66,7 +66,6 @@ public class HandManager : MonoBehaviour
         foreach (CardModelSO cardModel in GameManager.instance.getPlayerDeck()?.cards)
         {
             playerDeck.cards.Add(cardModel.clone());
-            Debug.Log(cardModel.title);
         }
 
         drawPile = new ObservableDeck();
@@ -230,8 +229,23 @@ public class HandManager : MonoBehaviour
     public void addCardToPlayerDeck(CardModelSO card)
     {
         // TO-DO: add animation for card entering draw pile
-        playerDeck.cards.Add(card);
-        drawPile.Add(card);
+        CardModelSO clonedCard = card.clone();
+        playerDeck.cards.Add(clonedCard);
+        drawPile.Add(clonedCard);
+    }
+
+    public void removeCardFromPlayerDeck(CardModelSO card)
+    {
+        playerDeck.cards.Remove(card);
+        drawPile.Remove(card);
+        discardPile.Remove(card);
+    }
+
+    public void removeAllOfSpecificCardFromPlayerDeck(CardModelSO card)
+    {
+        playerDeck.cards.RemoveAll((c) => c.title == card.title);
+        drawPile.cards.RemoveAll((c) => c.title == card.title);
+        discardPile.cards.RemoveAll((c) => c.title == card.title);
     }
 
     public CardModelSO getCardInDeckDuringEncounter(string title)
@@ -252,7 +266,6 @@ public class HandManager : MonoBehaviour
     // Card Processing
     public List<CardEffect> useSelectedCard(List<Enemy> enemies)
     {
-        Debug.Log("Use card in hand manager");
         // Get player attributes
         Dictionary<EffectType, int> playerAttributes = sceneController.getPlayerAttributes();
 

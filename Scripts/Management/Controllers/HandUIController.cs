@@ -242,7 +242,6 @@ public class HandUIController : MonoBehaviour
     {
         yield return StartCoroutine(moveCardCoroutine(card, targetPosition, targetScale, duration));
         yield return StartCoroutine(fadeOutCoroutine(card.gameObject, duration, onComplete));
-        Debug.Log(cardsInHand.Count);
     }
 
     IEnumerator moveCardCoroutine(Transform card, Vector3 targetPos, Vector3 targetScale, float duration, Action onComplete = null)

@@ -7,8 +7,8 @@ public class KnightCardAI: EnemyCardAI
     public KnightCardAI(Enemy enemy)
     {
         character = enemy;
-        attackMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Knight/Special").ToList();
-        defenseMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Knight/Special").ToList();
+        attackMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Knight/Attack").ToList();
+        defenseMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Knight/Defense").ToList();
         specialMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Knight/Special").ToList();
     }
 

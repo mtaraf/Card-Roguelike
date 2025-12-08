@@ -12,7 +12,12 @@ public class CardProcessor
 
     public virtual List<CardEffect> processCard(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies)
     {
-        List<CardEffect> cardEffects = applyEffectsToCardDamage(card.getEffects(), attributes);
+        List<CardEffect> cardEffects = card.getEffects();
+
+        // Roll critical hits
+        checkCritHits(cardEffects);
+
+        cardEffects = applyEffectsToCardDamage(card.getEffects(), attributes);
 
         int draw = card.getCardsToDraw();
         int discard = card.getCardsDiscarded();
@@ -27,26 +32,10 @@ public class CardProcessor
             // TO-DO: add discard functionality to parent scene controller and call here
         }
 
-        // Roll critical hits
-        cardEffects = checkCritHits(cardEffects);
-
         sceneController.playAnimationsForCard(card.getCardType());
 
         return cardEffects;
     }
-
-    // public List<CardEffect> processEnemyCard(CardModelSO model, Dictionary<EffectType, int> attributes, Enemy enemy)
-    // {
-    //     List<CardEffect> cardEffects = applyEffectsToCardDamage(model.effects, attributes);
-
-    //     if (model.target == Target.Player)
-    //     {
-    //         sceneController.processEnemyCardEffectsOnPlayer(cardEffects, enemy);
-    //         return null;
-    //     }
-
-    //     return cardEffects;
-    // }
 
     // applies Strenth and Weakness attributes to the Cards effects
     protected List<CardEffect> applyEffectsToCardDamage(List<CardEffect> cardEffects, Dictionary<EffectType, int> attributes)
@@ -59,15 +48,15 @@ public class CardProcessor
             {
                 type = effect.type,
                 value = effect.value,
-                turns = effect.turns
+                turns = effect.turns,
+                critRate = effect.critRate
             });
         }
 
         int damage_index = modifiedEffects.FindIndex((effect) => effect.type == EffectType.Damage);
         if (damage_index != -1)
         {
-            modifiedEffects[damage_index].value += attributes[EffectType.Strength];
-            modifiedEffects[damage_index].value -= Mathf.FloorToInt(modifiedEffects[damage_index].value * 0.2f * attributes[EffectType.Weaken]);
+            modifiedEffects[damage_index].value += attributes[EffectType.Strength] - attributes[EffectType.Weaken];
         }
 
         return modifiedEffects;

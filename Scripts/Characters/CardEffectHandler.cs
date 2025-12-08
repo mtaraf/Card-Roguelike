@@ -56,7 +56,10 @@ public class CardEffectHandler
         {
             damage = (int)(damage * 2.5);
             type = DamageType.Critical;
+            Debug.Log("Dealing crit damage.");
         }
+
+        Debug.Log(critRate);
 
         // Damage
         if (damage - attributes[EffectType.Armor] > 0)

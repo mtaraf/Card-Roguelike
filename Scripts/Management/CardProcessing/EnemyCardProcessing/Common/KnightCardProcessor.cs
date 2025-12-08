@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class KnightCardProccesor : EnemyCardProcessor
 {
-    private Dictionary<string, SpecialEnemyCardLogicInterface> specialCards;
-
     public KnightCardProccesor(ParentSceneController parentSceneController) : base(parentSceneController)
     {
         specialCards = new Dictionary<string, SpecialEnemyCardLogicInterface>
@@ -18,30 +16,6 @@ public class KnightCardProccesor : EnemyCardProcessor
             {"Cry Valhalla", new CryValhallaLogic()},
             {"Combo Attack", new ComboAttackLogic()}
         };
-    }
-
-    public override List<CardEffect> processCard(CardModelSO card, Dictionary<EffectType, int> attributes, Enemy enemy)
-    {
-        if (card.special)
-        {
-            enemy.playAnimation(card.type);
-            return processSpecialCard(card, attributes, enemy);
-        }
-
-        return base.processCard(card, attributes, enemy);
-    }
-
-    protected override List<CardEffect> processSpecialCard(CardModelSO specialCard, Dictionary<EffectType, int> attributes, Enemy enemy)
-    {
-        SpecialEnemyCardLogicInterface specialCardLogic = specialCards[specialCard.title];
-
-        if (specialCardLogic == null)
-        {
-            Debug.LogError($"No Special Card Logic for {specialCard.title}");
-            return new List<CardEffect>();
-        }
-        
-        return specialCardLogic.process(specialCard,attributes,sceneController, enemy);
     }
 }
 
