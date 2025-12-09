@@ -11,7 +11,7 @@ public class VictoryManager : MonoBehaviour
     [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
     [SerializeField] private Transform canvasTransform;
 
-    private CardModelSO[] chosenCards = new CardModelSO[2];
+    private CardModelSO[] chosenCards = new CardModelSO[3];
     private GameObject victoryScreenInstance;
     private Dictionary<CardRarity, Color> rarityColors = new()
     {
@@ -53,7 +53,8 @@ public class VictoryManager : MonoBehaviour
 
     void generateCardRewards()
     {
-        for (int i = 0; i < 2; i++)
+        // TO-DO: if player has a mythic card, remove possiblility of drawing one as a reward!
+        for (int i = 0; i < 3; i++)
         {
             int rand = Random.Range(0, 100);
             CardModelSO card = rand switch
@@ -86,14 +87,15 @@ public class VictoryManager : MonoBehaviour
 
     void chooseCard(int index)
     {
-        if (index < 2)
+        CardModelSO cardReward = chosenCards[index];
+
+        if (cardReward.rarity == CardRarity.MYTHIC)
         {
-            Debug.Log("Selected card: " + chosenCards[index].title);
-            GameManager.instance.addCardToPlayerDeck(chosenCards[index]);
+            GameManager.instance.setPlayerMythicCard(cardReward);
         }
         else
         {
-            Debug.Log("Enhance card path chosen");
+            GameManager.instance.addCardToPlayerDeck(cardReward);
         }
 
         Destroy(victoryScreenInstance);

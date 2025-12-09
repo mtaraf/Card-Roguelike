@@ -53,6 +53,7 @@ public class TurnManager : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
 
             currentTurn++;
+            processPlayerAndEnemyRoundEndEffects();
         }
 
         if (enemies.Count == 0)
@@ -99,6 +100,7 @@ public class TurnManager : MonoBehaviour
                 currentRound++;
                 if (currentRound + 1 <= rounds)
                 {
+                    processPlayerAndEnemyRoundEndEffects();
                     sceneController.updateCurrentRound(currentRound, rounds);
                     generateEnemyCardsForNextTurn();
                 }
@@ -111,6 +113,16 @@ public class TurnManager : MonoBehaviour
         else
             Debug.Log("Game over!");
             // StartCoroutine(GameManager.instance.encounterDefeat()); TO-DO: add encounter defeat function
+    }
+
+    private void processPlayerAndEnemyRoundEndEffects()
+    {
+        player.processEndOfRoundEffects();
+
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.processEndOfRoundEffects();
+        }
     }
 
 
@@ -136,6 +148,7 @@ public class TurnManager : MonoBehaviour
             {
                 yield return StartCoroutine(enemyTurn());
                 currentState = TurnState.PlayerTurn;
+                processPlayerAndEnemyRoundEndEffects();
                 generateEnemyCardsForNextTurn();
             }
             yield return null;
@@ -192,6 +205,11 @@ public class TurnManager : MonoBehaviour
         {
             enemy.decideUpcomingMoveset();
         }
+    }
+
+    public List<Enemy> getCurrentEnemies()
+    {
+        return enemies;
     }
 
     public void endTurnButtonPressed()

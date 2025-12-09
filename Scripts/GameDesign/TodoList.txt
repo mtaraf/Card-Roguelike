@@ -5,7 +5,6 @@
 - Re-do the Deck View UI
     - new background image, deckview icon, corrupt card prefab
 
-
 Main Menu:
     - Add volume settings to save file, change them on load
 
@@ -18,9 +17,6 @@ Culver's:
     - 
 
 General:
-    - Add classes to cards
-    - only allow class cards to show up
-    - create deck for class cards
     - rework blind to last indefinetly, max 3 stacks
     - improve discard UI
     - Reorganize cards on discard/draw
@@ -37,7 +33,9 @@ Card Bugs:
     - Judgement: needs to be implemented
 
 Current Work:
-    - Add delay between attacks for cards with multiple attacks
+    - Add more cards to Mistborn character
+    - Work on Final boss
+    - Work on Hold The Line boss cards/AI
     - Add pop-up confirmation when delete save is pressed
     - Discard broken with new drag cards (switch to just click when discarding to move the cards to discard)
 

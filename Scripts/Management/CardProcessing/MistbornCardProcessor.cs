@@ -28,11 +28,15 @@ public class MistbornCardProcessor : CardProcessor
             {"Ravage+", new RavageLogic()},
             {"Transfusion", new TransfusionLogic()},
             {"Transfusion+", new TransfusionLogic()},
+            {"Blood Burst", new BloodBurstLogic()},
+            {"Blood Burst+", new BloodBurstLogic()},
             // Crit
             {"Luck of the Draw", new LuckOfTheDrawLogic(1)},
             {"Luck of the Draw+", new LuckOfTheDrawLogic(2)},
             {"Teamwork", new TeamworkLogic()},
             {"Teamwork+", new TeamworkLogic()},
+            {"Assassin's Mark", new AssassinsMarkLogic()},
+            {"Assassin's Mark+", new AssassinsMarkLogic()},
             // Dagger
             {"Close Combat", new CloseCombatLogic()},
             {"Close Combat+", new CloseCombatLogic()},

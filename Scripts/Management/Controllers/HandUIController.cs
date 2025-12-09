@@ -23,7 +23,7 @@ public class HandUIController : MonoBehaviour
 
     public void Initialize()
     {
-        centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI");
+        centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI"); 
         cardSpawnPoint = new Vector3(centerOfUI.transform.localPosition.x, centerOfUI.transform.localPosition.y + 180, 0);
         cardSlots = GameObject.FindGameObjectWithTag("CardSlots");
 

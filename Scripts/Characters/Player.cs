@@ -9,15 +9,33 @@ public enum PlayerClass
     Mistborn
 }
 
+public class MythicCard
+{
+    private CardModelSO card;
+
+    public MythicCard(CardModelSO mythic)
+    {
+        card = mythic.clone();
+    }
+
+    public string getMythicName()
+    {
+        return card.title;
+    }
+}
+
 public class Player : Character
 {
-    [SerializeField] private Deck deck = null;
+    [SerializeField] protected Deck deck = null;
     [SerializeField] private PlayerClass playerClass;
+    protected MythicCard mythic;
 
     // Attributes
 
     public override void Start()
     {
+        // Testing Mythic
+        setMythic(Resources.Load<CardModelSO>("ScriptableObjects/Cards/Mistborn/Mythics/CrimsonCurse"));
         base.Start();
     }
 
@@ -60,5 +78,10 @@ public class Player : Character
     public PlayerClass getPlayerClass()
     {
         return playerClass;
+    }
+
+    public void setMythic(CardModelSO card)
+    {
+        mythic = new MythicCard(card);
     }
 }

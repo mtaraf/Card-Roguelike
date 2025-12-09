@@ -87,21 +87,21 @@ public class Character : MonoBehaviour
     // Card Processing
     public virtual void processCardEffects(List<CardEffect> effects, Enemy enemy = null)
     {
-        cardEffectHandler.processCardEffects(effects, enemy);
+        StartCoroutine(cardEffectHandler.processCardEffects(effects, enemy));
     }
 
-    public int processDamage(int damage, int critRate, DamageType type)
+    public virtual int processDamage(int damage, int critRate, DamageType type)
     {
         return cardEffectHandler.processDamage(damage, critRate, type);
     }
 
-    public void updateAttribute(EffectType type, int value)
+    public virtual void updateAttribute(EffectType type, int value)
     {
         attributes[type] = value;
         uIUpdater.updateEffect(type, attributes[type]);
     }
 
-    public void addAttributeValue(EffectType type, int value)
+    public virtual void addAttributeValue(EffectType type, int value)
     {
         attributes[type] += value;
         uIUpdater.updateEffect(type, attributes[type]);
@@ -137,6 +137,19 @@ public class Character : MonoBehaviour
     }
 
     public void processEndOfTurnEffects()
+    {
+        // Dictionary<EffectType, int> attributesCopy = new Dictionary<EffectType, int>(attributes);
+        // foreach (EffectType type in attributesCopy.Keys)
+        // {
+        //     if (attributesCopy[type] > 0)
+        //     {
+        //         IStatusEffect effect = StatusEffectFactory.create(type);
+        //         effect?.onEndRound(this);
+        //     }
+        // }
+    }
+
+    public virtual void processEndOfRoundEffects()
     {
         Dictionary<EffectType, int> attributesCopy = new Dictionary<EffectType, int>(attributes);
         foreach (EffectType type in attributesCopy.Keys)

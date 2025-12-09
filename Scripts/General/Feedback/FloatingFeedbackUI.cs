@@ -61,10 +61,10 @@ public class FloatingFeedbackUI : MonoBehaviour
             transform.Rotate(0, 10 * rotationSpeed * Time.deltaTime, 0);
 
             // // Shake
-            if (shake > 0)
-            {
-                transform.localPosition += new Vector3(UnityEngine.Random.Range(-shake, shake) * Time.deltaTime, 0, 0);
-            }
+            // if (shake > 0)
+            // {
+            //     transform.localPosition += new Vector3(UnityEngine.Random.Range(-shake, shake) * Time.deltaTime, 0, 0);
+            // }
 
             timer += Time.deltaTime;
             yield return null;

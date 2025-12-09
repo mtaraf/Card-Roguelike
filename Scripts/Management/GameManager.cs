@@ -239,6 +239,11 @@ public class GameManager : MonoBehaviour
         playerDeck.cards.Add(clone);
     }
 
+    public void setPlayerMythicCard(CardModelSO card)
+    {
+        player.setMythic(card);
+    }
+
     public void removeCardFromPlayerDeck(CardModelSO model)
     {
         playerDeck.cards.Remove(model);

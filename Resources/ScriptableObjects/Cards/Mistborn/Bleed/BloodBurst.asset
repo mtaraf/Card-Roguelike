@@ -10,32 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: BladeWork
+  m_Name: BloodBurst
   m_EditorClassIdentifier: 
   type: 0
-  rarity: 1
-  energy: 2
+  rarity: 3
+  energy: 1
   effects:
   - type: 0
-    value: 4
+    value: 0
     turns: 0
-    critRate: 40
-  - type: 0
-    value: 4
-    turns: 0
-    critRate: 40
-  special: 0
+    critRate: 0
+  special: 1
   condition:
     conditionValue: 0
     metric: 0
   multiplier: 0
-  details: Deals 4 damage, twice. Each hit has a 40% critical chance.
-  title: Blade Work
+  details: Consume all bleed stacks on an enemy, dealing that damage to all enemies
+    in the encounter.
+  title: Blood Burst
   image: {fileID: 0}
-  target: 1
+  target: 0
   cardsDrawn: 0
   cardsDiscarded: 0
   corrupts: 0
-  upgradedCard: {fileID: 11400000, guid: 8fa6fe93b18dd194aab76a705900bdfa, type: 2}
+  upgradedCard: {fileID: 0}
   oneUse: 0
   lithe: 0

@@ -121,7 +121,6 @@ public class Enemy : Character
     {
         foreach (CardModelSO card in moveset.cards)
         {
-            Debug.Log($"{gameObject.name} played card: {card.title}");
             if (dead)
             {
                 yield break;

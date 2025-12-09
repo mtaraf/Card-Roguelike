@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class CardEffectHandler
         character = myCharacter;    
     }
 
-    public virtual void processCardEffects(List<CardEffect> effects, Enemy enemy = null)
+    public virtual IEnumerator processCardEffects(List<CardEffect> effects, Enemy enemy = null)
     {
         if (enemy != null)
         {
@@ -27,6 +28,7 @@ public class CardEffectHandler
             {
                 damageDealt = processDamage(effect.value, effect.critRate, DamageType.General);
                 effects.Remove(effect);
+                yield return new WaitForSeconds(0.3f);
             }
         }
 
@@ -58,8 +60,6 @@ public class CardEffectHandler
             type = DamageType.Critical;
             Debug.Log("Dealing crit damage.");
         }
-
-        Debug.Log(critRate);
 
         // Damage
         if (damage - attributes[EffectType.Armor] > 0)

@@ -101,7 +101,10 @@ public class TargetableObject : MonoBehaviour
 
     public void hideTarget()
     {
-        targetSprites.SetActive(false);
+        if (targetSprites != null)
+        {
+            targetSprites.SetActive(false);
+        }
         targetable = false;
     }
 
@@ -114,6 +117,12 @@ public class TargetableObject : MonoBehaviour
     {
         // Check if this object can be targeted before showing target
         Card card = HandManager.instance.getSelectedCard();
+        if (card == null)
+        {
+            Debug.LogError("Hand Manager has no selected card when trying to update target."); 
+            return;
+        }
+
         bool targetable = false;
 
         if (card.isSpecial())

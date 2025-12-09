@@ -7,9 +7,9 @@ public class TasteOfBloodLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
+        // TO-DO: Test
         List<CardEffect> effects = card.getEffects();
         
-
         if (enemies.Count < 1)
         {
             Debug.LogError("No enemies found for Taste of Blood");
@@ -27,8 +27,8 @@ public class TransfusionLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
+        // TO-DO: Test
         List<CardEffect> effects = card.getEffects();
-        
 
         if (enemies.Count < 1)
         {
@@ -51,6 +51,7 @@ public class RavageLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
+        // TO-DO: Test
         List<CardEffect> effects = card.getEffects();
 
         CardModelSO bloodyDagger = (CardModelSO) Resources.Load("ScriptableObjects/Cards/Mistborn/Bleed/LitheBloodyDagger");
@@ -73,6 +74,7 @@ public class BleedItOutLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
+        // TO-DO: Test
         if (enemies.Count < 1)
         {
             Debug.LogError("No enemies found for Taste of Blood");
@@ -89,6 +91,7 @@ public class VampiricLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
+        // TO-DO: Test
         List<CardEffect> effects = card.getEffects();
 
         if (enemies.Count < 1)
@@ -108,6 +111,17 @@ public class VampiricLogic: SpecialCardLogicInterface
     }  
 }
 
+public class BloodBurstLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        // TO-DO: implement/test
+        List<CardEffect> effects = card.getEffects();
+
+        return effects;
+    }  
+}
+
 // Crit
 public class LuckOfTheDrawLogic: SpecialCardLogicInterface
 {
@@ -118,6 +132,7 @@ public class LuckOfTheDrawLogic: SpecialCardLogicInterface
     }
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
+        // TO-DO: Test
         CardProcessor cardProcessor = new CardProcessor(parentSceneController);
         List<CardEffect> effects = cardProcessor.processCard(card, attributes, enemies);
 
@@ -137,6 +152,7 @@ public class TeamworkLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
+        // TO-DO: Test
         List<CardEffect> effects = card.getEffects();
 
         effects[0].critRate = HandManager.instance.getNumCardsInHand() * effects[0].critRate;
@@ -145,11 +161,23 @@ public class TeamworkLogic: SpecialCardLogicInterface
     }
 }
 
+public class AssassinsMarkLogic: SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
+    {
+        // TO-DO: implement/test
+        List<CardEffect> cardEffects = card.getEffects();
+
+        return cardEffects;
+    }
+}
+
 // Corruption
 public class CorruptDaggerLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
+        // TO-DO: Test
         List<CardEffect> effects = card.getEffects();
         
         int corruptCards = HandManager.instance.getCorruptedCards().Count;
@@ -167,6 +195,7 @@ public class CleanseLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
+        // TO-DO: Test
         parentSceneController.clearPlayerNegativeEffects();
         return new List<CardEffect>();
     }
@@ -176,6 +205,7 @@ public class GreedLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
+        // TO-DO: Test
         List<CardEffect> effects = card.getEffects();
 
         if (enemies[0].hasAttribute(EffectType.Corruption))
@@ -201,6 +231,7 @@ public class CloseCombatLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
+        // TO-DO: Test
         List<CardEffect> effects = card.getEffects();
 
         int daggerCards = 0;
@@ -222,6 +253,7 @@ public class DanceOfDaggersLogic: SpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
+        // TO-DO: Test
         List<CardEffect> effects = card.getEffects();
 
         effects[0].value *= parentSceneController.getPlayerAttributes()[EffectType.Agility];
@@ -239,9 +271,10 @@ public class HiddenInventoryLogic:  SpecialCardLogicInterface
     }
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController)
     {
+        // TO-DO: Test
         CardModelSO glassDaggerCard = (CardModelSO) Resources.Load("ScriptableObjects/Cards/Mistborn/StarterCards/GlassDagger");
 
-        bool success = true;
+        bool success;
 
         for (int i=0; i<num; i++)
         {

@@ -66,12 +66,9 @@ public class EnemyCardProcessor
             });
         }
 
-        Debug.Log("Applying effects to damage.");
-
         int damage_index = modifiedEffects.FindIndex((effect) => effect.type == EffectType.Damage);
         if (damage_index != -1)
         {
-            Debug.Log(attributes[EffectType.Weaken]);
             modifiedEffects[damage_index].value += attributes[EffectType.Strength] - attributes[EffectType.Weaken];
         }
 
