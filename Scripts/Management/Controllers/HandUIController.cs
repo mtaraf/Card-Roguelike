@@ -11,9 +11,6 @@ public class HandUIController : MonoBehaviour
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private GameObject noAnimationCardPrefab;
     private Vector3 cardSpawnPoint;
-
-    private GameObject cardSlots;
-    private List<GameObject> cardSlotsList = new();
     private List<Card> cardsInHand = new List<Card>();
     [SerializeField] private float handWidth = 900f;
     [SerializeField] private float cardSpacing = 160f;
@@ -25,18 +22,10 @@ public class HandUIController : MonoBehaviour
     {
         centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI"); 
         cardSpawnPoint = new Vector3(centerOfUI.transform.localPosition.x, centerOfUI.transform.localPosition.y + 180, 0);
-        cardSlots = GameObject.FindGameObjectWithTag("CardSlots");
 
         feedbackMessage = Resources.Load<GameObject>("UI/General/Feedback/FeedbackMessage");
         cardPrefab = Resources.Load<GameObject>("UI/Cards/CardPrefab");
         noAnimationCardPrefab = Resources.Load<GameObject>("UI/Cards/CardNoAnimation");
-
-        cardSlotsList.Clear();
-        for (int i = 0; i < cardSlots.transform.childCount; i++)
-        {
-            string slotName = "CardSlot" + (i + 1);
-            cardSlotsList.Add(cardSlots.transform.Find(slotName).gameObject);
-        }
     }
 
     public void updateCardDisplay(CardModelSO card)
@@ -111,13 +100,7 @@ public class HandUIController : MonoBehaviour
 
     public int getNumCardsInHand()
     {
-        int count = 0;
-        foreach (var slot in cardSlotsList)
-        {
-            if (slot.transform.childCount != 0)
-                count++;
-        }
-        return count;
+        return cardsInHand.Count;
     }
 
     public void shuffleHandIntoDiscard(ObservableDeck discardPile)

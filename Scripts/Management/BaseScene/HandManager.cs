@@ -20,7 +20,7 @@ public class HandManager : MonoBehaviour
 
     // Cards
     private Card selectedCard = null;
-    private GameObject cardSlots;
+    private GameObject selectedCardObject = null;
     private List<GameObject> cardSlotsList;
     private Card lastCardPlayed;
 
@@ -75,15 +75,6 @@ public class HandManager : MonoBehaviour
         discardPile = new ObservableDeck();
         discardPile.OnDeckSizeChanged += GameManager.instance.updateDiscardPile;
 
-        cardSlots = GameObject.FindGameObjectWithTag("CardSlots");
-
-        string cardSlotName;
-        for (int i = 0; i < cardSlots.transform.childCount; i++)
-        {
-            cardSlotName = "CardSlot" + (i + 1).ToString();
-            cardSlotsList.Add(cardSlots.transform.Find(cardSlotName).gameObject);
-        }
-
         cardProcessor = player.getPlayerClass() switch
         {
             PlayerClass.Paladin => new PaladinCardProcessor(controller),
@@ -106,6 +97,7 @@ public class HandManager : MonoBehaviour
         if (card.GetComponent<Card>() != null)
         {
             selectedCard = card.GetComponent<Card>();
+            selectedCardObject = card;
         }
         else
         {
@@ -116,11 +108,17 @@ public class HandManager : MonoBehaviour
     public void clearSelectedCard()
     {
         selectedCard = null;
+        selectedCardObject = null;
     }
 
     public Card getSelectedCard()
     {
         return selectedCard;
+    }
+
+    public GameObject getSelectedCardObject()
+    {
+        return selectedCardObject;
     }
 
     public bool hasSelectedCard()

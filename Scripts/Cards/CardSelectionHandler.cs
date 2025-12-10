@@ -249,7 +249,7 @@ IEndDragHandler
             discardInProgress = true;
 
             // Move card above discard pile and save it for after this
-            handUIController.animateCardMovement(transform, discardCardHoldPosition, transform.localScale, cardHoverSpeed);
+            //handUIController.animateCardMovement(transform, discardCardHoldPosition, transform.localScale, cardHoverSpeed);
 
 
             sceneController.startDiscard(numDiscards);
@@ -259,6 +259,8 @@ IEndDragHandler
             {
                 Debug.LogError("Error retrieving discardUI component");
             }
+
+            discardUI.startDiscard(numDiscards, HandManager.instance.getSelectedCardObject());
 
             discardUI.setDiscardNum(numDiscards);
 

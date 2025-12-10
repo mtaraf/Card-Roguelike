@@ -47,7 +47,6 @@ public class FeedbackUI: MonoBehaviour
 
         FloatingFeedbackUI floatingFeedback = feedback.GetComponent<FloatingFeedbackUI>();
 
-        floatingFeedback.setText(message, info.color, info.baseFontSize, info.useGradient, info.gradientTop, info.gradientBottom, info.bounceScale, info.shakeIntensity,
-            info.rotationSpeed);
+        floatingFeedback.setText(message, info.color, info.baseFontSize, info.useGradient, info.gradientTop, info.gradientBottom, info.rotationSpeed);
     }
 }

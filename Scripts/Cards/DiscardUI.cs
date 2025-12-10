@@ -1,9 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DiscardUI : MonoBehaviour
 {
     [SerializeField] private int discardNum = 0;
+    private bool discardInProgress = false;
 
     public void setDiscardNum(int num)
     {
@@ -24,5 +26,10 @@ public class DiscardUI : MonoBehaviour
     public void setInactive()
     {
         gameObject.SetActive(false);
+    }
+
+    public void startDiscard(int discardNum, GameObject cardWithDiscards)
+    {
+        
     }
 }

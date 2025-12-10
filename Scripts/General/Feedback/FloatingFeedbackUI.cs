@@ -16,7 +16,7 @@ public class FloatingFeedbackUI : MonoBehaviour
         startScale = transform.localScale;
     }
 
-    public void setText(string text, Color color, int baseFontSize, bool useGradient, Color gradientTop, Color gradientBottom, float bounce, float shake, int rotationSpeed)
+    public void setText(string text, Color color, int baseFontSize, bool useGradient, Color gradientTop, Color gradientBottom, int rotationSpeed)
     {
         textComponent.text = text;
 
@@ -37,16 +37,13 @@ public class FloatingFeedbackUI : MonoBehaviour
             textComponent.color = color;
         }
 
-        StartCoroutine(animateFeedback(bounce, shake, rotationSpeed));
+        StartCoroutine(animateFeedback(rotationSpeed));
     }
 
-    private IEnumerator animateFeedback(float bounce, float shake, int rotationSpeed)
+    private IEnumerator animateFeedback(int rotationSpeed)
     {
         float timer = 0f;
 
-        // Bounce
-        transform.localScale = startScale * bounce;
-        yield return new WaitForSeconds(0.05f);
         transform.localScale = startScale;
 
         Vector3 randomUpwardDirection = new Vector3(
@@ -59,12 +56,6 @@ public class FloatingFeedbackUI : MonoBehaviour
         {
             transform.localPosition += randomUpwardDirection * riseSpeed * Time.deltaTime;
             transform.Rotate(0, 10 * rotationSpeed * Time.deltaTime, 0);
-
-            // // Shake
-            // if (shake > 0)
-            // {
-            //     transform.localPosition += new Vector3(UnityEngine.Random.Range(-shake, shake) * Time.deltaTime, 0, 0);
-            // }
 
             timer += Time.deltaTime;
             yield return null;
