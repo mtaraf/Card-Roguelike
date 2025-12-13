@@ -12,6 +12,7 @@ public class Card : MonoBehaviour
     [SerializeField] private GameObject cardDescription;
     [SerializeField] private GameObject cardEnergyValue;
     [SerializeField] private GameObject cardBackgroundImage;
+    [SerializeField] private GameObject cardOutline;
 
     public void setCardDisplayInformation(CardModelSO model)
     {
@@ -55,6 +56,11 @@ public class Card : MonoBehaviour
     public string getCardTitle()
     {
         return cardModel.title;
+    }
+
+    public void toggleCardOutline(bool toggle)
+    {
+        cardOutline.SetActive(toggle);
     }
 
     public void setCardDetails(string details)

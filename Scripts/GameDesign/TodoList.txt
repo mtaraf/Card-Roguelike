@@ -33,8 +33,6 @@ Card Bugs:
     - Judgement: needs to be implemented
 
 Current Work:
-    - implement discardUI
-        - add all cards in hand to discardUI, allow user to place cards in discard space (should snap into place), once over cards go back (reflow)
     - Add more cards to Mistborn character
     - Work on Final boss
     - Work on Hold The Line boss cards/AI

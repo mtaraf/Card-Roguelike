@@ -11,7 +11,6 @@ public class ParentSceneController : MonoBehaviour
     // UI
     private GameObject mainCanvas;
     private GameObject playerEnergyUI;
-    private GameObject discardUI;
 
     // Game States
     protected Player player;
@@ -48,10 +47,6 @@ public class ParentSceneController : MonoBehaviour
         playerEnergyUI = Helpers.findDescendant(mainCanvas.transform, "EnergyUI");
         playerCurrentEnergy = GameManager.instance.getPlayerHandEnergy();
         setPlayerEnergy(playerCurrentEnergy);
-
-        // Find Discard UI
-        discardUI = GameObject.FindGameObjectWithTag("DiscardUI");
-        discardUI.gameObject.SetActive(false);
 
         if (enemySpawnLocation == null)
         {
@@ -147,36 +142,15 @@ public class ParentSceneController : MonoBehaviour
     {
     }
 
-    public void toggleDiscardUI()
-    {
-        discardUI.gameObject.SetActive(true);
-    }
-
-    public DiscardUI getDiscardUI()
-    {
-        return discardUI.GetComponent<DiscardUI>();
-    }
-
-    public void startDiscard(int numberToDiscard)
-    {
-        discardInProgress = true;
-        discardUI.gameObject.SetActive(true);
-        DiscardUI discard = discardUI.GetComponent<DiscardUI>();
-
-        discard.setDiscardNum(numberToDiscard);
-
-        HandManager.instance.clearSelectedCard();
-    }
-
     public bool getDiscardInProgress()
     {
         return discardInProgress;
     }
 
-    public void setDiscardInProgress(bool inProgress)
-    {
-        discardInProgress = inProgress;
-    }
+    // public void setDiscardInProgress(bool inProgress)
+    // {
+    //     discardInProgress = inProgress;
+    // }
 
     public virtual void updateCurrentRound(int currentRound, int totalTurns)
     {

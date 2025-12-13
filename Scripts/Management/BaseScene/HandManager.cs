@@ -24,6 +24,9 @@ public class HandManager : MonoBehaviour
     private List<GameObject> cardSlotsList;
     private Card lastCardPlayed;
 
+    // Discard
+    private bool discardInProgress = false;
+
     public void Awake()
     {
         if (instance != null)
@@ -211,6 +214,7 @@ public class HandManager : MonoBehaviour
     public void addCardToDiscardPile(Card card)
     {
         discardPile.Add(card.getCardModel());
+        handUI.moveCardToDiscardPile(card);
     }
 
     public void litheCardPlayed(Card card)
@@ -334,6 +338,20 @@ public class HandManager : MonoBehaviour
         }
     }
 
+    public bool getDiscardInProgress()
+    {
+        return discardInProgress;
+    }
+
+    public void setDiscardInProgress(bool inProgress)
+    {
+        discardInProgress = inProgress;
+    }
+
+    public void resetCardPositions()
+    {
+        handUI.reflowHand();
+    }
 }
 
 public enum EffectType

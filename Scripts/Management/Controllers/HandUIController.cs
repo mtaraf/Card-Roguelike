@@ -7,6 +7,7 @@ using UnityEngine;
 public class HandUIController : MonoBehaviour
 {
     [SerializeField] private GameObject centerOfUI;
+    private GameObject discardPile;
     [SerializeField] private GameObject feedbackMessage;
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private GameObject noAnimationCardPrefab;
@@ -15,12 +16,20 @@ public class HandUIController : MonoBehaviour
     [SerializeField] private float handWidth = 900f;
     [SerializeField] private float cardSpacing = 160f;
     [SerializeField] private float animationDuration = 0.25f;
+    private float cardMoveSpeed = 0.6f;
 
 
 
     public void Initialize()
     {
         centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI"); 
+        discardPile = GameObject.FindGameObjectWithTag("DiscardPile");
+
+        if (centerOfUI == null || discardPile == null)
+        {
+            Debug.LogError("Could not find centerofUI or discard pile object in hand UI");
+        }
+
         cardSpawnPoint = new Vector3(centerOfUI.transform.localPosition.x, centerOfUI.transform.localPosition.y + 180, 0);
 
         feedbackMessage = Resources.Load<GameObject>("UI/General/Feedback/FeedbackMessage");
@@ -51,6 +60,13 @@ public class HandUIController : MonoBehaviour
 
         cardsInHand.Add(card);
         StartCoroutine(reflowHand());
+    }
+
+    public void moveCardToDiscardPile(Card card)
+    {
+        Transform cardTransform = cardsInHand.Find((cardInHand) => cardInHand == card).transform;
+        animateCardMovement(cardTransform, discardPile.transform.position, cardTransform.localScale, cardMoveSpeed);
+        cardsInHand.Remove(card);
     }
 
     public void removeCardFromHand(Card card)
