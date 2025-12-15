@@ -1,14 +1,10 @@
 using System.Collections.Generic;
-using System.IO;
-using Unity.VisualScripting;
-using UnityEngine;
-
 
 public class Mistborn : Player
 {
     public override void processEndOfRoundEffects()
     {
-        if (mythic.getMythicName() == "Crimson Curse")
+        if (mythic != null && mythic.getMythicName() == "Crimson Curse")
         {
             int totalBleed = 0;
             // Check all enemies for Bleed stacks

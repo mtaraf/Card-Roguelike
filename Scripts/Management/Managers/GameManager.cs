@@ -5,16 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum SceneBuildIndex
-{
-    MAIN_MENU = 0,
-    BASE_LEVEL = 1,
-    PATH_SELECTION = 2,
-    FORGE = 3,
-    HOLD_THE_LINE = 4,
-    CHARACTER_SELECTION = 5
-}
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -27,38 +17,27 @@ public class GameManager : MonoBehaviour
 
     // Game States
     private int currentLevel;
-    [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
     private ParentSceneController currentSceneController;
     private List<PathOptionData> currentPathSelectionOptions;
 
     // Player States
     private GameObject playerObject;
     private GameObject playerDisplayObject;
-    private int playerMaxHealth;
-    private DeckModelSO playerDeck;
-    private int playerCurrentHealth;
-    private int playerHandSize;
-    private int playerHandEnergy;
-    private int playerGold;
+    private PlayerInformation playerInformation;
     private Player player;
-    private int cardRarity = 0;
-    private int cardChoices = 3;
 
     // UI
     [SerializeField] private List<GameObject> statusPrefabs = new List<GameObject>();
-    // [SerializeField] private List<GameObject> valueBasedStatuses = new List<GameObject>();
-
-    // Cards
-    [SerializeField] private DeckModelSO starterDeck;
 
 
     // Encounter Information
     private EncounterReward encounterReward;
+    private int encounterRewardValue;
     private EncounterType previousEncounter;
 
     // Scene
     private int previousScene;
-    private HashSet<int> battleScenes = new HashSet<int>() { 1, 4, 6 };
+    private HashSet<int> battleScenes = new HashSet<int>() { 1, 4, 6, 7 };
 
 
     public void Awake()
@@ -84,18 +63,11 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Game Manager detected scene loaded: {scene.name} + {scene.buildIndex}");
         if (scene.buildIndex != 0)
         {
-            if (!loadGame(currentSaveSlot) || currentSaveSlot == -1)
+            if (currentSaveSlot == -1 || !loadGame(currentSaveSlot))
             {
-                    createPlayerDeckCopy();
-                    playerMaxHealth = 50;
-                    playerHandSize = 6;
-                    playerHandEnergy = 3;
-                    playerCurrentHealth = 50;
-                    playerGold = 0;
-                    playerHandEnergy = 3;
+                    playerInformation = new PlayerInformation(50, 50, 3, 0, 6, null, null, PlayerClass.Mistborn, null);
                     currentLevel = 0;
             }
-
             StartCoroutine(updateUI());
         }
 
@@ -111,7 +83,7 @@ public class GameManager : MonoBehaviour
         topBarUIManager = FindFirstObjectByType<TopBarUIManager>();
         if (topBarUIManager != null)
         {
-            topBarUIManager.Initialize(playerGold, currentLevel, cardRarity);
+            topBarUIManager.Initialize(playerInformation.playerGold, currentLevel, playerInformation.playerCardRarity, playerInformation.playerCardChoices);
         }
     }
 
@@ -129,13 +101,6 @@ public class GameManager : MonoBehaviour
     {
         statusPrefabs = new List<GameObject>(Resources.LoadAll<GameObject>("UI/Effects/EffectPrefabs"));
         //valueBasedStatuses = new List<GameObject>(Resources.LoadAll<GameObject>("UI/Effects/ValueBasedEffects"));
-        starterDeck = Resources.Load<DeckModelSO>("ScriptableObjects/Cards/Mistborn/MistbornCurrentTestDeck");
-        
-        // Get Victory Card Pools
-        victoryCardPools.Insert(0, cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/CommonVictoryCards")));
-        victoryCardPools.Insert(1, cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/RareVictoryCards")));
-        victoryCardPools.Insert(2, cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/EpicVictoryCards")));
-        victoryCardPools.Insert(3, cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Decks/MythicVictoryCards")));
     }
 
     private IEnumerator waitForUI()
@@ -150,8 +115,6 @@ public class GameManager : MonoBehaviour
         }
 
         getPlayer();
-
-        player.setDeck(playerDeck);
     }
 
     private void getPlayer()
@@ -169,43 +132,14 @@ public class GameManager : MonoBehaviour
         currentSceneController.updateDiscardPile(count);
     }
 
-    private DeckModelSO cloneDeck(DeckModelSO deck)
-    {
-        DeckModelSO clonedDeck = ScriptableObject.CreateInstance<DeckModelSO>();
-        clonedDeck.cards = new List<CardModelSO>();
-
-        foreach (CardModelSO card in deck.cards)
-        {
-            clonedDeck.cards.Add(card.clone());
-        }
-
-        return clonedDeck;
-    }
-
-    public void createPlayerDeckCopy()
-    {
-        playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
-        playerDeck.cards = new List<CardModelSO>();
-
-        foreach (CardModelSO card in starterDeck.cards)
-        {
-            playerDeck.cards.Add(card.clone());
-        }
-    }
-
     public List<GameObject> getStatusPrefabs()
     {
         return statusPrefabs;
     }
-
-    // public List<GameObject> getValueBasedStatusObject()
-    // {
-    //     return valueBasedStatuses;
-    // }
-
+    
     public List<DeckModelSO> getVictoryCardsPools()
     {
-        return victoryCardPools;
+        return playerInformation.victoryCardPools;
     }
 
     public IEnumerator encounterVictory()
@@ -214,7 +148,7 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.playVictory();
         addEncounterRewards();
         yield return new WaitForSeconds(1.0f);
-        victoryManager.showVictoryScreen(cardChoices, cardRarity);
+        victoryManager.showVictoryScreen(playerInformation.playerCardChoices, playerInformation.playerCardRarity, playerInformation.playerMythic != null);
     }
 
     void addEncounterRewards()
@@ -222,13 +156,16 @@ public class GameManager : MonoBehaviour
         switch (encounterReward)
         {
             case EncounterReward.Gold:
-                addPlayerGold(25 +  (currentLevel * 2));
+                addPlayerGold(encounterRewardValue);
                 break;
             case EncounterReward.CardRarity:
-                cardRarity += 1;
+                playerInformation.playerCardChoices += encounterRewardValue;
                 break;
             case EncounterReward.CardChoices:
-                cardChoices += 1;
+                playerInformation.playerCardChoices += encounterRewardValue;
+                break;
+            case EncounterReward.MaxHealth:
+                playerInformation.playerMaxHealth += encounterRewardValue;
                 break;
         }
     }
@@ -236,24 +173,25 @@ public class GameManager : MonoBehaviour
     public void addCardToPlayerDeck(CardModelSO model)
     {
         CardModelSO clone = model.clone();
-        playerDeck.cards.Add(clone);
+        playerInformation.playerDeck.cards.Add(clone);
     }
 
     public void setPlayerMythicCard(CardModelSO card)
     {
+        playerInformation.playerMythic = new MythicCard(card);
         player.setMythic(card);
     }
 
     public void removeCardFromPlayerDeck(CardModelSO model)
     {
-        playerDeck.cards.Remove(model);
+        playerInformation.playerDeck.cards.Remove(model);
     }
 
     public IEnumerator moveToPathSelection()
     {
          // update player stats
-        playerCurrentHealth = player.getCurrentHealth();
-        playerMaxHealth = player.getMaxHealth();
+        playerInformation.playerCurrentHealth = player.getCurrentHealth();
+        playerInformation.playerMaxHealth = player.getMaxHealth();
 
         // Save game
         yield return new WaitUntil(() => saveGame(currentSaveSlot));
@@ -267,31 +205,31 @@ public class GameManager : MonoBehaviour
 
     public int getPlayerGold()
     {
-        return playerGold;
+        return playerInformation.playerGold;
     }
 
     // TO-DO: add cha-ching sound
     public void addPlayerGold(int value)
     {
-        playerGold += value;
-        topBarUIManager.updateGoldCount(playerGold);
+        playerInformation.playerGold += value;
+        topBarUIManager.updateGoldCount(playerInformation.playerGold);
     }
 
     // TO-DO: add gold spending sound
     public void subtractPlayerGold(int value)
     {
-        playerGold -= value;
-        topBarUIManager.updateGoldCount(playerGold);
+        playerInformation.playerGold -= value;
+        topBarUIManager.updateGoldCount(playerInformation.playerGold);
     }
 
     public int getPlayerHandSize()
     {
-        return playerHandSize;
+        return playerInformation.playerHandSize;
     }
 
     public int getPlayerHandEnergy()
     {
-        return playerHandEnergy;
+        return playerInformation.playerHandEnergy;
     }
 
     public void setPlayerCharacter(GameObject obj)
@@ -322,11 +260,6 @@ public class GameManager : MonoBehaviour
     public void incrementCurrentLevel()
     {
         currentLevel++;
-    }    
-
-    public void setPlayer(Player currentPlayer)
-    {
-        player = currentPlayer;
     }
 
     public void endTurn()
@@ -336,48 +269,44 @@ public class GameManager : MonoBehaviour
 
     public DeckModelSO getPlayerDeck()
     {
-        return playerDeck;
+        return playerInformation.playerDeck;
     }
 
     public int getPlayerMaxHealth()
     {
-        return playerMaxHealth;
+        return playerInformation.playerMaxHealth;
     }
 
     public int getPlayerCurrentHealth()
     {
-        return playerCurrentHealth;
+        return playerInformation.playerCurrentHealth;
     }
 
-    public DeckModelSO getStarterDeck()
-    {
-        return starterDeck;
-    }
-
-    public void loadEncounterTypeAndRewards(EncounterType type, EncounterReward reward)
+    public void loadEncounterTypeAndRewards(EncounterType type, EncounterReward reward, int rewardValue)
     {
         encounterReward = reward;
+        encounterRewardValue = rewardValue;
         switch (type)
         {
             case EncounterType.Forge:
-                //SceneLoader.instance.loadScene(3);
+                SceneLoader.instance.loadScene(Enums.mapBuildIndex(SceneBuildIndex.FORGE));
                 break;
             case EncounterType.Regular_Encounter:
-                SceneLoader.instance.loadScene("BaseLevelScene");
+                SceneLoader.instance.loadScene(Enums.mapBuildIndex(SceneBuildIndex.BASE_LEVEL));
                 break;
             case EncounterType.Mini_Boss_Encounter:
                 // TODO: Change this
-                SceneLoader.instance.loadScene("BaseLevelScene");
+                SceneLoader.instance.loadScene(Enums.mapBuildIndex(SceneBuildIndex.MINI_BOSS));
                 break;
             case EncounterType.Final_Boss:
                 // TODO: Change this
-                SceneLoader.instance.loadScene("BaseLevelScene");
+                SceneLoader.instance.loadScene(Enums.mapBuildIndex(SceneBuildIndex.MINI_BOSS));
                 break;
             case EncounterType.Culver_Encounter:
-                SceneLoader.instance.loadScene("CulverScene");
+                SceneLoader.instance.loadScene(Enums.mapBuildIndex(SceneBuildIndex.CULVER));
                 break;
             case EncounterType.Hold_The_Line_Encounter:
-                SceneLoader.instance.loadScene("HoldTheLine");
+                SceneLoader.instance.loadScene(Enums.mapBuildIndex(SceneBuildIndex.HOLD_THE_LINE));
                 break;
         }
         StartCoroutine(updateUI());
@@ -425,20 +354,25 @@ public class GameManager : MonoBehaviour
 
         SaveData saveData = new SaveData();
         saveData.currentLevel = currentLevel;
-        saveData.playerCurrentHealth = playerCurrentHealth;
-        saveData.playerMaxHealth = playerMaxHealth;
-        saveData.playerGold = playerGold;
-        saveData.playerHandSize = playerHandSize;
-        saveData.playerHandEnergy = playerHandEnergy;
+        saveData.playerCurrentHealth = playerInformation.playerCurrentHealth;
+        saveData.playerMaxHealth = playerInformation.playerMaxHealth;
+        saveData.playerGold = playerInformation.playerGold;
+        saveData.playerHandSize = playerInformation.playerHandSize;
+        saveData.playerHandEnergy = playerInformation.playerHandEnergy;
         saveData.playerCards = new List<SerializableCardModel>();
+        saveData.playerCardChoices = playerInformation.playerCardChoices;
+        saveData.playerCardRarity = playerInformation.playerCardRarity;
+        saveData.mythicCard = playerInformation.playerMythic;
+        saveData.victoryCards = playerInformation.victoryCardPools;
         saveData.playerPrefab = playerObject;
         saveData.playerDisplay = playerDisplayObject;
+        saveData.playerClass = playerInformation.playerClass;
         saveData.pathOptions = currentPathSelectionOptions;
         saveData.musicVolume = currentVolume.Item1;
         saveData.sfxVolume = currentVolume.Item2;
 
 
-        foreach (CardModelSO model in playerDeck.cards)
+        foreach (CardModelSO model in playerInformation.playerDeck.cards)
         {
             saveData.playerCards.Add(SaveSystem.convertToSerializableModel(model));
         }
@@ -457,26 +391,37 @@ public class GameManager : MonoBehaviour
         }
 
         currentLevel = data.currentLevel;
-        playerCurrentHealth = data.playerCurrentHealth;
-        playerMaxHealth = data.playerMaxHealth;
-        playerGold = data.playerGold;
-        playerHandSize = data.playerHandSize;
-        playerHandEnergy = data.playerHandEnergy;
-        playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
-        playerDeck.cards = new List<CardModelSO>();
+        playerInformation = new PlayerInformation(data.playerMaxHealth, data.playerCurrentHealth, data.playerHandEnergy, data.playerGold, 
+            data.playerHandSize, null, data.mythicCard, data.playerClass, data.victoryCards);
+        playerInformation.playerCardChoices = data.playerCardChoices;
+        playerInformation.playerCardRarity = data.playerCardRarity;
+        playerInformation.playerDeck = ScriptableObject.CreateInstance<DeckModelSO>();
+        playerInformation.playerDeck.cards = new List<CardModelSO>();
         currentPathSelectionOptions = data.pathOptions;
-        AudioManager.instance.setBackgroundMusicVolume(data.musicVolume);
-        AudioManager.instance.setSFXVolume(data.sfxVolume);
-
         playerObject = data.playerPrefab;
         playerDisplayObject = data.playerDisplay;
 
+
+
         foreach (SerializableCardModel serializableCardModel in data.playerCards)
         {
-            playerDeck.cards.Add(SaveSystem.convertToRuntimeCard(serializableCardModel));
+            playerInformation.playerDeck.cards.Add(SaveSystem.convertToRuntimeCard(serializableCardModel));
         }
 
+        AudioManager.instance.setBackgroundMusicVolume(data.musicVolume);
+        AudioManager.instance.setSFXVolume(data.sfxVolume);
+
         return true;
+    }
+
+    public void loadPlayerInformation(Player currentPlayer)
+    {
+        player = currentPlayer;
+
+        currentPlayer.setDeck(playerInformation.playerDeck);
+        currentPlayer.setMaxHealth(playerInformation.playerMaxHealth);
+        currentPlayer.setCurrentHealth(playerInformation.playerCurrentHealth);
+        currentPlayer.setEnergy(playerInformation.playerHandEnergy);
     }
 
     public void setCurrentSaveSlot(int slot)

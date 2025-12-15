@@ -2,21 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public enum ToolTipDirection
-{
-    Above,
-    Below,
-    Left,
-    Right,
-}
-
-public enum ToolTipSize
-{
-    Large,
-    Medium,
-    Small
-}
-
 public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject tooltip;

@@ -37,9 +37,12 @@ public class CardProcessor
         return cardEffects;
     }
 
-    // applies Strenth and Weakness attributes to the Cards effects
-    protected List<CardEffect> applyEffectsToCardDamage(List<CardEffect> cardEffects, Dictionary<EffectType, int> attributes)
+    // applies Strenth, Weakness attributes to the Cards effects
+    public static List<CardEffect> applyEffectsToCardDamage(List<CardEffect> cardEffects, Dictionary<EffectType, int> attributes)
     {
+        if (cardEffects == null || cardEffects.Count == 0)
+            return cardEffects;
+            
         // Deep copy the effects
         List<CardEffect> modifiedEffects = new List<CardEffect>();
         foreach (var effect in cardEffects)
@@ -53,10 +56,12 @@ public class CardProcessor
             });
         }
 
-        int damage_index = modifiedEffects.FindIndex((effect) => effect.type == EffectType.Damage);
-        if (damage_index != -1)
+        foreach (CardEffect effect in modifiedEffects)
         {
-            modifiedEffects[damage_index].value += attributes[EffectType.Strength] - attributes[EffectType.Weaken];
+            if (effect.type == EffectType.Damage)
+            {
+                effect.value += attributes[EffectType.Strength] - attributes[EffectType.Weaken];
+            }
         }
 
         return modifiedEffects;

@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 public class CardSelectionHandler : MonoBehaviour,
 IPointerEnterHandler,
@@ -287,9 +285,6 @@ IEndDragHandler
 
         // use card
         List<CardEffect> effects = HandManager.instance.useSelectedCard(enemies);
-
-        Debug.Log(effects[0].type);
-        Debug.Log(enemies[0].name);
 
         if (player != null)
             player.processCardEffects(effects);

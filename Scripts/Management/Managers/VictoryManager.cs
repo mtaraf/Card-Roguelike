@@ -30,10 +30,10 @@ public class VictoryManager : MonoBehaviour
     }
 
     // TO-DO: implement card choices / card rarity
-    public void showVictoryScreen(int cardChoices, int cardRarity)
+    public void showVictoryScreen(int cardChoices, int cardRarity, bool hasMythic)
     {
         victoryScreenInstance = Instantiate(victoryCardSelectionScreenPrefab, canvasTransform);
-        generateCardRewards();
+        generateCardRewards(cardRarity, hasMythic);
 
         var slotsParent = victoryScreenInstance.transform.Find("Slots");
         for (int i = 0; i < cardChoices; i++)
@@ -51,17 +51,20 @@ public class VictoryManager : MonoBehaviour
         }
     }
 
-    void generateCardRewards()
+    void generateCardRewards(int cardRarity, bool hasMythic)
     {
-        // TO-DO: if player has a mythic card, remove possiblility of drawing one as a reward!
+        int randomUpperLimit = 100;
+        if (hasMythic)
+            randomUpperLimit = 95;
+        
         for (int i = 0; i < 3; i++)
         {
-            int rand = Random.Range(0, 100);
+            int rand = Random.Range(cardRarity, randomUpperLimit);
             CardModelSO card = rand switch
             {
                 < 65 => getRandomCard(victoryCardPools[0]),
-                < 90 => getRandomCard(victoryCardPools[1]),
-                < 98 => getRandomCard(victoryCardPools[2]),
+                < 85 => getRandomCard(victoryCardPools[1]),
+                < 95 => getRandomCard(victoryCardPools[2]),
                 _ => getRandomCard(victoryCardPools[3])
             };
             chosenCards[i] = card;

@@ -112,15 +112,11 @@ public class CharacterSelectionSceneController : MonoBehaviour
 
         switch (information.characterClass)
         {
-            case CharacterClass.Paladin:
+            case PlayerClass.Paladin:
                 playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Dwarf/DwarfCharacter");
                 playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/DwarfDisplay");
                 break;
-            case CharacterClass.Witch:
-                playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Witch/WitchCharacter");
-                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/WitchDisplay");
-                break;
-            case CharacterClass.Mistborn:
+            case PlayerClass.Mistborn:
                 playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Witch/WitchCharacter");
                 playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/WitchDisplay");
                 break;

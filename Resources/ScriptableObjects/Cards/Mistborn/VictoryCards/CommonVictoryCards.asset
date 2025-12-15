@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b04a2a5476ff64788caa87c41b8035, type: 3}
+  m_Name: CommonVictoryCards
+  m_EditorClassIdentifier: 
+  cards:
+  - {fileID: 11400000, guid: d26e486059c7b594f947f8146c64e0ed, type: 2}
+  - {fileID: 11400000, guid: a2f33ff152dfe914984d70541bb06641, type: 2}
+  - {fileID: 11400000, guid: a7812638ffa10124db8d258d496e55d5, type: 2}
+  - {fileID: 11400000, guid: 26f5498f06eedca43a53cb27017d0edb, type: 2}
+  - {fileID: 11400000, guid: 086cd2c67dc3a124db0a2389dce13ec0, type: 2}
+  - {fileID: 11400000, guid: 8a0b2443b7d2ede479ff3aecbf005987, type: 2}
+  - {fileID: 11400000, guid: 43b848be375c2e642a55a2dbf87dd5d9, type: 2}

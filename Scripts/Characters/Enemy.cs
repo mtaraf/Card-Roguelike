@@ -1,14 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-
-public enum EnemyName
-{
-    Samurai,
-    Knight
-}
 
 public class Enemy : Character
 {

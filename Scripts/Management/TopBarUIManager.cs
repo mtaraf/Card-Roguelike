@@ -7,12 +7,13 @@ public class TopBarUIManager : MonoBehaviour
     [SerializeField] private GameObject goldCount;
     [SerializeField] private GameObject levelCount;
     [SerializeField] private GameObject cardRarity;
+    [SerializeField] private GameObject cardChoices;
     [SerializeField] private GameObject fullDeck;
     private GameObject settingsMenuPrefab;
     private GameObject settingsMenuObject;
     private SettingsMenu settingsMenu;
 
-    public void Initialize(int gold, int level, int rarity)
+    public void Initialize(int gold, int level, int rarity, int choices)
     {
         goldCount = GameObject.FindGameObjectWithTag("GoldCount");
         levelCount = GameObject.FindGameObjectWithTag("LevelCount");
@@ -23,7 +24,8 @@ public class TopBarUIManager : MonoBehaviour
             Debug.LogError("Could not find UI for top bar");
         }
 
-        cardRarity.GetComponent<TextMeshProUGUI>().text = rarity.ToString() + "%";
+        cardChoices.GetComponent<TextMeshProUGUI>().text = choices.ToString();
+        cardRarity.GetComponent<TextMeshProUGUI>().text = rarity.ToString();
         goldCount.GetComponent<TextMeshProUGUI>().text = gold.ToString();
         levelCount.GetComponent<TextMeshProUGUI>().text = "Level " + level.ToString();
 

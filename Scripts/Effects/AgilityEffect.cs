@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class AgilityEffect: IStatusEffect
 {
@@ -13,9 +12,8 @@ public class AgilityEffect: IStatusEffect
 
     public void apply(Character target, int damageDealt = 0)
     {
-        target.addAttributeValue(type, value);
+        target.addAgility(value);
 
-        //target.showFloatingFeedbackUI(type.ToFeedbackString(), Color.blueViolet);
         target.addAudioCue(type);
     }
 
@@ -23,6 +21,6 @@ public class AgilityEffect: IStatusEffect
     {
         // Lose 25% agility stacks
         Dictionary<EffectType, int> attributes = target.getAttributes();
-        target.updateAttribute(type, (int)(attributes[type] * .25));
+        target.updateAttribute(type, (int)(attributes[type] * .75));
     }
 }

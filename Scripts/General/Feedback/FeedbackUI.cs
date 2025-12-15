@@ -1,17 +1,6 @@
 
 using UnityEngine;
 
-
-public enum DamageType
-{
-    Critical,
-    Bleed,
-    Corruption,
-    Heal,
-    General
-}
-
-
 public class FeedbackUI: MonoBehaviour
 {
     private DamageTypeSettings damageSettings;

@@ -1,13 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum BossType
-{
-    HoldTheLine,
-    Culver,
-    FinalBoss,
-    MiniBoss
-}
+
 public class Boss : Enemy
 {
     [SerializeField] private BossType bossType;

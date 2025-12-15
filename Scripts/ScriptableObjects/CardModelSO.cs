@@ -3,40 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum CardType
-{
-    Attack,
-    Defense,
-    Buff,
-    Resource,
-    Unique,
-    Special
-}
-
-public enum CardRarity {
-    Starter,
-    COMMON,
-    RARE,
-    EPIC,
-    MYTHIC
-}
-
-public enum ConditionMetric
-{
-    HEALTH,
-    ARMOR,
-    APPLIED_EFFECT,
-    PLAYER_CURRENT_EFFECT,
-    NO_CONDITION
-}
-
-public enum Target
-{
-    Enemy_Multiple,
-    Enemy_Single,
-    Player
-}
-
 [Serializable]
 public class CardEffect
 {

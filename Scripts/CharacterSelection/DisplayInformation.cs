@@ -1,14 +1,8 @@
 using UnityEngine;
 
-public enum CharacterClass
-{
-    Paladin,
-    Witch,
-    Mistborn
-}
 public class DisplayInformation : MonoBehaviour
 {
-    [SerializeField] public CharacterClass characterClass;
+    [SerializeField] public PlayerClass characterClass;
     [SerializeField] public string [] classDetails;
     [SerializeField] public string characterName;
     [SerializeField] public Sprite characterIcon;

@@ -25,7 +25,7 @@ public class EnemyCardProcessor
             cardEffects = card.getEffects();
         }
 
-        cardEffects = applyEffectsToCardDamage(cardEffects, attributes);
+        cardEffects = CardProcessor.applyEffectsToCardDamage(cardEffects, attributes);
 
         // Roll critical hits
         cardEffects = checkCritHits(cardEffects);
@@ -45,34 +45,6 @@ public class EnemyCardProcessor
         }
 
         return cardEffects;
-    }
-
-    // applies Strenth and Weakness attributes to the Cards effects
-    protected List<CardEffect> applyEffectsToCardDamage(List<CardEffect> cardEffects, Dictionary<EffectType, int> attributes)
-    {
-        if (cardEffects == null)
-            return new List<CardEffect>();
-
-        // Deep copy the effects
-        List<CardEffect> modifiedEffects = new List<CardEffect>();
-        foreach (var effect in cardEffects)
-        {
-            modifiedEffects.Add(new CardEffect
-            {
-                type = effect.type,
-                value = effect.value,
-                turns = effect.turns,
-                critRate = effect.critRate
-            });
-        }
-
-        int damage_index = modifiedEffects.FindIndex((effect) => effect.type == EffectType.Damage);
-        if (damage_index != -1)
-        {
-            modifiedEffects[damage_index].value += attributes[EffectType.Strength] - attributes[EffectType.Weaken];
-        }
-
-        return modifiedEffects;
     }
 
     protected virtual List<CardEffect> processSpecialCard(CardModelSO specialCard, Dictionary<EffectType, int> attributes, Enemy enemy)

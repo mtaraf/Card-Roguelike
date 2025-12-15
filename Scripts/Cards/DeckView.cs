@@ -3,15 +3,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
-
-public enum DeckViewType
-{
-    FullDeck,
-    DiscardPile,
-    DrawPile
-}
 
 public class DeckView : MonoBehaviour, IPointerClickHandler
 {

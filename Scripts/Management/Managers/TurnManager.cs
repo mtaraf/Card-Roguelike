@@ -2,14 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TurnState
-{
-    PlayerTurn,
-    EnemyTurn,
-    Victory,
-    Defeat
-}
-
 public class TurnManager : MonoBehaviour
 {
     public static TurnManager instance;

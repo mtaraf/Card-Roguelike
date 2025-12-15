@@ -21,7 +21,6 @@ public class HandManager : MonoBehaviour
     // Cards
     private Card selectedCard = null;
     private GameObject selectedCardObject = null;
-    private List<GameObject> cardSlotsList;
     private Card lastCardPlayed;
 
     // Discard
@@ -49,7 +48,6 @@ public class HandManager : MonoBehaviour
         }
 
         StartCoroutine(createDecksAfterStartHasRun(sceneController));
-        cardSlotsList = new List<GameObject>();
     }
 
     // Any data that is created in Start() functions of other files needs to be accessed after the first frame
@@ -352,25 +350,6 @@ public class HandManager : MonoBehaviour
     {
         handUI.reflowHand();
     }
-}
-
-public enum EffectType
-{
-    Damage,
-    Armor,
-    Strength,
-    Weaken,
-    Blind,
-    Divinity,
-    Poison,
-    Frostbite,
-    HealDamageDone,
-    Heal,
-    HealOverTime,
-    Stun,
-    Bleed,
-    Agility,
-    Corruption
 }
 
 public static class EffectTypeExtensions

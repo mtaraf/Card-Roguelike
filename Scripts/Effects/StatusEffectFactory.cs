@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public static class StatusEffectFactory
 {
     public static IStatusEffect create(CardEffect effect)

@@ -1,13 +1,5 @@
 using System.Collections.Generic;
-using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
-
-public enum PlayerClass
-{
-    Paladin,
-    Mistborn
-}
 
 public class MythicCard
 {
@@ -22,6 +14,16 @@ public class MythicCard
     {
         return card.title;
     }
+
+    public void setCard(CardModelSO model)
+    {
+        card = model.clone();
+    }
+
+    public CardModelSO getCard()
+    {
+        return card;
+    }
 }
 
 public class Player : Character
@@ -29,13 +31,10 @@ public class Player : Character
     [SerializeField] protected Deck deck = null;
     [SerializeField] private PlayerClass playerClass;
     protected MythicCard mythic;
-
-    // Attributes
+    private int roundEnergy;
 
     public override void Start()
     {
-        // Testing Mythic
-        setMythic(Resources.Load<CardModelSO>("ScriptableObjects/Cards/Mistborn/Mythics/CrimsonCurse"));
         base.Start();
     }
 
@@ -54,14 +53,8 @@ public class Player : Character
         // add card to deck
         deck.addCardToDeck(card);
 
-
         // update hand manager
         HandManager.instance.setPlayerDeck(deck.deck);
-    }
-
-    private void generateStartingDeck()
-    {
-        deck.setDeck(GameManager.instance.getStarterDeck());
     }
 
     public override void processCardEffects(List<CardEffect> effects, Enemy enemy = null)
@@ -83,5 +76,20 @@ public class Player : Character
     public void setMythic(CardModelSO card)
     {
         mythic = new MythicCard(card);
+    }
+
+    public MythicCard getMythicCard()
+    {
+        return mythic;
+    }
+
+    public void setEnergy(int energy)
+    {
+        roundEnergy = energy;
+    }
+
+    public int getEnergy()
+    {
+        return roundEnergy;
     }
 }

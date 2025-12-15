@@ -37,16 +37,12 @@ public class ParentSceneController : MonoBehaviour
         GameObject playerObj = Instantiate(playerPrefab, mainCanvas.transform);
         player = playerObj.GetComponent<Player>();
 
-        GameManager.instance.setPlayer(player);
-
-        player.setDeck(GameManager.instance.getPlayerDeck());
-        player.setMaxHealth(GameManager.instance.getPlayerMaxHealth());
-        player.setCurrentHealth(GameManager.instance.getPlayerCurrentHealth());
+        GameManager.instance.loadPlayerInformation(player);
 
         // Find energy UI
         playerEnergyUI = Helpers.findDescendant(mainCanvas.transform, "EnergyUI");
-        playerCurrentEnergy = GameManager.instance.getPlayerHandEnergy();
-        setPlayerEnergy(playerCurrentEnergy);
+        playerCurrentEnergy = player.getEnergy();
+        setPlayerEnergy(player.getEnergy());
 
         if (enemySpawnLocation == null)
         {
@@ -90,7 +86,7 @@ public class ParentSceneController : MonoBehaviour
 
     public void resetPlayerEnergy()
     {
-        playerCurrentEnergy = GameManager.instance.getPlayerHandEnergy();
+        playerCurrentEnergy = player.getEnergy();
         setPlayerEnergy(playerCurrentEnergy);
     }
 

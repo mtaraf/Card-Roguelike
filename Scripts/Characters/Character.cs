@@ -107,6 +107,12 @@ public class Character : MonoBehaviour
         uIUpdater.updateEffect(type, attributes[type]);
     }
 
+    public void addAgility(int value)
+    {
+        attributes[EffectType.Agility] = Math.Min(attributes[EffectType.Agility] + value, 20);
+        uIUpdater.updateEffect(EffectType.Agility, attributes[EffectType.Agility]);
+    }
+
     public void addCorruption(int amount)
     {
         Debug.Log($"Amount: {amount} limit: {corruptionLimit}");

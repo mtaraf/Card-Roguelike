@@ -61,6 +61,9 @@ public class CardEffectHandler
             Debug.Log("Dealing crit damage.");
         }
 
+        // Apply agility to damage
+        damage = (int)(damage * (1 - attributes[EffectType.Agility] * 0.05));
+
         // Damage
         if (damage - attributes[EffectType.Armor] > 0)
         {

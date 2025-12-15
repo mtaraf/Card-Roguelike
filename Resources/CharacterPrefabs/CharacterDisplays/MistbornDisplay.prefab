@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a552ae6341d54e42a9361a0c1d1760c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterClass: 3
+  characterClass: 1
   classDetails:
   - High damage, low armor
   - High blind and poison chance

@@ -1,26 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-
-
-public enum EncounterType
-{
-    Forge,
-    Regular_Encounter,
-    Mini_Boss_Encounter,
-    Culver_Encounter,
-    Hold_The_Line_Encounter,
-    Final_Boss
-}
-
-public enum EncounterReward
-{
-    CardRarity,
-    CardChoices,
-    Gold,
-}
 
 public static class EncounterRewardExtensions
 {
@@ -39,12 +22,33 @@ public static class EncounterRewardExtensions
 public class PathSelectionSceneController : MonoBehaviour
 {
     public static PathSelectionSceneController instance;
-    private int levels = 10;
     private int currentLevel;
     private PathSelectionUIController pathSelectionUIController;
     private List<PathOptionData> options = new List<PathOptionData>();
     private List<GameObject> doorButtons = new List<GameObject>();
     private Transform playerDisplayLocation;
+
+    // Base rewards
+    public Tuple<EncounterReward, int> baseGoldReward = new Tuple<EncounterReward, int>(EncounterReward.Gold, 10);
+    public Tuple<EncounterReward, int> baseMaxHealthReward = new Tuple<EncounterReward, int>(EncounterReward.MaxHealth, 5);
+    public Tuple<EncounterReward, int> baseCardChoicesReward = new Tuple<EncounterReward, int>(EncounterReward.CardChoices, 1);
+    public Tuple<EncounterReward, int> baseCardRarityReward = new Tuple<EncounterReward, int>(EncounterReward.CardRarity, 5); // TO-DO: Might be too high
+
+    // Path Selection Chances
+    private List<Tuple<int, EncounterType>> encounters_three_to_ten = new List<Tuple<int, EncounterType>>
+    {
+        new Tuple<int, EncounterType>(8, EncounterType.Regular_Encounter),
+        new Tuple<int, EncounterType>(9, EncounterType.Culver_Encounter),
+        new Tuple<int, EncounterType>(10, EncounterType.Hold_The_Line_Encounter)
+    };
+
+     private List<Tuple<int, EncounterType>> encounters_ten_to_twenty = new List<Tuple<int, EncounterType>>
+    {
+        new Tuple<int, EncounterType>(6, EncounterType.Regular_Encounter),
+        new Tuple<int, EncounterType>(8, EncounterType.Mini_Boss_Encounter),
+        new Tuple<int, EncounterType>(9, EncounterType.Culver_Encounter),
+        new Tuple<int, EncounterType>(9, EncounterType.Hold_The_Line_Encounter)
+    };
 
 
     void Start()
@@ -111,61 +115,66 @@ public class PathSelectionSceneController : MonoBehaviour
 
     public void moveToEncounter(PathOptionData option)
     {
-        GameManager.instance.loadEncounterTypeAndRewards(option.encounterType, option.encounterReward);
+        GameManager.instance.loadEncounterTypeAndRewards(option.encounterType, option.encounterReward, option.rewardValue);
     }
 
     private PathOptionData generateOption()
     {
         int random = UnityEngine.Random.Range(0, 11);
         PathOptionData option;
+        Tuple<EncounterReward,int> encounterReward;
 
         if (currentLevel < 3)
         {
-            option = new PathOptionData(EncounterType.Regular_Encounter, generateRandomReward(EncounterType.Regular_Encounter));
-            
+            encounterReward = generateRandomReward(EncounterType.Regular_Encounter);
+            option = new PathOptionData(EncounterType.Regular_Encounter, encounterReward.Item1, encounterReward.Item2);
         }
-        else if (currentLevel < 6)
+        else if (currentLevel < 10)
         {
-            option = random switch
-            {
-                < 8 => new PathOptionData(EncounterType.Regular_Encounter, generateRandomReward(EncounterType.Regular_Encounter)),
-                < 10 => new PathOptionData(EncounterType.Culver_Encounter, generateRandomReward(EncounterType.Culver_Encounter)),
-                _ => new PathOptionData(EncounterType.Hold_The_Line_Encounter, generateRandomReward(EncounterType.Hold_The_Line_Encounter))
-            };
+            Tuple<int, EncounterType> encounterInfo = encounters_three_to_ten.First(e => random < e.Item1);
+            encounterReward = generateRandomReward(encounterInfo.Item2);
+            option = new PathOptionData(encounterInfo.Item2, encounterReward.Item1, encounterReward.Item2);
         }
         else
         {
-            option = random switch
-            {
-                < 8 => new PathOptionData(EncounterType.Regular_Encounter, generateRandomReward(EncounterType.Regular_Encounter)),
-                < 9 => new PathOptionData(EncounterType.Culver_Encounter, generateRandomReward(EncounterType.Culver_Encounter)),
-                < 10 => new PathOptionData(EncounterType.Hold_The_Line_Encounter, generateRandomReward(EncounterType.Hold_The_Line_Encounter)),
-                10 => new PathOptionData(EncounterType.Mini_Boss_Encounter, generateRandomReward(EncounterType.Mini_Boss_Encounter)),
-                _ => new PathOptionData(EncounterType.Final_Boss, generateRandomReward(EncounterType.Final_Boss))
-            };
+            Tuple<int, EncounterType> encounterInfo = encounters_ten_to_twenty.First(e => random < e.Item1);
+            encounterReward = generateRandomReward(encounterInfo.Item2);
+            option = new PathOptionData(encounterInfo.Item2, encounterReward.Item1, encounterReward.Item2);
         }
 
         return option;
     }
     
-    EncounterReward generateRandomReward(EncounterType encounterType)
+    Tuple<EncounterReward,int> generateRandomReward(EncounterType encounterType)
     {
-
         int random = UnityEngine.Random.Range(0, 101);
 
         if (encounterType == EncounterType.Mini_Boss_Encounter)
         {
             // Specific mini-boss rewards
-            return EncounterReward.Gold;
+            return new Tuple<EncounterReward, int>(EncounterReward.Gold, 0);
         }
 
         if (random < 71)
         {
-            return EncounterReward.Gold;
+            return new Tuple<EncounterReward, int>(baseGoldReward.Item1, baseGoldReward.Item2 * currentLevel);
         }
         else
         {
-            return Helpers.GetRandomEnumValue<EncounterReward>();
+            EncounterReward rewardType = Helpers.GetRandomEnumValue<EncounterReward>();
+            switch (rewardType)
+            {
+                case EncounterReward.CardChoices:
+                    return new Tuple<EncounterReward, int>(baseCardChoicesReward.Item1, baseGoldReward.Item2);
+                case EncounterReward.CardRarity:
+                    return new Tuple<EncounterReward, int>(baseCardRarityReward.Item1, baseGoldReward.Item2);
+                case EncounterReward.Gold:
+                    return new Tuple<EncounterReward, int>(baseGoldReward.Item1, baseGoldReward.Item2 * currentLevel);
+                case EncounterReward.MaxHealth:
+                    return new Tuple<EncounterReward, int>(baseMaxHealthReward.Item1, baseGoldReward.Item2 * currentLevel);
+                default:
+                    return new Tuple<EncounterReward, int>(EncounterReward.Gold, 0);
+            }
         }
     }
 }

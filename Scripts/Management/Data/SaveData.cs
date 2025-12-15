@@ -11,8 +11,13 @@ public class SaveData
     public int playerHandSize;
     public int playerGold;
     public int playerHandEnergy;
+    public int playerCardChoices;
+    public int playerCardRarity;
+    public PlayerClass playerClass;
+    public List<DeckModelSO> victoryCards;
     public string saveName = "Save Name";
     public List<SerializableCardModel> playerCards; // Unique card IDs or titles
+    public MythicCard mythicCard;
     public GameObject playerPrefab;
     public GameObject playerDisplay;
     public List<PathOptionData> pathOptions;
@@ -44,10 +49,12 @@ public class PathOptionData
 {
     public EncounterType encounterType;
     public EncounterReward encounterReward;
+    public int rewardValue;
 
-    public PathOptionData(EncounterType type, EncounterReward reward)
+    public PathOptionData(EncounterType type, EncounterReward reward, int value)
     {
         encounterType = type;
         encounterReward = reward;
+        rewardValue = value;
     }
 }

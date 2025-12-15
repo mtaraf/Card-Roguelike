@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b04a2a5476ff64788caa87c41b8035, type: 3}
+  m_Name: EpicVictoryCards
+  m_EditorClassIdentifier: 
+  cards:
+  - {fileID: 11400000, guid: 8f3868529a875414ca22554062618e45, type: 2}
+  - {fileID: 11400000, guid: 60235656190edbf469ef2e09ee8c4654, type: 2}
+  - {fileID: 11400000, guid: 919a23241a64b334db41e97fafde36fa, type: 2}
+  - {fileID: 11400000, guid: 55483d6bead526b45af3c576cc38e6f0, type: 2}
+  - {fileID: 11400000, guid: 3594e0aa7c102924ebd9243670b5ac7d, type: 2}
+  - {fileID: 11400000, guid: bbe04dc026a4e0e4e81bb877a828ec0f, type: 2}
+  - {fileID: 11400000, guid: 252a82303f1be4348bb4fadb9a31728f, type: 2}
