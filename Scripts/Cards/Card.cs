@@ -138,11 +138,6 @@ public class Card : MonoBehaviour
         return cardModel.energy;
     }
 
-    public void mulitplyValues(int multiplier)
-    {
-        cardModel.multiplyValues(multiplier);
-    }
-
     public CardModelSO getUpgradedCard()
     {
         if (cardModel.upgradedCard != null)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +35,12 @@ public class Enemy : Character
         decideUpcomingMoveset();
     }
 
+    public void scaleEnemyToCurrentLevel(int currentLevel)
+    {
+        double statIncrease = Math.Pow(currentLevel, 2)/10 * 0.1;
+        
+    }
+
     public virtual void setAIandCardProcessor()
     {
         switch (enemyName)
@@ -61,15 +68,6 @@ public class Enemy : Character
             animator.SetTrigger("death");
         }
     }
-
-    // Check if selected card can target self, display visual indicator if so
-    // private void checkSelectedCard()
-    // {
-    //     if (HandManager.instance.hasSelectedCard())
-    //     {
-    //         Card card = HandManager.instance.getSelectedCard();
-    //     }
-    // }
 
     public override void processCardEffects(List<CardEffect> effects, Enemy enemy = null)
     {
@@ -104,12 +102,12 @@ public class Enemy : Character
         return sceneController.getCurrentPlayerDeck();
     }
 
-    public IEnumerator playCards(int multiplier)
+    public IEnumerator playCards()
     {
-        yield return StartCoroutine(playAndProcessCards(upcomingMoveSet, multiplier));
+        yield return StartCoroutine(playAndProcessCards(upcomingMoveSet));
     }
 
-    IEnumerator playAndProcessCards(DeckModelSO moveset, int multiplier)
+    IEnumerator playAndProcessCards(DeckModelSO moveset)
     {
         foreach (CardModelSO card in moveset.cards)
         {
@@ -120,7 +118,6 @@ public class Enemy : Character
 
             yield return new WaitForSeconds(1.0f);
 
-            card.multiplyValues(multiplier);
             List<CardEffect> effects = enemyCardProcessor.processCard(card, attributes, this);
 
             if (effects != null && effects.Count > 0)

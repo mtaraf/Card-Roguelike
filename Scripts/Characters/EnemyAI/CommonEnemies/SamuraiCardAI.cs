@@ -7,9 +7,9 @@ public class SamuraiCardAI: EnemyCardAI
     public SamuraiCardAI(Enemy enemy)
     {
         character = enemy;
-        attackMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Samurai/Attack").ToList();
-        defenseMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Samurai/Defense").ToList();
-        specialMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Samurai/Special").ToList();
+        path = "ScriptableObjects/Cards/Enemies/RegularEnemies/Samurai/";
+        setMovesets();
+        scaleMovesets(2.0);
     }
 
     public override DeckModelSO generateNextRoundMoves(Dictionary<EffectType, int> playerAttributes)

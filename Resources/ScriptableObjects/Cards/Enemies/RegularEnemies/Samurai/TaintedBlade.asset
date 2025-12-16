@@ -24,9 +24,10 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 6 damage for each gash card in the player deck. Heal for half the
     amount.
+  baseDetails: Deals {Damage} damage for each gash card in the player deck. Heal
+    for half the amount.
   title: Tainted Blade
   image: {fileID: 0}
   target: 2

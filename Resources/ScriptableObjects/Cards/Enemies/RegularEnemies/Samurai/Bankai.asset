@@ -24,8 +24,7 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
-  details: Consumes Gash cards in player's deck, deals 12 damage per card.
+  details: Consumes Gash cards in player's deck, deals {Damage} damage per card.
   title: Bankai
   image: {fileID: 0}
   target: 2

@@ -39,8 +39,8 @@ public class CardModelSO : ScriptableObject
     public List<CardEffect> effects = new List<CardEffect>();
     public bool special;
     public ConditionTupleEquivalent condition;
-    public double multiplier;
     public string details;
+    public string baseDetails;
     public string title;
     public Sprite image;
     public Target target;
@@ -51,12 +51,21 @@ public class CardModelSO : ScriptableObject
     public bool oneUse;
     public bool lithe;
 
-    public void multiplyValues(int multiplier)
+    public void scaleValues(double scaling)
     {
         foreach (CardEffect effect in effects)
         {
-            effect.value *= multiplier;
+            effect.value = (int) (effect.value * scaling);
         }
+
+        setDescription();
+        Debug.Log(baseDetails);
+    }
+
+    public void setDescription()
+    {
+        if (baseDetails != null && effects != null && effects.Count > 0)
+            details = DescriptionBuilder.buildDescription(baseDetails, effects);
     }
 
     public CardModelSO clone()
@@ -72,8 +81,8 @@ public class CardModelSO : ScriptableObject
             conditionValue = condition?.conditionValue ?? 0,
             metric = condition?.metric ?? ConditionMetric.NO_CONDITION
         };
-        copy.multiplier = multiplier;
         copy.details = details;
+        copy.baseDetails = baseDetails;
         copy.title = title;
         copy.image = image;
         copy.target = target;
@@ -96,6 +105,8 @@ public class CardModelSO : ScriptableObject
                 critRate = effect.critRate
             });
         }
+
+        copy.setDescription();
 
         return copy;
     }

@@ -7,9 +7,8 @@ public class DeathWitchAI: EnemyCardAI
     public DeathWitchAI(Enemy enemy)
     {
         character = enemy;
-        attackMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/MiniBosses/DeathWitch/Attack").ToList();
-        defenseMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/MiniBosses/DeathWitch/Defense").ToList();
-        specialMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/MiniBosses/DeathWitch/Special").ToList();
+        path = "ScriptableObjects/Cards/Enemies/MiniBosses/DeathWitch/";
+        setMovesets();
     }
 
     public override DeckModelSO generateNextRoundMoves(Dictionary<EffectType, int> playerAttributes)

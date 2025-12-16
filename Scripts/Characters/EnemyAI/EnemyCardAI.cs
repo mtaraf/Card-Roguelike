@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyCardAI
@@ -7,7 +8,48 @@ public class EnemyCardAI
     public List<DeckModelSO> attackMovesets = new List<DeckModelSO>();
     public List<DeckModelSO> defenseMovesets = new List<DeckModelSO>();
     public List<DeckModelSO> specialMovesets = new List<DeckModelSO>();
+    public string path;
     public Enemy character;
+
+    public void setMovesets()
+    {
+        Debug.Log(path);
+        List<DeckModelSO> attacks = Resources.LoadAll<DeckModelSO>(path + "Test").ToList();
+        foreach (DeckModelSO attack in attacks)
+        {
+            attackMovesets.Add(attack.clone());
+        }
+
+        List<DeckModelSO> defenses = Resources.LoadAll<DeckModelSO>(path + "Test").ToList();
+        foreach (DeckModelSO defense in defenses)
+        {
+            defenseMovesets.Add(defense.clone());
+        }
+
+        List<DeckModelSO> specials = Resources.LoadAll<DeckModelSO>(path + "Test").ToList();
+        foreach (DeckModelSO special in specials)
+        {
+            specialMovesets.Add(special.clone());
+        }
+    }
+
+    public void scaleMovesets(double scaling)
+    {
+        foreach(DeckModelSO deck in attackMovesets)
+        {
+            deck.scaleCards(scaling);
+        }
+
+        foreach(DeckModelSO deck in defenseMovesets)
+        {
+            deck.scaleCards(scaling);
+        }
+
+        foreach(DeckModelSO deck in specialMovesets)
+        {
+            deck.scaleCards(scaling);
+        }
+    }
 
     public virtual DeckModelSO generateNextRoundMoves(Dictionary<EffectType, int> playerAttributes)
     {

@@ -48,7 +48,6 @@ public static class SaveSystem
             energy = model.energy,
             effects = new List<CardEffect>(model.effects), // assuming CardEffect is serializable
             condition = model.condition,
-            multiplier = model.multiplier,
             target = model.target,
             cardsDrawn = model.cardsDrawn,
             special = model.special,
@@ -67,7 +66,6 @@ public static class SaveSystem
         model.energy = serial.energy;
         model.effects = new List<CardEffect>(serial.effects);
         model.condition = serial.condition;
-        model.multiplier = serial.multiplier;
         model.target = serial.target;
         model.cardsDrawn = serial.cardsDrawn;
         model.special = serial.special;

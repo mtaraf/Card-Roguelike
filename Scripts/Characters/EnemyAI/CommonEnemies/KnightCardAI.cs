@@ -7,9 +7,9 @@ public class KnightCardAI: EnemyCardAI
     public KnightCardAI(Enemy enemy)
     {
         character = enemy;
-        attackMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Knight/Attack").ToList();
-        defenseMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Knight/Defense").ToList();
-        specialMovesets = Resources.LoadAll<DeckModelSO>("ScriptableObjects/Cards/Enemies/RegularEnemies/Knight/Special").ToList();
+        path = "ScriptableObjects/Cards/Enemies/RegularEnemies/Knight/";
+        setMovesets();
+        scaleMovesets(2.0);
     }
 
     public override DeckModelSO generateNextRoundMoves(Dictionary<EffectType, int> playerAttributes)
