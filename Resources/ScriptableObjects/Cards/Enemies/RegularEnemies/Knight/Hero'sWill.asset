@@ -28,8 +28,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Adds 8 armor, 2 strength.
+  baseDetails: Adds {Armor} armor, {Strength} strength.
   title: Hero's Will
   image: {fileID: 0}
   target: 1

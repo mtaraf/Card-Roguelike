@@ -20,7 +20,7 @@ public class CharacterSelectionSceneController : MonoBehaviour
     {
         cardPrefab = Resources.Load<GameObject>("UI/Cards/CardNoAnimation");
         characterIconPrefab = Resources.Load<GameObject>("UI/CharacterSelection/CharacterIcon");
-        availableCharacters = Resources.LoadAll<GameObject>("CharacterPrefabs/CharacterDisplays");
+        availableCharacters = Resources.LoadAll<GameObject>("CharacterPrefabs/CharacterDisplays/READY");
 
         characterDetails = GameObject.Find("CharacterDetails");
         characterSelector = GameObject.Find("CharacterSelector");
@@ -62,7 +62,6 @@ public class CharacterSelectionSceneController : MonoBehaviour
     {
         GameObject character = Array.Find(availableCharacters, character => character.name == name);
         DisplayInformation displayInformation = character.GetComponent<DisplayInformation>();
-        Debug.Log("Selected: " + character.name);
         if (characterDisplay.transform.childCount > 0)
         {
             // Destroy the current character display
@@ -114,15 +113,15 @@ public class CharacterSelectionSceneController : MonoBehaviour
         {
             case PlayerClass.Paladin:
                 playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Dwarf/DwarfCharacter");
-                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/DwarfDisplay");
+                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/READY/DwarfDisplay");
                 break;
             case PlayerClass.Mistborn:
-                playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Witch/WitchCharacter");
-                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/WitchDisplay");
+                playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Mistborn/Mistborn");
+                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/READY/MistbornDisplay");
                 break;
             default:
                 playerCharacter = Resources.Load<GameObject>("CharacterPrefabs/PlayableCharacters/Mistborn/Mistborn");
-                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/MistbornDisplay");
+                playerDisplay = Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/READY/MistbornDisplay");
                 break;
         }
 

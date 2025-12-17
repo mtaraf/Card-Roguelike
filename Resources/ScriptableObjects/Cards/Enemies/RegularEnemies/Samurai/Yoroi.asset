@@ -24,8 +24,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Gain 8 armor.
+  baseDetails: Gain {Armor} armor.
   title: Yoroi
   image: {fileID: 0}
   target: 1

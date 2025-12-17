@@ -40,8 +40,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 4 dmage, 4 times. Heals for damage done.
+  baseDetails: Deals {Damage} dmage, 4 times. Heals for damage done.
   title: Whirlwind Cut
   image: {fileID: 0}
   target: 2
@@ -50,3 +50,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 0}
   oneUse: 0
+  lithe: 0

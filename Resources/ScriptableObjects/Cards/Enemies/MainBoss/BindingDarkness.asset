@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: Worldreaver
+  m_Name: BindingDarkness
   m_EditorClassIdentifier: 
   type: 0
   rarity: 0
   energy: 0
   effects:
-  - type: 12
-    value: 8
+  - type: 0
+    value: 15
     turns: 0
     critRate: 0
   special: 1
   condition:
     conditionValue: 0
     metric: 0
-  details: Adds 8 bleed stacks per puncture in the player's hand.
-  baseDetails: Adds {Bleed} bleed stacks per puncture in the player's hand.
-  title: Worldreaver
+  details: Deals 15 damage, adds a Soul Eater card to the player's deck.
+  baseDetails: 
+  title: Binding Darkness
   image: {fileID: 0}
   target: 2
   cardsDrawn: 0

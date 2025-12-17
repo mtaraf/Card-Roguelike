@@ -36,7 +36,7 @@ public class PathSelectionUIController : MonoBehaviour
         {
             icon = Instantiate(pathSelectionIconPrefab, mainCanvas.transform);
             icon.transform.localPosition = new Vector2(iconPositions[i].Item1, iconPositions[i].Item2);
-            StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(options[i].encounterType, options[i].encounterReward));
+            StartCoroutine(icon.GetComponent<PathSelectionIcon>().instantiateIcon(options[i].encounterType, options[i].encounterReward, options[i].rewardValue));
         }
     }
 }

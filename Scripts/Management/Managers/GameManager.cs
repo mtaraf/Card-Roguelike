@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
 
     // Game States
-    private int currentLevel;
+    private int currentLevel = 1;
     private ParentSceneController currentSceneController;
     private List<PathOptionData> currentPathSelectionOptions;
 
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
             if (currentSaveSlot == -1 || !loadGame(currentSaveSlot))
             {
                     playerInformation = new PlayerInformation(50, 50, 3, 0, 6, null, null, PlayerClass.Mistborn, null);
-                    currentLevel = 0;
+                    currentLevel = 1;
             }
             StartCoroutine(updateUI());
         }

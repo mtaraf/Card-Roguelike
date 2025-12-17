@@ -11,9 +11,10 @@ public static class EncounterRewardExtensions
     {
         switch (eff)
         {
-            case EncounterReward.CardRarity: return "+25% Card Rarity";
+            case EncounterReward.CardRarity: return "Card Rarity";
             case EncounterReward.CardChoices: return "+1 Card Choice";
-            case EncounterReward.Gold: return "+25 Gold";
+            case EncounterReward.Gold: return "Gold";
+            case EncounterReward.MaxHealth: return "Max Health";
             default: return "Default";
         }
     }
@@ -60,11 +61,12 @@ public class PathSelectionSceneController : MonoBehaviour
 
         playerDisplayLocation = GameObject.Find("PlayerDisplayPosition").transform;
 
-        GameObject playerDisplay;
+        GameObject playerDisplay = GameManager.instance.getPlayerDisplayObject();
         // For testing purposes, TO-DO: Replace with error checking later
-        if (GameManager.instance.getPlayerDisplayObject() == null)
+        if (playerDisplay == null)
         {
-            playerDisplay = Instantiate(Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/MistbornDisplay"), playerDisplayLocation);
+            Debug.LogError("Player display is null, using default");
+            playerDisplay = Instantiate(Resources.Load<GameObject>("CharacterPrefabs/CharacterDisplays/READY/MistbornDisplay"), playerDisplayLocation);
         }
         else
         {
@@ -171,7 +173,7 @@ public class PathSelectionSceneController : MonoBehaviour
                 case EncounterReward.Gold:
                     return new Tuple<EncounterReward, int>(baseGoldReward.Item1, baseGoldReward.Item2 * currentLevel);
                 case EncounterReward.MaxHealth:
-                    return new Tuple<EncounterReward, int>(baseMaxHealthReward.Item1, baseGoldReward.Item2 * currentLevel);
+                    return new Tuple<EncounterReward, int>(baseMaxHealthReward.Item1, baseMaxHealthReward.Item2 * currentLevel);
                 default:
                     return new Tuple<EncounterReward, int>(EncounterReward.Gold, 0);
             }

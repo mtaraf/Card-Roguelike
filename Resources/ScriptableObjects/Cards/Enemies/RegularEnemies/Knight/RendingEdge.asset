@@ -24,8 +24,9 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 9 damage. If a puncture card is in the player's deck, apply 2 weaken
+  baseDetails: Deals {Damage} damage. If a puncture card is in the player's deck,
+    apply 2 weaken
   title: Rending Edge
   image: {fileID: 0}
   target: 0

@@ -28,8 +28,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Gain 3 strength, 6 armor.
+  baseDetails: Gain {Strength} strength, {Armor} armor.
   title: Serene Focus
   image: {fileID: 0}
   target: 1

@@ -24,8 +24,9 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 5 damage, 40% critical chance. If damage is critical, gain 5 armor.
+  baseDetails: Deals {Damage} damage, 40% critical chance. If damage is critical,
+    gain 5 armor.
   title: Combo Attack
   image: {fileID: 0}
   target: 2

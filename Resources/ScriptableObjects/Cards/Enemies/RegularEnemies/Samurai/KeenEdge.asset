@@ -28,8 +28,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Heals 5 hit points, adds 5 armor.
+  baseDetails: Heals {Heal} hit points, adds {Armor} armor.
   title: Keen Edge
   image: {fileID: 0}
   target: 1

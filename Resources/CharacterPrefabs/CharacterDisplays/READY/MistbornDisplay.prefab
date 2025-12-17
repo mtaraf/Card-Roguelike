@@ -51,15 +51,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterClass: 1
   classDetails:
-  - High damage, low armor
-  - High blind and poison chance
+  - 'Offensive: Bleed, Corruption, Critical Damage'
+  - 'Defensive: Agility and Healing'
   characterName: Ren
   characterIcon: {fileID: -3963609580147510630, guid: 71b304dff5e425e47b479cc6dff1ec81, type: 3}
   displaycards:
-  - {fileID: 11400000, guid: 6dcbcb52b5eef3349b534205a20bb877, type: 2}
-  - {fileID: 11400000, guid: 7d05e225c3a4caa409bf2c751ebeac52, type: 2}
-  pathSelectionYOffset: -30
-  pathSelectionScale: 0.5
+  - {fileID: 11400000, guid: cc25b5d0dc778614bbf6dcac5e953a2f, type: 2}
+  - {fileID: 11400000, guid: 31b1d61849fde374a85e8553c9e7d809, type: 2}
+  pathSelectionYOffset: 10
+  pathSelectionScale: 1
 --- !u!1 &8863711403973895507
 GameObject:
   m_ObjectHideFlags: 0

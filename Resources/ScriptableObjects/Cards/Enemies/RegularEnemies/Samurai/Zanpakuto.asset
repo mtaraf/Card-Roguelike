@@ -24,8 +24,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 20 damage.
+  baseDetails: Deals {Damage} damage.
   title: Zanpakuto
   image: {fileID: 0}
   target: 2

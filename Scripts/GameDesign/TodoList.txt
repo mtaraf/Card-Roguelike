@@ -70,3 +70,16 @@ Game loops:
 
 Full Testing:
 - 
+
+
+Pre-Alpha:
+- Implement Corruption Mechanic!
+    -
+- Implement Game settings in settings popup during encounters
+
+
+Alpha: 
+- Character selection: create icons that represent the different damage/defesive typing to add to character descriptions
+
+Beta:
+- 

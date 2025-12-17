@@ -35,10 +35,9 @@ public class Enemy : Character
         decideUpcomingMoveset();
     }
 
-    public void scaleEnemyToCurrentLevel(int currentLevel)
+    public double scaleEnemyToCurrentLevel(int currentLevel)
     {
-        double statIncrease = Math.Pow(currentLevel, 2)/10 * 0.1;
-        
+        return Math.Pow(currentLevel, 2)/10 * 0.1;
     }
 
     public virtual void setAIandCardProcessor()
@@ -57,6 +56,8 @@ public class Enemy : Character
                 Debug.LogError($"Could not find AI/Card processor for {gameObject.name}");
                 break;
         }
+
+        enemyCardAI.scaleMovesets(scaleEnemyToCurrentLevel(GameManager.instance.getCurrentLevel()));
     }
 
     public void Update()

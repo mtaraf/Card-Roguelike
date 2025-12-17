@@ -10,25 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: Worldreaver
+  m_Name: FocusedFury
   m_EditorClassIdentifier: 
-  type: 0
+  type: 2
   rarity: 0
   energy: 0
   effects:
-  - type: 12
-    value: 8
+  - type: 2
+    value: 2
     turns: 0
     critRate: 0
-  special: 1
+  - type: 1
+    value: 10
+    turns: 0
+    critRate: 0
+  special: 0
   condition:
     conditionValue: 0
     metric: 0
-  details: Adds 8 bleed stacks per puncture in the player's hand.
-  baseDetails: Adds {Bleed} bleed stacks per puncture in the player's hand.
-  title: Worldreaver
+  details: Gain 2 strength, 10 armor.
+  baseDetails: 
+  title: Focused Fury
   image: {fileID: 0}
-  target: 2
+  target: 1
   cardsDrawn: 0
   cardsDiscarded: 0
   corrupts: 0

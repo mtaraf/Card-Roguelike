@@ -10,23 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
-  m_Name: Worldreaver
+  m_Name: DemonLash
   m_EditorClassIdentifier: 
   type: 0
   rarity: 0
   energy: 0
   effects:
-  - type: 12
+  - type: 0
     value: 8
     turns: 0
     critRate: 0
-  special: 1
+  - type: 0
+    value: 8
+    turns: 0
+    critRate: 0
+  - type: 0
+    value: 8
+    turns: 0
+    critRate: 0
+  - type: 0
+    value: 8
+    turns: 0
+    critRate: 0
+  special: 0
   condition:
     conditionValue: 0
     metric: 0
-  details: Adds 8 bleed stacks per puncture in the player's hand.
-  baseDetails: Adds {Bleed} bleed stacks per puncture in the player's hand.
-  title: Worldreaver
+  details: Deals 8 damage, 4 times.
+  baseDetails: 
+  title: Demon Lash
   image: {fileID: 0}
   target: 2
   cardsDrawn: 0

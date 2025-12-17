@@ -28,8 +28,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 12 damage, twice.
+  baseDetails: Deals {Damage} damage, twice.
   title: Rising Rage
   image: {fileID: 0}
   target: 2

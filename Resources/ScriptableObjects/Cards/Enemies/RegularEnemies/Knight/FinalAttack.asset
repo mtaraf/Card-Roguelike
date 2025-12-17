@@ -24,8 +24,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Delas 12 damage, 40% critical chance.
+  baseDetails: Delas {Damage} damage, 40% critical chance.
   title: Final Attack
   image: {fileID: 0}
   target: 2

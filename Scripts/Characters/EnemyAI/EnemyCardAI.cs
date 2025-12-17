@@ -14,19 +14,19 @@ public class EnemyCardAI
     public void setMovesets()
     {
         Debug.Log(path);
-        List<DeckModelSO> attacks = Resources.LoadAll<DeckModelSO>(path + "Test").ToList();
+        List<DeckModelSO> attacks = Resources.LoadAll<DeckModelSO>(path + "Attack").ToList();
         foreach (DeckModelSO attack in attacks)
         {
             attackMovesets.Add(attack.clone());
         }
 
-        List<DeckModelSO> defenses = Resources.LoadAll<DeckModelSO>(path + "Test").ToList();
+        List<DeckModelSO> defenses = Resources.LoadAll<DeckModelSO>(path + "Defense").ToList();
         foreach (DeckModelSO defense in defenses)
         {
             defenseMovesets.Add(defense.clone());
         }
 
-        List<DeckModelSO> specials = Resources.LoadAll<DeckModelSO>(path + "Test").ToList();
+        List<DeckModelSO> specials = Resources.LoadAll<DeckModelSO>(path + "Special").ToList();
         foreach (DeckModelSO special in specials)
         {
             specialMovesets.Add(special.clone());

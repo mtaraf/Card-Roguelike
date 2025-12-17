@@ -24,8 +24,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 10 damage. Adds a puncture to the player's deck.
+  baseDetails: Deals {Damage} damage. Adds a puncture to the player's deck.
   title: Raging Blow
   image: {fileID: 0}
   target: 2

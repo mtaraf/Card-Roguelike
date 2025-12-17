@@ -59,7 +59,6 @@ public class CardModelSO : ScriptableObject
         }
 
         setDescription();
-        Debug.Log(baseDetails);
     }
 
     public void setDescription()

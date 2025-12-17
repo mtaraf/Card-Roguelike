@@ -24,8 +24,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Gain 3 strength
+  baseDetails: Gain {Strength} strength
   title: Agile Arms
   image: {fileID: 0}
   target: 1

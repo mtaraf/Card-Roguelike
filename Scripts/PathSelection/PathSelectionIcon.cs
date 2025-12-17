@@ -21,7 +21,7 @@ public class PathSelectionIcon : MonoBehaviour
         container = GetComponent<Image>();
     }
 
-    public IEnumerator instantiateIcon(EncounterType type, EncounterReward reward)
+    public IEnumerator instantiateIcon(EncounterType type, EncounterReward reward, int rewardValue)
     {
         // Wait for Start() to finish
         yield return null;
@@ -34,7 +34,7 @@ public class PathSelectionIcon : MonoBehaviour
         if (EncounterData.InfoMap.TryGetValue(type, out var info))
         {
             iconImage.sprite = Resources.Load<Sprite>(info.iconPath);
-            string message = info.message + "\n\n" + reward.ToDisplayString();
+            string message = info.message + "\n\n" + $"+{rewardValue} {reward.ToDisplayString()}";
             tooltip.setTooltipData(info.title, message, 20, ToolTipDirection.Above);
         }
 
@@ -53,6 +53,9 @@ public class PathSelectionIcon : MonoBehaviour
                 break;
             case EncounterReward.Gold:
                 rewardIcon.sprite = Resources.Load<Sprite>("UI/Art/Icons/gold_icon");
+                break;
+            case EncounterReward.MaxHealth:
+                rewardIcon.sprite = Resources.Load<Sprite>("UI/Art/Icons/health_icon");
                 break;
         }
     }
