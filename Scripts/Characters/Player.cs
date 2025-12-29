@@ -36,6 +36,9 @@ public class Player : Character
     public override void Start()
     {
         base.Start();
+
+        // For testing purposes only
+        // mythic = new MythicCard(Resources.Load<CardModelSO>("ScriptableObjects/Cards/Mistborn/Mythics/TheCollector"));
     }
 
     public bool hasDeck()

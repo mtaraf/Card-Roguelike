@@ -64,6 +64,12 @@ public class Enemy : Character
     {
         if (currentHealth < 1 && dead)
         {
+            // Mythic Check
+            if (GameManager.instance.getPlayerMythicCard() != null && GameManager.instance.getPlayerMythicCard().getMythicName() == "The Collector")
+            {
+                GameManager.instance.addPlayerGold(20);
+            }
+
             sceneController.removeDeadEnemy(id);
             dead = false;
             animator.SetTrigger("death");

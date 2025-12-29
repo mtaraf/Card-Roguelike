@@ -182,6 +182,11 @@ public class GameManager : MonoBehaviour
         player.setMythic(card);
     }
 
+    public MythicCard getPlayerMythicCard()
+    {
+        return player.getMythicCard();
+    }
+
     public void removeCardFromPlayerDeck(CardModelSO model)
     {
         playerInformation.playerDeck.cards.Remove(model);

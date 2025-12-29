@@ -17,7 +17,7 @@ public class Character : MonoBehaviour
     [SerializeField] private int xSpawnOffset;
     [SerializeField] private int ySpawnOffset;
     protected CardEffectHandler cardEffectHandler;
-    private int corruptionLimit = 25;
+    private int corruptionLimit = 20;
 
     // UI
     protected UIUpdater uIUpdater;
@@ -132,8 +132,8 @@ public class Character : MonoBehaviour
     {
         // TO-DO: Add corruption animation!
         sceneController.healPlayer(amount);
-        attributes[EffectType.Corruption] = 0;
-        processDamage(amount, 0, DamageType.General);
+        updateAttribute(EffectType.Corruption, 0);
+        processDamage(amount, 0, DamageType.Corruption);
     }
 
     public void updateCurrentHealth(int health)
@@ -205,6 +205,7 @@ public class Character : MonoBehaviour
     private void clearEffect(EffectType type)
     {
         attributes[type] = 0;
+        uIUpdater.updateEffect(type, 0);
     }
 
     public int getCurrentHealth()

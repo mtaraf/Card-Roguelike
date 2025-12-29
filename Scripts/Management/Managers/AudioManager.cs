@@ -130,6 +130,16 @@ public class AudioManager : MonoBehaviour
         sfxSource.volume = volume;
     }
 
+    public float getBackgroundMusicVolume()
+    {
+        return musicSource.volume;
+    }
+
+    public float getSFXVolume()
+    {
+        return sfxSource.volume;
+    }
+
     public Tuple<float,float> getAudioVolumes()
     {
         return new Tuple<float, float>(musicSource.volume, sfxSource.volume);

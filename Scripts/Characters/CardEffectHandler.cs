@@ -49,16 +49,22 @@ public class CardEffectHandler
 
     public int processDamage(int damage, int critRate, DamageType type)
     {
-        bool corruption = type == DamageType.Corruption;
         int currentHealth = character.getCurrentHealth();
         Dictionary<EffectType, int> attributes = character.getAttributes();
         int damageDealt = 0;
 
         if (critRate == 100)
         {
-            damage = (int)(damage * 2.5);
+            if (GameManager.instance.getPlayerMythicCard() != null && GameManager.instance.getPlayerMythicCard().getMythicName() == "Critical Fate")
+            {
+                float randomRoll = Random.Range(1.5f, 3.51f);
+                damage = (int)(damage * randomRoll);
+                Debug.Log($"Dealing {randomRoll} crit damage.");
+            }
+            else
+                damage = (int)(damage * 2.5);
+            
             type = DamageType.Critical;
-            Debug.Log("Dealing crit damage.");
         }
 
         // Apply agility to damage

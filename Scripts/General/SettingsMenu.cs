@@ -7,19 +7,16 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Button close;
     [SerializeField] private Button gameSettings;
     [SerializeField] private Button exitGame;
+    [SerializeField] private Button backButton;
     [SerializeField] private Button mainMenu;
-
-    private TopBarUIManager topBarUIManager;
+    [SerializeField] private TextMeshProUGUI title;
+    [SerializeField] private GameObject mainSettingsPage;
+    [SerializeField] private GameObject gameSettingsPage;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
 
     void Start()
     {
-        topBarUIManager = FindFirstObjectByType<TopBarUIManager>();
-
-        if (topBarUIManager == null)
-        {
-            Debug.LogError("Could not find topbarmanager for settings menu");
-        }
-
         close.onClick.RemoveAllListeners();
         close.onClick.AddListener(() => { gameObject.SetActive(false); });
 
@@ -31,11 +28,33 @@ public class SettingsMenu : MonoBehaviour
 
         gameSettings.onClick.RemoveAllListeners();
         gameSettings.onClick.AddListener(() => showGameSettingsPage());
+
+        backButton.onClick.RemoveAllListeners();
+        backButton.onClick.AddListener(() => showMainSettingsPage());
+
+        musicSlider.value = AudioManager.instance.getBackgroundMusicVolume();
+        sfxSlider.value = AudioManager.instance.getSFXVolume();
+
+        musicSlider.onValueChanged.RemoveAllListeners();
+        musicSlider.onValueChanged.AddListener((value) => AudioManager.instance.setBackgroundMusicVolume(value));
+
+        sfxSlider.onValueChanged.RemoveAllListeners();
+        sfxSlider.onValueChanged.AddListener((value) => AudioManager.instance.setSFXVolume(value));
+
+        gameSettingsPage.SetActive(false);
     }
 
     public void showGameSettingsPage()
     {
-
+        mainSettingsPage.SetActive(false);
+        gameSettingsPage.SetActive(true);
+        title.text = "Game Settings";
     }
-    
+
+    public void showMainSettingsPage()
+    {
+        mainSettingsPage.SetActive(true);
+        gameSettingsPage.SetActive(false);
+        title.text = "Settings";
+    }
 }

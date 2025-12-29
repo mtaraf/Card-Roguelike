@@ -8298,9 +8298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d756d9862e29548a02090e90da91ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  victoryCardPools: []
   statusPrefabs: []
-  starterDeck: {fileID: 0}
 --- !u!4 &1773149073
 Transform:
   m_ObjectHideFlags: 0

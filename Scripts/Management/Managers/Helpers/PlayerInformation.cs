@@ -29,7 +29,8 @@ public class PlayerInformation
         playerCardRarity = 0;
 
         if (deck == null)
-            playerDeck = cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Cards/Mistborn/StarterCards/StarterDeck"));
+            // playerDeck = cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Cards/Mistborn/StarterCards/StarterDeck"));
+            playerDeck = cloneDeck(Resources.Load<DeckModelSO>("ScriptableObjects/Cards/Mistborn/MistbornCurrentTestDeck"));
         else
             playerDeck = deck;
 

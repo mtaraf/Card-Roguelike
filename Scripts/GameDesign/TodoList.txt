@@ -73,9 +73,10 @@ Full Testing:
 
 
 Pre-Alpha:
-- Implement Corruption Mechanic!
-    -
-- Implement Game settings in settings popup during encounters
+- Make str/weaken effect icons
+- Make target sprites icon
+- Make energy icon
+- Make health bar art
 
 
 Alpha: 
