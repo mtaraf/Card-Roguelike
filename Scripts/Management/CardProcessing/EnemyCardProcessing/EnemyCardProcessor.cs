@@ -40,7 +40,7 @@ public class EnemyCardProcessor
         }
         else if (cardTarget == Target.Enemy_Multiple)
         {
-            // TO-DO add functionality to allow enemies to buff different enemies
+            // TO-DO (Beta): add functionality to allow enemies to buff different enemies
             return null;
         }
 

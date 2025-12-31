@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
   m_Name: Gash
   m_EditorClassIdentifier: 
-  type: 0
+  type: 5
   rarity: 0
   energy: 1
   effects: []
@@ -20,8 +20,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Does nothing. Lithe.
+  baseDetails: 
   title: Gash
   image: {fileID: 0}
   target: 2

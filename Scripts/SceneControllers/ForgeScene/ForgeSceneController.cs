@@ -82,7 +82,7 @@ public class ForgeSceneController : MonoBehaviour
         }
         else
         {
-            // TO-DO: Add not enough gold message
+            // TO-DO (Pre-Alpha): Add not enough gold message
         }
     }
 

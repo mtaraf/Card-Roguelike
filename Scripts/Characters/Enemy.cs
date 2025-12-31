@@ -37,7 +37,9 @@ public class Enemy : Character
 
     public double scaleEnemyToCurrentLevel(int currentLevel)
     {
-        return Math.Pow(currentLevel, 2)/10 * 0.1;
+        double scale = 1 + Math.Floor(currentLevel / 3.0) * 0.5;
+        Debug.Log($"Scaling enemy {enemyName} to level {currentLevel} with scale {scale}");
+        return scale;
     }
 
     public virtual void setAIandCardProcessor()

@@ -10,13 +10,13 @@ public static class StatusEffectFactory
             case EffectType.Blind: return new BlindEffect(effect.value);
             case EffectType.Corruption: return new CorruptionEffect(effect.value);
             case EffectType.Divinity: return new DivinityEffect(effect.value);
-            case EffectType.Frostbite: return null; // TO-DO: implement
+            case EffectType.Frostbite: return null;
             case EffectType.Heal: return new HealEffect(effect.value);
             case EffectType.HealDamageDone: return new HealDamageDoneEffect(effect.value);
-            case EffectType.HealOverTime: return null; // TO-DO: implement
-            case EffectType.Poison: return null; // TO-DO: implement
+            case EffectType.HealOverTime: return null;
+            case EffectType.Poison: return null;
             case EffectType.Strength: return new StrengthEffect(effect.value);
-            case EffectType.Stun: return null; // TO-DO: implement
+            case EffectType.Stun: return null;
             case EffectType.Weaken: return new WeakenEffect(effect.value);
             default: return null;
         }
@@ -32,13 +32,13 @@ public static class StatusEffectFactory
             case EffectType.Blind: return new BlindEffect(0);
             case EffectType.Corruption: return new CorruptionEffect(0);
             case EffectType.Divinity: return new DivinityEffect(0);
-            case EffectType.Frostbite: return null; // TO-DO: implement
+            case EffectType.Frostbite: return null;
             case EffectType.Heal: return new HealEffect(0);
             case EffectType.HealDamageDone: return new HealDamageDoneEffect(0);
-            case EffectType.HealOverTime: return null; // TO-DO: implement
-            case EffectType.Poison: return null; // TO-DO: implement
+            case EffectType.HealOverTime: return null;
+            case EffectType.Poison: return null;
             case EffectType.Strength: return new StrengthEffect(0);
-            case EffectType.Stun: return null; // TO-DO: implement
+            case EffectType.Stun: return null;
             case EffectType.Weaken: return new WeakenEffect(0);
             default: return null;
         }

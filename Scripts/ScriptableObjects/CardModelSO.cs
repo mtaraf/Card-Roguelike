@@ -55,7 +55,7 @@ public class CardModelSO : ScriptableObject
     {
         foreach (CardEffect effect in effects)
         {
-            effect.value = (int) (effect.value * scaling);
+            effect.value = (int)(effect.value * scaling);
         }
 
         setDescription();

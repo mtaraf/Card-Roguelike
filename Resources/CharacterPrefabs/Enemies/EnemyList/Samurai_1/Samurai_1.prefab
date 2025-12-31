@@ -63,16 +63,8 @@ MonoBehaviour:
   xSpawnOffset: 0
   ySpawnOffset: -95
   spriteObject: {fileID: 4653887851505298441}
-  moveset: 0
-  movesets:
-  - {fileID: 11400000, guid: 946eacfba4f407849a08075abab9bd52, type: 2}
-  - {fileID: 11400000, guid: 09fc1bc6bfa476743894d5b7ac57c769, type: 2}
-  - {fileID: 11400000, guid: 6ca2964e36e6ba04c81ea95b3edb5517, type: 2}
-  - {fileID: 11400000, guid: f2af0028928e48e4d920e8d69af4b1c6, type: 2}
-  - {fileID: 11400000, guid: 2bfafcf6eb457a94c87e0eee6f05f114, type: 2}
-  - {fileID: 11400000, guid: ce547713d92df8543b0d8d5ebd2fd7ff, type: 2}
-  - {fileID: 11400000, guid: 9dc0f90a9f4ce64488e7b4871ca23df9, type: 2}
   energyUI: {fileID: 3326835025415496621}
+  enemyName: 0
 --- !u!114 &5314620027693752524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -817,7 +809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7170742265325174066, guid: 68f835917a6042546a685cd4175a92d3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 7170742265325174066, guid: 68f835917a6042546a685cd4175a92d3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

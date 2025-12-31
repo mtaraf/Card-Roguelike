@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,6 +15,7 @@ IDragHandler,
 IEndDragHandler
 {
     [SerializeField] private float verticalMoveAmount = 300f;
+    [SerializeField] private GameObject cardTooltip;
 
     private Vector3 startPos;
     private int originalIndex = -1;
@@ -27,6 +29,7 @@ IEndDragHandler
 
     private ParentSceneController sceneController;
     private bool toggledForDiscard = false;
+    private string tooltipDescription = "";
 
     private void Start()
     {
@@ -35,6 +38,13 @@ IEndDragHandler
         centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI");
 
         originalIndex = transform.parent.gameObject.transform.GetSiblingIndex();
+
+        tooltipDescription = EffectTooltipFactory.createCardTooltipDescription(gameObject.GetComponent<Card>().getCardEffects());
+
+        if (tooltipDescription != "")
+            cardTooltip.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = tooltipDescription;
+        
+        cardTooltip.SetActive(false);
         StartCoroutine(getController());
     }
 
@@ -57,6 +67,9 @@ IEndDragHandler
     {
         if (HandManager.instance.getDiscardInProgress())
             return;
+
+        // Hide tooltip
+        cardTooltip.SetActive(false);
 
         // bring card in front
         transform.SetAsLastSibling();
@@ -184,6 +197,12 @@ IEndDragHandler
         if (HandManager.instance.getDiscardInProgress())
             return;
 
+        // Show tooltip is needed
+        if (tooltipDescription != "")
+        {
+            cardTooltip.SetActive(true);
+        }
+
         // Only allow card animation if a card is not selected for playing
         if (!HandManager.instance.hasSelectedCard())
         {
@@ -198,6 +217,10 @@ IEndDragHandler
     {
         if (HandManager.instance.getDiscardInProgress())
             return;
+
+
+        // Hide tooltip
+        cardTooltip.SetActive(false);
 
         if (!HandManager.instance.hasSelectedCard())
         {

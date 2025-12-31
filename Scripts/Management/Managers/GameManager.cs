@@ -213,16 +213,16 @@ public class GameManager : MonoBehaviour
         return playerInformation.playerGold;
     }
 
-    // TO-DO: add cha-ching sound
     public void addPlayerGold(int value)
     {
+        AudioManager.instance.playGoldSound();
         playerInformation.playerGold += value;
         topBarUIManager.updateGoldCount(playerInformation.playerGold);
     }
 
-    // TO-DO: add gold spending sound
     public void subtractPlayerGold(int value)
     {
+        AudioManager.instance.playGoldSound();
         playerInformation.playerGold -= value;
         topBarUIManager.updateGoldCount(playerInformation.playerGold);
     }

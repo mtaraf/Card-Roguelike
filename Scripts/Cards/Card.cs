@@ -58,6 +58,11 @@ public class Card : MonoBehaviour
         return cardModel.title;
     }
 
+    public List<CardEffect> getCardEffects()
+    {
+        return cardModel.effects;
+    }
+
     public void toggleCardOutline(bool toggle)
     {
         cardOutline.SetActive(toggle);

@@ -10,7 +10,7 @@ public class PathSelectionIcon : MonoBehaviour
     [SerializeField] private GameObject rewardContainer;
     private Button iconButton;
     private Image iconImage;
-    private Image container; // TO-DO: add this and enable if the path has been completed
+    private Image container; // TO-DO: add this and enable if the path has been completed ? idk what this is lol
     private Tooltip tooltip;
 
     void Start()

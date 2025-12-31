@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -167,7 +168,7 @@ public class HandManager : MonoBehaviour
                 return;
             }
 
-            randomCardIndex = Random.Range(0, drawPile.Count);
+            randomCardIndex = UnityEngine.Random.Range(0, drawPile.Count);
             bool spaceInHandRemaining = addCardToCardSlot(drawPile.cards[randomCardIndex]);
             if (spaceInHandRemaining)
             {
@@ -209,10 +210,10 @@ public class HandManager : MonoBehaviour
         }
     }
 
-    public void addCardToDiscardPile(Card card)
+    public void addCardToDiscardPile(Card card, Action onComplete = null)
     {
         discardPile.Add(card.getCardModel());
-        handUI.moveCardToDiscardPile(card);
+        handUI.moveCardToDiscardPile(card, onComplete);
     }
 
     public void litheCardPlayed(Card card)
@@ -228,7 +229,7 @@ public class HandManager : MonoBehaviour
 
     public void addCardToPlayerDeck(CardModelSO card)
     {
-        // TO-DO: add animation for card entering draw pile
+        // TO-DO (Alpha): add animation for card entering draw pile
         CardModelSO clonedCard = card.clone();
         playerDeck.cards.Add(clonedCard);
         drawPile.Add(clonedCard);

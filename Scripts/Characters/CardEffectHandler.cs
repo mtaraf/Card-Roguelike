@@ -78,7 +78,7 @@ public class CardEffectHandler
 
             character.showFloatingFeedbackUI(type, damageDealt.ToString());
             character.updateAttribute(EffectType.Armor, 0);
-            AudioManager.instance.playDamage();
+            character.playHitAnimation();
         }
         else
         {

@@ -73,14 +73,21 @@ Full Testing:
 
 
 Pre-Alpha:
+- Encounter defeat menu/statistics!
+- Forge not enough gold, maybe make button inactive with not enough gold
+- Hold the Line / Culver number of turn scaling
 - Make str/weaken effect icons
 - Make target sprites icon
 - Make energy icon
-- Make health bar art
-
+- Mythic card diplay w/ tooltip
+- Set cards as last child to appear infront of characters/enemies
 
 Alpha: 
 - Character selection: create icons that represent the different damage/defesive typing to add to character descriptions
+- Make health bar art
+- Add corruption overload animation
+- Add card book (player can look through to see what cards they have found / not found)
 
 Beta:
-- 
+- Add a statistics menu to show best score, round, etc.
+- Add build planner maybe?

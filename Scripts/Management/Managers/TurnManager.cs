@@ -184,7 +184,6 @@ public class TurnManager : MonoBehaviour
         foreach (Enemy enemy in enemies)
         {
             //enemy.processStartOfTurnEffects();
-            // TO-DO: depending on current level adjust multiplier for enemy cards
             yield return StartCoroutine(enemy.playCards());
             //enemy.processEndOfTurnEffects();
         }

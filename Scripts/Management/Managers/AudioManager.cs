@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip buffSound;
     public AudioClip blockSound;
     public AudioClip debuffSound;
+    public AudioClip goldSound;
 
     void Awake()
     {
@@ -72,6 +73,7 @@ public class AudioManager : MonoBehaviour
             sfxSource.PlayOneShot(victorySound);
         }
     }
+    
     public void playDamage()
     {
         if (sfxSource)
@@ -109,6 +111,14 @@ public class AudioManager : MonoBehaviour
         if (sfxSource)
         {
             sfxSource.PlayOneShot(blockSound);
+        }
+    }
+
+    public void playGoldSound()
+    {
+        if (sfxSource)
+        {
+            sfxSource.PlayOneShot(goldSound);
         }
     }
 

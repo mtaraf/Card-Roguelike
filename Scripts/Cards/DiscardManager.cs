@@ -99,10 +99,9 @@ public class DiscardManager : MonoBehaviour
     {
         if (selectedCards.Count == requiredCount)
         {
-            // TO-DO: Add feedback error message
             foreach (Card card in selectedCards)
             {
-                HandManager.instance.addCardToDiscardPile(card);
+                HandManager.instance.addCardToDiscardPile(card, () => Destroy(card.gameObject));
             }
         }
 

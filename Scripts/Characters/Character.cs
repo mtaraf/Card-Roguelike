@@ -130,7 +130,7 @@ public class Character : MonoBehaviour
 
     public void consumeCorruption(int amount)
     {
-        // TO-DO: Add corruption animation!
+        // TO-DO (Alpha): Add corruption animation!
         sceneController.healPlayer(amount);
         updateAttribute(EffectType.Corruption, 0);
         processDamage(amount, 0, DamageType.Corruption);
@@ -310,6 +310,12 @@ public class Character : MonoBehaviour
         {
             animator.SetTrigger("buff");
         }
+    }
+
+    public void playHitAnimation()
+    {
+        AudioManager.instance.playDamage();
+        animator.SetTrigger("hit");
     }
 
     public void showFloatingFeedbackUI(DamageType type, string message)

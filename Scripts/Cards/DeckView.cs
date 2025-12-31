@@ -114,12 +114,7 @@ public class DeckView : MonoBehaviour, IPointerClickHandler
             }
         }
 
-        if (deck.cards.Count == 0)
-        {
-            // No cards for this deck view, display empty
-            // TO-DO: Add empty tag where cards are usually
-        }
-        else
+        if (deck.cards.Count > 0)
         {
             // Fill the cards of the deck view
             foreach (CardModelSO card in deck.cards)

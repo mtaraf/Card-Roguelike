@@ -973,6 +973,7 @@ MonoBehaviour:
   buffSound: {fileID: 8300000, guid: f4d066236c5eebf4e9a4bcc56cd993e3, type: 3}
   blockSound: {fileID: 8300000, guid: 3a4b257c1bd63e64b88685b8673ca411, type: 3}
   debuffSound: {fileID: 8300000, guid: 1e657c97a2d8470438f4521c604aa661, type: 3}
+  goldSound: {fileID: 8300000, guid: b48b90d07d44c2c438723b9165653915, type: 3}
 --- !u!4 &963980916
 Transform:
   m_ObjectHideFlags: 0

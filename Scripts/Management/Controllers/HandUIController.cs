@@ -48,7 +48,6 @@ public class HandUIController : MonoBehaviour
 
         cardToUpdate.setCardDisplayInformation(card);
         Debug.Log($"Card display updated for {card.title}");
-        // TO-DO: Add animation for this update
     }
 
     public void addCardToHand(CardModelSO cardModel)
@@ -62,10 +61,10 @@ public class HandUIController : MonoBehaviour
         StartCoroutine(reflowHand());
     }
 
-    public void moveCardToDiscardPile(Card card)
+    public void moveCardToDiscardPile(Card card, Action onComplete = null)
     {
         Transform cardTransform = cardsInHand.Find((cardInHand) => cardInHand == card).transform;
-        animateCardMovement(cardTransform, discardPile.transform.position, cardTransform.localScale, cardMoveSpeed);
+        animateCardMovement(cardTransform, discardPile.transform.position, cardTransform.localScale, cardMoveSpeed, onComplete);
         cardsInHand.Remove(card);
     }
 

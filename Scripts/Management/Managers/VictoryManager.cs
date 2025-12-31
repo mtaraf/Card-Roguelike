@@ -29,7 +29,6 @@ public class VictoryManager : MonoBehaviour
         victoryCardPools = GameManager.instance.getVictoryCardsPools();
     }
 
-    // TO-DO: implement card choices / card rarity
     public void showVictoryScreen(int cardChoices, int cardRarity, bool hasMythic)
     {
         victoryScreenInstance = Instantiate(victoryCardSelectionScreenPrefab, canvasTransform);

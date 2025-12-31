@@ -70,7 +70,7 @@ public class BaseLevelSceneController : ParentSceneController
         }
         else
         {
-            int randomSize = Random.Range(1, 2); // TO-DO: change back to 1,5 after testing
+            int randomSize = Random.Range(1, 2); // TO-DO: change back to 1,4 after testing and have encounter with multiple enemies 1/2/3
             List<EnemyGroup> enemyGroups = enemyPrefabs.FindAll((group) => group.size == randomSize);
 
             int randomGroup = Random.Range(0, enemyGroups.Count);
@@ -97,12 +97,12 @@ public class BaseLevelSceneController : ParentSceneController
                 }
             }
 
-            // TO-DO: remove enemy from list once there are enough enemies
+            // TO-DO (Beta): remove enemy from list once there are enough enemies
             // enemyPrefabs.Remove(enemyPrefabs[random]);
 
             // Get enemy component
 
-            // TO-DO: Add random events instead of common enemy
+            // TO-DO (Beta): Add random events instead of common enemy
 
             // Start turns
             TurnManager.instance.Initialize(player, enemies);
