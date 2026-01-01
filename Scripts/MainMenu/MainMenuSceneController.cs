@@ -27,7 +27,6 @@ public class MainMenuSceneController : MonoBehaviour
             Debug.LogError("Could not find options menu sliders");
         }
 
-        // TO-DO: add this to global save data to retain volume settings
         changeMusicVolume();
         changeSFXVolume();
 

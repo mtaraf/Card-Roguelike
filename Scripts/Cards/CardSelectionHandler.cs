@@ -43,7 +43,7 @@ IEndDragHandler
 
         if (tooltipDescription != "")
             cardTooltip.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = tooltipDescription;
-        
+
         cardTooltip.SetActive(false);
         StartCoroutine(getController());
     }
@@ -110,7 +110,7 @@ IEndDragHandler
         else
         {
             transform.position = startPos;
-            
+
             // Set layering back to original
             transform.SetSiblingIndex(originalIndex);
             HandManager.instance.clearSelectedCard();
@@ -243,7 +243,6 @@ IEndDragHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-
         handUIController.animateCardMovement(transform, startPos + new Vector3(0f, verticalMoveAmount, 0f), transform.localScale, cardHoverSpeed, null);
     }
 

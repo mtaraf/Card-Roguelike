@@ -74,6 +74,8 @@ Full Testing:
 
 Pre-Alpha:
 - Encounter defeat menu/statistics!
+    - Add continue button
+    - Make another background image
 - Forge not enough gold, maybe make button inactive with not enough gold
 - Hold the Line / Culver number of turn scaling
 - Make str/weaken effect icons

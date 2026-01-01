@@ -65,8 +65,8 @@ public class GameManager : MonoBehaviour
         {
             if (currentSaveSlot == -1 || !loadGame(currentSaveSlot))
             {
-                    playerInformation = new PlayerInformation(50, 50, 3, 0, 6, null, null, PlayerClass.Mistborn, null);
-                    currentLevel = 1;
+                playerInformation = new PlayerInformation(50, 50, 3, 0, 6, null, null, PlayerClass.Mistborn, null);
+                currentLevel = 1;
             }
             StartCoroutine(updateUI());
         }
@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
     {
         return statusPrefabs;
     }
-    
+
     public List<DeckModelSO> getVictoryCardsPools()
     {
         return playerInformation.victoryCardPools;
@@ -149,6 +149,11 @@ public class GameManager : MonoBehaviour
         addEncounterRewards();
         yield return new WaitForSeconds(1.0f);
         victoryManager.showVictoryScreen(playerInformation.playerCardChoices, playerInformation.playerCardRarity, playerInformation.playerMythic != null);
+    }
+
+    public void setVictoryCardSelection(Card card)
+    {
+        victoryManager.setSelectedCard(card);
     }
 
     void addEncounterRewards()
@@ -194,7 +199,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator moveToPathSelection()
     {
-         // update player stats
+        // update player stats
         playerInformation.playerCurrentHealth = player.getCurrentHealth();
         playerInformation.playerMaxHealth = player.getMaxHealth();
 
@@ -251,7 +256,7 @@ public class GameManager : MonoBehaviour
     {
         playerDisplayObject = display;
     }
-    
+
     public GameObject getPlayerDisplayObject()
     {
         return playerDisplayObject;
@@ -355,7 +360,7 @@ public class GameManager : MonoBehaviour
 
     public bool saveGame(int saveSlot)
     {
-        Tuple<float,float> currentVolume = AudioManager.instance.getAudioVolumes();
+        Tuple<float, float> currentVolume = AudioManager.instance.getAudioVolumes();
 
         SaveData saveData = new SaveData();
         saveData.currentLevel = currentLevel;
@@ -396,7 +401,7 @@ public class GameManager : MonoBehaviour
         }
 
         currentLevel = data.currentLevel;
-        playerInformation = new PlayerInformation(data.playerMaxHealth, data.playerCurrentHealth, data.playerHandEnergy, data.playerGold, 
+        playerInformation = new PlayerInformation(data.playerMaxHealth, data.playerCurrentHealth, data.playerHandEnergy, data.playerGold,
             data.playerHandSize, null, data.mythicCard, data.playerClass, data.victoryCards);
         playerInformation.playerCardChoices = data.playerCardChoices;
         playerInformation.playerCardRarity = data.playerCardRarity;

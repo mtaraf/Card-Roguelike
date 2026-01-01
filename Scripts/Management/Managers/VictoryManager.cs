@@ -21,10 +21,13 @@ public class VictoryManager : MonoBehaviour
         {CardRarity.MYTHIC, new Color(255f / 255f, 142f / 255f, 6f / 255f, 1f)},
     };
 
+    private Card selectedCard;
+    private List<VictoryCardChoice> cards = new List<VictoryCardChoice>();
+
     public void instantiate()
     {
         victoryCardSelectionScreenPrefab = Resources.Load<GameObject>("UI/General/VictoryCardSelection");
-        cardSelectionDisplayPrefab = Resources.Load<GameObject>("UI/Cards/CardNoAnimation");
+        cardSelectionDisplayPrefab = Resources.Load<GameObject>("UI/Cards/VictoryCardChoicePrefab");
         canvasTransform = GameObject.FindGameObjectWithTag("OverlayCanvas").transform;
         victoryCardPools = GameManager.instance.getVictoryCardsPools();
     }
@@ -34,19 +37,18 @@ public class VictoryManager : MonoBehaviour
         victoryScreenInstance = Instantiate(victoryCardSelectionScreenPrefab, canvasTransform);
         generateCardRewards(cardRarity, hasMythic);
 
-        var slotsParent = victoryScreenInstance.transform.Find("Slots");
+        Transform rewards = victoryScreenInstance.transform.Find("Rewards");
+        if (rewards == null)
+        {
+            Debug.LogError("Rewards transform not found in VictoryCardSelection prefab.");
+            return;
+        }
+
         for (int i = 0; i < cardChoices; i++)
         {
-            var slot = slotsParent.GetChild(i).gameObject;
-            int index = i;
-            slot.GetComponent<Button>().onClick.AddListener(() => chooseCard(index));
-
-            if (i < 2)
-            {
-                GameObject display = Instantiate(cardSelectionDisplayPrefab, slot.transform);
-                display.transform.GetChild(0).GetComponent<Image>().color = rarityColors[chosenCards[i].rarity];
-                display.GetComponent<Card>().setCardDisplayInformation(chosenCards[i]);
-            }
+            GameObject display = Instantiate(cardSelectionDisplayPrefab, rewards);
+            cards.Add(display.GetComponent<VictoryCardChoice>());
+            display.GetComponent<Card>().setCardDisplayInformation(chosenCards[i]);
         }
     }
 
@@ -55,22 +57,23 @@ public class VictoryManager : MonoBehaviour
         int randomUpperLimit = 100;
         if (hasMythic)
             randomUpperLimit = 95;
-        
+
         for (int i = 0; i < 3; i++)
         {
             int rand = Random.Range(cardRarity, randomUpperLimit);
             CardModelSO card = rand switch
             {
-                < 65 => getRandomCard(victoryCardPools[0]),
-                < 85 => getRandomCard(victoryCardPools[1]),
-                < 95 => getRandomCard(victoryCardPools[2]),
+                < 55 => getRandomCard(victoryCardPools[0]),
+                < 75 => getRandomCard(victoryCardPools[1]),
+                < 90 => getRandomCard(victoryCardPools[2]),
                 _ => getRandomCard(victoryCardPools[3])
             };
             chosenCards[i] = card;
         }
     }
 
-    CardModelSO getRandomCard(DeckModelSO deck) {
+    CardModelSO getRandomCard(DeckModelSO deck)
+    {
         int random = Random.Range(0, deck.cards.Count);
         CardModelSO card = deck.cards[random];
         if (chosenCards.Contains(card))
@@ -87,21 +90,29 @@ public class VictoryManager : MonoBehaviour
         return card;
     }
 
-    void chooseCard(int index)
+    void confirmReward()
     {
-        CardModelSO cardReward = chosenCards[index];
-
-        if (cardReward.rarity == CardRarity.MYTHIC)
+        Debug.Log($"Selected Card: {selectedCard.getCardTitle()}");
+        if (selectedCard == null)
         {
-            GameManager.instance.setPlayerMythicCard(cardReward);
+            // TO-DO: Maybe show popup warning mesage
         }
+        else if (selectedCard.getRarity() == CardRarity.MYTHIC)
+            GameManager.instance.setPlayerMythicCard(selectedCard.getCardModel());
         else
-        {
-            GameManager.instance.addCardToPlayerDeck(cardReward);
-        }
+            GameManager.instance.addCardToPlayerDeck(selectedCard.getCardModel());
 
         Destroy(victoryScreenInstance);
-
         StartCoroutine(GameManager.instance.moveToPathSelection());
+    }
+
+    public void setSelectedCard(Card card)
+    {
+        selectedCard = card;
+
+        // foreach (VictoryCardChoice cardChoice in cards)
+        // {
+        //     if (card != cardChoice.get)
+        // }
     }
 }
