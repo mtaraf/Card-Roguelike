@@ -36,7 +36,7 @@ public class TurnManager : MonoBehaviour
     public IEnumerator culverTurnLoop(int turns)
     {
         int currentTurn = 1;
-        while (currentTurn <= turns && enemies.Count > 0)
+        while (currentTurn <= turns && enemies.Count > 0 && player.getCurrentHealth() > 0)
         {
             CulverSceneController.instance.updateTurnCount(currentTurn);
             yield return StartCoroutine(playerCulverTurn());
@@ -48,7 +48,9 @@ public class TurnManager : MonoBehaviour
             processPlayerAndEnemyRoundEndEffects();
         }
 
-        if (enemies.Count == 0)
+        if (player.getCurrentHealth() < 1)
+            StartCoroutine(GameManager.instance.encounterDefeat());
+        else if (enemies.Count == 0)
             StartCoroutine(GameManager.instance.encounterVictory());
     }
 
@@ -70,7 +72,7 @@ public class TurnManager : MonoBehaviour
     {
         StartCoroutine(roundBasedTurnLoop(rounds));
     }
-    
+
     private IEnumerator roundBasedTurnLoop(int rounds)
     {
         int currentRound = 0;
@@ -103,8 +105,7 @@ public class TurnManager : MonoBehaviour
         if (player.getCurrentHealth() > 0)
             StartCoroutine(GameManager.instance.encounterVictory());
         else
-            Debug.Log("Game over!");
-            // StartCoroutine(GameManager.instance.encounterDefeat()); TO-DO: add encounter defeat function
+            StartCoroutine(GameManager.instance.encounterDefeat());
     }
 
     private void processPlayerAndEnemyRoundEndEffects()
@@ -146,6 +147,8 @@ public class TurnManager : MonoBehaviour
             yield return null;
         }
 
+        if (player.getCurrentHealth() < 1)
+            StartCoroutine(GameManager.instance.encounterDefeat());
         if (enemies.Count == 0)
             StartCoroutine(GameManager.instance.encounterVictory());
     }

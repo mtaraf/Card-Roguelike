@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip blockSound;
     public AudioClip debuffSound;
     public AudioClip goldSound;
+    public AudioClip defeatSound;
 
     void Awake()
     {
@@ -73,7 +74,15 @@ public class AudioManager : MonoBehaviour
             sfxSource.PlayOneShot(victorySound);
         }
     }
-    
+
+    public void playDefeat()
+    {
+        if (sfxSource)
+        {
+            sfxSource.PlayOneShot(defeatSound);
+        }
+    }
+
     public void playDamage()
     {
         if (sfxSource)
@@ -150,7 +159,7 @@ public class AudioManager : MonoBehaviour
         return sfxSource.volume;
     }
 
-    public Tuple<float,float> getAudioVolumes()
+    public Tuple<float, float> getAudioVolumes()
     {
         return new Tuple<float, float>(musicSource.volume, sfxSource.volume);
     }

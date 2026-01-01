@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     // Controllers
     private TopBarUIManager topBarUIManager;
     private VictoryManager victoryManager;
+    private DefeatManager defeatManager;
     private int currentSaveSlot = -1;
 
 
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour
         {
             if (currentSaveSlot == -1 || !loadGame(currentSaveSlot))
             {
-                playerInformation = new PlayerInformation(50, 50, 3, 0, 6, null, null, PlayerClass.Mistborn, null);
+                playerInformation = new PlayerInformation(5, 5, 3, 0, 6, null, null, PlayerClass.Mistborn, null);
                 currentLevel = 1;
             }
             StartCoroutine(updateUI());
@@ -106,13 +107,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator waitForUI()
     {
         yield return null;
-        victoryManager = transform.AddComponent<VictoryManager>();
-        victoryManager.instantiate();
-
-        if (victoryManager == null)
-        {
-            Debug.LogError("Could not instatiate victory manager");
-        }
 
         getPlayer();
     }
@@ -144,11 +138,33 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator encounterVictory()
     {
-        Debug.Log("Victory! rewards: " + encounterReward);
+        victoryManager = transform.AddComponent<VictoryManager>();
+        victoryManager.instantiate();
+
+        if (victoryManager == null)
+        {
+            Debug.LogError("Could not instatiate victory manager");
+        }
+
         AudioManager.instance.playVictory();
         addEncounterRewards();
         yield return new WaitForSeconds(1.0f);
         victoryManager.showVictoryScreen(playerInformation.playerCardChoices, playerInformation.playerCardRarity, playerInformation.playerMythic != null);
+    }
+
+    public IEnumerator encounterDefeat()
+    {
+        defeatManager = transform.AddComponent<DefeatManager>();
+        defeatManager.instantiate();
+
+        if (defeatManager == null)
+        {
+            Debug.LogError("Could not instatiate defeat manager");
+        }
+        AudioManager.instance.playDefeat();
+        yield return new WaitForSeconds(1.0f);
+
+        defeatManager.showDefeatScreen(currentLevel, playerInformation.playerGold, playerInformation.playerDeck);
     }
 
     public void setVictoryCardSelection(Card card)
@@ -437,6 +453,11 @@ public class GameManager : MonoBehaviour
     public void setCurrentSaveSlot(int slot)
     {
         currentSaveSlot = slot;
+    }
+
+    public bool clearSaveSlot()
+    {
+        return SaveSystem.deleteSave(currentSaveSlot);
     }
 
     public void loadScene(int sceneNumber)

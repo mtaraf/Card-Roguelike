@@ -1,32 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using System.Linq;
 
 public class VictoryManager : MonoBehaviour
 {
-    [SerializeField] private GameObject victoryCardSelectionScreenPrefab;
-    [SerializeField] private GameObject cardSelectionDisplayPrefab;
-    [SerializeField] private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
-    [SerializeField] private Transform canvasTransform;
-
+    private GameObject victoryCardSelectionScreenPrefab;
+    private GameObject cardSelectionDisplayPrefab;
+    private List<DeckModelSO> victoryCardPools; // 0: common, 1: rare, etc.
+    private Transform canvasTransform;
     private CardModelSO[] chosenCards = new CardModelSO[3];
     private GameObject victoryScreenInstance;
-    private Dictionary<CardRarity, Color> rarityColors = new()
-    {
-        {CardRarity.COMMON, new Color(204f / 255f, 204f / 255f, 204f / 255f, 1f)},
-        {CardRarity.RARE,   new Color(90f / 255f, 207f / 255f, 255f / 255f, 1f)},
-        {CardRarity.EPIC,   new Color(190f / 255f, 123f / 255f, 248f / 255f, 1f)},
-        {CardRarity.MYTHIC, new Color(255f / 255f, 142f / 255f, 6f / 255f, 1f)},
-    };
-
     private Card selectedCard;
-    private List<VictoryCardChoice> cards = new List<VictoryCardChoice>();
+    private Button continueButton;
 
     public void instantiate()
     {
-        victoryCardSelectionScreenPrefab = Resources.Load<GameObject>("UI/General/VictoryCardSelection");
+        victoryCardSelectionScreenPrefab = Resources.Load<GameObject>("UI/RoundEnd/VictoryCardSelection");
         cardSelectionDisplayPrefab = Resources.Load<GameObject>("UI/Cards/VictoryCardChoicePrefab");
         canvasTransform = GameObject.FindGameObjectWithTag("OverlayCanvas").transform;
         victoryCardPools = GameManager.instance.getVictoryCardsPools();
@@ -35,6 +25,16 @@ public class VictoryManager : MonoBehaviour
     public void showVictoryScreen(int cardChoices, int cardRarity, bool hasMythic)
     {
         victoryScreenInstance = Instantiate(victoryCardSelectionScreenPrefab, canvasTransform);
+
+        continueButton = victoryScreenInstance.transform.Find("Continue").GetComponent<Button>();
+        if (continueButton == null)
+        {
+            Debug.LogError("Could not find continue button in victory screen");
+        }
+
+        continueButton.onClick.RemoveAllListeners();
+        continueButton.onClick.AddListener(() => confirmReward());
+
         generateCardRewards(cardRarity, hasMythic);
 
         Transform rewards = victoryScreenInstance.transform.Find("Rewards");
@@ -47,7 +47,6 @@ public class VictoryManager : MonoBehaviour
         for (int i = 0; i < cardChoices; i++)
         {
             GameObject display = Instantiate(cardSelectionDisplayPrefab, rewards);
-            cards.Add(display.GetComponent<VictoryCardChoice>());
             display.GetComponent<Card>().setCardDisplayInformation(chosenCards[i]);
         }
     }
@@ -92,7 +91,6 @@ public class VictoryManager : MonoBehaviour
 
     void confirmReward()
     {
-        Debug.Log($"Selected Card: {selectedCard.getCardTitle()}");
         if (selectedCard == null)
         {
             // TO-DO: Maybe show popup warning mesage
@@ -109,10 +107,5 @@ public class VictoryManager : MonoBehaviour
     public void setSelectedCard(Card card)
     {
         selectedCard = card;
-
-        // foreach (VictoryCardChoice cardChoice in cards)
-        // {
-        //     if (card != cardChoice.get)
-        // }
     }
 }

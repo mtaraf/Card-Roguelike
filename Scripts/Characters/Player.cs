@@ -41,6 +41,15 @@ public class Player : Character
         // mythic = new MythicCard(Resources.Load<CardModelSO>("ScriptableObjects/Cards/Mistborn/Mythics/TheCollector"));
     }
 
+    void Update()
+    {
+        if (currentHealth < 1)
+        {
+            dead = true;
+            animator.SetTrigger("death");
+        }
+    }
+
     public bool hasDeck()
     {
         return deck == null;

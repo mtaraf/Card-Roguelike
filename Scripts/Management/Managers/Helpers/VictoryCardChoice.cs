@@ -21,6 +21,19 @@ public class VictoryCardChoice : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void OnDeselect(BaseEventData eventData)
     {
+        PointerEventData pointerData = eventData as PointerEventData;
+        if (pointerData != null)
+        {
+            GameObject clickedObj = pointerData.pointerCurrentRaycast.gameObject;
+            Debug.Log(clickedObj.name);
+
+            if (clickedObj != null && clickedObj.name == "Continue")
+            {
+                Debug.Log("Blocked deselection because " + clickedObj.name + " was clicked");
+                return;
+            }
+        }
+
         card.toggleCardOutline(false);
         GameManager.instance.setVictoryCardSelection(null);
     }

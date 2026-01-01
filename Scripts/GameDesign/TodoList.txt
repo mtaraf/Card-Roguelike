@@ -73,9 +73,6 @@ Full Testing:
 
 
 Pre-Alpha:
-- Encounter defeat menu/statistics!
-    - Add continue button
-    - Make another background image
 - Forge not enough gold, maybe make button inactive with not enough gold
 - Hold the Line / Culver number of turn scaling
 - Make str/weaken effect icons
@@ -83,6 +80,9 @@ Pre-Alpha:
 - Make energy icon
 - Mythic card diplay w/ tooltip
 - Set cards as last child to appear infront of characters/enemies
+
+- Set total rounds to 11 (last is final boss)
+- Do one full play through and check balance
 
 Alpha: 
 - Character selection: create icons that represent the different damage/defesive typing to add to character descriptions

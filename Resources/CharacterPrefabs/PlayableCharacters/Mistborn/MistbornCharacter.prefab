@@ -277,13 +277,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b51b15ede585f24fb997a625efcbf02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
+  maxHealth: 5
   id: 0
   xSpawnOffset: 100
   ySpawnOffset: -80
   spriteObject: {fileID: 8863711403973895507}
   playerClass: 1
-  mythic: 4
 --- !u!1 &3513468498831711399
 GameObject:
   m_ObjectHideFlags: 0
