@@ -73,22 +73,23 @@ Full Testing:
 
 
 Pre-Alpha:
-- Forge not enough gold, maybe make button inactive with not enough gold
-- Hold the Line / Culver number of turn scaling
-- Make str/weaken effect icons
-- Make target sprites icon
-- Make energy icon
-- Mythic card diplay w/ tooltip
-- Set cards as last child to appear infront of characters/enemies
+- Test all mistborn cards
+- Test all samurai cards
+- Test all knnight cards
+- Test all death witch cards
 
-- Set total rounds to 11 (last is final boss)
+- Hold the Line / Culver number of turn scaling
 - Do one full play through and check balance
 
 Alpha: 
+- Add a way for player to check progress towards final boss 
+    - (x -> x -> x -> F -> x -> .... -> ? -> FinalBoss) where x is the encounters they have done, y is future encounters
 - Character selection: create icons that represent the different damage/defesive typing to add to character descriptions
 - Make health bar art
 - Add corruption overload animation
 - Add card book (player can look through to see what cards they have found / not found)
+- Animate target sprites
+- Add a healing fountain to forge (cost gold)
 
 Beta:
 - Add a statistics menu to show best score, round, etc.

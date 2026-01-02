@@ -35,7 +35,8 @@ public enum SceneBuildIndex
     HOLD_THE_LINE = 4,
     CHARACTER_SELECTION = 5,
     CULVER = 6,
-    MINI_BOSS = 7
+    MINI_BOSS = 7,
+    FINAL_BOSS = 8
 }
 
 public enum DeckViewType
@@ -150,7 +151,8 @@ public enum CardType
     Special
 }
 
-public enum CardRarity {
+public enum CardRarity
+{
     Starter,
     COMMON,
     RARE,

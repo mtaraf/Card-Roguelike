@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     // Game States
     private int currentLevel = 1;
+    private int totalLevels = 11;
     private ParentSceneController currentSceneController;
     private List<PathOptionData> currentPathSelectionOptions;
 
@@ -109,6 +110,10 @@ public class GameManager : MonoBehaviour
         yield return null;
 
         getPlayer();
+
+        // Set Center of UI as last child
+        GameObject centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI");
+        centerOfUI.transform.SetAsLastSibling();
     }
 
     private void getPlayer()
@@ -281,6 +286,11 @@ public class GameManager : MonoBehaviour
     public int getCurrentLevel()
     {
         return currentLevel;
+    }
+
+    public int getTotalLevels()
+    {
+        return totalLevels;
     }
 
     public void incrementCurrentLevel()

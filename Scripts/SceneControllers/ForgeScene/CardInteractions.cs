@@ -35,6 +35,21 @@ public class CardInteractions : MonoBehaviour//, IPointerEnterHandler, IPointerE
         removalHoverButton = removalButton.GetComponent<HoverButton>();
     }
 
+    void Update()
+    {
+        int playerGold = GameManager.instance.getPlayerGold();
+        if (playerGold < 30)
+        {
+            if (playerGold < 25)
+                removalButton.interactable = false;
+            else
+                removalButton.interactable = true;
+            upgradeButton.interactable = false;
+        }
+        else
+            upgradeButton.interactable = true;
+    }
+
     private void showUpgradedCardOnHover()
     {
         CardModelSO upgradedCard = card.getUpgradedCard();

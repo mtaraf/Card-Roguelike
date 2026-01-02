@@ -114,6 +114,9 @@ public class ForgeSceneController : MonoBehaviour
 
     public void moveToNextEncounter()
     {
-        SceneLoader.instance.loadScene("PathSelectionScene");
+        if (GameManager.instance.getCurrentLevel() == GameManager.instance.getTotalLevels() - 1)
+            SceneLoader.instance.loadScene((int)SceneBuildIndex.FINAL_BOSS);
+        else
+            SceneLoader.instance.loadScene((int)SceneBuildIndex.PATH_SELECTION);
     }
 }

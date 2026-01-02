@@ -26,6 +26,9 @@ public class HoverButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (button.interactable == false)
+            return;
+
         transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
         image.sprite = hoverButtonImage;
         if (hoverEnterAction != null)
@@ -36,6 +39,9 @@ public class HoverButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (button.interactable == false)
+            return;
+
         transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         image.sprite = buttonImage;
         if (hoverExitAction != null)
