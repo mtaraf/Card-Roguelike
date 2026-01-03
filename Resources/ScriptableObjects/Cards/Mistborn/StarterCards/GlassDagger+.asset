@@ -19,12 +19,13 @@ MonoBehaviour:
   - type: 0
     value: 4
     turns: 0
+    critRate: 0
   special: 0
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
-  details: Deals 4 damage. Exhausts.
+  details: Deals 4 damage.
+  baseDetails: Deals {Damage} damage.
   title: Glass Dagger+
   image: {fileID: 0}
   target: 1
@@ -32,4 +33,5 @@ MonoBehaviour:
   cardsDiscarded: 0
   corrupts: 0
   upgradedCard: {fileID: 0}
-  oneUse: 1
+  oneUse: 0
+  lithe: 0

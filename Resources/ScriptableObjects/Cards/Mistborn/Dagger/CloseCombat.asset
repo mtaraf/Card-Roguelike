@@ -19,12 +19,14 @@ MonoBehaviour:
   - type: 0
     value: 2
     turns: 0
+    critRate: 0
   special: 1
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
-  details: Deals 2 damage per card with dagger in the title.
+  details: Deals 2 damage per card with dagger in the title within your deck.
+  baseDetails: Deals {Damage} damage per card with dagger in the title within your
+    deck..
   title: Close Combat
   image: {fileID: 0}
   target: 1
@@ -33,3 +35,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 11400000, guid: 3d26a6b5a9235e84ea1e0885b95a9802, type: 2}
   oneUse: 0
+  lithe: 0

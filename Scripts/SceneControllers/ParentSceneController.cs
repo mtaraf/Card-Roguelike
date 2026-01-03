@@ -81,6 +81,17 @@ public class ParentSceneController : MonoBehaviour
     public void usePlayerEnergy(int value)
     {
         playerCurrentEnergy -= value;
+
+        if (playerCurrentEnergy < 0)
+            playerCurrentEnergy = 0;
+
+        setPlayerEnergy(playerCurrentEnergy);
+    }
+
+    public void addPlayerEnergy(int value)
+    {
+        playerCurrentEnergy += value;
+
         setPlayerEnergy(playerCurrentEnergy);
     }
 
@@ -159,7 +170,7 @@ public class ParentSceneController : MonoBehaviour
         {
             if (effect.type == EffectType.Damage && effect.critRate > 0)
             {
-                float rand = Random.Range(0,101);
+                float rand = Random.Range(0, 101);
                 if (rand <= effect.critRate)
                 {
                     effect.critRate = 100;

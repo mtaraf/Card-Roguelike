@@ -24,8 +24,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: 5 daamage
+  baseDetails: 5 daamage
   title: Test Bleed Damage
   image: {fileID: 0}
   target: 1

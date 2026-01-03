@@ -20,13 +20,14 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
-  details: Gain 2 energy. Exhausts.
+  details: Gain 2 energy. Corrupts.
+  baseDetails: Gain 2 energy. Corrupts.
   title: Pewter Drag+
   image: {fileID: 0}
   target: 2
   cardsDrawn: 0
   cardsDiscarded: 0
-  corrupts: 0
+  corrupts: 1
   upgradedCard: {fileID: 0}
-  oneUse: 1
+  oneUse: 0
+  lithe: 0

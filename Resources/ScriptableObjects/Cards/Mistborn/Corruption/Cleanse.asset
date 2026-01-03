@@ -20,8 +20,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Cleanse all negative effects. Corrupts.
+  baseDetails: Cleanse all negative effects. Corrupts.
   title: Cleanse
   image: {fileID: 0}
   target: 2
@@ -30,3 +30,4 @@ MonoBehaviour:
   corrupts: 1
   upgradedCard: {fileID: 11400000, guid: 6f8b71a08d2cf9d4fbc38c599740c001, type: 2}
   oneUse: 0
+  lithe: 0

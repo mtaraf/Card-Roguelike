@@ -24,8 +24,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Discard 2, 5 damage
+  baseDetails: Discard 2, 5 damage
   title: Test Discard
   image: {fileID: 0}
   target: 1

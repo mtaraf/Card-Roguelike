@@ -24,9 +24,10 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
-  details: Deals 8 damage, 50% critical chance. If damage is critical, add a Lucky
-    Dagger to your current hand.
+  details: Deals 8 damage, 50% critical chance. If damage is critical, add a Lithe
+    Lucky Dagger to your current hand.
+  baseDetails: Deals {Damage} damage, 50% critical chance. If damage is critical,
+    add a Lithe Lucky Dagger to your current hand.
   title: Critical Success+
   image: {fileID: 0}
   target: 1
@@ -35,3 +36,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 0}
   oneUse: 0
+  lithe: 0

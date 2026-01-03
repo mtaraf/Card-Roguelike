@@ -24,8 +24,9 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 8 damage with 40% critical chance. If attack crits, draw 2 card.
+  baseDetails: Deals {Damage} damage with 40% critical chance. If attack crits, draw
+    2 card.
   title: Luck of the Draw+
   image: {fileID: 0}
   target: 1
@@ -34,3 +35,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 0}
   oneUse: 0
+  lithe: 0

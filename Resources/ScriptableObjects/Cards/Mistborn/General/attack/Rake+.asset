@@ -19,12 +19,13 @@ MonoBehaviour:
   - type: 0
     value: 4
     turns: 0
+    critRate: 0
   special: 0
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 4 damage to all enemies.
+  baseDetails: Deals {Damage} damage to all enemies.
   title: Rake+
   image: {fileID: 0}
   target: 0
@@ -33,3 +34,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 0}
   oneUse: 0
+  lithe: 0

@@ -92,7 +92,7 @@ public class BaseLevelSceneController : ParentSceneController
                 }
                 else
                 {
-                    enemyComponent.setMaxHealth(5); // For Dev Testing
+                    enemyComponent.setMaxHealth(50); // For Dev Testing
                     enemies.Add(enemyComponent);
                 }
             }
@@ -120,7 +120,7 @@ public class BaseLevelSceneController : ParentSceneController
         //     }
         // }
         GameObject enemy = Instantiate(enemyObj, enemySpawnLocation.transform);
-        enemy.transform.localPosition = new Vector2(-50,0);
+        enemy.transform.localPosition = new Vector2(-50, 0);
         return enemy;
     }
 

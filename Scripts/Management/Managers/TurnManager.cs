@@ -111,6 +111,7 @@ public class TurnManager : MonoBehaviour
     private void processPlayerAndEnemyRoundEndEffects()
     {
         player.processEndOfRoundEffects();
+        HandManager.instance.endOfRoundCardProcessing();
 
         foreach (Enemy enemy in enemies)
         {
@@ -167,8 +168,9 @@ public class TurnManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
 
-        //player.processStartOfTurnEffects();
         sceneController.resetPlayerEnergy();
+
+        HandManager.instance.startOfRoundCardProcessing();
         HandManager.instance.drawCards(GameManager.instance.getPlayerHandSize());
 
         endPlayerTurnBool = false;
@@ -178,7 +180,6 @@ public class TurnManager : MonoBehaviour
     private void endPlayerTurn()
     {
         HandManager.instance.shuffleCurrentHandIntoDiscardPile();
-        //player.processEndOfTurnEffects();
     }
 
     IEnumerator enemyTurn()

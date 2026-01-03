@@ -9,7 +9,7 @@ public class CardEffectHandler
 
     public CardEffectHandler(Character myCharacter)
     {
-        character = myCharacter;    
+        character = myCharacter;
     }
 
     public virtual IEnumerator processCardEffects(List<CardEffect> effects, Enemy enemy = null)
@@ -63,12 +63,12 @@ public class CardEffectHandler
             }
             else
                 damage = (int)(damage * 2.5);
-            
+
             type = DamageType.Critical;
         }
 
         // Apply agility to damage
-        damage = (int)(damage * (1 - attributes[EffectType.Agility] * 0.05));
+        damage = (int)(damage * (1 - attributes[EffectType.Agility] * 0.04));
 
         // Damage
         if (damage - attributes[EffectType.Armor] > 0)

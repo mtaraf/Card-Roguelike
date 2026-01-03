@@ -1,14 +1,17 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 public class MistbornCardProcessor : CardProcessor
 {
+    private Dictionary<string, MistbornSpecialCardLogicInterface> mistBornspecialCards;
     private Dictionary<string, SpecialCardLogicInterface> specialCards;
+    private Tuple<bool, int> bloodLust = new Tuple<bool, int>(false, 0);
 
     public MistbornCardProcessor(ParentSceneController parentSceneController) : base(parentSceneController)
     {
-        specialCards = new Dictionary<string, SpecialCardLogicInterface>
+        mistBornspecialCards = new Dictionary<string, MistbornSpecialCardLogicInterface>
         {
             // Corruption
             {"Cleanse", new CleanseLogic()},
@@ -18,6 +21,8 @@ public class MistbornCardProcessor : CardProcessor
             {"Greed", new GreedLogic()},
             {"Greed+", new GreedLogic()},
             // Bleed
+            {"Bloodlust", new BloodlustLogic()},
+            {"Bloodlust+", new BloodlustLogic()},
             {"Taste of Blood", new TasteOfBloodLogic()},
             {"Taste of Blood+", new TasteOfBloodLogic()},
             {"Vampiric", new VampiricLogic()},
@@ -35,8 +40,12 @@ public class MistbornCardProcessor : CardProcessor
             {"Luck of the Draw+", new LuckOfTheDrawLogic(2)},
             {"Teamwork", new TeamworkLogic()},
             {"Teamwork+", new TeamworkLogic()},
-            {"Assassin's Mark", new AssassinsMarkLogic()},
-            {"Assassin's Mark+", new AssassinsMarkLogic()},
+            {"Assassin's Mark", new AssassinsMarkLogic(2)},
+            {"Assassin's Mark+", new AssassinsMarkLogic(2)},
+            {"Agile Focus", new AgileFocusLogic()},
+            {"Agile Focus+", new AgileFocusLogic()},
+            {"Critical Success", new CriticalSuccessLogic()},
+            {"Critical Success+", new CriticalSuccessLogic()},
             // Dagger
             {"Close Combat", new CloseCombatLogic()},
             {"Close Combat+", new CloseCombatLogic()},
@@ -44,6 +53,10 @@ public class MistbornCardProcessor : CardProcessor
             {"Dance of Daggers+", new DanceOfDaggersLogic()},
             {"Hidden Inventory", new HiddenInventoryLogic(2)},
             {"Hidden Inventory+", new HiddenInventoryLogic(3)},
+        };
+
+        specialCards = new Dictionary<string, SpecialCardLogicInterface>
+        {
             // General
             {"Hunter's Instinct", new HuntersInstinctLogic()},
             {"Hunter's Instinct+", new HuntersInstinctLogic()},
@@ -51,32 +64,79 @@ public class MistbornCardProcessor : CardProcessor
             {"Stockade+", new StockadeLogic()},
             {"Onslaught", new OnslaughtLogic()},
             {"Onslaught+", new OnslaughtLogic()},
+            {"Gymnastics", new GymnasticsLogic()},
+            {"Gymnastics+", new GymnasticsLogic()},
+            {"Pewter Drag", new PewterDragLogic(true)},
+            {"Pewter Drag+", new PewterDragLogic(false)},
+            {"Second Chance", new SecondChanceLogic()},
+            {"Second Chance+", new SecondChanceLogic()},
         };
     }
 
     public override List<CardEffect> processCard(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies)
     {
+        List<CardEffect> cardEffects;
         if (card.isSpecial())
         {
             sceneController.playAnimationsForCard(card.getCardType());
-            return processSpecialCard(card, attributes, enemies);
+            cardEffects = processSpecialCard(card, attributes, enemies);
+        }
+        else
+        {
+            cardEffects = base.processCard(card, attributes, enemies);
         }
 
-        return base.processCard(card, attributes, enemies);
+        // Check bloodlust
+        if (bloodLust.Item1 && cardEffects.Find((effect) => effect.type == EffectType.Bleed) != null)
+            sceneController.healPlayer(bloodLust.Item2);
+
+        return cardEffects;
     }
 
     protected override List<CardEffect> processSpecialCard(Card specialCard, Dictionary<EffectType, int> attributes, List<Enemy> enemies)
     {
-        SpecialCardLogicInterface specialCardLogic = specialCards[specialCard.getCardTitle()];
+        MistbornSpecialCardLogicInterface mistbornSpecialCardLogic;
+        mistBornspecialCards.TryGetValue(specialCard.getCardTitle(), out mistbornSpecialCardLogic);
 
-        if (specialCardLogic == null)
+        List<CardEffect> cardEffects;
+
+        if (mistbornSpecialCardLogic == null)
         {
-            Debug.LogError($"No Special Card Logic for {specialCard.getCardTitle()}");
-            return new List<CardEffect>();
+            Debug.Log($"No Mistborn Special Card Logic for {specialCard.getCardTitle()}, checking Special Card Logic");
+            SpecialCardLogicInterface specialCardLogic;
+            specialCards.TryGetValue(specialCard.getCardTitle(), out specialCardLogic);
+
+            if (specialCardLogic == null)
+            {
+                Debug.Log($"No Special Card Logic for {specialCard.getCardTitle()}, ignoring card");
+                return new List<CardEffect>();
+            }
+
+            cardEffects = specialCardLogic.process(specialCard, attributes, enemies, sceneController, this);
+
+            checkCritHits(cardEffects);
+
+            return applyEffectsToCardDamage(cardEffects, attributes);
         }
 
-        List<CardEffect> cardEffects = specialCardLogic.process(specialCard,attributes,enemies,sceneController);
+        cardEffects = mistbornSpecialCardLogic.process(specialCard, attributes, enemies, sceneController, this);
+
+        checkCritHits(cardEffects);
 
         return applyEffectsToCardDamage(cardEffects, attributes);
+    }
+
+    public override void endOfRoundEffects()
+    {
+        setBloodlust(false, 0);
+    }
+
+    public void setBloodlust(bool toggle, int heal)
+    {
+        bloodLust = new Tuple<bool, int>(toggle, heal);
+
+        Debug.Log($"Bloodlust: {toggle}");
+
+        // Maybe add an active icon to player
     }
 }

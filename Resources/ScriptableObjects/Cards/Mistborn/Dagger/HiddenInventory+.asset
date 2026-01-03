@@ -20,8 +20,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
-  details: Adds 3 Glass Daggers to your hand.
+  details: Adds 3 Lithe Glass Daggers to your hand.
+  baseDetails: Adds 3 Lithe Glass Daggers to your hand.
   title: Hidden Inventory+
   image: {fileID: 0}
   target: 2
@@ -30,3 +30,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 0}
   oneUse: 0
+  lithe: 0

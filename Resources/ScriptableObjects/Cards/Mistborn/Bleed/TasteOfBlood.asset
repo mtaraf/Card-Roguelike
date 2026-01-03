@@ -19,12 +19,13 @@ MonoBehaviour:
   - type: 0
     value: 6
     turns: 0
+    critRate: 0
   special: 1
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 6 damage. If the target is bleeding, damage will be critical.
+  baseDetails: Deals {Damage} damage. If the target is bleeding, damage will be critical.
   title: Taste of Blood
   image: {fileID: 0}
   target: 1
@@ -33,3 +34,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 11400000, guid: 5220dbe5ae9081d479fd66ac6413e604, type: 2}
   oneUse: 0
+  lithe: 0

@@ -19,12 +19,13 @@ MonoBehaviour:
   - type: 0
     value: 2
     turns: 0
+    critRate: 0
   special: 1
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 2 damage per active stack of agility.
+  baseDetails: Deals {Damage} damage per active stack of agility.
   title: Dance of Daggers+
   image: {fileID: 0}
   target: 1
@@ -33,3 +34,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 0}
   oneUse: 0
+  lithe: 0

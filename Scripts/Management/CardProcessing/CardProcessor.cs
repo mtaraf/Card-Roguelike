@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CardProcessor
 {
     protected ParentSceneController sceneController;
+
+    private Tuple<bool, int> nextTurnEnergyLoss = new Tuple<bool, int>(false, 0);
 
     public CardProcessor(ParentSceneController parentSceneController)
     {
@@ -17,7 +20,7 @@ public class CardProcessor
         // Roll critical hits
         checkCritHits(cardEffects);
 
-        cardEffects = applyEffectsToCardDamage(card.getEffects(), attributes);
+        cardEffects = applyEffectsToCardDamage(cardEffects, attributes);
 
         int draw = card.getCardsToDraw();
         int discard = card.getCardsDiscarded();
@@ -42,7 +45,7 @@ public class CardProcessor
     {
         if (cardEffects == null || cardEffects.Count == 0)
             return cardEffects;
-            
+
         // Deep copy the effects
         List<CardEffect> modifiedEffects = new List<CardEffect>();
         foreach (var effect in cardEffects)
@@ -94,7 +97,7 @@ public class CardProcessor
         {
             if (effect.type == EffectType.Damage && effect.critRate > 0)
             {
-                float rand = Random.Range(0,101);
+                float rand = UnityEngine.Random.Range(0, 101);
                 if (rand <= effect.critRate)
                 {
                     effect.critRate = 100;
@@ -107,5 +110,24 @@ public class CardProcessor
         }
 
         return cardEffects;
+    }
+
+    public virtual void endOfRoundEffects()
+    {
+
+    }
+
+    public virtual void startOfRoundEffects()
+    {
+        if (nextTurnEnergyLoss.Item1)
+        {
+            sceneController.usePlayerEnergy(nextTurnEnergyLoss.Item2);
+            nextTurnEnergyLoss = new Tuple<bool, int>(false, 0);
+        }
+    }
+
+    public void setNextTurnEnergyLoss(int energy)
+    {
+        nextTurnEnergyLoss = new Tuple<bool, int>(true, nextTurnEnergyLoss.Item2 + energy);
     }
 }

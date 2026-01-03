@@ -24,9 +24,10 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 10 damage. If the target is bleeding, add a bloody dagger to your
     hand.
+  baseDetails: Deals {Damage} damage. If the target is bleeding, add a bloody dagger
+    to your hand.
   title: Ravage+
   image: {fileID: 0}
   target: 1
@@ -35,3 +36,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 0}
   oneUse: 0
+  lithe: 0

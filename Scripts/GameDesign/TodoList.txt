@@ -73,7 +73,9 @@ Full Testing:
 
 
 Pre-Alpha:
-- Test all mistborn cards
+- Add all cards to excel sheet
+- Add tooltip for lithe
+- Corruption cards: a corruption overload should reset all corrupted cards in discard pile.
 - Test all samurai cards
 - Test all knnight cards
 - Test all death witch cards
@@ -82,6 +84,7 @@ Pre-Alpha:
 - Do one full play through and check balance
 
 Alpha: 
+- Add Buff/Attack icon on cards
 - Add a way for player to check progress towards final boss 
     - (x -> x -> x -> F -> x -> .... -> ? -> FinalBoss) where x is the encounters they have done, y is future encounters
 - Character selection: create icons that represent the different damage/defesive typing to add to character descriptions

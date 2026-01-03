@@ -1005,6 +1005,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3065566786669671891}
     m_Modifications:
+    - target: {fileID: 2483116098546013166, guid: d55119885bfa1bc498b51a810fa48cb4, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4414050547184101465, guid: d55119885bfa1bc498b51a810fa48cb4, type: 3}
       propertyPath: m_Name
       value: CardTooltip
@@ -1088,6 +1092,10 @@ PrefabInstance:
     - target: {fileID: 6381569713928628813, guid: d55119885bfa1bc498b51a810fa48cb4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7810745058034694044, guid: d55119885bfa1bc498b51a810fa48cb4, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

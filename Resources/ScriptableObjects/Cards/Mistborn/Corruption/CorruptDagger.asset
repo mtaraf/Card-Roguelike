@@ -24,13 +24,14 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
-  details: Deals 2 corruption per corrupted card in the discard pile. Corrupts.
+  details: Deals 2 corruption per corrupted card in the discard pile.
+  baseDetails: Deals {Corruption} corruption per corrupted card in the discard pile.
   title: Corrupt Dagger
   image: {fileID: 0}
   target: 1
   cardsDrawn: 0
   cardsDiscarded: 0
-  corrupts: 1
+  corrupts: 0
   upgradedCard: {fileID: 11400000, guid: dbb276ae72ce113409f7b45d6113e82b, type: 2}
   oneUse: 0
+  lithe: 0

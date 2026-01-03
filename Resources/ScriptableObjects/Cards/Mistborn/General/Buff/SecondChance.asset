@@ -20,8 +20,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Move a random card from the discard pile into your hand.
+  baseDetails: Move a random card from the discard pile into your hand.
   title: Second Chance
   image: {fileID: 0}
   target: 2
@@ -30,3 +30,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 11400000, guid: 7e2aee611d84f444f84c9d63780f9cfe, type: 2}
   oneUse: 0
+  lithe: 0

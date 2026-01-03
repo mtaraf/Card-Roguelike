@@ -28,8 +28,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 2 damage, adds 4 stacks of bleed.
+  baseDetails: Deals {Damage} damage, adds {Bleed} stacks of bleed.
   title: Bloody Dagger+
   image: {fileID: 0}
   target: 1
@@ -38,3 +38,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 0}
   oneUse: 0
+  lithe: 0

@@ -22,7 +22,7 @@ public class HandUIController : MonoBehaviour
 
     public void Initialize()
     {
-        centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI"); 
+        centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI");
         discardPile = GameObject.FindGameObjectWithTag("DiscardPile");
 
         if (centerOfUI == null || discardPile == null)
@@ -69,7 +69,7 @@ public class HandUIController : MonoBehaviour
     }
 
     public void removeCardFromHand(Card card)
-    {   
+    {
         cardsInHand.Remove(card);
         Destroy(card.gameObject);
         StartCoroutine(reflowHand());
@@ -85,7 +85,7 @@ public class HandUIController : MonoBehaviour
         float totalWidth = (cardsInHand.Count - 1) * cardSpacing;
         float startX = -totalWidth / 2f;
 
-        for (int i=0; i<cardsInHand.Count; i++)
+        for (int i = 0; i < cardsInHand.Count; i++)
         {
             Card card = cardsInHand[i];
             RectTransform rt = card.GetComponent<RectTransform>();
@@ -168,7 +168,6 @@ public class HandUIController : MonoBehaviour
     public IEnumerator animateLitheCardPlayed(Transform card, Vector3 targetPosition, Vector3 targetScale, float duration, Action onComplete = null)
     {
         yield return StartCoroutine(litheCardAnimation(card, targetPosition, targetScale, duration, onComplete));
-        Debug.Log(cardsInHand.Count);
     }
 
     private IEnumerator litheCardAnimation(Transform card, Vector3 targetPosition, Vector3 targetScale, float duration, Action onComplete = null)
@@ -254,7 +253,7 @@ public class HandUIController : MonoBehaviour
             {
                 yield break;
             }
-            
+
             float t = elapsedTime / duration;
             card.position = Vector3.Lerp(startPos, targetPos, t);
             card.localScale = Vector3.Lerp(startScale, targetScale, t);
@@ -299,5 +298,5 @@ public class HandUIController : MonoBehaviour
     {
         return cardsInHand;
     }
-    
+
 }

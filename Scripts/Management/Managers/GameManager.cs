@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         {
             if (currentSaveSlot == -1 || !loadGame(currentSaveSlot))
             {
-                playerInformation = new PlayerInformation(5, 5, 3, 0, 6, null, null, PlayerClass.Mistborn, null);
+                playerInformation = new PlayerInformation(50, 50, 3, 0, 6, null, null, PlayerClass.Mistborn, null);
                 currentLevel = 1;
             }
             StartCoroutine(updateUI());
@@ -110,10 +110,6 @@ public class GameManager : MonoBehaviour
         yield return null;
 
         getPlayer();
-
-        // Set Center of UI as last child
-        GameObject centerOfUI = GameObject.FindGameObjectWithTag("CenterOfUI");
-        centerOfUI.transform.SetAsLastSibling();
     }
 
     private void getPlayer()

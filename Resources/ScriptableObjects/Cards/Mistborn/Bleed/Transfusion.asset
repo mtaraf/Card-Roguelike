@@ -24,9 +24,10 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 20 damage. If the target is bleeding, reduce this card's energy
     cost by 1 for this encounter.
+  baseDetails: Deals {Damage} damage. If the target is bleeding, reduce this card's
+    energy cost by 1 for this encounter.
   title: Transfusion
   image: {fileID: 0}
   target: 1
@@ -35,3 +36,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 11400000, guid: c5e99a72b81480749bb565fe77c4a705, type: 2}
   oneUse: 0
+  lithe: 0

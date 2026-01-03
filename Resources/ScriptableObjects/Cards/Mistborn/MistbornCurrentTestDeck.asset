@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: MistbornCurrentTestDeck
   m_EditorClassIdentifier: 
   cards:
-  - {fileID: 11400000, guid: ef474b946ae34ae42a16a1daead4f438, type: 2}
-  - {fileID: 11400000, guid: 8dce0c9e3206ab745babee9eaf8e9741, type: 2}
-  - {fileID: 11400000, guid: 99084bef9ae02e343bebc5aca2f753db, type: 2}
-  - {fileID: 11400000, guid: 8dce0c9e3206ab745babee9eaf8e9741, type: 2}
-  - {fileID: 11400000, guid: ef474b946ae34ae42a16a1daead4f438, type: 2}
-  - {fileID: 11400000, guid: ef474b946ae34ae42a16a1daead4f438, type: 2}
-  - {fileID: 11400000, guid: 937e8cccb2b182a40b90089182334be4, type: 2}
+  - {fileID: 11400000, guid: c9e746eb4739a5b48a7ad6d88c3de431, type: 2}
+  - {fileID: 11400000, guid: 6bd55355112361d48a7b4cad86487f9d, type: 2}
+  - {fileID: 11400000, guid: 9b7d0d9f9f76c6c4a9b0d8bf4116fd2e, type: 2}
+  - {fileID: 11400000, guid: 59c37a5eff45fc148bcdda0a241fb667, type: 2}
+  - {fileID: 11400000, guid: cf6f2ff4ea9a15d4ca2707289cd33886, type: 2}
+  - {fileID: 11400000, guid: 265c6c2c6c06f9b4980057c5cbfb87a2, type: 2}

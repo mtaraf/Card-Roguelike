@@ -32,8 +32,9 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Gain 5 strength, 5 agility. Deals 18 corruption to all enemies. Corrupts.
+  baseDetails: Gain {Strength} strength, {Agility} agility. Deals {Corruption} corruption
+    to all enemies. Corrupts.
   title: Mistborn+
   image: {fileID: 0}
   target: 0
@@ -42,3 +43,4 @@ MonoBehaviour:
   corrupts: 1
   upgradedCard: {fileID: 0}
   oneUse: 0
+  lithe: 0

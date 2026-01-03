@@ -83,7 +83,7 @@ public class HandManager : MonoBehaviour
             PlayerClass.Mistborn => new MistbornCardProcessor(controller),
             _ => new CardProcessor(controller),
         };
-        
+
         corruptedCards = ScriptableObject.CreateInstance<DeckModelSO>();
         corruptedCards.cards = new List<CardModelSO>();
 
@@ -216,6 +216,12 @@ public class HandManager : MonoBehaviour
         handUI.moveCardToDiscardPile(card, onComplete);
     }
 
+    public void moveCardFromDiscardPileToHand(CardModelSO card)
+    {
+        handUI.addCardToHand(card);
+        discardPile.Remove(card);
+    }
+
     public void litheCardPlayed(Card card)
     {
         playerDeck.cards.Remove(card.getCardModel());
@@ -271,7 +277,7 @@ public class HandManager : MonoBehaviour
         Dictionary<EffectType, int> playerAttributes = sceneController.getPlayerAttributes();
 
         // Get card effects
-        List<CardEffect> effects = cardProcessor.processCard(selectedCard, playerAttributes,enemies);
+        List<CardEffect> effects = cardProcessor.processCard(selectedCard, playerAttributes, enemies);
 
         // Add card to discard pile and remove card
         if (selectedCard.isLithe())
@@ -336,6 +342,17 @@ public class HandManager : MonoBehaviour
             cardProcessor.checkOnDeathEffect(lastCardPlayed);
         }
     }
+
+    public void endOfRoundCardProcessing()
+    {
+        cardProcessor.endOfRoundEffects();
+    }
+
+    public void startOfRoundCardProcessing()
+    {
+        cardProcessor.startOfRoundEffects();
+    }
+
 
     public bool getDiscardInProgress()
     {

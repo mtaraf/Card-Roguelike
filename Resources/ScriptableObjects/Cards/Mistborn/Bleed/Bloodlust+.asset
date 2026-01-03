@@ -15,13 +15,17 @@ MonoBehaviour:
   type: 2
   rarity: 3
   energy: 1
-  effects: []
+  effects:
+  - type: 9
+    value: 6
+    turns: 0
+    critRate: 0
   special: 1
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Heal for 6 health when inflicting bleed on an enemy this turn.
+  baseDetails: Heal for {Heal} health when inflicting bleed on an enemy this turn.
   title: Bloodlust+
   image: {fileID: 0}
   target: 2
@@ -30,3 +34,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 0}
   oneUse: 0
+  lithe: 0

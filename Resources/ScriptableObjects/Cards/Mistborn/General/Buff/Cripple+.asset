@@ -12,19 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
   m_Name: Cripple+
   m_EditorClassIdentifier: 
-  type: 1
+  type: 2
   rarity: 1
   energy: 1
   effects:
   - type: 3
     value: 2
     turns: 0
+    critRate: 0
   special: 0
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Applies 2 stack of weaken to the target.
+  baseDetails: Applies {Weaken} stack of weaken to the target.
   title: Cripple+
   image: {fileID: 0}
   target: 1
@@ -33,3 +34,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 0}
   oneUse: 0
+  lithe: 0

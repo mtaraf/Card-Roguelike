@@ -24,8 +24,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: adds 4 strength
+  baseDetails: adds 4 strength
   title: Test Strength
   image: {fileID: 0}
   target: 2

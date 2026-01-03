@@ -20,8 +20,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Doubles the bleed stacks on the target.
+  baseDetails: Doubles the bleed stacks on the target.
   title: Bleed It Out
   image: {fileID: 0}
   target: 1
@@ -30,3 +30,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 11400000, guid: 5f1835872e74ce14eaae5ef90c4df707, type: 2}
   oneUse: 0
+  lithe: 0

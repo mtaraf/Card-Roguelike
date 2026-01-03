@@ -12,6 +12,7 @@ public class Character : MonoBehaviour
     protected int currentHealth;
     protected int weakness;
     protected Dictionary<EffectType, int> attributes = new Dictionary<EffectType, int>();
+    private List<EffectType> negativeEffects = new List<EffectType> { EffectType.Bleed, EffectType.Frostbite, EffectType.Poison, EffectType.Weaken, EffectType.Stun };
     [SerializeField] protected int id;
     protected bool dead = false;
     [SerializeField] private int xSpawnOffset;
@@ -30,7 +31,6 @@ public class Character : MonoBehaviour
     // Animations
     [SerializeField] protected GameObject spriteObject;
     protected Animator animator;
-
     protected ParentSceneController sceneController;
 
     public virtual void Start()
@@ -192,7 +192,7 @@ public class Character : MonoBehaviour
                 // Add general debuff
                 AudioManager.instance.playDebuff();
                 break;
-            
+
         }
     }
 
@@ -275,7 +275,7 @@ public class Character : MonoBehaviour
         Dictionary<EffectType, int> effectsCopy = new Dictionary<EffectType, int>(attributes);
         foreach (KeyValuePair<EffectType, int> pair in effectsCopy)
         {
-            if (pair.Key != EffectType.Damage && pair.Key != EffectType.Armor && pair.Key != EffectType.Strength)
+            if (negativeEffects.Contains(pair.Key))
             {
                 Debug.Log("Cleansed: " + pair.Key);
                 attributes[pair.Key] = 0;
