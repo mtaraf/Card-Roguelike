@@ -132,6 +132,52 @@ public class BloodBurstLogic : MistbornSpecialCardLogicInterface
 }
 
 // Crit
+public class ShowdownLogic : MistbornSpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController, MistbornCardProcessor mistbornCardProcessor)
+    {
+        List<CardEffect> effects = card.getEffects();
+
+        int playerAgility = parentSceneController.getPlayer().getAttributeValue(EffectType.Agility);
+
+        effects[0].critRate += playerAgility * 3;
+        return effects;
+    }
+}
+
+public class LuckySevenLogic : MistbornSpecialCardLogicInterface
+{
+    int damageGain = 0;
+
+    public LuckySevenLogic(int gain)
+    {
+        damageGain = gain;
+    }
+
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController, MistbornCardProcessor mistbornCardProcessor)
+    {
+        List<CardEffect> effects = card.getEffects();
+
+        effects = mistbornCardProcessor.checkCritHits(effects);
+
+        if (effects[0].critRate == 100)
+        {
+            List<CardEffect> updatedEffects = new List<CardEffect>();
+            CardEffect damage = new CardEffect
+            {
+                type = EffectType.Damage,
+                value = effects[0].value + damageGain,
+                turns = 0,
+                critRate = effects[0].critRate
+            };
+            updatedEffects.Add(damage);
+            GameManager.instance.updateCardForPresentAndFutureEncounters(updatedEffects, card.getCardTitle());
+        }
+
+        return effects;
+    }
+}
+
 public class LuckOfTheDrawLogic : MistbornSpecialCardLogicInterface
 {
     int drawCards = 0;
@@ -141,14 +187,10 @@ public class LuckOfTheDrawLogic : MistbornSpecialCardLogicInterface
     }
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController, MistbornCardProcessor mistbornCardProcessor)
     {
-        CardProcessor cardProcessor = new CardProcessor(parentSceneController);
-        List<CardEffect> effects = cardProcessor.processCard(card, attributes, enemies);
-
-        Debug.Log("Crit hit: " + effects[0].critRate);
+        List<CardEffect> effects = mistbornCardProcessor.processCard(card, attributes, enemies);
 
         if (effects[0].critRate == 100)
         {
-            Debug.Log("Draw Card");
             HandManager.instance.drawCards(drawCards);
         }
 
@@ -221,6 +263,73 @@ public class CriticalSuccessLogic : MistbornSpecialCardLogicInterface
 }
 
 // Corruption
+public class CrescendoLogic : MistbornSpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController, MistbornCardProcessor mistbornCardProcessor)
+    {
+        List<CardEffect> effects = card.getEffects();
+
+        if (enemies[0].hasAttribute(EffectType.Corruption))
+        {
+            effects[0].type = EffectType.Corruption;
+            effects[0].value *= 2;
+        }
+
+        return effects;
+    }
+}
+
+public class CorruptionShroudLogic : MistbornSpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController, MistbornCardProcessor mistbornCardProcessor)
+    {
+        List<CardEffect> effects = card.getEffects();
+
+        foreach (Enemy enemy in parentSceneController.getEnemies())
+        {
+            if (enemy.hasAttribute(EffectType.Corruption))
+            {
+                return effects;
+            }
+        }
+
+        return new List<CardEffect>();
+    }
+}
+
+public class PlagueLogic : MistbornSpecialCardLogicInterface
+{
+    int corruptionGain = 0;
+
+    public PlagueLogic(int gain)
+    {
+        corruptionGain = gain;
+    }
+
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController, MistbornCardProcessor mistbornCardProcessor)
+    {
+        List<CardEffect> effects = card.getEffects();
+
+        int enemyCorruption = enemies[0].getAttributeValue(EffectType.Corruption);
+
+        if (enemyCorruption + (effects[0].value / 2) >= enemies[0].getCorruptionLimit())
+        {
+            List<CardEffect> updatedEffects = new List<CardEffect>();
+            CardEffect corruption = new CardEffect
+            {
+                type = EffectType.Corruption,
+                value = effects[0].value + corruptionGain,
+                turns = 0,
+                critRate = 0
+            };
+            updatedEffects.Add(corruption);
+            GameManager.instance.updateCardForPresentAndFutureEncounters(updatedEffects, card.getCardTitle());
+        }
+
+        return effects;
+    }
+}
+
 public class CorruptDaggerLogic : MistbornSpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController, MistbornCardProcessor mistbornCardProcessor)
@@ -264,6 +373,27 @@ public class GreedLogic : MistbornSpecialCardLogicInterface
 }
 
 // Dagger
+public class LoadOutLogic : MistbornSpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController, MistbornCardProcessor mistbornCardProcessor)
+    {
+        List<CardEffect> effects = card.getEffects();
+
+        int daggerCards = 0;
+        List<Card> cards = HandManager.instance.getCurrentHand();
+
+        foreach (Card item in cards)
+        {
+            if (item.getCardTitle().ToLower().Contains("glass dagger"))
+                daggerCards++;
+        }
+
+        effects[0].value *= daggerCards;
+
+        return effects;
+    }
+}
+
 public class CloseCombatLogic : MistbornSpecialCardLogicInterface
 {
     public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController, MistbornCardProcessor mistbornCardProcessor)

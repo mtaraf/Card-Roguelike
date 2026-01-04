@@ -25,12 +25,9 @@ MonoBehaviour:
     turns: 0
     critRate: 0
   special: 0
-  condition:
-    conditionValue: 0
-    metric: 0
-  multiplier: 0
   details: Deals 1 damage, adds 2 stacks of bleed. Lithe.
-  title: Bloody Dagger
+  baseDetails: Deals {Damage} damage, adds {Bleed} stacks of bleed. Lithe.
+  title: Lithe Bloody Dagger
   image: {fileID: 0}
   target: 1
   cardsDrawn: 0

@@ -19,12 +19,13 @@ MonoBehaviour:
   - type: 2
     value: 2
     turns: 0
+    critRate: 0
   special: 0
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Gain 2 strength.
+  baseDetails: Gain {Strength} strength.
   title: Pewter
   image: {fileID: 0}
   target: 2
@@ -33,3 +34,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 11400000, guid: b5f124d7aca8edf4d8b79b8a5bdd8451, type: 2}
   oneUse: 0
+  lithe: 0

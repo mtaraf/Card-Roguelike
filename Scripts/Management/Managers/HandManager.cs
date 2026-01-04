@@ -248,6 +248,12 @@ public class HandManager : MonoBehaviour
         discardPile.Remove(card);
     }
 
+    public void updateCardInDeck(List<CardEffect> cardEffects, string title)
+    {
+        CardModelSO cardModel = playerDeck.cards.Find((model) => model.title == title);
+        cardModel.updateEffects(cardEffects);
+    }
+
     public void removeAllOfSpecificCardFromPlayerDeck(CardModelSO card)
     {
         playerDeck.cards.RemoveAll((c) => c.title == card.title);

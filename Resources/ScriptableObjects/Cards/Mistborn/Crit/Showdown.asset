@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9df70d662a7b334baaf0cd2a13b7038, type: 3}
+  m_Name: Showdown
+  m_EditorClassIdentifier: 
+  type: 0
+  rarity: 2
+  energy: 2
+  effects:
+  - type: 0
+    value: 8
+    turns: 0
+    critRate: 0
+  special: 1
+  details: Deals 8 damage to all enemies, gains 3% critical chance for every one
+    active agility.
+  baseDetails: Deals {Damage} damage to all enemies, gains 3% critical chance for
+    every one active agility.
+  title: Showdown
+  image: {fileID: 0}
+  target: 0
+  cardsDrawn: 0
+  cardsDiscarded: 0
+  corrupts: 0
+  upgradedCard: {fileID: 11400000, guid: a9d7eab08f9c3084096da9183244f072, type: 2}
+  oneUse: 0
+  lithe: 0

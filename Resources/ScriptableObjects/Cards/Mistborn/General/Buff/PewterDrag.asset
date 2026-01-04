@@ -13,13 +13,10 @@ MonoBehaviour:
   m_Name: PewterDrag
   m_EditorClassIdentifier: 
   type: 2
-  rarity: 2
+  rarity: 3
   energy: 0
   effects: []
   special: 1
-  condition:
-    conditionValue: 0
-    metric: 0
   details: Gain 2 energy. Lose 1 energy next turn. Corrupts.
   baseDetails: Gain 2 energy. Lose 1 energy next turn. Corrupts.
   title: Pewter Drag
@@ -28,6 +25,6 @@ MonoBehaviour:
   cardsDrawn: 0
   cardsDiscarded: 0
   corrupts: 1
-  upgradedCard: {fileID: 0}
+  upgradedCard: {fileID: 11400000, guid: 6bd55355112361d48a7b4cad86487f9d, type: 2}
   oneUse: 0
   lithe: 0

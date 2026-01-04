@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LitheGlassDagger
   m_EditorClassIdentifier: 
   type: 0
-  rarity: 0
+  rarity: 1
   energy: 0
   effects:
   - type: 0
@@ -21,9 +21,6 @@ MonoBehaviour:
     turns: 0
     critRate: 0
   special: 0
-  condition:
-    conditionValue: 0
-    metric: 0
   details: Deals 2 damage. Lithe.
   baseDetails: Deals {Damage} damage. Lithe.
   title: Lithe Glass Dagger

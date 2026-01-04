@@ -24,8 +24,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 15 corruption. Corrupts.
+  baseDetails: Deals {Corruption} corruption. Corrupts.
   title: Savage Blow+
   image: {fileID: 0}
   target: 1
@@ -34,3 +34,4 @@ MonoBehaviour:
   corrupts: 1
   upgradedCard: {fileID: 0}
   oneUse: 0
+  lithe: 0

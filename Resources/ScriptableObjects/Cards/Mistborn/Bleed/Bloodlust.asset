@@ -21,9 +21,6 @@ MonoBehaviour:
     turns: 0
     critRate: 0
   special: 1
-  condition:
-    conditionValue: 0
-    metric: 0
   details: Heal for 3 health when inflicting bleed on an enemy this turn.
   baseDetails: Heal for {Heal} health when inflicting bleed on an enemy this turn.
   title: Bloodlust
@@ -32,6 +29,6 @@ MonoBehaviour:
   cardsDrawn: 0
   cardsDiscarded: 0
   corrupts: 0
-  upgradedCard: {fileID: 0}
+  upgradedCard: {fileID: 11400000, guid: 4626b10f52f0c73478fd3a5313bd20f6, type: 2}
   oneUse: 0
   lithe: 0

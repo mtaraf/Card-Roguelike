@@ -34,7 +34,6 @@ public class SerializableCardModel
     public CardRarity rarity;
     public int energy;
     public List<CardEffect> effects;
-    public ConditionTupleEquivalent condition;
     public double multiplier;
     public Target target;
     public int cardsDrawn;

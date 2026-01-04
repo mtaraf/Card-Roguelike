@@ -20,9 +20,10 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Gain 1 strength for every 5 bleed stacks for total bleed stacks on enemies
     at the end of each round.
+  baseDetails: Gain 1 strength for every 5 bleed stacks for total bleed stacks on
+    enemies at the end of each round.
   title: Crimson Curse
   image: {fileID: 0}
   target: 2

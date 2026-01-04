@@ -21,7 +21,7 @@ MonoBehaviour:
     conditionValue: 0
     metric: 0
   details: Critical strikes now deal 150-350% damage.
-  baseDetails: 
+  baseDetails: Critical strikes now deal 150-350% damage.
   title: Critical Fate
   image: {fileID: 0}
   target: 2

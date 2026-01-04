@@ -21,9 +21,6 @@ MonoBehaviour:
     turns: 0
     critRate: 30
   special: 1
-  condition:
-    conditionValue: 0
-    metric: 0
   details: Deals 5 damage, 30% critical chance. If damage is critical, adds 2 strength.
   baseDetails: Deals {Damage} damage, 30% critical chance. If damage is critical,
     adds {Strength} strength.
@@ -33,6 +30,6 @@ MonoBehaviour:
   cardsDrawn: 0
   cardsDiscarded: 0
   corrupts: 0
-  upgradedCard: {fileID: 0}
+  upgradedCard: {fileID: 11400000, guid: 7a2d66caee435b8499fb32a8fef6fa92, type: 2}
   oneUse: 0
   lithe: 0

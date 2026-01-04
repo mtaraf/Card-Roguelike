@@ -21,9 +21,6 @@ MonoBehaviour:
     turns: 0
     critRate: 40
   special: 0
-  condition:
-    conditionValue: 0
-    metric: 0
   details: Deals 3 damage. 40% chance to deal critical damage.
   baseDetails: Deals {Damage} damage. 40% chance to deal critical damage.
   title: Lithe Lucky Dagger

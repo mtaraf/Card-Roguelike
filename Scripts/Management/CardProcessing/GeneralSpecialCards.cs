@@ -132,3 +132,20 @@ public class SecondChanceLogic : SpecialCardLogicInterface
         return new List<CardEffect>();
     }
 }
+
+public class LastHopeLogic : SpecialCardLogicInterface
+{
+    public List<CardEffect> process(Card card, Dictionary<EffectType, int> attributes, List<Enemy> enemies, ParentSceneController parentSceneController, CardProcessor cardProcessor)
+    {
+        List<CardEffect> effects = card.getEffects();
+
+        int handSize = HandManager.instance.getCurrentHand().Count - 1;
+
+        if (handSize > 0)
+        {
+            effects[0].value = Math.Max(0, effects[0].value - (4 * handSize));
+        }
+
+        return effects;
+    }
+}

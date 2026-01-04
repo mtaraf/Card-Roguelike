@@ -20,6 +20,12 @@ public class MistbornCardProcessor : CardProcessor
             {"Corrupt Dagger+", new CorruptDaggerLogic()},
             {"Greed", new GreedLogic()},
             {"Greed+", new GreedLogic()},
+            {"Plague", new PlagueLogic(2)},
+            {"Plague+", new PlagueLogic(3)},
+            {"Corruption Shroud", new CorruptionShroudLogic()},
+            {"Corruption Shroud+", new CorruptionShroudLogic()},
+            {"Crescendo", new CrescendoLogic()},
+            {"Crescendo+", new CrescendoLogic()},
             // Bleed
             {"Bloodlust", new BloodlustLogic()},
             {"Bloodlust+", new BloodlustLogic()},
@@ -36,6 +42,10 @@ public class MistbornCardProcessor : CardProcessor
             {"Blood Burst", new BloodBurstLogic()},
             {"Blood Burst+", new BloodBurstLogic()},
             // Crit
+            {"Showdown", new ShowdownLogic()},
+            {"Showdown+", new ShowdownLogic()},
+            {"Lucky Seven", new LuckySevenLogic(1)},
+            {"Lucky Seven+", new LuckySevenLogic(2)},
             {"Luck of the Draw", new LuckOfTheDrawLogic(1)},
             {"Luck of the Draw+", new LuckOfTheDrawLogic(2)},
             {"Teamwork", new TeamworkLogic()},
@@ -47,6 +57,8 @@ public class MistbornCardProcessor : CardProcessor
             {"Critical Success", new CriticalSuccessLogic()},
             {"Critical Success+", new CriticalSuccessLogic()},
             // Dagger
+            {"Load Out", new LoadOutLogic()},
+            {"Load Out+", new LoadOutLogic()},
             {"Close Combat", new CloseCombatLogic()},
             {"Close Combat+", new CloseCombatLogic()},
             {"Dance of Daggers", new DanceOfDaggersLogic()},
@@ -70,6 +82,8 @@ public class MistbornCardProcessor : CardProcessor
             {"Pewter Drag+", new PewterDragLogic(false)},
             {"Second Chance", new SecondChanceLogic()},
             {"Second Chance+", new SecondChanceLogic()},
+            {"Last Hope", new LastHopeLogic()},
+            {"Last Hope+", new LastHopeLogic()}
         };
     }
 

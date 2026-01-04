@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PewterDrag+
   m_EditorClassIdentifier: 
   type: 2
-  rarity: 2
+  rarity: 3
   energy: 0
   effects: []
   special: 1

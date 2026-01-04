@@ -198,6 +198,16 @@ public class GameManager : MonoBehaviour
         playerInformation.playerDeck.cards.Add(clone);
     }
 
+    public void updateCardForPresentAndFutureEncounters(List<CardEffect> effects, string cardTitle)
+    {
+        // For future encounters
+        CardModelSO cardModel = playerInformation.playerDeck.cards.Find((model) => model.title == cardTitle);
+        cardModel.updateEffects(effects);
+
+        // For current encouunter
+        HandManager.instance.updateCardInDeck(effects, cardTitle);
+    }
+
     public void setPlayerMythicCard(CardModelSO card)
     {
         playerInformation.playerMythic = new MythicCard(card);

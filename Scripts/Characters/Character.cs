@@ -18,7 +18,7 @@ public class Character : MonoBehaviour
     [SerializeField] private int xSpawnOffset;
     [SerializeField] private int ySpawnOffset;
     protected CardEffectHandler cardEffectHandler;
-    private int corruptionLimit = 20;
+    private int corruptionLimit = 5;
 
     // UI
     protected UIUpdater uIUpdater;
@@ -126,6 +126,11 @@ public class Character : MonoBehaviour
         }
 
         updateAttribute(EffectType.Corruption, currentCorruption);
+    }
+
+    public int getCorruptionLimit()
+    {
+        return corruptionLimit;
     }
 
     public void consumeCorruption(int amount)

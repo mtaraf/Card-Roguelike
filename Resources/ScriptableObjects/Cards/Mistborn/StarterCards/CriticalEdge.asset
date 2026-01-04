@@ -24,8 +24,8 @@ MonoBehaviour:
   condition:
     conditionValue: 0
     metric: 0
-  multiplier: 0
   details: Deals 5 damage. 25% chance to deal critical damage.
+  baseDetails: Deals {Damage} damage. 25% chance to deal critical damage.
   title: Critical Edge
   image: {fileID: 0}
   target: 1
@@ -34,3 +34,4 @@ MonoBehaviour:
   corrupts: 0
   upgradedCard: {fileID: 11400000, guid: 25589d7b3fa962441a364323bd07d833, type: 2}
   oneUse: 0
+  lithe: 0

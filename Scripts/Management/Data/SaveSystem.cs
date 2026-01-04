@@ -17,7 +17,7 @@ public static class SaveSystem
     public static void saveGame(SaveData data, int slotIndex)
     {
         string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(getSlotPath(slotIndex) , json);
+        File.WriteAllText(getSlotPath(slotIndex), json);
         Debug.Log($"Game saved to slot {slotIndex}");
     }
 
@@ -47,7 +47,6 @@ public static class SaveSystem
             rarity = model.rarity,
             energy = model.energy,
             effects = new List<CardEffect>(model.effects), // assuming CardEffect is serializable
-            condition = model.condition,
             target = model.target,
             cardsDrawn = model.cardsDrawn,
             special = model.special,
@@ -65,7 +64,6 @@ public static class SaveSystem
         model.rarity = serial.rarity;
         model.energy = serial.energy;
         model.effects = new List<CardEffect>(serial.effects);
-        model.condition = serial.condition;
         model.target = serial.target;
         model.cardsDrawn = serial.cardsDrawn;
         model.special = serial.special;
@@ -78,7 +76,7 @@ public static class SaveSystem
     {
         return File.Exists(getSlotPath(slotIndex));
     }
-    
+
     public static bool deleteSave(int slotIndex)
     {
         string path = getSlotPath(slotIndex);

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: MistbornCurrentTestDeck
   m_EditorClassIdentifier: 
   cards:
-  - {fileID: 11400000, guid: c9e746eb4739a5b48a7ad6d88c3de431, type: 2}
+  - {fileID: 11400000, guid: a188d961940c2464bb67e437e20e1575, type: 2}
+  - {fileID: 11400000, guid: 71fe0604727c5ff42a785c263982ffdd, type: 2}
+  - {fileID: 11400000, guid: 72956113f641e2b4f82a0b3174edc845, type: 2}
+  - {fileID: 11400000, guid: 72956113f641e2b4f82a0b3174edc845, type: 2}
+  - {fileID: 11400000, guid: aed5d6e8a47e5754f9f72bf485211027, type: 2}
   - {fileID: 11400000, guid: 6bd55355112361d48a7b4cad86487f9d, type: 2}
-  - {fileID: 11400000, guid: 9b7d0d9f9f76c6c4a9b0d8bf4116fd2e, type: 2}
-  - {fileID: 11400000, guid: 59c37a5eff45fc148bcdda0a241fb667, type: 2}
-  - {fileID: 11400000, guid: cf6f2ff4ea9a15d4ca2707289cd33886, type: 2}
-  - {fileID: 11400000, guid: 265c6c2c6c06f9b4980057c5cbfb87a2, type: 2}

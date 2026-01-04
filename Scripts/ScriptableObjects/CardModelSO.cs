@@ -23,12 +23,6 @@ public class CardEffect
     }
 }
 
-[Serializable]
-public class ConditionTupleEquivalent
-{
-    public int conditionValue;
-    public ConditionMetric metric;
-}
 
 [CreateAssetMenu(fileName = "Card", menuName = "New Card")]
 public class CardModelSO : ScriptableObject
@@ -38,7 +32,6 @@ public class CardModelSO : ScriptableObject
     public int energy;
     public List<CardEffect> effects = new List<CardEffect>();
     public bool special;
-    public ConditionTupleEquivalent condition;
     public string details;
     public string baseDetails;
     public string title;
@@ -75,11 +68,6 @@ public class CardModelSO : ScriptableObject
         copy.rarity = rarity;
         copy.energy = energy;
         copy.special = special;
-        copy.condition = new ConditionTupleEquivalent
-        {
-            conditionValue = condition?.conditionValue ?? 0,
-            metric = condition?.metric ?? ConditionMetric.NO_CONDITION
-        };
         copy.details = details;
         copy.baseDetails = baseDetails;
         copy.title = title;
@@ -108,6 +96,24 @@ public class CardModelSO : ScriptableObject
         copy.setDescription();
 
         return copy;
+    }
+
+    public void updateEffects(List<CardEffect> cardEffects)
+    {
+        effects.Clear();
+
+        foreach (var effect in cardEffects)
+        {
+            effects.Add(new CardEffect
+            {
+                type = effect.type,
+                value = effect.value,
+                turns = effect.turns,
+                critRate = effect.critRate
+            });
+        }
+
+        setDescription();
     }
 
     public bool containsEffect(EffectType type)

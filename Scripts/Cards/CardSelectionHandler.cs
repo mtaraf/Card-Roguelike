@@ -94,9 +94,7 @@ IEndDragHandler
         if (HandManager.instance.getDiscardInProgress())
             return;
 
-        Debug.Log(eventData.pointerEnter.tag);
         Debug.Log(eventData.pointerEnter.gameObject.name);
-        Debug.Log(HandManager.instance.getDiscardInProgress());
         if (eventData.pointerEnter == null)
         {
             Debug.LogError("Error dragging card");

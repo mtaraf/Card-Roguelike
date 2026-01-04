@@ -17,9 +17,6 @@ MonoBehaviour:
   energy: 1
   effects: []
   special: 1
-  condition:
-    conditionValue: 0
-    metric: 0
   details: Reduce the energy cost of 2 random attack cards in your hand by 1.
   baseDetails: Reduce the energy cost of 2 random attack cards in your hand by 1.
   title: Hunter's Instinct
@@ -28,6 +25,6 @@ MonoBehaviour:
   cardsDrawn: 0
   cardsDiscarded: 0
   corrupts: 0
-  upgradedCard: {fileID: 0}
+  upgradedCard: {fileID: 11400000, guid: b62a74759a8f91e4fa0e86842cb5c27a, type: 2}
   oneUse: 0
   lithe: 0

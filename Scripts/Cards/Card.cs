@@ -83,11 +83,6 @@ public class Card : MonoBehaviour
         return cardModel.target;
     }
 
-    public bool hasCondition()
-    {
-        return cardModel.condition.metric != ConditionMetric.NO_CONDITION;
-    }
-
     public List<CardEffect> getEffects()
     {
         return cardModel.effects.Select(c => c.clone()).ToList();
@@ -117,7 +112,7 @@ public class Card : MonoBehaviour
     {
         return cardModel.lithe;
     }
-    
+
     public bool isSpecial()
     {
         return cardModel.special;
